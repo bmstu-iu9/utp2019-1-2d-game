@@ -25,16 +25,16 @@ class Input {
                 keys.right = true;
             }
             if (e.keyCode === 87) {
-                keys.W = true;
+                keys.keyW = true;
             }
             if (e.keyCode === 65) {
-                keys.A = true;
+                keys.keyA = true;
             }
             if (e.keyCode === 83) {
-                keys.S = true;
+                keys.keyS = true;
             }
             if (e.keyCode === 68) {
-                keys.D = true;
+                keys.keyD = true;
             }
         });
         $(document).keyup((e) => {
@@ -51,16 +51,16 @@ class Input {
                 keys.right = false;
             }
             if (e.keyCode === 87) {
-                keys.W = false;
+                keys.keyW = false;
             }
             if (e.keyCode === 65) {
-                keys.A = false;
+                keys.keyA = false;
             }
             if (e.keyCode === 83) {
-                keys.S = false;
+                keys.keyS = false;
             }
             if (e.keyCode === 68) {
-                keys.D = false;
+                keys.keyD = false;
             }
         });
     }
