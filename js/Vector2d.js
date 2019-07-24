@@ -25,6 +25,11 @@ class Vector2d{
             this.x-=vector2d_or_x.x;
             this.y-=vector2d_or_x.y;
         }else {
+            if (y instanceof Vector2d){
+                y.set(this.x,this.y);
+                y.sub(vector2d_or_x);
+                return y;
+            }
             this.x-=vector2d_or_x;
             this.y-=y;
         }
