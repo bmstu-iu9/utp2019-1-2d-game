@@ -19,4 +19,8 @@ class Texture{
                 context.drawImage(this.image,x,y,w,h);
     }
 
+    drawElement(sx,sy,sw,sh,dx,dy,dw,dh){
+        context.drawImage(this.image,sx,sy,sw,sh,dx,dy,dw,dh);
+    }
+
 }
