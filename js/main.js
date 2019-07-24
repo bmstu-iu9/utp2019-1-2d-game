@@ -3,10 +3,14 @@
 let world=new World();
 let player=new Player();
 
-world.setTile(Tile.black,2,3);
-
 const input=new Input();
 
+
+world.setTile(Tile.brick,3,3);
+world.setTile(Tile.brick,2,3);
+world.setTile(Tile.brick,1,3);
+world.setTile(Tile.brick,0,3);
+world.setTile(Tile.brick,3,2);
 const render=()=>{
     input.update();
     world.render();
