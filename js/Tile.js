@@ -5,6 +5,7 @@ class Tile{
     static small_grass=new Tile('small_grass.jpg');
     static grass=new Tile('grass.png');
     static black=new Tile('black.jpg').makeSolid();
+    static brick=new Tile('brick.jpg').makeSolid();
     constructor(name){
         this.id=Tile.numberOfTiles++;
         this.texture=new Texture(name);
