@@ -13,8 +13,12 @@ class AABB{
     }
 
     correctPosition(object,collision){
-        let vec=new Vector2d(object.centre.x,object.centre.y);
-        let correction=vec.sub(this.centre);
+        let vec=new Vector2d(object.centre);
+        let temp=new Vector2d(this.centre);
+        vec.sub(temp);
+
+        let correction=new Vector2d(vec);
+
         if (collision.dist.x>collision.dist.y){
             if (correction.x>0){
                 this.centre.add(collision.dist.x,0);
