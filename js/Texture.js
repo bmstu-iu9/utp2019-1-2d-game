@@ -3,7 +3,7 @@
 class Texture{
     constructor(filename,isPattern){
         this.image=new Image();
-        this.image.src='images/'+filename;
+        this.image.src='temporary/'+filename;
         this.pattern=null;
         if (isPattern)
             this.pattern=context.createPattern(this.image,'repeat');
