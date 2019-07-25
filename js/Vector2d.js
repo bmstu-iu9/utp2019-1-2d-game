@@ -77,7 +77,9 @@ class Vector2d{
     }
 
     vectorProjection(vector_to_project_on){
-        return this.dotProduct(vector_to_project_on)/vector_to_project_on.length();
+        return this.dotProduct(vector_to_project_on)/vector_to_project_on.length(); 
+        // здесь высчитывается не вектор ,а скаляр.
+        // для получения вектора необходимо домножить результат на направляющий вектор прямой
     }
 
 }
