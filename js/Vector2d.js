@@ -58,5 +58,26 @@ class Vector2d{
             this.y=y;
         }
     }
+    dotProduct(vector2d){
+        return this.x*vector2d.x+this.y*vector2d.y;
+    }
+
+    lengthSquared(){
+        return this.x*this.x+this.y*this.y;
+    }
+
+    length(){
+        return Math.sqrt(this.lengthSquared());
+    }
+
+    normalize(){
+        this.x/=this.length();
+        this.y/=this.length();
+        return this;
+    }
+
+    vectorProjection(vector_to_project_on){
+        return this.dotProduct(vector_to_project_on)/vector_to_project_on.length();
+    }
 
 }
