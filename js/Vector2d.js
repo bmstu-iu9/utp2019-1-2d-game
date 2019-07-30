@@ -18,6 +18,8 @@
 //который и будет возвращен как результат. Очевидно, что ,передавая вектор-"контейнер", вы не изеняете вектор,
 //метод которого был вызван. Метод set(...) работает очевидным образом. Он может принимать либо вектор,либо два числа.
 
+//Добавлен метод получения нормали
+
 class Vector2d{
     x;
     y;
@@ -119,11 +121,14 @@ class Vector2d{
     }
 
     normalize(){
-        return this.mul(1/this.length());
+        return this.mul(1.0/this.length());
     }
 
     vectorProjection(vector_to_project_on){
         return this.dotProduct(vector_to_project_on.normalize());
+    }
+    normal(){
+        return new Vector2d(-this.y,this.x);
     }
 }
 
