@@ -27,13 +27,7 @@ class Vector2d{
         if (arguments.length===0){
             this.x=this.y=0;
         }else {
-            if (y === undefined) {
-                this.x = vector2d_or_x.x;
-                this.y = vector2d_or_x.y;
-            } else {
-                this.x = vector2d_or_x;
-                this.y = y;
-            }
+            this.set(vector2d_or_x,y);
         }
     }
 
