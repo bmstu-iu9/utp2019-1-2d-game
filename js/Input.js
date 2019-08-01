@@ -17,28 +17,32 @@ let mouse={
     clickPosition:new Vector2d()
 };
 
-const keyboardHandler=(event)=>{
-    if (keyboard.hasOwnProperty(event.code)){
-        keyboard[event.code]=event.type==='keydown';
-    }
+const keyboardListener=(keyboard)=>{
+    const keyboardHandler=(event)=>{
+        if (keyboard.hasOwnProperty(event.code)){
+            keyboard[event.code]=event.type==='keydown';
+        }
+    };
+    addEventListener('keydown',keyboardHandler);
+    addEventListener('keyup',keyboardHandler);
 };
 
-addEventListener('keydown',keyboardHandler);
-addEventListener('keyup',keyboardHandler);
-
-const mouseHandler=(event)=>{
-    const state=event.type==='mousedown';
-    if (event.which===1){
-        mouse.isLeftClicked=state;
-    }
-    if (event.which===3){
-        mouse.isRightClicked=state;
-    }
-    if (state){
-        mouse.clickPosition.set(event.clientX,event.clientY);
-    }
+const moueListener=(mouse)=>{
+    const mouseHandler=(event)=>{
+        const state=event.type==='mousedown';
+        if (event.which===1){
+            mouse.isLeftClicked=state;
+        }
+        if (event.which===3){
+            mouse.isRightClicked=state;
+        }
+        if (state){
+            mouse.clickPosition.set(event.clientX,event.clientY);
+        }
+    };
+    addEventListener('mousedown',mouseHandler);
+    addEventListener('mouseup',mouseHandler);
 };
 
-addEventListener('mousedown',mouseHandler);
-addEventListener('mouseup',mouseHandler);
-
+keyboardListener(keyboard);
+moueListener(mouse);
