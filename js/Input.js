@@ -1,3 +1,5 @@
+'use strict';
+
 let keyboard={
     up:false,
     down:false,
