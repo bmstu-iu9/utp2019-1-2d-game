@@ -1,4 +1,4 @@
-'use strict'
+import {GameObject} from "./GameObject"
 
 class Room extends GameObject{
     /**
