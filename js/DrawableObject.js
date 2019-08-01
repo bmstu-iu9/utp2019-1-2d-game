@@ -14,6 +14,9 @@ class DrawableObject {
     setCanvasCoord(arg) {
         this.canvasCoord = arg;
     }
+    setGameCoord(x, y) {
+        this.gameCoord.set(x, y);
+    }
     render() {
         this.drowable.render(this.canvasCoord);
     }

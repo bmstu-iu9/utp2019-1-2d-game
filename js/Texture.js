@@ -5,13 +5,13 @@ class Texture {
     width;
     height;
     constructor(image) {
-        setImage(image);
+        this.setImage(image);
     }
     setImage(img) {
         if (img instanceof Image) {
             this.img = img;
 
-        } else if (img instanceof String) {
+        } else if (typeof(img) == "string") {
             this.img = new Image();
             this.img.src = "temporary/" + img;
         } else {

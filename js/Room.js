@@ -15,12 +15,14 @@ class Room extends GameObject{
         this.solidTiles = new Array(height).fill(new Array(width))
         this.rndTiles = new Array(height).fill(new Array(width))
         this.middlegroundTiles = new Array(height).fill(new Array(width))
-        this.rnd = {}
+        this.rnd = {};
         this.manager = new RoomManager(this)
     }
-     
-    Render(){
-        this.rnd.Render()
+    setRenderer(renderer) {
+        this.rnd = renderer;
+    }
+    render(){
+        this.rnd.render(this);
     }
 
     Update(){

@@ -10,7 +10,6 @@ class World extends GameObject{
         this.roomContaier = new Array
         this.currentRoom = undefined
         this.manager = new WorldManager(this)
-        this.rnd = {}
     }
     /**
      * Добавляет комнату в World
@@ -23,8 +22,8 @@ class World extends GameObject{
     /**
      * Отрисовка World
      */
-    Render(){
-        this.rnd.Render()
+    render(){
+        this.currentRoom.render();
     }
     /**
      * Вызов обработки игровой логики
