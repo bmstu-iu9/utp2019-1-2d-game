@@ -1,6 +1,6 @@
 'use strict'
 
-class GameObject{
+export default class GameObject{
     /**
      * 
      * @param {String} id Строковый идентификатор игрового объекта
