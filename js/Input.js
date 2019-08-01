@@ -27,7 +27,7 @@ const keyboardListener=(keyboard)=>{
     addEventListener('keyup',keyboardHandler);
 };
 
-const moueListener=(mouse)=>{
+const mouseListener=(mouse)=>{
     const mouseHandler=(event)=>{
         const state=event.type==='mousedown';
         if (event.which===1){
@@ -45,4 +45,4 @@ const moueListener=(mouse)=>{
 };
 
 keyboardListener(keyboard);
-moueListener(mouse);
+mouseListener(mouse);
