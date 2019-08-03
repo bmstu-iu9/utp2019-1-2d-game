@@ -1,17 +1,11 @@
 'use strict'
 
 class SpritePattern {
-    img;
-    frames;
-    dir; // vertical or horizontal
-    spriteMapCoord;
-    width;
-    height;
-    constructor(image, frames, dir, spriteMapCoord) {
+    constructor(image, frames, dir, x, y, height, width) {
         this.img = image;
         this.frames = frames;
         this.dir = dir;
-        this.spriteMapCoord = spriteMapCoord;
+        this.spriteMapCoord = new Vector2d(x, y)
         this.width = width;
         this.height = height;
     }

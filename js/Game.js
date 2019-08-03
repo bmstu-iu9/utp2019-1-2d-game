@@ -15,6 +15,9 @@ const Game = {
         Game.TestImage2 = new Image()
         Game.TestImage2.src = Game.srcPath + "test2.png"
         Game.TestTexture2 = new Texture(Game.TestImage2)
+        Game.TestImage3 = new Image()
+        Game.TestImage3.src = Game.srcPath + "ghost-shriek.png"
+        Game.TestSpritePattern = new SpritePattern(Game.TestImage3, [0, 1, 2, 3], "horizontal", 0, 0, 80, 64)
         Game.fps = 60
         Game.dt = 0
         Game.step = 1 / Game.fps
@@ -41,8 +44,8 @@ const Game = {
             Game.dt = Game.dt - Game.step
             Game.Update()
         }
-        Game.last = Game.now
         Game.Render()
+        Game.last = Game.now
         requestAnimationFrame(Game.GameLoop)
     },
 

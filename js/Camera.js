@@ -14,8 +14,7 @@ class Camera {
      * @param {GameObject} tile
      */
     setCanvasCoord(tile) {
-        tile.drawable.canvasCoord.set(tile.position)
-        tile.drawable.canvasCoord.sub(this.position)
+        tile.position.sub(this.position, tile.drawable.canvasCoord)
     }
 
     /**

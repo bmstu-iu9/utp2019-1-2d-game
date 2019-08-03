@@ -13,7 +13,8 @@ class RoomFactory{
         }
         let player = TilesFactory.CreateTestTile2(300, 350)
 
-        let player2 = TilesFactory.CreateTestTile2(350, 370 )
+        let player2 = TilesFactory.CreateTestTile3(350, 370 )
+
         room.middlegroundTiles[6][7].set(player)
         room.middlegroundTiles[7][7].set(player2)
         return room
