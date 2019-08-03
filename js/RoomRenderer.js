@@ -26,7 +26,7 @@ class RoomRenderer {
         for (let i = leftTop[0]; i < rightBot[0]; i++){
             for (let j = leftTop[1]; j < rightBot[1]; j++) {
                 drowable = room.backgroundTiles[j][i];
-                drowable.setCanvasCoord(this.camera.getCanvasCoord(drowable.gameCoord)); //?
+                this.camera.setCanvasCoord(drowable);
                 drowable.render();
             }
         }

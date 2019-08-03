@@ -11,10 +11,10 @@ class Camera {
     }
     /**
      * Возвращает координаты объекта на Canvas
-     * @param {Vector2d} elementCoord 
+     * @param {DrawableObject} drawable
      */
-    getCanvasCoord(elementCoord) {
-        return elementCoord.sub(this.position,new Vector2d());
+    setCanvasCoord(drawable) {
+        drawable.canvasCoord = drawable.gameCoord.sub(this.position.x,  this.position.y, drawable.canvasCoord);
     }
 
     /**
