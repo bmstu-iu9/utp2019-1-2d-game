@@ -1,8 +1,9 @@
 'use strict'
-
+/**
+ * @class
+ */
 class World extends GameObject{
     /**
-     * 
      * @param {String} id 
      */
     constructor(id = Game.getUniqId()){
@@ -23,7 +24,7 @@ class World extends GameObject{
      * Отрисовка World
      */
     render(){
-        this.currentRoom.render();
+        this.currentRoom.rnd.render(this.currentRoom);
     }
     /**
      * Вызов обработки игровой логики

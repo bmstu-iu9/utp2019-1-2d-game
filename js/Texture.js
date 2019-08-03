@@ -1,28 +1,31 @@
 'use strict'
 
 class Texture {
-    img;
-    width;
-    height;
+    /**
+     * 
+     * @param {Image} image 
+     */
     constructor(image) {
         this.setImage(image);
     }
+    /**
+     * 
+     * @param {Image} img 
+     */
     setImage(img) {
         if (img instanceof Image) {
             this.img = img;
 
-        } else if (typeof(img) == "string") {
-            this.img = new Image();
-            this.img.src = "temporary/" + img;
-        } else {
-            throw Error("img is not a Image object or file source");
-
         }
-        this.width = img.width;
-        this.height = img.height;
+        this.width = img.width
+        this.height = img.height
     }
+    /**
+     * 
+     * @param {Vector2D} canvasCoord 
+     */
     render(canvasCoord) {
-        ctx.drawImage(img, canvasCoord.x, canvasCoord.x);
+        ctx.drawImage(this.img, canvasCoord.x, canvasCoord.y);
     }
 }
 

@@ -1,22 +1,34 @@
 'use strict'
 
-let ctx = document.getElementById(canvas)
+let canvas = document.getElementById("canvas")
+canvas.width = document.body.clientWidth;
+canvas.height = document.body.clientHeight; 
+let ctx = canvas.getContext("2d")
 
 const Game = {
-    fps: 60,
-    dt: 0,
-    step: 1 / 60,
-    last: 0,
-    tileWidth: 50,
-    tileHeight: 50,
-    currentWorld: new World("mainWorld"),
-    camera: new Camera(540, 990),
-    objCnt: 0,
-    now: 0,
-
+    Init(){
+        Game.srcPath = "resources/"
+        Game.TestImage = new Image()
+        Game.TestImage.src = Game.srcPath + "test.jpg"
+        Game.TestTexture = new Texture(Game.TestImage)
+        Game.fps = 60
+        Game.dt = 0
+        Game.step = 1 / Game.fps
+        Game.last = 0
+        Game.tileWidth = 70
+        Game.tileHeight = 70
+        Game.camera = new Camera(canvas.width, canvas.height)
+        Game.roomRnd = new RoomRenderer(2)
+        Game.currentWorld = WorldFactory.CreateTestWorld()     
+        Game.objCnt = 0
+        Game.now = 0
+    },
+    /**
+     * Возвращает уникальный id в формате "gameObj_number"
+     */
     getUniqId() {
-        Game.objCnt = Game.objCnt + 1
-        return "gameObj_" + Game.obj
+        Game.objCnt++
+        return "gameObj_" + Game.objCnt
     },
 
     GameLoop() {
@@ -40,4 +52,5 @@ const Game = {
     },
 }
 
+Game.Init()
 Game.GameLoop()

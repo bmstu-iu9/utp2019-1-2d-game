@@ -1,8 +1,9 @@
 'use strict'
-
+/**
+ * @clsass Класс игровой сцены
+ */
 class Room extends GameObject{
     /**
-     * 
      * @param {String} id 
      * @param {Number} height 
      * @param {Number} width 
@@ -11,20 +12,17 @@ class Room extends GameObject{
         super(id)
         this.height = height
         this.width = width
-        this.backgroundTiles = new Array(height).fill(new Array(width))
-        this.solidTiles = new Array(height).fill(new Array(width))
-        this.rndTiles = new Array(height).fill(new Array(width))
-        this.middlegroundTiles = new Array(height).fill(new Array(width))
-        this.rnd = {};
+        this.backgroundTiles = new Array(height).fill().map(x => new Array(width))
+        this.solidTiles = new Array(height).fill().map(x => new Array(width))
+        this.rndTiles = new Array(height).fill().map(x => new Array(width))
+        this.middlegroundTiles = new Array(height).fill().map(x => new Array(width))
+        this.rnd = Game.roomRnd;
         this.manager = new RoomManager(this)
     }
-    setRenderer(renderer) {
-        this.rnd = renderer;
-    }
-    render(){
-        this.rnd.render(this);
-    }
 
+    /**
+     * Обновление игровой логики Room 
+     */
     Update(){
         this.manager.Update()
     }
