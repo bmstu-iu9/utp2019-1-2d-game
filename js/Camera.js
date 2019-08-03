@@ -1,7 +1,7 @@
 'use strict'
 class Camera {
     constructor(ledwidth, ledheight) {
-        this.position = new Vector2d(0, 0);
+        this.position = new Vector2d(-25, -25);
         this.ledWidth = ledwidth;
         this.ledHeight = ledheight;
     }
@@ -11,10 +11,11 @@ class Camera {
     }
     /**
      * Возвращает координаты объекта на Canvas
-     * @param {DrawableObject} drawable
+     * @param {GameObject} tile
      */
-    setCanvasCoord(drawable) {
-        drawable.canvasCoord = drawable.gameCoord.sub(this.position.x,  this.position.y, drawable.canvasCoord);
+    setCanvasCoord(tile) {
+        tile.drawable.canvasCoord.set(tile.position)
+        tile.drawable.canvasCoord.sub(this.position)
     }
 
     /**

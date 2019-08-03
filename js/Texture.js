@@ -17,8 +17,9 @@ class Texture {
             this.img = img;
 
         }
-        this.width = img.width
-        this.height = img.height
+        this.width = this.img.width
+        this.height = this.img.height
+
     }
     /**
      * 

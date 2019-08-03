@@ -5,6 +5,9 @@ class TilesFactory{
      * @param {Number} y 
      */
     static CreateTestTile(x = 0, y = 0){
-        return  new DrawableObject(x, y, "background",  Game.TestTexture)
+        return new StaticObject(x, y,new DrawableObject("background",  Game.TestTexture));
+    }
+    static CreateTestTile2(x = 0, y = 0){
+        return new StaticObject(x, y, new DrawableObject("background",  Game.TestTexture2));
     }
 }

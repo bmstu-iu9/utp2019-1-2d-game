@@ -7,10 +7,14 @@ let ctx = canvas.getContext("2d")
 
 const Game = {
     Init(){
+        Game.objCnt = 0
         Game.srcPath = "resources/"
         Game.TestImage = new Image()
         Game.TestImage.src = Game.srcPath + "test.jpg"
         Game.TestTexture = new Texture(Game.TestImage)
+        Game.TestImage2 = new Image()
+        Game.TestImage2.src = Game.srcPath + "test2.png"
+        Game.TestTexture2 = new Texture(Game.TestImage2)
         Game.fps = 60
         Game.dt = 0
         Game.step = 1 / Game.fps
@@ -19,8 +23,7 @@ const Game = {
         Game.tileHeight = 70
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
-        Game.currentWorld = WorldFactory.CreateTestWorld()     
-        Game.objCnt = 0
+        Game.currentWorld = WorldFactory.CreateTestWorld()
         Game.now = 0
     },
     /**
@@ -46,7 +49,6 @@ const Game = {
     Update() {
 
     },
-
     Render() {
         this.currentWorld.render();
     },
