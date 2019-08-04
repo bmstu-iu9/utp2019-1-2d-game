@@ -16,7 +16,6 @@ let imagesSrc = [
 let Game = {
     InitConfig() {
         Game.srcPath = "resources/"
-        Game.TestImage = { a: 1 }
         Game.fps = 60
         Game.dt = 0
         Game.step = 1 / Game.fps
