@@ -44,6 +44,6 @@ class Sprite {
         } else if (this.dir == 'horizontal') {
             x += frame * this.width;
         }
-        ctx.drawImage(this.img, x, y, this.width, this.height, canvasCoord.x, canvasCoord.x, this.width, this.height);
+        ctx.drawImage(this.img, x, y, this.width, this.height, canvasCoord.x, canvasCoord.y, this.width, this.height);
     }
 }

@@ -9,12 +9,18 @@ class Camera {
     setPosition(x, y) {
         this.position.set(x, y);
     }
+
+    focusOn(x, y) {
+        this.position.set(x,y)
+        this.position.x -= ~~(canvas.width / 2)
+        this.position.y -= ~~(canvas.height / 2)
+    }
     /**
      * Возвращает координаты объекта на Canvas
      * @param {GameObject} tile
      */
     setCanvasCoord(tile) {
-        tile.position.sub(this.position, tile.drawable.canvasCoord)
+        tile.actor.position.sub(this.position, tile.drawable.canvasCoord)
     }
 
     /**

@@ -41,7 +41,7 @@ class RoomRenderer {
             }
         }
         sortArray.sort((a, b) => {
-            return a.centre.y > b.centre.y
+            return (a.actor.centre.y > b.actor.centre.y ? 1:-1)
         });
         sortArray.forEach((key) => {
             this.camera.setCanvasCoord(key)

@@ -58,7 +58,7 @@ let Game = {
     },
 
     Update() {
-
+        this.currentWorld.Update()
     },
     Render() {
         this.currentWorld.render();

@@ -1,12 +1,12 @@
 'use strict'
 
-class RoomManager{
+class RoomManager {
     /**
      * 
      * @param {Room} room 
      */
-    constructor(room){
-        if(room === undefined){
+    constructor(room) {
+        if (room === undefined) {
             throw "managableObj can not be undefined"
         }
         this.managableObj = room
@@ -15,10 +15,17 @@ class RoomManager{
     /**
      * Обновляет все игровые объекты внури managebleObj (Room)
      */
-    Update(){
-        this.managableObj.middlegroundTiles.forEach(element => {
-            if (element.Update !== undefined)
-                element.Update();
-        }); 
+    Update() {
+        this.managableObj.middlegroundTiles.forEach(row => {
+            row.forEach(col => {
+                col.forEach(element => {
+                    //console.log(element)
+                    if (element.Update !== undefined) {
+                        //console.log(element)
+                        element.Update();
+                    }
+                });
+            });
+        });
     }
 }
