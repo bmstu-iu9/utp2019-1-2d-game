@@ -1,42 +1,70 @@
 'use strict'
 
-let ctx = document.getElementById(canvas)
+let canvas = document.getElementById("canvas")
+canvas.width = document.body.clientWidth;
+canvas.height = document.body.clientHeight;
+let ctx = canvas.getContext("2d")
 
-const Game = {
-    fps : 60,
-    dt : 0,
-    step : 1 / 60,
-    last : 0,
-    tileWidth : 50,
-    tileHeight : 50,
-    currenWorld : new World("mainWorld"),
-    objCnt : 0,
-    now : 0,
+let imagesStorage = {}
 
-    getUniqId(){
-        Game.objCnt = Game.objCnt + 1
-        return "gameObj_" + Game.obj
+let imagesSrc = [
+    'test2.png',
+    'test.jpg',
+    'ghost_shriek.png',
+]
+
+let Game = {
+    InitConfig() {
+        Game.srcPath = "resources/"
+        Game.fps = 60
+        Game.dt = 0
+        Game.step = 1 / Game.fps
+        Game.last = 0
+        Game.tileWidth = 70
+        Game.tileHeight = 70
+        Game.objCnt = 0
+        Game.now = 0
+
     },
 
-    GameLoop(){
+    InitLogic() {
+        Game.TestTexture = new Texture(imagesStorage.test)
+        Game.TestTexture2 = new Texture(imagesStorage.test2)
+        Game.TestSpritePattern = new SpritePattern(imagesStorage.ghost_shriek, [0, 1, 2, 3], "horizontal", 0, 0, 80, 64)
+        Game.camera = new Camera(canvas.width, canvas.height)
+        Game.roomRnd = new RoomRenderer(2)
+        Game.currentWorld = WorldFactory.CreateTestWorld()
+        requestAnimationFrame(Game.Loop)
+    },
+
+    /**
+     * Возвращает уникальный id в формате "gameObj_number"
+     */
+    getUniqId() {
+        Game.objCnt++
+        return "gameObj_" + Game.objCnt
+    },
+
+    Loop() {
         Game.now = performance.now()
-        Game.dt = Game.dt + Math.min(1, (Game.now - Game.last) / 1000);
-        while(Game.dt > Game.step){
-            Game.dt = Game.dt - Game.step 
+        Game.dt = Game.dt + Math.min(1, (Game.now - Game.last) / 1000)
+        while (Game.dt > Game.step) {
+            Game.dt = Game.dt - Game.step
             Game.Update()
         }
-        Game.last = Game.now
         Game.Render()
-        requestAnimationFrame(Game.GameLoop)
-    }, 
-
-    Update(){
-
+        Game.last = Game.now
+        requestAnimationFrame(Game.Loop)
     },
 
-    Render(){
+    Update() {
 
+    },
+    Render() {
+        this.currentWorld.render();
     },
 }
 
-Game.GameLoop()
+Game.InitConfig()
+ResourceLoader.setCallback(Game.InitLogic)
+ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc)

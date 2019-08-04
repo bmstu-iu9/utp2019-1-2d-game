@@ -1,8 +1,9 @@
 'use strict'
-
+/**
+ * @class
+ */
 class World extends GameObject{
     /**
-     * 
      * @param {String} id 
      */
     constructor(id = Game.getUniqId()){
@@ -10,7 +11,6 @@ class World extends GameObject{
         this.roomContaier = new Array
         this.currentRoom = undefined
         this.manager = new WorldManager(this)
-        this.rnd = {}
     }
     /**
      * Добавляет комнату в World
@@ -23,8 +23,8 @@ class World extends GameObject{
     /**
      * Отрисовка World
      */
-    Render(){
-        this.rnd.Render()
+    render(){
+        this.currentRoom.rnd.render(this.currentRoom);
     }
     /**
      * Вызов обработки игровой логики
