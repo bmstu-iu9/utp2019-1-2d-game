@@ -27,6 +27,7 @@ class Sprite {
         this.index = 0;
     }
     render(canvasCoord) {
+        this.update((Game.now - Game.last) / 1000)
         let frame = 0;
         if (this.speed > 0) {
             let max = this.frames.length;
@@ -36,13 +37,13 @@ class Sprite {
                 return;
             }
         }
-        let x = this.spriteMapCoord[0];
-        let y = this.spriteMapCoord[1];
+        let x = this.spriteMapCoord.x;
+        let y = this.spriteMapCoord.y
         if (this.dir == 'vertical') {
-            y += frame * this.width;
+            y += frame * this.height;
         } else if (this.dir == 'horizontal') {
-            x += frame * this.height;
+            x += frame * this.width;
         }
-        ctx.drawImage(this.img, x, y, this.height, this.width, canvasCoord.x, canvasCoord.x, this.height, this.width);
+        ctx.drawImage(this.img, x, y, this.width, this.height, canvasCoord.x, canvasCoord.x, this.width, this.height);
     }
 }

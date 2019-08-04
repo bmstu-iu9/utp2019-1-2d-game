@@ -8,8 +8,9 @@ let ctx = canvas.getContext("2d")
 let imagesStorage = {}
 
 let imagesSrc = [
-    'tile.png',
+    'test2.png',
     'test.jpg',
+    'ghost_shriek.png',
 ]
 
 let Game = {
@@ -28,8 +29,9 @@ let Game = {
     },
 
     InitLogic() {
-        Game.TestImage = imagesStorage.test
-        Game.TestTexture = new Texture(Game.TestImage)
+        Game.TestTexture = new Texture(imagesStorage.test)
+        Game.TestTexture2 = new Texture(imagesStorage.test2)
+        Game.TestSpritePattern = new SpritePattern(imagesStorage.ghost_shriek, [0, 1, 2, 3], "horizontal", 0, 0, 80, 64)
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
         Game.currentWorld = WorldFactory.CreateTestWorld()
@@ -51,15 +53,14 @@ let Game = {
             Game.dt = Game.dt - Game.step
             Game.Update()
         }
-        Game.last = Game.now
         Game.Render()
+        Game.last = Game.now
         requestAnimationFrame(Game.Loop)
     },
 
     Update() {
 
     },
-
     Render() {
         this.currentWorld.render();
     },

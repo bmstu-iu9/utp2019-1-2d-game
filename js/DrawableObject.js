@@ -1,16 +1,10 @@
 'use strict'
 
 class DrawableObject {
-    constructor(x, y, placement, drowable) {
-        this.gameCoord = new Vector2d(x, y);
+    constructor(placement, drowable) {
         this.placement = placement;
         this.drowable = drowable
-    }
-    setCanvasCoord(arg) {
-        this.canvasCoord = arg;
-    }
-    setGameCoord(x, y) {
-        this.gameCoord.set(x, y);
+        this.canvasCoord = new Vector2d(0, 0)
     }
     render() {
         this.drowable.render(this.canvasCoord);
