@@ -32,15 +32,6 @@ class Room extends GameObject{
      * Предполагается,что здесь будет происходить обработка коллизий
      */
     collide(){
-        this.middlegroundTiles.forEach(row=>{
-            row.forEach(col=>{
-                col.forEach(object=>{
-                    if (!(object instanceof StaticObject)){
-                        this.collisionManager.collide(object);
-                    }
-                }
-                )
-            })
-        })
+        this.collisionManager.collide();
     }
 }
