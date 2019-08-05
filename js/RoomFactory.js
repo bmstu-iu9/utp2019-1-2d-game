@@ -1,11 +1,12 @@
+'use strict';
 class RoomFactory {
     static CreateTestRoom() {
-        let testRoomSize = 100
-        let room = new Room("Test Room", testRoomSize, testRoomSize)
+        let testRoomSize = 100;
+        let room = new Room("Test Room", testRoomSize, testRoomSize);
 
         for (let i = 0; i < testRoomSize; i++) {
             for (let j = 0; j < testRoomSize; j++) {
-                room.backgroundTiles[i][j] = TilesFactory.CreateTestTile(j * Game.tileWidth, i * Game.tileHeight)
+                room.backgroundTiles[i][j] = TilesFactory.CreateTestTile(j * Game.tileWidth, i * Game.tileHeight);
             }
         }
 
@@ -15,12 +16,12 @@ class RoomFactory {
             }
         }
 
-        let player = TilesFactory.CreateTestTile2(300, 350)
+        let player = TilesFactory.CreateTileTry();
 
-        let player2 = TilesFactory.CreateTestTile3(350, 370)
+        let player2 = TilesFactory.CreateTestTile3(350, 370);
 
-        room.middlegroundTiles[6][7].set(player)
-        room.middlegroundTiles[7][7].set(player2)
-        return room
+        room.middlegroundTiles[6][7].set(player);
+        room.middlegroundTiles[7][7].set(player2);
+        return room;
     }
 }

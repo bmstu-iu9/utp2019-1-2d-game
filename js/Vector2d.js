@@ -8,7 +8,7 @@
 class Vector2d{
     constructor(vector2d_or_x,y){
         if (arguments.length===0){
-            this.x=this.y=0;
+            this.y=this.x=0;
         }else {
             this.set(vector2d_or_x,y);
         }

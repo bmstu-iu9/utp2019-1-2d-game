@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 class Camera {
     constructor(ledwidth, ledheight) {
         this.position = new Vector2d(-25, -25);
@@ -11,9 +11,9 @@ class Camera {
     }
 
     focusOn(x, y) {
-        this.position.set(x,y)
-        this.position.x -= ~~(canvas.width / 2)
-        this.position.y -= ~~(canvas.height / 2)
+        this.position.set(x,y);
+        this.position.x -= ~~(canvas.width / 2);
+        this.position.y -= ~~(canvas.height / 2);
     }
     /**
      * Возвращает координаты объекта на Canvas

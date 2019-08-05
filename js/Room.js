@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 /**
- * @clsass Класс игровой сцены
+ * @class Класс игровой сцены
  */
 class Room extends GameObject{
     /**
@@ -9,15 +9,16 @@ class Room extends GameObject{
      * @param {Number} width 
      */
     constructor(id = Game.getUniqId(), height = 10, width = 10){
-        super(id)
-        this.height = height
-        this.width = width
-        this.backgroundTiles = new Array(height).fill().map(x => new Array(width))
-        this.solidTiles = new Array(height).fill().map(x => new Array(width))
-        this.rndTiles = new Array(height).fill().map(x => new Array(width))
-        this.middlegroundTiles = new Array(height).fill().map(x => new Array(width))
+        super(id);
+        this.height = height;
+        this.width = width;
+        this.backgroundTiles = new Array(height).fill().map(x => new Array(width));
+        this.solidTiles = new Array(height).fill().map(x => new Array(width));
+        this.rndTiles = new Array(height).fill().map(x => new Array(width));
+        this.middlegroundTiles = new Array(height).fill().map(x => new Array(width));
         this.rnd = Game.roomRnd;
-        this.manager = new RoomManager(this)
+        this.manager = new RoomManager(this);
+        this.collisionManager=new CollisionManager(this.manager);
     }
 
     /**
@@ -25,5 +26,12 @@ class Room extends GameObject{
      */
     Update(){
         this.manager.Update()
+    }
+
+    /**
+     * Предполагается,что здесь будет происходить обработка коллизий
+     */
+    collide(){
+
     }
 }

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 class WorldManager {
     /**
@@ -17,5 +17,12 @@ class WorldManager {
      */
     Update() {
         this.managableObj.currentRoom.Update()
+    }
+
+    /**
+     * Предполагается,что здесь будет происходить обработка коллизий
+     */
+    collide(){
+        this.managableObj.currentRoom.collide();
     }
 }

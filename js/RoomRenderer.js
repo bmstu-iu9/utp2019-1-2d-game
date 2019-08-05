@@ -21,7 +21,7 @@ class RoomRenderer {
         let leftTop = [~~(cameraVec.x / this.tileWidth) - this.margin, ~~(cameraVec.y / this.tileHeight) - this.margin];
         let rightBot = [Math.min(leftTop[0] + this.tileCount[0], room.width - 1), Math.min(leftTop[1] + this.tileCount[1], room.height - 1)];
         leftTop = [Math.max(leftTop[0], 0), Math.max(leftTop[1], 0)];
-        let tile = 0
+        let tile = 0;
         
         for (let i = leftTop[0]; i < rightBot[0]; i++){
             for (let j = leftTop[1]; j < rightBot[1]; j++) {
@@ -31,7 +31,7 @@ class RoomRenderer {
             }
         }
         // Without sprites
-        let sortArray = new Array();
+        let sortArray = [];
         for (let i = leftTop[0]; i < rightBot[0]; i++){
             for (let j = leftTop[1]; j < rightBot[1]; j++) {
                 let drowableMap = room.middlegroundTiles[i][j];
@@ -44,7 +44,7 @@ class RoomRenderer {
             return (a.actor.centre.y > b.actor.centre.y ? 1:-1)
         });
         sortArray.forEach((key) => {
-            this.camera.setCanvasCoord(key)
+            this.camera.setCanvasCoord(key);
             key.render();
         })
     }
