@@ -54,6 +54,7 @@ let Game = {
         while (Game.dt > Game.step) {
             Game.dt -= Game.step;
             Game.Update();
+            Game.Collide();
         }
         Game.Render();
         Game.last = Game.now;
@@ -62,6 +63,10 @@ let Game = {
 
     Update() {
         this.currentWorld.Update()
+    },
+
+    Collide(){
+        this.currentWorld.currentRoom.collide();
     },
 
 

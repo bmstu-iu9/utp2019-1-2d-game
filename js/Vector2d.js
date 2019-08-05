@@ -6,6 +6,10 @@
  * (то поля будут инициализированы нулями.
  */
 class Vector2d{
+    /**
+     * @param {Vector2d,Number,undefined} vector2d_or_x
+     * @param {Number,undefined} y
+     */
     constructor(vector2d_or_x,y){
         if (arguments.length===0){
             this.y=this.x=0;
@@ -15,6 +19,9 @@ class Vector2d{
     }
 
     /**
+     * @param {Vector2d,Number} vector2d_or_x
+     * @param {Vector2d,Number,undefined} y_or_res
+     * @param {Vector2d ,undefined} res
      *Сложение. Метод может принимать либо вектор,либо -- два числа.
      *В каждом случае возможна передача вектора-"контейнера"
      *в качестве последнего параметра, тогда
@@ -47,6 +54,9 @@ class Vector2d{
     }
 
     /**
+     * @param {Vector2d,Number} vector2d_or_x
+     * @param {Vector2d,Number,undefined} y_or_res
+     * @param {Vector2d ,undefined} res
      *Разность. Метод может принимать либо вектор,либо -- два числа.
      *В каждом случае возможна передача вектора-"контейнера"
      *в качестве последнего параметра, тогда
@@ -78,7 +88,9 @@ class Vector2d{
         }
     }
 
-    /** 
+    /**
+     * @param {Number} number
+     * @param {Vector2d ,undefined} res
      *Умножение на число.
      *Кроме числа,метод своим последним параметром
      *может принимать вектор-"контейнер",который
@@ -98,6 +110,8 @@ class Vector2d{
     }
 
     /**
+     * @param {Vector2d,Number} vector2d_or_x
+     * @param {Number,undefined} y
     Присваивание. Принимает либо вектор,либо -- два числа.
      */
     set(vector2d_or_x,y){
@@ -110,7 +124,9 @@ class Vector2d{
         }
     }
 
+
     /**
+     * @param {Vector2d} vector2d
     Скалярное произведение. Принимает вектор в качестве параметра.
      */
     dotProduct(vector2d){
@@ -139,6 +155,7 @@ class Vector2d{
     }
 
     /**
+     * @param {Vector2d} vector_to_project_on
     Проекция на вектор. Метод в какчестве параметра принмает вектор,
     на который нужно спроецировать.
      */
@@ -153,4 +170,6 @@ class Vector2d{
         return new Vector2d(-this.y,this.x);
     }
 }
+
+let a=new Vector2d();
 

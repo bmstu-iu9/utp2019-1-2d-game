@@ -19,10 +19,4 @@ class WorldManager {
         this.managableObj.currentRoom.Update()
     }
 
-    /**
-     * Предполагается,что здесь будет происходить обработка коллизий
-     */
-    collide(){
-        this.managableObj.currentRoom.collide();
-    }
 }

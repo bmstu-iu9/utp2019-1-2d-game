@@ -16,7 +16,7 @@ class NPC extends GameObject {
         //     centre.add(25,40,new Vector2d()),
         //     centre.add(-25,40,new Vector2d())
         // ]);
-        this.hitbox=new CircleHitbox(new Vector2d(centre),30);
+        this.hitbox=new CircleHitbox(new Vector2d(centre),26);
 
     }
     render() {
@@ -39,22 +39,5 @@ class NPC extends GameObject {
         }
         //Game.camera.focusOn(this.actor.position);
         this.hitbox.changePosition(this.actor.centre);
-        NPC.collide(Game.currentWorld.currentRoom,this);
-    }
-
-    static collide(roomManager,object){
-        roomManager.middlegroundTiles.forEach(row => {
-            row.forEach(col => {
-                col.forEach(objectToCollideWith => {
-                    if (objectToCollideWith.id!==object.id){
-                        let collision=object.hitbox.getCollision(objectToCollideWith.hitbox);
-                        if (collision){
-                            object.hitbox.correctPosition(collision);
-                            object.actor.changePosition(collision.distance);
-                        }
-                    }
-                });
-            });
-        });
     }
 }

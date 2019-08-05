@@ -15,13 +15,13 @@ class MovableActor extends Actor {
      * @param {Vector2d} arg 
      */
     changePosition(arg) {
-        this.centre.add(arg)
-        this.position.add(arg)
+        this.centre.add(arg);
+        this.position.add(arg);
     }
 
     move(arg) {
-        this.centre.add(arg)
-        this.position.add(arg)
+        this.centre.add(arg);
+        this.position.add(arg);
     }
 
     update() {

@@ -18,7 +18,7 @@ class Room extends GameObject{
         this.middlegroundTiles = new Array(height).fill().map(x => new Array(width));
         this.rnd = Game.roomRnd;
         this.manager = new RoomManager(this);
-        this.collisionManager=new CollisionManager(this.manager);
+        this.collisionManager=new CollisionManager(this);
     }
 
     /**
@@ -32,6 +32,15 @@ class Room extends GameObject{
      * Предполагается,что здесь будет происходить обработка коллизий
      */
     collide(){
-
+        this.middlegroundTiles.forEach(row=>{
+            row.forEach(col=>{
+                col.forEach(object=>{
+                    if (!(object instanceof StaticObject)){
+                        this.collisionManager.collide(object);
+                    }
+                }
+                )
+            })
+        })
     }
 }
