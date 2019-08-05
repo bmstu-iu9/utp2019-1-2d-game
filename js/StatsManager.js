@@ -21,7 +21,7 @@ class StatsManager {
     gainModifier(modifier){
        if (!this.modifiersContainer.has(modifier.id)){
            this.modifiersContainer.set(modifier.id,modifier)
-           this.stats += modifier.stats
+           this.stats.add(modifier.stats)
        }
     }
 
@@ -32,7 +32,7 @@ class StatsManager {
     delModifier(id){
         if (this.modifiersContainer.has(id)){
             let mod = this.modifiersContainer.get(id)
-            this.stats -= mod.stats
+            this.stats.add(mod.stats.inverse())
             this.modifiersContainer.delete(id)
         }
     }
@@ -51,7 +51,7 @@ class StatsManager {
      */
 
     gainAction(action){
-        this.stats += action.stats
+        this.stats.add(action.stats)
     }
 
     /**

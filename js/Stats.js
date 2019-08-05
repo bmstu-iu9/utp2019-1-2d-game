@@ -23,4 +23,22 @@ class Stats{
         this.intelligence=intelligence
         this.speed=speed
     }
+
+    /**
+     *
+     * @param{Stats} stats
+     */
+    add(stats){
+        this.hp += stats.hp
+        this.mana += stats.mana
+        this.strenght += stats.strenght
+        this.agility += stats.agility
+        this.intelligence += stats.intelligence
+        this.speed += stats.speed
+    }
+    
+    inverse(){
+        return new Stats(-this.hp,-this.mana,-this.strenght,
+            -this.agility,-this.intelligence,-this.speed)
+    }
 }
