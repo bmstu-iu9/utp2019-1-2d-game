@@ -3,33 +3,36 @@
 /**
  * Player control
  */
-class PlayerManager{
+class PlayerManager {
     /**
      *
      * @param {NPC} player
      */
-    constructor(player){
-        this.player=player
+    constructor(player) {
+        this.player = player
     }
 
-    update(){
+    update() {
         let speed = 10
-        if (keyboard.KeyW) {
-            this.player.actor.changePosition(new Vector2d(0, -speed))
-            //console.log(this.actor.position)
+        let xDirection = 0
+        let yDirection = 0
+        if (keyboard.KeyW || keyboard.ArrowUp) {
+            yDirection -= speed
         }
-        if (keyboard.KeyS) {
-            this.player.actor.changePosition(new Vector2d(0, speed))
-            //console.log(this.actor.position)
+        if (keyboard.KeyS || keyboard.ArrowDown) {
+            yDirection += speed
         }
-        if (keyboard.KeyA) {
-            this.player.actor.changePosition(new Vector2d(-speed, 0))
-            //console.log(this.actor.position)
+        if (keyboard.KeyA || keyboard.ArrowLeft) {
+            xDirection -= speed
         }
-        if (keyboard.KeyD) {
-            this.player.actor.changePosition(new Vector2d(speed, 0))
-            //console.log(this.actor.position)
+        if (keyboard.KeyD || keyboard.ArrowRight) {
+            xDirection += speed
         }
+        if (xDirection !== 0 && yDirection !== 0) {
+            xDirection = ~~(xDirection / Math.sqrt(2))
+            yDirection = ~~(yDirection / Math.sqrt(2))
+        }
+        this.player.actor.changePosition(new Vector2d(xDirection, yDirection))
         Game.camera.focusOn(this.player.actor.position)
     }
 }
