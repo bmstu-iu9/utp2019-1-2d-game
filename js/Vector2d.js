@@ -171,5 +171,4 @@ class Vector2d{
     }
 }
 
-let a=new Vector2d();
 
