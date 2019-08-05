@@ -4,7 +4,7 @@
  * Lasting effect
  */
 
-class Effect{
+class Effect {
     /**
      *
      * @param {Number} remainTime
@@ -19,7 +19,7 @@ class Effect{
      * @param {Number} dt
      */
 
-    update(target,dt){
+    update(target, dt) {
         this.remainTime -= dt
     }
 }
