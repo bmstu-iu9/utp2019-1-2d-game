@@ -8,7 +8,7 @@ class StatsAffector {
      *
      * @param {StatsManager} target
      */
-    constructor(target){
+    constructor(target) {
         this.target = target
     }
 
@@ -17,7 +17,7 @@ class StatsAffector {
      * @param {Effect} effect
      * @param {StatsManager} target
      */
-    toDealEffect(effect,target){
+    toDealEffect(effect, target) {
         target.gainEffect(effect)
     }
 
@@ -26,7 +26,7 @@ class StatsAffector {
      * @param {Modifier} modifier
      * @param {StatsManager} target
      */
-    toAddModifier(modifier,target){
+    toAddModifier(modifier, target) {
         target.gainModifier(modifier)
     }
 
@@ -35,7 +35,7 @@ class StatsAffector {
      * @param {String} id
      * @param {StatsManager} target
      */
-    toDelModifier(id,target){
+    toDelModifier(id, target) {
         target.delModifier(id)
     }
 
@@ -44,7 +44,7 @@ class StatsAffector {
      * @param {Action} action
      * @param {StatsManager} target
      */
-    toDoAction(action,target){
+    toDoAction(action, target) {
         target.gainAction(action)
     }
 }

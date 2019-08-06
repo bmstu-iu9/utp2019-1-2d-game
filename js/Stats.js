@@ -4,7 +4,7 @@
  * Represents NPCs' stats
  */
 
-class Stats{
+class Stats {
     /**
      *
      * @param {Number} hp
@@ -15,20 +15,20 @@ class Stats{
      * @param {Number} speed
      */
 
-    constructor(hp,mana,strength,agility,intelligence,speed){
-        this.hp=hp
-        this.mana=mana
-        this.strenght=strength
-        this.agility=agility
-        this.intelligence=intelligence
-        this.speed=speed
+    constructor(hp, mana, strength, agility, intelligence, speed) {
+        this.hp = hp
+        this.mana = mana
+        this.strenght = strength
+        this.agility = agility
+        this.intelligence = intelligence
+        this.speed = speed
     }
 
     /**
      *
      * @param{Stats} stats
      */
-    add(stats){
+    add(stats) {
         this.hp += stats.hp
         this.mana += stats.mana
         this.strenght += stats.strenght
@@ -36,9 +36,9 @@ class Stats{
         this.intelligence += stats.intelligence
         this.speed += stats.speed
     }
-    
-    inverse(){
-        return new Stats(-this.hp,-this.mana,-this.strenght,
-            -this.agility,-this.intelligence,-this.speed)
+
+    inverse() {
+        return new Stats(-this.hp, -this.mana, -this.strenght,
+            -this.agility, -this.intelligence, -this.speed)
     }
 }

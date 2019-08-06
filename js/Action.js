@@ -4,7 +4,7 @@
  * Instant effect
  */
 
-class Action{
+class Action {
     /**
      *
      * @param {Stats} stats
