@@ -19,6 +19,7 @@ class Room extends GameObject{
         this.rnd = Game.roomRnd;
         this.manager = new RoomManager(this);
         this.collisionManager=new CollisionManager(this);
+        this.quadTree=new QuadTree(0,new Rectangle(0,0,canvas.width,canvas.height));
     }
 
     /**

@@ -18,10 +18,19 @@ class RoomFactory {
 
         let player = TilesFactory.CreateTileTry();
 
-        let player2 = TilesFactory.CreateTestTile3(350, 370);
+        let p=TilesFactory.CreateTestTile3();
+
+        for (let i=0;i<10;i++){
+            for (let j=0;j<10;j++){
+                let t=TilesFactory.CreateTestTile4((2+j)*125,(2+i)*125);
+                room.middlegroundTiles[i][j].set(t);
+                room.quadTree.add(t.hitbox);
+            }
+        }
 
         room.middlegroundTiles[6][7].set(player);
-        room.middlegroundTiles[7][7].set(player2);
+        room.middlegroundTiles[8][8].set(p);
+        console.log(room.quadTree);
         return room;
     }
 }

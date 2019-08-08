@@ -12,7 +12,11 @@ class TilesFactory {
         return new StaticObject(x, y, x, y, new DrawableObject("middleground", Game.TestTexture2));
     }
     static CreateTestTile3(x = 0, y = 0) {
-        return new NPC(new Vector2d(350, 370), new Vector2d(375, 395));
+        return new NPC(new Vector2d(x, y), new Vector2d(x+25, y+25));
+    }
+
+    static CreateTestTile4(x,y){
+        return new StaticObject(x,y,x+25,y+25,new DrawableObject('middleground',SpriteFactory.CreateTestSprite()))
     }
 
     static CreateTileTry(x = 0, y = 0) {
