@@ -94,7 +94,7 @@ class QuadTree{
                 this.next[index].retrieve(objects,object);
             }else {
                 for (let n of this.next){
-                    [].push.apply(objects,n.objects);
+                    n.retrieve(objects,object);
                 }
             }
         }
