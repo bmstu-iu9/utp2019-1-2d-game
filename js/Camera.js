@@ -2,18 +2,26 @@
 class Camera {
     constructor(ledwidth, ledheight) {
         this.position = new Vector2d(-25, -25);
+        this.focusObject = null
         this.ledWidth = ledwidth;
         this.ledHeight = ledheight;
+    }
+    Update(){
+        this.position.set(this.focusObject.position.x,
+                          this.focusObject.position.y)
+        this.position.x -= ~~(canvas.width / 2)
+        this.position.y -= ~~(canvas.height / 2)
     }
 
     setPosition(x, y) {
         this.position.set(x, y);
     }
-
-    focusOn(x, y) {
-        this.position.set(x,y)
-        this.position.x -= ~~(canvas.width / 2)
-        this.position.y -= ~~(canvas.height / 2)
+    /**
+     * Задает фокус камеры на объект
+     * @param {Actor} actor
+     */
+    focusOn(actor) {
+        this.focusObject = actor
     }
     /**
      * Возвращает координаты объекта на Canvas

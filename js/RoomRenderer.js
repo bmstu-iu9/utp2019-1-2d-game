@@ -11,14 +11,14 @@ class RoomRenderer {
         this.ledWidth = this.camera.getLedWidth();
         this.margin = margin;
         this.tileCount = [Math.ceil(this.ledWidth / this.tileWidth) + 2 * margin, Math.ceil(this.ledHeight / this.tileHeight) + 2 * margin];
+        this.cameraVec = this.camera.getPosition();
     }
 
     /**
      * @param {Room} room 
      */
     render(room) {
-        let cameraVec = this.camera.getPosition();
-        let leftTop = [~~(cameraVec.x / this.tileWidth) - this.margin, ~~(cameraVec.y / this.tileHeight) - this.margin];
+        let leftTop = [~~(this.cameraVec.x / this.tileWidth) - this.margin, ~~(this.cameraVec.y / this.tileHeight) - this.margin];
         let rightBot = [Math.min(leftTop[0] + this.tileCount[0], room.width - 1), Math.min(leftTop[1] + this.tileCount[1], room.height - 1)];
         leftTop = [Math.max(leftTop[0], 0), Math.max(leftTop[1], 0)];
         let tile = 0

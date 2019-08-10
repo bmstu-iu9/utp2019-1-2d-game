@@ -33,6 +33,5 @@ class PlayerManager {
             yDirection = ~~(yDirection / Math.sqrt(2))
         }
         this.player.actor.changePosition(new Vector2d(xDirection, yDirection))
-        Game.camera.focusOn(this.player.actor.position)
     }
 }

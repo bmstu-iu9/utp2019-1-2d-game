@@ -3,7 +3,7 @@
 let canvas = document.getElementById("canvas")
 canvas.width = document.body.clientWidth;
 canvas.height = document.body.clientHeight;
-let ctx = canvas.getContext("2d")
+let ctx = canvas.getContext("2d",{ alpha: false })
 
 let imagesStorage = {}
 
@@ -51,7 +51,10 @@ let Game = {
         while (Game.dt > Game.step) {
             Game.dt = Game.dt - Game.step
             Game.Update()
+            //collisions update should be here
+            Game.camera.Update()
         }
+        
         Game.Render()
         Game.last = Game.now
         requestAnimationFrame(Game.Loop)
