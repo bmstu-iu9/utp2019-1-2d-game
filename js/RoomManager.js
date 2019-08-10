@@ -14,18 +14,12 @@ class RoomManager {
 
     /**
      * Обновляет все игровые объекты внури managebleObj (Room)
-     */
+     */ 
     Update() {
-        this.managableObj.middlegroundTiles.forEach(row => {
-            row.forEach(col => {
-                col.forEach(element => {
-                    //console.log(element)
-                    if (element.Update !== undefined) {
-                        //console.log(element)
-                        element.Update();
-                    }
-                });
-            });
+        this.managableObj.updatableObjects.forEach(element => {
+            element.Update();
         });
     }
+
+
 }

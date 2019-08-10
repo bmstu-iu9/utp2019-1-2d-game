@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 class WorldManager {
     /**
@@ -18,4 +18,5 @@ class WorldManager {
     Update() {
         this.managableObj.currentRoom.Update()
     }
+
 }
