@@ -113,6 +113,15 @@ class AABB {
     correctPosition(collision){
         this.changePosition(this.centre.add(collision.distance,new Vector2d()));
     }
+
+    toJSON(){
+        return {
+            centre : this.centre,
+            vertices : this.vertices,
+            firstAxis : this.firstAxis,
+            secondAxis : this.secondAxis
+        }
+    }
 }
 
 class CircleHitbox {
@@ -143,6 +152,13 @@ class CircleHitbox {
     }
     correctPosition(collision){
         this.changePosition(this.centre.add(collision.distance,new Vector2d()));
+    }
+
+    toJSON(){
+        return {
+            radius : this.radius,
+            centre : this.centre
+        }
     }
 }
 

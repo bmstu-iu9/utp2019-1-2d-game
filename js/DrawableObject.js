@@ -9,4 +9,12 @@ class DrawableObject {
     render() {
         this.drowable.render(this.canvasCoord);
     }
+
+    toJSON(){
+        return {
+            placement : this.placement,
+            drowable : this.drowable, //Нужно поменять на id
+            canvasCoord : this.canvasCoord
+        }
+    }
 }

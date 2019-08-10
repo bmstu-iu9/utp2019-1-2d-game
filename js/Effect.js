@@ -22,4 +22,11 @@ class Effect {
     update(target, dt) {
         this.remainTime -= dt
     }
+
+    toJSON(){
+        return {
+            remainTime : this.remainTime
+            //Еще будет id
+        }
+    }
 }

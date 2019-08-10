@@ -152,5 +152,12 @@ class Vector2d{
     normal(){
         return new Vector2d(-this.y,this.x);
     }
+
+    toJSON(){
+        return {
+            x : this.x,  //Потом можно будет удалить
+            y : this.y
+        }
+    }
 }
 

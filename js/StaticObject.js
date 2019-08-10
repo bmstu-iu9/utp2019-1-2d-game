@@ -9,6 +9,14 @@ class StaticObject extends GameObject {
     render() {
         this.drawable.render()
     }
+
+    toJSON(){
+        return {
+            id : this.id,
+            actor : this.actor,
+            drawable : this.drawable // возможно нужен будет id
+        }
+    }
 }
 
 

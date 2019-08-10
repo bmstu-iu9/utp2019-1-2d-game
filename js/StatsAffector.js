@@ -47,4 +47,10 @@ class StatsAffector {
     toDoAction(action, target) {
         target.gainAction(action)
     }
+
+    toJSON(){
+        return {
+            target : this.target //Возможно нужно будет удалить
+        }
+    }
 }

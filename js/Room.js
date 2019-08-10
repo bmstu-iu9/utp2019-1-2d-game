@@ -26,4 +26,17 @@ class Room extends GameObject{
     Update(){
         this.manager.Update()
     }
+
+    toJSON(){
+        return {
+            id : this.id,
+            height : this.height,
+            width : this.width,
+            backgroundTiles : this.backgroundTiles, //Пока пусть сериализуются, позже будет изменено
+            solidTiles : this.solidTiles,
+            rndTiles : this.rndTiles,
+            middlegroundTiles : this.middlegroundTiles
+        };
+
+    }
 }

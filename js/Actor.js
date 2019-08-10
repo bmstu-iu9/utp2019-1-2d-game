@@ -8,4 +8,11 @@ class Actor {
         this.position = coords
         this.centre = centre
     }
+
+    toJSON(){
+        return {
+            position : this.position,
+            centre : this.centre
+        }
+    }
 }

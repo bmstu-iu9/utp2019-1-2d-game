@@ -46,4 +46,19 @@ class Sprite {
         }
         ctx.drawImage(this.img, x, y, this.width, this.height, canvasCoord.x, canvasCoord.y, this.width, this.height);
     }
+
+    toJSON(){
+        return {
+            pattern : this.pattern,
+            once : this.once,
+            speed : this.speed,
+            frames : this.frames,
+            img : this.img, // нужно будет поменять на id
+            index : this.index,
+            dir : this.dir,
+            spriteMapCoord : this.spriteMapCoord,
+            width : this.width,
+            height : this.height
+        }
+    }
 }

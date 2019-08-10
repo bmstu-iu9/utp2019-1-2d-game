@@ -14,4 +14,11 @@ class Modifier extends GameObject {
         super(id)
         this.stats = stats
     }
+
+    toJSON(){
+        return{
+            stats : this.stats,
+            id : this.id
+        }
+    }
 }

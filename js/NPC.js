@@ -23,4 +23,12 @@ class NPC extends GameObject {
     Update() {
         this.manager.update()
     }
+
+    toJSON(){
+        return {
+            id : this.id,
+            actor : this.actor,
+            drawable : this.drawable
+        }
+    }
 }
