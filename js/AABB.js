@@ -27,7 +27,7 @@ class AABB {
             };
         };
 
-        const isOverlapping = (pr1, pr2) => {
+        const overlap = (pr1, pr2) => {
             let max, min;
 
             if (pr1.max < pr2.max) {
@@ -54,8 +54,8 @@ class AABB {
 
             let dx, dy,dX,dY;
 
-            if ((dx = isOverlapping(thisPr1, objPr1)) < 0 && (dy = isOverlapping(thisPr2, objPr2)) < 0
-                && (dX=isOverlapping(secThisPr1, secObjPr1))< 0 && (dY=isOverlapping(secThisPr2, secObjPr2)) < 0) {
+            if ((dx = overlap(thisPr1, objPr1)) < 0 && (dy = overlap(thisPr2, objPr2)) < 0
+                && (dX=overlap(secThisPr1, secObjPr1))< 0 && (dY=overlap(secThisPr2, secObjPr2)) < 0) {
 
                 const getMin=(dx,dy,firstAxis,secondAxis)=>{
                     let depth, axis;
@@ -95,7 +95,7 @@ class AABB {
 
             let depth;
 
-            if ((depth=isOverlapping(thisProjection,struct))<0){
+            if ((depth=overlap(thisProjection,struct))<0){
                 return new Collision(axis.normalize().mul(depth));
             }
         }
@@ -112,6 +112,23 @@ class AABB {
 
     correctPosition(collision){
         this.changePosition(this.centre.add(collision.distance,new Vector2d()));
+    }
+
+    getMinMax(x_or_y){
+        let min,max;
+        min=max=this.vertices[0][x_or_y];
+        for (let i=1;i<4;i++){
+            if (this.vertices[i][x_or_y]>max){
+                max=this.vertices[i][x_or_y]
+            }
+            if (this.vertices[i][x_or_y]<min){
+                min=this.vertices[i][x_or_y];
+            }
+        }
+        return {
+            max:max,
+            min:min
+        }
     }
 }
 
@@ -143,6 +160,13 @@ class CircleHitbox {
     }
     correctPosition(collision){
         this.changePosition(this.centre.add(collision.distance,new Vector2d()));
+    }
+
+    getMinMax(x_or_y){
+        return {
+            max:this.centre[x_or_y]+this.radius,
+            min:this.centre[x_or_y]-this.radius
+        }
     }
 }
 

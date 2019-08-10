@@ -1,24 +1,24 @@
-'use strict'
+'use strict';
 class HashMap {
     constructor() {
-        this.map = new Object();
+        this.map = {};
     }
 
     /**
      * Присваивание ключу хеш карты key.id (id GameObject) значение
      * ссылки на объект key
-     * @param {GameObject} : key
+     * @param {GameObject}  key
      */
     set(key) {
         if (this.hasId(key.id)) {
-            throw Erorr("map has current id " + key.id)
+            throw Error("map has current id " + key.id)
         }
         this.map[key.id] = key
     }
 
     /**
      * Имеет ли карта объект с данным id
-     * @param {String} : keyid
+     * @param {String}  keyid
      * @returns {boolean}
      */
     hasId(keyid) {
@@ -28,7 +28,7 @@ class HashMap {
     /**
      * Возвращает объект с ключем keyid или кидает ошибку
      * если такого объекта нет
-     * @param {String} : keyid
+     * @param {String}  keyid
      * @returns {GameObject}
      */
     get(keyid) {
@@ -36,19 +36,19 @@ class HashMap {
             return this.map[kayid]
         }
 
-        throw Erorr("map has not current id " + keyid)
+        throw Error("map has not current id " + keyid)
 
     }
     /**
      * Удаление из карты
-     * @param {GameObject} : key
+     * @param {GameObject}  key
      */
     delete(key) {
         delete this.map[key.id]
     }
     /**
      * Проход по карте функцией functi
-     * @param {Function} : functi
+     * @param {Function}  functi
      */
     forEach(functi) {
         for (let key in this.map)

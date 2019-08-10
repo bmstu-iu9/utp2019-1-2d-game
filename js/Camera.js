@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 class Camera {
     constructor(ledwidth, ledheight) {
         this.position = new Vector2d(-25, -25);

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 /**
  * @class
  */
@@ -7,9 +7,9 @@ class World extends GameObject{
      * @param {String} id 
      */
     constructor(id = Game.getUniqId()){
-        super(id)
-        this.roomContaier = new Array
-        this.currentRoom = undefined
+        super(id);
+        this.roomContaier = [];
+        this.currentRoom = undefined;
         this.manager = new WorldManager(this)
     }
     /**
@@ -32,4 +32,5 @@ class World extends GameObject{
     Update(){
         this.manager.Update()
     }
+
 }
