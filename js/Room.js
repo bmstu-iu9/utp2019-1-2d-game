@@ -30,7 +30,7 @@ class Room extends GameObject {
      */
     Add(obj) {
         this.roomObjects.push(obj)
-        if (obj.Update !== undefined) {
+        if (obj.manager !== undefined) {
             this.updatableObjects.push(obj)
         }
         let i = 0

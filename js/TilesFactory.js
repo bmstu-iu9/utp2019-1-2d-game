@@ -6,22 +6,42 @@ class TilesFactory {
      * @param {Number} y 
      */
     static CreateTestTile(x = 0, y = 0) {
-        return new StaticObject(x, y, x, y, new DrawableObject("background", Game.TestTexture));
-    }
-    static CreateTestTile2(x = 0, y = 0) {
-        return new StaticObject(x, y, x, y, new DrawableObject("middleground", Game.TestTexture2));
-    }
-    static CreateTestTile3(x = 0, y = 0) {
-        return new NPC(new Vector2d(x, y), new Vector2d(x+25, y+25));
+        return new StaticObject(x, y, x, y, new DrawableObject("background", Game.BrickTexture));
     }
 
-    static CreateTestTile4(x,y){
-        let a = new NPC(new Vector2d(x, y), new Vector2d(x+25, y+25))
-        a.manager = {update(){}}
-        return a
+    /**
+     * Порождает и Player по заданным игровым координатам
+     * @param {Number} x 
+     * @param {Number} y 
+     */
+    static CreatePlayer(x = 0, y = 0) {
+        let player = new NPC(new Vector2d(x, y), new Vector2d(x + 25, y + 25));
+        player.manager = new PlayerManager(player)
+        return player
     }
 
-    static CreateTileTry(x = 0, y = 0) {
-        return new StaticObject(100, 100, 125,125, new DrawableObject("middleground", Game.texture));
+    /**
+     * Порождает и NPC по заданным игровым координатам
+     * @param {Number} x 
+     * @param {Number} y 
+     */
+    static CreateStaticNPC(x, y) {
+        return new NPC(new Vector2d(x, y), new Vector2d(x + 25, y + 25))
+    }
+
+    /**
+     * Порождает и возвращает тайл по заданным игровым координатам
+     * @param {Number} x 
+     * @param {Number} y 
+     */
+    static CreateTestGrassTile(x = 0, y = 0) {
+        let tile = new StaticObject(100, 100, 125, 125, new DrawableObject("middleground", Game.GrassTexture));
+        tile.hitbox = new AABB(new Vector2d(tile.actor.centre), [
+            tile.actor.centre.add(-25, -25, new Vector2d()),
+            tile.actor.centre.add(25, -25, new Vector2d()),
+            tile.actor.centre.add(25, 40, new Vector2d()),
+            tile.actor.centre.add(-25, 40, new Vector2d())
+        ]);
+        return tile
     }
 }

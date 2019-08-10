@@ -3,7 +3,7 @@
 let canvas = document.getElementById("canvas");
 canvas.width = document.body.clientWidth;
 canvas.height = document.body.clientHeight;
-let ctx = canvas.getContext("2d",{ alpha: false })
+let ctx = canvas.getContext("2d", { alpha: false })
 
 let imagesStorage = {};
 
@@ -28,11 +28,10 @@ let Game = {
     },
 
     InitLogic() {
-        Game.TestTexture = new Texture(imagesStorage.test);
-        Game.TestTexture2 = new Texture(imagesStorage.test2);
-        Game.TestSpritePattern = new SpritePattern(imagesStorage.ghost_shriek, [0, 1, 2, 3], "horizontal", 0, 0, 80, 64);
+        Game.BrickTexture = new Texture(imagesStorage.test);
+        Game.GhostSpritePattern = new SpritePattern(imagesStorage.ghost_shriek, [0, 1, 2, 3], "horizontal", 0, 0, 80, 64);
 
-        Game.texture=new Texture(imagesStorage.try);
+        Game.GrassTexture = new Texture(imagesStorage.try);
 
         Game.camera = new Camera(canvas.width, canvas.height);
         Game.roomRnd = new RoomRenderer(2);
@@ -67,7 +66,7 @@ let Game = {
         this.currentWorld.Update()
     },
 
-    Collide(){
+    Collide() {
         this.currentWorld.currentRoom.collide();
     },
 
