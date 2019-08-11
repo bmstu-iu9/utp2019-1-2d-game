@@ -32,6 +32,7 @@ class PlayerManager {
             xDirection = ~~(xDirection / Math.sqrt(2))
             yDirection = ~~(yDirection / Math.sqrt(2))
         }
+        this.player.actor.update()
         this.player.actor.changePosition(new Vector2d(xDirection, yDirection))
     }
 }
