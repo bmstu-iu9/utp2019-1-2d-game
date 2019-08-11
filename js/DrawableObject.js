@@ -17,4 +17,13 @@ class DrawableObject {
             canvasCoord : this.canvasCoord
         }
     }
+
+    /**
+     *
+     * @param {DrawableObject} object
+     */
+
+    static fromJSON(object){
+        return new DrawableObject(object.placement,Texture.fromJSON(object.drowable),Vector2d.fromJSON(object.canvasCoord))
+    }
 }

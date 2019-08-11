@@ -37,8 +37,19 @@ class World extends GameObject{
         return  {
             id : this.id,
             roomContaier : this.roomContaier,
-            currentRoom : this.currentRoom // Для тестирования, потом будет изменено на id
+            currentRoom : this.currentRoom// Для тестирования, потом будет изменено на id
         };
+    }
 
+    /**
+     *
+     * @param {World} object
+     */
+
+    static fromJSON(object){
+        let world = new World(object.id)
+        object.roomContaier.forEach(room => world.AddRoom(Room.fromJSON(room)))
+        world.currentRoom = world.roomContaier.find(room => room.id === object.id)
+        return world;
     }
 }

@@ -62,5 +62,14 @@ class StatsManager {
         this.effectsContainer.forEach(effect => effect.update(this, dt))
         this.effectsContainer = this.effectsContainer.filter(effect => effect.remainTime > 0)
     }
+
+    /**
+     *
+     * @param {StatsManager}object
+     */
+
+    static fromJSON(object){
+        return new StatsManager(Stats.fromJSON(object.stats))
+    }
 }
 

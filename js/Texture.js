@@ -28,5 +28,14 @@ class Texture {
     render(canvasCoord) {
         ctx.drawImage(this.img, canvasCoord.x, canvasCoord.y);
     }
+
+    /**
+     *
+     * @param {Texture} object
+     */
+
+    static fromJSON(object){
+        return new Texture(object.img) //Как появится id нужно будет удалить
+    }
 }
 

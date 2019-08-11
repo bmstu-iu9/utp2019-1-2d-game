@@ -18,7 +18,7 @@ class RoomRenderer {
      * @param {Room} room 
      */
     render(room) {
-        ctx.fillRect(0, 0, this.ledWidth, this.ledHeight);
+        //ctx.fillRect(0, 0, this.ledWidth, this.ledHeight);
 
         let leftTop = [~~(this.cameraVec.x / this.tileWidth) - this.margin, ~~(this.cameraVec.y / this.tileHeight) - this.margin];
         let rightBot = [Math.min(leftTop[0] + this.tileCount[0], room.width - 1), Math.min(leftTop[1] + this.tileCount[1], room.height - 1)];

@@ -21,4 +21,13 @@ class Modifier extends GameObject {
             id : this.id
         }
     }
+
+    /**
+     *
+     * @param {Modifier} object
+     */
+
+    static fromJSON(object){
+        return new Modifier(Stats.fromJSON(object.stats),object.id)
+    }
 }

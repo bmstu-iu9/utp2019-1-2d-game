@@ -52,4 +52,13 @@ class Stats {
             speed : this.speed
         }
     }
+
+    /**
+     *
+     * @param {Stats} object
+     */
+
+    static fromJSON(object){
+        return new Stats(object.hp,object.mana,object.strenght,object.agility,object.intelligence,object.speed)
+    }
 }

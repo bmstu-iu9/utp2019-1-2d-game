@@ -32,7 +32,32 @@ class NPC extends GameObject {
         return {
             id : this.id,
             actor : this.actor,
-            drawable : this.drawable
+            drawable : this.drawable,
+            hitbox : this.hitbox,
+            manager : this.manager !== undefined
         }
+    }
+
+    /**
+     *
+     * @param {NPC} object
+     */
+
+    static fromJSON(object){
+        let npc
+        if (object.manager === true){
+            npc = TilesFactory.CreatePlayer()
+            npc.id = object.id
+            npc.actor = MovableActor.fromJSON(object.actor)
+            npc.hitbox = CircleHitbox.fromJSON(object.hitbox)
+        }
+        else {
+            npc = TilesFactory.CreateStaticNPC(0,0)
+            npc.id = object.id
+            npc.actor = MovableActor.fromJSON(object.actor)
+            npc.hitbox = CircleHitbox.fromJSON(object.hitbox)
+        }
+
+        return npc
     }
 }

@@ -3,7 +3,7 @@
 let canvas = document.getElementById("canvas");
 canvas.width = document.body.clientWidth;
 canvas.height = document.body.clientHeight;
-let ctx = canvas.getContext("2d", { alpha: false })
+let ctx = canvas.getContext("2d")
 
 let imagesStorage = {};
 

@@ -176,5 +176,14 @@ class Vector2d{
             y : this.y
         }
     }
+
+    /**
+     *
+     * @param {Vector2d} object
+     */
+
+    static fromJSON(object){
+        return new Vector2d(object)
+    }
 }
 

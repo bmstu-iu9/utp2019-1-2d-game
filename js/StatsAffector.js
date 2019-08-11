@@ -53,4 +53,13 @@ class StatsAffector {
             target : this.target //Возможно нужно будет удалить
         }
     }
+
+    /**
+     *
+     * @param {StatsAffector}object
+     */
+
+    static fromJSON(object){
+        return new StatsAffector(StatsManager.fromJSON(object.target))
+    }
 }

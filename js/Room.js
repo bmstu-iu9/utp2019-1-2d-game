@@ -65,15 +65,34 @@ class Room extends GameObject {
     }
 
     toJSON() {
+
         return {
             id: this.id,
             height: this.height,
             width: this.width,
-            backgroundTiles: this.backgroundTiles, //Пока пусть сериализуются, позже будет изменено
-            solidTiles: this.solidTiles,
-            rndTiles: this.rndTiles,
-            middlegroundTiles: this.middlegroundTiles
+          //  backgroundTiles: this.backgroundTiles, //Пока пусть сериализуются, позже будет изменено
+          //  solidTiles: this.solidTiles,
+          //  middlegroundTiles: this.middlegroundTiles,
+            roomObjects : this.roomObjects,
+          //  updatableObjects : this.updatableObjects
         };
+    }
+
+    /**
+     *
+     * @param {Room} object
+     */
+    static fromJSON(object){
+        let room = new Room(object.id,object.height,object.width)
+        for (let i = 0;i < object.roomObjects.length;i++){
+            if (hitbox in object.roomObjects[i]){
+                room.Add(NPC.fromJSON(object.roomObjects[i]))
+            }
+            else {
+                room.Add(StaticObject.fromJSON(object.roomObjects[i]))
+            }
+        }
+        return room
     }
 
     /**

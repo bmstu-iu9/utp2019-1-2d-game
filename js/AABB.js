@@ -122,6 +122,17 @@ class AABB {
             secondAxis: this.secondAxis
         }
     }
+
+
+    /**
+     *
+     * @param {AABB} object
+     */
+    static fromJSON(object){
+        let vertices = []
+        vertices.push(object.vertices.forEach(vertex => Vector2d.fromJSON(vertex)))
+        return new AABB(Vector2d.fromJSON(object.centre),vertices)
+    }
     getMinMax(x_or_y) {
         let min, max;
         min = max = this.vertices[0][x_or_y];
@@ -176,7 +187,16 @@ class CircleHitbox {
             centre: this.centre
         }
     }
-    
+
+    /**
+     *
+     * @param {CircleHitbox} object
+     */
+
+    static fromJSON(object){
+        return new CircleHitbox(Vector2d.fromJSON(object.centre),object.radius)
+    }
+
     getMinMax(x_or_y) {
         return {
             max: this.centre[x_or_y] + this.radius,

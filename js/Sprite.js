@@ -53,12 +53,21 @@ class Sprite {
             once : this.once,
             speed : this.speed,
             frames : this.frames,
-            img : this.img, // нужно будет поменять на id
+            img : this.img, // нужно будет только id
             index : this.index,
             dir : this.dir,
             spriteMapCoord : this.spriteMapCoord,
             width : this.width,
             height : this.height
         }
+    }
+
+    /**
+     *
+     * @param {Sprite}object
+     */
+
+    static fromJSON(object){
+        let sprite = new Sprite(object.speed,object.once,SpritePattern.fromJSON(object.pattern))
     }
 }
