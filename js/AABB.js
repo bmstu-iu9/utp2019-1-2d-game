@@ -7,6 +7,7 @@ class AABB {
         let secondSide=this.vertices[2].sub(this.vertices[1],new Vector2d());
         this.firstAxis=firstSide.normal();
         this.secondAxis=secondSide.normal();
+        this.type='AABB';
     }
 
     getCollision(object) {
@@ -136,6 +137,7 @@ class CircleHitbox {
     constructor(centre,radius){
         this.radius=radius;
         this.centre=centre;
+        this.type='CircleHitbox';
     }
 
     getCollision(object){
@@ -173,5 +175,56 @@ class CircleHitbox {
 class Collision{
     constructor(dist){
         this.distance=dist;
+    }
+}
+
+const Hitbox={
+    /**
+     *
+     * @param {String} type
+     * @param {AABB,CircleHitbox,Vector2d} hitbox_or_centre
+     * @param {Number,Vector2d[],undefined} radius_or_vertices
+     */
+    constructor(type,hitbox_or_centre,radius_or_vertices=undefined){
+        if (type==='AABB'){
+            if (radius_or_vertices!==undefined){
+                return new AABB(new Vector2d(hitbox_or_centre),[
+                    new Vector2d(radius_or_vertices[0]),
+                    new Vector2d(radius_or_vertices[1]),
+                    new Vector2d(radius_or_vertices[2]),
+                    new Vector2d(radius_or_vertices[3])
+                ]);
+            }else {
+                return new AABB(new Vector2d(hitbox_or_centre.centre),[
+                    new Vector2d(hitbox_or_centre.vertices[0]),
+                    new Vector2d(hitbox_or_centre.vertices[1]),
+                    new Vector2d(hitbox_or_centre.vertices[2]),
+                    new Vector2d(hitbox_or_centre.vertices[3]),
+                ])
+            }
+        }else if (type==='CircleHitbox'){
+            if (radius_or_vertices!==undefined){
+                return new CircleHitbox(new Vector2d(hitbox_or_centre),radius_or_vertices);
+            }else {
+                return new CircleHitbox(new Vector2d(hitbox_or_centre.centre),hitbox_or_centre.radius);
+            }
+        }
+        alert('Incorrect type : '+type);
+    },
+
+    /**
+     *
+     * @param {AABB,CircleHitbox} hitboxToUpdate
+     * @param {AABB,CircleHitbox} hitbox
+     */
+    update(hitboxToUpdate,hitbox){
+        hitboxToUpdate.centre.set(hitbox.centre);
+        if (hitboxToUpdate.type && hitbox.type==='AABB'){
+            for (let i=0;i<4;i++){
+                hitboxToUpdate.vertices[i].set(hitbox.vertices[i]);
+            }
+        }else if (hitboxToUpdate.type && hitbox.type==='CircleHitbox'){
+            hitboxToUpdate.radius=hitbox.radius;
+        }
     }
 }

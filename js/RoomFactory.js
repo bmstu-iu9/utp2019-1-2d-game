@@ -25,7 +25,7 @@ class RoomFactory {
                 room.quadTree.add(t.hitbox);
             }
         }
-
+        room.quadTree.add(grassTile.hitbox)
         return room
     }
 }

@@ -10,7 +10,7 @@ class Vector2d{
      * @param {Vector2d,Number,undefined} vector2d_or_x
      * @param {Number,undefined} y
      */
-    constructor(vector2d_or_x,y){
+    constructor(vector2d_or_x=undefined,y=undefined){
         if (arguments.length===0){
             this.y=this.x=0;
         }else {
@@ -28,7 +28,7 @@ class Vector2d{
      *вектор-"контейнер" будет возвращен как результат,а
      *вектор ,метод которого был вызван, не изменится.
      */
-    add(vector2d_or_x,y_or_res,res){
+    add(vector2d_or_x,y_or_res=undefined,res=undefined){
         if (vector2d_or_x instanceof Vector2d){
             if (y_or_res===undefined){
                 this.x+=vector2d_or_x.x;
@@ -63,7 +63,7 @@ class Vector2d{
      *вектор-"контейнер" будет возвращен как результат,а
      *вектор ,метод которого был вызван, не изменится.
      */
-    sub(vector2d_or_x,y_or_res,res){
+    sub(vector2d_or_x,y_or_res=undefined,res=undefined){
         if (vector2d_or_x instanceof Vector2d){
             if (y_or_res===undefined){
                 this.x-=vector2d_or_x.x;
@@ -97,7 +97,7 @@ class Vector2d{
      *и будет возвращен как результат;вектор,
      *метод которого был вызван, при этом не изменится.
      */
-    mul(number,res){
+    mul(number,res=undefined){
         if (res===undefined){
             this.x*=number;
             this.y*=number;
@@ -112,9 +112,9 @@ class Vector2d{
     /**
      * @param {Vector2d,Number} vector2d_or_x
      * @param {Number,undefined} y
-    Присваивание. Принимает либо вектор,либо -- два числа.
+     Присваивание. Принимает либо вектор,либо -- два числа.
      */
-    set(vector2d_or_x,y){
+    set(vector2d_or_x,y=undefined){
         if (y===undefined){
             this.x=vector2d_or_x.x;
             this.y=vector2d_or_x.y;
@@ -127,28 +127,28 @@ class Vector2d{
 
     /**
      * @param {Vector2d} vector2d
-    Скалярное произведение. Принимает вектор в качестве параметра.
+     Скалярное произведение. Принимает вектор в качестве параметра.
      */
     dotProduct(vector2d){
         return this.x*vector2d.x+this.y*vector2d.y;
     }
 
     /**
-    Квадрат длины вектора.
+     Квадрат длины вектора.
      */
     lengthSquared(){
         return this.x*this.x+this.y*this.y;
     }
 
     /**
-    Длина вектора.
+     Длина вектора.
      */
     length(){
         return Math.sqrt(this.lengthSquared());
     }
 
     /**
-    Метод выполняет нормирование вектора.
+     Метод выполняет нормирование вектора.
      */
     normalize(){
         return this.mul(1.0/this.length());
@@ -156,18 +156,17 @@ class Vector2d{
 
     /**
      * @param {Vector2d} vector_to_project_on
-    Проекция на вектор. Метод в какчестве параметра принмает вектор,
-    на который нужно спроецировать.
+     Проекция на вектор. Метод в какчестве параметра принмает вектор,
+     на который нужно спроецировать.
      */
     vectorProjection(vector_to_project_on){
         return this.dotProduct(vector_to_project_on.normalize());
     }
 
     /**
-    Получение нормали к данному вектору.
+     Получение нормали к данному вектору.
      */
     normal(){
         return new Vector2d(-this.y,this.x);
     }
 }
-

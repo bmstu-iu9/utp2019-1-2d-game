@@ -90,7 +90,7 @@ class QuadTree{
                 for (let i=0;i<this.objects.length;){
                     const index=this.getIndex(this.objects[i]);
                     if (index.index!==undefined){
-                        this.next[index.index].add(this.objects.splice(i,1)[0]);
+                        this.next[index.index].add(this.objects.removeByIndex(i));
                     }else {
                         i++;
                     }
@@ -124,13 +124,49 @@ class QuadTree{
             if (index.index!==undefined){
                 this.next[index.index].retrieve(objects,object);
             }else {
-                for (let i of QuadTree.getIndexes(index.estimation)){
+                const indices=QuadTree.getIndexes(index.estimation)
+                for (let i of indices){
                     this.next[i].retrieve(objects,object);
                 }
             }
         }
         [].push.apply(objects,this.objects);
         return objects;
+    }
+
+    /**
+     * @param {AABB,CircleHitbox} object
+     */
+    delete(object){
+        if (this.next[0]!=null){
+            const index=this.getIndex(object);
+            if (index.index!==undefined){
+                this.next[index.index].delete(object);
+            }else {
+                this.objects.remove(object)
+                let amount=this.objects.length
+                for (let n of this.next)
+                    amount+=n.objects.length
+                if (amount<=this.capacity){
+                    for (let i=0;i<4;i++){
+                        [].push.apply(this.objects,this.next[i].objects);
+                        this.next[i]=null;
+                    }
+                }
+            }
+        }else {
+            this.objects.remove(object)
+            let amount=this.parent.objects.length;
+            for (const n of this.parent.next){
+                amount+=n.objects.length;
+            }
+            if (amount<=this.capacity){
+                for (let i=0;i<4;i++){
+                    [].push.apply(this.parent.objects,this.parent.next[i].objects);
+                    this.parent.next[i]=null;
+                }
+            }
+        }
     }
 
     clear(){
@@ -140,6 +176,17 @@ class QuadTree{
                 this.next[i].clear();
                 this.next[i]=null;
             }
+        }
+    }
+
+    /**
+     *
+     * @param {NPC[]} objects
+     */
+    update(objects){
+        for (let o of objects){
+            this.delete(o.hitboxPrevState);
+            this.add(o.hitbox);
         }
     }
 }
