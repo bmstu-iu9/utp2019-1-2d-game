@@ -1,6 +1,6 @@
 'use strict';
 class AABB {
-    constructor(centre,vertices){
+    constructor(centre,vertices,id=Game.getUniqId()){
         this.centre=centre;
         this.vertices=vertices;
         let firstSide=this.vertices[1].sub(this.vertices[0],new Vector2d());
@@ -8,6 +8,7 @@ class AABB {
         this.firstAxis=firstSide.normal();
         this.secondAxis=secondSide.normal();
         this.type='AABB';
+        this.id=id;
     }
 
     getCollision(object) {
@@ -131,13 +132,27 @@ class AABB {
             min:min
         }
     }
+
+    /**
+     * @param {AABB} object
+     * @return boolean
+     */
+    equals(object){
+        return object instanceof AABB && this.id===object.id;
+    }
+
+    setId(id){
+        this.id=id;
+        return this;
+    }
 }
 
 class CircleHitbox {
-    constructor(centre,radius){
+    constructor(centre,radius,id=Game.getUniqId()){
         this.radius=radius;
         this.centre=centre;
         this.type='CircleHitbox';
+        this.id=id;
     }
 
     getCollision(object){
@@ -170,6 +185,20 @@ class CircleHitbox {
             min:this.centre[x_or_y]-this.radius
         }
     }
+
+    /**
+     * @param {CircleHitbox} object
+     * @return boolean
+     */
+    equals(object){
+        return object instanceof CircleHitbox
+            && this.id===object.id;
+    }
+
+    setId(id){
+        this.id=id;
+        return this;
+    }
 }
 
 class Collision{
@@ -200,13 +229,14 @@ const Hitbox={
                     new Vector2d(hitbox_or_centre.vertices[1]),
                     new Vector2d(hitbox_or_centre.vertices[2]),
                     new Vector2d(hitbox_or_centre.vertices[3]),
-                ])
+                ],undefined).setId(hitbox_or_centre.id)
             }
         }else if (type==='CircleHitbox'){
             if (radius_or_vertices!==undefined){
                 return new CircleHitbox(new Vector2d(hitbox_or_centre),radius_or_vertices);
             }else {
-                return new CircleHitbox(new Vector2d(hitbox_or_centre.centre),hitbox_or_centre.radius);
+                return new CircleHitbox(new Vector2d(hitbox_or_centre.centre),hitbox_or_centre.radius,undefined)
+                    .setId(hitbox_or_centre.id);
             }
         }
         alert('Incorrect type : '+type);
