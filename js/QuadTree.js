@@ -76,6 +76,10 @@ class QuadTree{
         };
     }
 
+    /**
+     *
+     * @param {AABB,CircleHitbox} object
+     */
     add(object){
         if (this.next[0]!=null){
             const index=this.getIndex(object);
@@ -186,7 +190,7 @@ class QuadTree{
      * @param {NPC} object
      */
     update(object) {
-        this.delete(object.hitboxPrevState);
-        this.add(object.hitbox);
+        this.delete(object.hitboxManager.hitboxPrevState);
+        this.add(object.hitboxManager.hitbox);
     }
 }

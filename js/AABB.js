@@ -135,7 +135,7 @@ class AABB {
 
     /**
      * @param {AABB} object
-     * @return boolean
+     * @return {boolean}
      */
     equals(object){
         return object instanceof AABB && this.id===object.id;
@@ -188,7 +188,7 @@ class CircleHitbox {
 
     /**
      * @param {CircleHitbox} object
-     * @return boolean
+     * @return {boolean}
      */
     equals(object){
         return object instanceof CircleHitbox
@@ -207,54 +207,45 @@ class Collision{
     }
 }
 
-const Hitbox={
+
+const HITBOX_AABB='AABB'
+const HITBOX_CIRCLE='CircleHitbox'
+
+class Hitbox{
     /**
      *
      * @param {String} type
-     * @param {AABB,CircleHitbox,Vector2d} hitbox_or_centre
-     * @param {Number,Vector2d[],undefined} radius_or_vertices
+     * @param {Vector2d} centre
+     * @param {Vector2d[],Number} vertices_or_radius
      */
-    constructor(type,hitbox_or_centre,radius_or_vertices=undefined){
-        if (type==='AABB'){
-            if (radius_or_vertices!==undefined){
-                return new AABB(new Vector2d(hitbox_or_centre),[
-                    new Vector2d(radius_or_vertices[0]),
-                    new Vector2d(radius_or_vertices[1]),
-                    new Vector2d(radius_or_vertices[2]),
-                    new Vector2d(radius_or_vertices[3])
-                ]);
-            }else {
-                return new AABB(new Vector2d(hitbox_or_centre.centre),[
-                    new Vector2d(hitbox_or_centre.vertices[0]),
-                    new Vector2d(hitbox_or_centre.vertices[1]),
-                    new Vector2d(hitbox_or_centre.vertices[2]),
-                    new Vector2d(hitbox_or_centre.vertices[3]),
-                ],undefined).setId(hitbox_or_centre.id)
-            }
-        }else if (type==='CircleHitbox'){
-            if (radius_or_vertices!==undefined){
-                return new CircleHitbox(new Vector2d(hitbox_or_centre),radius_or_vertices);
-            }else {
-                return new CircleHitbox(new Vector2d(hitbox_or_centre.centre),hitbox_or_centre.radius,undefined)
-                    .setId(hitbox_or_centre.id);
+    constructor(type,centre,vertices_or_radius){
+        const getCopy=(type,hitbox)=>{
+            if (type==='AABB') {
+                return new AABB(new Vector2d(hitbox.centre), [
+                    new Vector2d(hitbox.vertices[0]),
+                    new Vector2d(hitbox.vertices[1]),
+                    new Vector2d(hitbox.vertices[2]),
+                    new Vector2d(hitbox.vertices[3]),
+                ], undefined).setId(hitbox.id)
+            }else if (type==='CircleHitbox') {
+                return new CircleHitbox(new Vector2d(hitbox.centre), hitbox.radius, undefined)
+                    .setId(hitbox.id);
             }
         }
-        alert('Incorrect type : '+type);
-    },
+        if (type==='AABB'){
+            this.hitbox=new AABB(centre,vertices_or_radius)
+        }else if (type==='CircleHitbox'){
+            this.hitbox=new CircleHitbox(centre,vertices_or_radius)
+        }
+        this.hitboxPrevState=getCopy(type,this.hitbox)
+    }
 
     /**
      *
-     * @param {AABB,CircleHitbox} hitboxToUpdate
-     * @param {AABB,CircleHitbox} hitbox
+     * @param {Vector2d} nextPosition
      */
-    update(hitboxToUpdate,hitbox){
-        hitboxToUpdate.centre.set(hitbox.centre);
-        if (hitboxToUpdate.type && hitbox.type==='AABB'){
-            for (let i=0;i<4;i++){
-                hitboxToUpdate.vertices[i].set(hitbox.vertices[i]);
-            }
-        }else if (hitboxToUpdate.type && hitbox.type==='CircleHitbox'){
-            hitboxToUpdate.radius=hitbox.radius;
-        }
+    update(nextPosition){
+        this.hitboxPrevState.changePosition(this.hitbox.centre)
+        this.hitbox.changePosition(nextPosition)
     }
 }

@@ -22,7 +22,7 @@ class RoomFactory {
             for (let j = 0; j < 10; j++) {
                 let t = TilesFactory.CreateStaticNPC((2 + j) * 125, (2 + i) * 125);
                 room.Add(t);
-                room.quadTree.add(t.hitbox);
+                room.quadTree.add(t.hitboxManager.hitbox);
             }
         }
         room.quadTree.add(grassTile.hitbox)
