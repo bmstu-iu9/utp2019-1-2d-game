@@ -13,7 +13,6 @@ class CollisionManager {
             if (object.manager instanceof PlayerManager) {
                 this.room.quadTree.update(object)
                 objects = this.room.quadTree.retrieve([], object.hitboxManager.hitbox);
-                console.log(objects)
                 for (let i = 0; i < objects.length; i++) {
                     if (objects[i] !== object.hitboxManager.hitbox) {
                         collision = object.hitboxManager.hitbox.getCollision(objects[i]);
