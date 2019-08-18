@@ -16,6 +16,7 @@ class RoomFactory {
 
         room.Add(grassTile)
         room.Add(player)
+        room.quadTree.add(player.hitboxManager.hitbox)
         Game.camera.focusOn(player.actor)
 
         for (let i = 0; i < 10; i++) {

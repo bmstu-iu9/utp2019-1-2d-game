@@ -17,7 +17,7 @@ class CollisionManager {
                     if (objects[i] !== object.hitboxManager.hitbox) {
                         collision = object.hitboxManager.hitbox.getCollision(objects[i]);
                         if (collision) {
-                            collision.distance.set(~~collision.distance.x, ~~collision.distance.y);
+                            collision.distance.set(Math.ceil(collision.distance.x), Math.ceil(collision.distance.y));
                             object.hitboxManager.hitbox.correctPosition(collision);
                             object.actor.changePosition(collision.distance);
                         }

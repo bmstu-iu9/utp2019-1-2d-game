@@ -220,21 +220,21 @@ class Hitbox{
      */
     constructor(type,centre,vertices_or_radius){
         const getCopy=(type,hitbox)=>{
-            if (type==='AABB') {
+            if (type===HITBOX_AABB) {
                 return new AABB(new Vector2d(hitbox.centre), [
                     new Vector2d(hitbox.vertices[0]),
                     new Vector2d(hitbox.vertices[1]),
                     new Vector2d(hitbox.vertices[2]),
                     new Vector2d(hitbox.vertices[3]),
                 ], undefined).setId(hitbox.id)
-            }else if (type==='CircleHitbox') {
+            }else if (type===HITBOX_CIRCLE) {
                 return new CircleHitbox(new Vector2d(hitbox.centre), hitbox.radius, undefined)
                     .setId(hitbox.id);
             }
         }
-        if (type==='AABB'){
+        if (type===HITBOX_AABB){
             this.hitbox=new AABB(centre,vertices_or_radius)
-        }else if (type==='CircleHitbox'){
+        }else if (type===HITBOX_CIRCLE){
             this.hitbox=new CircleHitbox(centre,vertices_or_radius)
         }
         this.hitboxPrevState=getCopy(type,this.hitbox)
