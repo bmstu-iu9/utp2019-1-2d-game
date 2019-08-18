@@ -27,4 +27,9 @@ class NPC extends GameObject {
         this.manager.update()
         this.hitbox.changePosition(this.actor.centre)
     }
+
+    onCollide(collision){
+       this.hitbox.correctPosition(collision);
+       this.actor.changePosition(collision.distance);
+    }
 }

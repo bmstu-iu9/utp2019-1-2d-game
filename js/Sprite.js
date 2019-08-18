@@ -9,7 +9,9 @@ class Sprite {
     frames;
     dir; // vertical or horizontal
     spriteMapCoord;
+    last;
     constructor(speed, once, pattern) {
+        this.last = performance.now()
         this.pattern = pattern;
         this.once = once;
         this.speed = speed;
@@ -27,7 +29,7 @@ class Sprite {
         this.index = 0;
     }
     render(canvasCoord) {
-        this.update((Game.now - Game.last) / 1000)
+        this.update((Game.now - this.last) / 1000)
         let frame = 0;
         if (this.speed > 0) {
             let max = this.frames.length;
@@ -45,5 +47,6 @@ class Sprite {
             x += frame * this.width;
         }
         ctx.drawImage(this.img, x, y, this.width, this.height, canvasCoord.x, canvasCoord.y, this.width, this.height);
+        this.last = Game.now
     }
 }
