@@ -34,8 +34,8 @@ class QuadTree{
      * @returns {{left: boolean, right: boolean, up: boolean, down: boolean}}
      */
     getEstimation(object){
-        const minMaxY=object.getMinMax('y')
-        const minMaxX=object.getMinMax('x')
+        const minMaxY=object.getMinMaxY()
+        const minMaxX=object.getMinMaxX()
 
         const xCentre=this.bounds.x+(~~this.bounds.width/2)
         const yCentre=this.bounds.y+(~~this.bounds.height/2)

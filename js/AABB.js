@@ -143,15 +143,32 @@ class AABB {
         this.changePosition(this.centre.add(collision.distance,new Vector2d()))
     }
 
-    getMinMax(x_or_y){
+    getMinMaxX(){
         let min,max
-        min=max=this.vertices[0][x_or_y]
+        min=max=this.vertices[0].x
         for (let i=1;i<4;i++){
-            if (this.vertices[i][x_or_y]>max){
-                max=this.vertices[i][x_or_y]
+            if (this.vertices[i].x>max){
+                max=this.vertices[i].x
             }
-            if (this.vertices[i][x_or_y]<min){
-                min=this.vertices[i][x_or_y]
+            if (this.vertices[i].x<min){
+                min=this.vertices[i].x
+            }
+        }
+        return {
+            max:max,
+            min:min
+        }
+    }
+
+    getMinMaxY(){
+        let min,max
+        min=max=this.vertices[0].y
+        for (let i=1;i<4;i++){
+            if (this.vertices[i].x>max){
+                max=this.vertices[i].y
+            }
+            if (this.vertices[i].x<min){
+                min=this.vertices[i].y
             }
         }
         return {
@@ -201,10 +218,17 @@ class CircleHitbox {
         this.changePosition(this.centre.add(collision.distance,new Vector2d()))
     }
 
-    getMinMax(x_or_y){
+    getMinMaxX(){
         return {
-            max:this.centre[x_or_y]+this.radius,
-            min:this.centre[x_or_y]-this.radius
+            max:this.centre.x+this.radius,
+            min:this.centre.x-this.radius
+        }
+    }
+
+    getMinMaxY(){
+        return {
+            max:this.centre.y+this.radius,
+            min:this.centre.y-this.radius
         }
     }
 
