@@ -12,10 +12,10 @@ class Room extends GameObject {
         super(id)
         this.height = height
         this.width = width
-        this.roomObjects = new Array()
-        this.updatableObjects = new Array()
+        this.roomObjects = []
+        this.updatableObjects = []
         this.backgroundTiles = new Array(height).fill().map(x => new Array(width))
-        this.solidTiles = new Array()
+        this.solidTiles = []
         this.middlegroundTiles = new Array(height).fill().map(x => new Array(width).fill().map(y => new HashMap))
         this.foregroundTiles = new Array(height).fill().map(x => new Array(width))
 

@@ -24,7 +24,7 @@ const arrange=(i, object)=>{
 Array.prototype.removeHitbox=function(object){
     let i;
     for (i=0;i<this.length;i++)
-        if (this[i].equals(object)) break
+        if (this[i].hitbox.equals(object)) break
     return arrange(i,this)
 }
 

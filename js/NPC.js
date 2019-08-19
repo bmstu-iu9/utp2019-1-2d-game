@@ -16,8 +16,7 @@ class NPC extends GameObject {
         this.actor = new MovableActor(coords, centre);
         this.drawable = new DrawableObject("middleground", SpriteFactory.CreateTestSprite());
         this.manager = manager//new PlayerManager(this)
-        this.hitboxManager=new Hitbox(HITBOX_CIRCLE,new Vector2d(centre),26);
-        this.hitbox=this.hitboxManager.hitbox
+        this.hitbox=new Hitbox(HITBOX_CIRCLE,new Vector2d(centre),26);
     }
 
     render() {
@@ -26,6 +25,6 @@ class NPC extends GameObject {
 
     Update() {
         this.manager.update()
-        this.hitboxManager.update(this.actor.centre)
+        this.hitbox.update(this.actor.centre)
     }
 }

@@ -1,31 +1,31 @@
-'use strict';
+'use strict'
 class Rectangle{
     constructor(a,b,width,height){
-        this.x=a;
-        this.y=b;
-        this.width=width;
-        this.height=height;
+        this.x=a
+        this.y=b
+        this.width=width
+        this.height=height
     }
 }
 
 
 class QuadTree{
     constructor(bounds,capacity,parent){
-        this.bounds=bounds;
-        this.next=new Array(4).fill(null);
-        this.objects=[];
-        this.capacity=capacity||4;
-        this.parent=parent||this;
+        this.bounds=bounds
+        this.next=new Array(4).fill(null)
+        this.objects=[]
+        this.capacity=capacity||4
+        this.parent=parent||this
     }
 
     divide(){
-        const halfHeight=~~this.bounds.height/2;
-        const halfWidth=~~this.bounds.width/2;
+        const halfHeight=~~this.bounds.height/2
+        const halfWidth=~~this.bounds.width/2
 
-        this.next[0]=new QuadTree(new Rectangle(this.bounds.x+halfWidth,this.bounds.y,halfWidth,halfHeight),this.capacity,this);
-        this.next[1]=new QuadTree(new Rectangle(this.bounds.x,this.bounds.y,halfWidth,halfHeight),this.capacity,this);
-        this.next[2]=new QuadTree(new Rectangle(this.bounds.x,this.bounds.y+halfHeight,halfWidth,halfHeight),this.capacity,this);
-        this.next[3]=new QuadTree(new Rectangle(this.bounds.x+halfWidth,this.bounds.y+halfHeight,halfWidth,halfHeight),this.capacity,this);
+        this.next[0]=new QuadTree(new Rectangle(this.bounds.x+halfWidth,this.bounds.y,halfWidth,halfHeight),this.capacity,this)
+        this.next[1]=new QuadTree(new Rectangle(this.bounds.x,this.bounds.y,halfWidth,halfHeight),this.capacity,this)
+        this.next[2]=new QuadTree(new Rectangle(this.bounds.x,this.bounds.y+halfHeight,halfWidth,halfHeight),this.capacity,this)
+        this.next[3]=new QuadTree(new Rectangle(this.bounds.x+halfWidth,this.bounds.y+halfHeight,halfWidth,halfHeight),this.capacity,this)
     }
 
     /**
@@ -34,11 +34,11 @@ class QuadTree{
      * @returns {{left: boolean, right: boolean, up: boolean, down: boolean}}
      */
     getEstimation(object){
-        const minMaxY=object.getMinMax('y');
-        const minMaxX=object.getMinMax('x');
+        const minMaxY=object.getMinMax('y')
+        const minMaxX=object.getMinMax('x')
 
-        const xCentre=this.bounds.x+(~~this.bounds.width/2);
-        const yCentre=this.bounds.y+(~~this.bounds.height/2);
+        const xCentre=this.bounds.x+(~~this.bounds.width/2)
+        const yCentre=this.bounds.y+(~~this.bounds.height/2)
         return{
             right:minMaxX.min>xCentre,
             left:minMaxX.max<xCentre,
@@ -48,26 +48,28 @@ class QuadTree{
     }
 
     /**
-     * @param {AABB,CircleHitbox} object
+     * @param {AABB,CircleHitbox,NPC,StaticObject} obj
      */
-    getIndex(object){
-        let index;
+    getIndex(obj){
+        let index
 
-        const estimation=this.getEstimation(object);
+        const object=obj.getHitbox()
+
+        const estimation=this.getEstimation(object)
 
         if (estimation.right){
             if (estimation.up){
-                index=0;
+                index=0
             }
             if (estimation.down){
-                index=3;
+                index=3
             }
         }else if (estimation.left){
             if (estimation.up){
-                index=1;
+                index=1
             }
             if (estimation.down){
-                index=2;
+                index=2
             }
         }
         return {
@@ -78,25 +80,25 @@ class QuadTree{
 
     /**
      *
-     * @param {AABB,CircleHitbox} object
+     * @param {NPC,StaticObject} object
      */
     add(object){
         if (this.next[0]!=null){
-            const index=this.getIndex(object);
+            const index=this.getIndex(object.hitbox)
             if (index.index!==undefined){
-                this.next[index.index].add(object);
+                this.next[index.index].add(object)
             }
-            else this.objects.push(object);
+            else this.objects.push(object)
         }else {
-            this.objects.push(object);
+            this.objects.push(object)
             if (this.objects.length>this.capacity){
-                this.divide();
+                this.divide()
                 for (let i=0;i<this.objects.length;){
-                    const index=this.getIndex(this.objects[i]);
+                    const index=this.getIndex(this.objects[i].hitbox)
                     if (index.index!==undefined){
-                        this.next[index.index].add(this.objects.removeHitboxByIndex(i));
+                        this.next[index.index].add(this.objects.removeHitboxByIndex(i))
                     }else {
-                        i++;
+                        i++
                     }
                 }
             }
@@ -120,29 +122,34 @@ class QuadTree{
 
     /**
      * @param {[]} objects
-     * @param {AABB,CircleHitbox} object
+     * @param {NPC,StaticObject} object
      */
     retrieve(objects,object){
         if (this.next[0]!=null){
-            const index=this.getIndex(object);
+            const index=this.getIndex(object.hitbox);
             if (index.index!==undefined){
-                this.next[index.index].retrieve(objects,object);
+                this.next[index.index].retrieve(objects,object)
             }else {
                 const indices=QuadTree.getIndexes(index.estimation)
                 for (let i of indices){
-                    this.next[i].retrieve(objects,object);
+                    this.next[i].retrieve(objects,object)
                 }
             }
         }
-        [].push.apply(objects,this.objects);
-        return objects;
+        [].push.apply(objects,this.objects)
+        return objects
     }
 
+    /**
+     *
+     * @param {AABB,CircleHitbox} object
+     * @return {boolean}
+     */
     delete(object){
         if (this.next[0]!=null){
-            const index=this.getIndex(object);
+            const index=this.getIndex(object)
             if (index.index!==undefined){
-                this.next[index.index].delete(object);
+                this.next[index.index].delete(object)
             }else {
                 if(this.objects.removeHitbox(object)) {
                     QuadTree.rearrange(this,this.capacity)
@@ -158,7 +165,7 @@ class QuadTree{
     }
 
     static rearrange(node,capacity){
-        let amount = 0;
+        let amount = 0
         const getAll = (node) => {
             if (node.next[0] != null) {
                 for (let i = 0; i < 4; i++) {
@@ -170,8 +177,8 @@ class QuadTree{
         getAll(node)
         if (amount <= capacity) {
             for (let i = 0; i < 4; i++) {
-                [].push.apply(node.objects, node.next[i].objects);
-                node.next[i] = null;
+                [].push.apply(node.objects, node.next[i].objects)
+                node.next[i] = null
             }
         }
     }
@@ -180,8 +187,8 @@ class QuadTree{
         this.objects=[];
         for (let i=0;i<4;i++){
             if (this.next[i]!=null){
-                this.next[i].clear();
-                this.next[i]=null;
+                this.next[i].clear()
+                this.next[i]=null
             }
         }
     }
@@ -191,8 +198,8 @@ class QuadTree{
      * @param {NPC} object
      */
     update(object) {
-        this.delete(object.hitboxManager.hitboxPrevState);
-        this.add(object.hitboxManager.hitbox);
-        object.hitboxManager.update()
+        this.delete(object.hitbox.hitboxPrevState)
+        this.add(object)
+        object.hitbox.update()
     }
 }

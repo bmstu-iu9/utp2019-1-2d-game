@@ -8,22 +8,29 @@ class CollisionManager {
     }
 
     collide() {
+        const updateConfig=(object,collision)=>{
+            object.hitbox.update()
+            object.hitbox.correctPosition(collision)
+            this.room.quadTree.update(object)
+            object.actor.changePosition(collision.distance)
+        }
         let objects,collision;
         this.room.solidTiles.forEach(object => {
             if (object.actor instanceof MovableActor) {
                 this.room.quadTree.update(object)
-                objects = this.room.quadTree.retrieve([], object.hitboxManager.hitbox)
-                if (object.manager instanceof PlayerManager)
-                    console.log(objects.length)
+                objects = this.room.quadTree.retrieve([], object)
                 for (let i = 0; i < objects.length; i++) {
-                    if (objects[i] !== object.hitboxManager.hitbox) {
-                        collision = object.hitboxManager.hitbox.getCollision(objects[i])
+                    if (!objects[i].hitbox.equals(object.hitbox)) {
+                        collision = getCollision(object.hitbox,objects[i].hitbox)
                         if (collision) {
                             collision.distance.set(Math.ceil(collision.distance.x), Math.ceil(collision.distance.y))
-                            object.hitboxManager.update()
-                            object.hitboxManager.hitbox.correctPosition(collision)
-                            this.room.quadTree.update(object)
-                            object.actor.changePosition(collision.distance)
+                            if (objects[i].manager === undefined && objects[i].actor instanceof MovableActor){
+                                collision.distance.mul(-1)
+                                updateConfig(objects[i],collision)
+                            }else {
+                                updateConfig(object,collision)
+                            }
+
                         }
                     }
                 }
@@ -63,6 +70,11 @@ class Hitbox{
             this.hitbox=new CircleHitbox(centre,vertices_or_radius)
         }
         this.hitboxPrevState=getCopy(type,this.hitbox)
+
+    }
+
+    equals(arg){
+        return this.hitbox.equals(arg.getHitbox())
     }
 
     /**
@@ -74,4 +86,26 @@ class Hitbox{
         if (nextPosition!==undefined)
             this.hitbox.changePosition(nextPosition)
     }
+
+    /**
+     *
+     * @param {AABB,CircleHitbox} hitbox
+     * @return {Collision|null}
+     */
+    getCollision(hitbox){
+        return this.hitbox.getCollision(hitbox)
+    }
+
+    getHitbox(){
+        return this.hitbox
+    }
+
+    /**
+     *
+     * @param {Collision} collision
+     */
+    correctPosition(collision){
+        this.hitbox.correctPosition(collision)
+    }
 }
+
