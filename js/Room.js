@@ -10,8 +10,8 @@ class Room extends GameObject {
      */
     constructor(id = Game.getUniqId(), height = 10, width = 10) {
         super(id)
-        this.height = height
-        this.width = width
+        this.height = height/// * Game.tileHeight
+        this.width = width //* Game.tileWidth
         this.roomObjects = new Array()
         this.updatableObjects = new Array()
         this.backgroundTiles = new Array(height).fill().map(x => new Array(width))
@@ -85,7 +85,7 @@ class Room extends GameObject {
     static fromJSON(object){
         let room = new Room(object.id,object.height,object.width)
         for (let i = 0;i < object.roomObjects.length;i++){
-            if (hitbox in object.roomObjects[i]){
+            if ("hitbox" in object.roomObjects[i]){
                 room.Add(NPC.fromJSON(object.roomObjects[i]))
             }
             else {

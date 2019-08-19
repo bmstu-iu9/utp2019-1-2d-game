@@ -34,8 +34,12 @@ class Texture {
      * @param {Texture} object
      */
 
+    toJSON(){
+        return this.img.src
+    }
     static fromJSON(object){
-        return new Texture(object.img) //Как появится id нужно будет удалить
+        console.log(object)
+        return new Texture(object) //Как появится id нужно будет удалить
     }
 }
 
