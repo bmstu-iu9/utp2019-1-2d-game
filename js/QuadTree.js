@@ -138,39 +138,40 @@ class QuadTree{
         return objects;
     }
 
-    /**
-     * @param {AABB,CircleHitbox} object
-     */
     delete(object){
         if (this.next[0]!=null){
             const index=this.getIndex(object);
             if (index.index!==undefined){
                 this.next[index.index].delete(object);
             }else {
-                if (this.objects.removeHitbox(object)) {
-                    let amount = this.objects.length
-                    for (let n of this.next)
-                        amount += n.objects.length
-                    if (amount <= this.capacity) {
-                        for (let i = 0; i < 4; i++) {
-                            [].push.apply(this.objects, this.next[i].objects);
-                            this.next[i] = null;
-                        }
-                    }
+                if(this.objects.removeHitbox(object)) {
+                    QuadTree.rearrange(this,this.capacity)
+                    return true
                 }
             }
         }else {
-            if (this.objects.removeHitbox(object)) {
-                let amount = this.parent.objects.length;
-                for (const n of this.parent.next) {
-                    amount += n.objects.length;
+            if (this.objects.removeHitbox(object) && this.parent!==this) {
+                QuadTree.rearrange(this.parent,this.capacity)
+                return true
+            }
+        }
+    }
+
+    static rearrange(node,capacity){
+        let amount = 0;
+        const getAll = (node) => {
+            if (node.next[0] != null) {
+                for (let i = 0; i < 4; i++) {
+                    getAll(node.next[i])
                 }
-                if (amount <= this.capacity) {
-                    for (let i = 0; i < 4; i++) {
-                        [].push.apply(this.parent.objects, this.parent.next[i].objects);
-                        this.parent.next[i] = null;
-                    }
-                }
+            }
+            amount += node.objects.length
+        }
+        getAll(node)
+        if (amount <= capacity) {
+            for (let i = 0; i < 4; i++) {
+                [].push.apply(node.objects, node.next[i].objects);
+                node.next[i] = null;
             }
         }
     }
@@ -192,5 +193,6 @@ class QuadTree{
     update(object) {
         this.delete(object.hitboxManager.hitboxPrevState);
         this.add(object.hitboxManager.hitbox);
+        object.hitboxManager.update()
     }
 }

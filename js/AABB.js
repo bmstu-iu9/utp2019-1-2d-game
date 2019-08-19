@@ -7,7 +7,6 @@ class AABB {
         let secondSide=this.vertices[2].sub(this.vertices[1],new Vector2d());
         this.firstAxis=firstSide.normal();
         this.secondAxis=secondSide.normal();
-        this.type='AABB';
         this.id=id;
     }
 
@@ -82,7 +81,7 @@ class AABB {
 
                 if (centre_to_centre.vectorProjection(res.axis) < 0) res.axis.mul(-1);
 
-                return new Collision(res.axis.normalize().mul(res.depth));
+                return new Collision(res.axis.normalize().mul(res.depth),object);
             }
         }else {
             let axis=object.centre.sub(this.centre,new Vector2d());
@@ -98,7 +97,7 @@ class AABB {
             let depth;
 
             if ((depth=overlap(thisProjection,struct))<0){
-                return new Collision(axis.normalize().mul(depth));
+                return new Collision(axis.normalize().mul(depth),object);
             }
         }
         return null;
@@ -151,7 +150,6 @@ class CircleHitbox {
     constructor(centre,radius,id=Game.getUniqId()){
         this.radius=radius;
         this.centre=centre;
-        this.type='CircleHitbox';
         this.id=id;
     }
 
@@ -160,13 +158,14 @@ class CircleHitbox {
             let collision=object.getCollision(this);
             if (collision){
                 collision.distance.mul(-1);
+                collision.obstacle=object
                 return collision;
             }
         }else {
             let axis=this.centre.sub(object.centre,new Vector2d());
             let dist=axis.length();
             if (this.radius+object.radius>dist){
-                return new Collision(axis.normalize().mul(object.radius+this.radius-dist));
+                return new Collision(axis.normalize().mul(object.radius+this.radius-dist),object);
             }
         }
         return null;
@@ -202,50 +201,9 @@ class CircleHitbox {
 }
 
 class Collision{
-    constructor(dist){
-        this.distance=dist;
+    constructor(dist,obstacle){
+        this.distance=dist
+        this.obstacle=obstacle
     }
 }
 
-
-const HITBOX_AABB='AABB'
-const HITBOX_CIRCLE='CircleHitbox'
-
-class Hitbox{
-    /**
-     *
-     * @param {String} type
-     * @param {Vector2d} centre
-     * @param {Vector2d[],Number} vertices_or_radius
-     */
-    constructor(type,centre,vertices_or_radius){
-        const getCopy=(type,hitbox)=>{
-            if (type===HITBOX_AABB) {
-                return new AABB(new Vector2d(hitbox.centre), [
-                    new Vector2d(hitbox.vertices[0]),
-                    new Vector2d(hitbox.vertices[1]),
-                    new Vector2d(hitbox.vertices[2]),
-                    new Vector2d(hitbox.vertices[3]),
-                ], undefined).setId(hitbox.id)
-            }else if (type===HITBOX_CIRCLE) {
-                return new CircleHitbox(new Vector2d(hitbox.centre), hitbox.radius, undefined)
-                    .setId(hitbox.id);
-            }
-        }
-        if (type===HITBOX_AABB){
-            this.hitbox=new AABB(centre,vertices_or_radius)
-        }else if (type===HITBOX_CIRCLE){
-            this.hitbox=new CircleHitbox(centre,vertices_or_radius)
-        }
-        this.hitboxPrevState=getCopy(type,this.hitbox)
-    }
-
-    /**
-     *
-     * @param {Vector2d} nextPosition
-     */
-    update(nextPosition){
-        this.hitboxPrevState.changePosition(this.hitbox.centre)
-        this.hitbox.changePosition(nextPosition)
-    }
-}
