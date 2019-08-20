@@ -32,14 +32,18 @@ class RoomManager {
 
     /**
      * Обновляет все игровые объекты внури managebleObj (Room)
-     * и перемещает их на тайловой карте,если нужно
      */
     Update() {
-        this.managableObj.updatableObjects.forEach(element => {
+        this.managableObj.movedObjects.splice(0)
+        let element
+        for (let i = 0, n = this.managableObj.updatableObjects.length; i < n; i++) {
+            element = this.managableObj.updatableObjects[i]
             this.refreshPosition(element)
-            element.Update();
-        });
+            element.Update()
+            //Проверяем, переместился ли объект
+            if (element.actor.offset !== undefined && (element.actor.offset.x !== 0 || element.actor.offset.y !== 0)) { 
+                this.managableObj.movedObjects.push(element)
+            }
+        }
     }
-
-
 }
