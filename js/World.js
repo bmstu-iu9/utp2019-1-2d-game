@@ -47,10 +47,10 @@ class World extends GameObject{
      */
 
     static fromJSON(object){
-        //debugger;
         let world = new World(object.id)
         object.roomContaier.forEach(room => world.AddRoom(Room.fromJSON(room)))
         world.currentRoom = world.roomContaier.find(room => room.id === object.id)
+      //  debugger;
         world.currentRoom = Room.fromJSON(object.currentRoom)
         return world;
     }

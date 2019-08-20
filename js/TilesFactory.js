@@ -1,5 +1,15 @@
 'use strict';
 class TilesFactory {
+
+    /**
+     *
+     * @param {Image} img
+     */
+    static CreateTexture(img){
+        let obj = new Texture(img);
+        textureStorage[img.src] = obj
+        return obj
+    }
     /**
      * Порождает и возвращает тайл по заданным игровым координатам
      * @param {Number} x 

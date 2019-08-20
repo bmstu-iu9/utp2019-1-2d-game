@@ -36,6 +36,7 @@ class Room extends GameObject {
         let i = 0
         let j = 0
         if (obj.drawable !== undefined) {
+           // console.log(obj)
             i = ~~(obj.actor.position.y / Game.tileHeight)
             j = ~~(obj.actor.position.x / Game.tileWidth)
         }

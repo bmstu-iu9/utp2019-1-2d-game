@@ -6,6 +6,7 @@ canvas.height = document.body.clientHeight;
 let ctx = canvas.getContext("2d")
 
 let imagesStorage = {};
+let textureStorage = {};
 
 let imagesSrc = [
     'test2.png',
@@ -28,11 +29,10 @@ let Game = {
     },
 
     InitLogic() {
-        Game.BrickTexture = new Texture(imagesStorage.test);
+
         Game.GhostSpritePattern = new SpritePattern(imagesStorage.ghost_shriek, [0, 1, 2, 3], "horizontal", 0, 0, 80, 64);
-
-        Game.GrassTexture = new Texture(imagesStorage.try);
-
+        Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.test);
+        Game.GrassTexture = TilesFactory.CreateTexture(imagesStorage.try);
         Game.camera = new Camera(canvas.width, canvas.height);
         Game.roomRnd = new RoomRenderer(2);
         Game.currentWorld = WorldFactory.CreateTestWorld();
@@ -60,6 +60,10 @@ let Game = {
         Game.Render();
         Game.last = Game.now;
         requestAnimationFrame(Game.Loop)
+        if (keyboard.KeyZ === true)
+            SaveLoad.save()
+        if (keyboard.KeyX === true)
+            SaveLoad.load()
     },
 
     Update() {

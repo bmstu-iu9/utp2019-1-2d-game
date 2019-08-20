@@ -57,8 +57,4 @@ let initialize = async () => {
 }
 initialize()
 
-if (keyboard.KeyZ === true)
-    SaveLoad.save()
-if (keyboard.KeyX === true)
-    SaveLoad.load()
 
