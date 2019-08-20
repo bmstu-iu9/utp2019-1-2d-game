@@ -24,7 +24,10 @@ class CollisionManager {
                         collision = getCollision(object.hitbox,objects[i].hitbox)
                         if (collision) {
                             collision.distance.set(Math.ceil(collision.distance.x), Math.ceil(collision.distance.y))
-                            if (objects[i].manager === undefined && objects[i].actor instanceof MovableActor){
+                            if (objects[i].actor instanceof MovableActor){
+                                collision.distance.mul(1/2)
+                                collision.distance.set(Math.ceil(collision.distance.x), Math.ceil(collision.distance.y))
+                                updateConfig(object,collision)
                                 collision.distance.mul(-1)
                                 updateConfig(objects[i],collision)
                             }else {
