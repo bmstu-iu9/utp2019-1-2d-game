@@ -14,13 +14,13 @@ class CollisionManager {
      */
     updateConfig(object, collision) {
         object.hitbox.update()
-        object.hitbox.correctPosition(collision)
+        object.onCollide(collision)
         this.room.quadTree.update(object)
-        object.actor.changePosition(collision.distance)
+       
     }
 
     collide() {
-        let objects, collision, object, cnt = 0;
+        let objects, collision, object
         for (let j = 0; j < this.room.movedObjects.length; j++) {
             object = this.room.movedObjects[j]
             this.room.quadTree.update(object)
