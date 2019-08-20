@@ -105,7 +105,7 @@ class Hitbox {
     getCollision(hitbox) {
         return this.hitbox.getCollision(hitbox)
     }
-    
+
     getHitbox() {
         return this.hitbox
     }
