@@ -15,7 +15,7 @@ class Stats {
      * @param {Number} speed
      */
 
-    constructor(hp, mana, strength, agility, intelligence, speed) {
+    constructor(hp = 0, mana = 0, strength = 0, agility = 0, intelligence = 0, speed = 0) {
         this.hp = hp
         this.mana = mana
         this.strenght = strength
@@ -26,7 +26,7 @@ class Stats {
 
     /**
      *
-     * @param{Stats} stats
+     * @param {Stats} stats
      */
     add(stats) {
         this.hp += stats.hp

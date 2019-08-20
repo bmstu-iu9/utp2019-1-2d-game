@@ -51,7 +51,7 @@ class StatsManager {
      */
 
     gainAction(action) {
-        this.stats.add(action.stats)
+        action.apply(this)
     }
 
     /**
