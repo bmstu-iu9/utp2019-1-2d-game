@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * Game Player
+ * @class
  */
 class NPC extends GameObject {
     /**
@@ -15,8 +15,8 @@ class NPC extends GameObject {
         super(id);
         this.actor = new MovableActor(coords, centre);
         this.drawable = new DrawableObject("middleground", SpriteFactory.CreateTestSprite());
-        this.manager = manager//new PlayerManager(this)
-        this.hitbox=new Hitbox(HITBOX_CIRCLE,new Vector2d(centre),26);
+        this.manager = manager
+        this.hitbox = new Hitbox(HITBOX_CIRCLE, new Vector2d(centre), 26);
     }
 
     render() {
@@ -24,7 +24,10 @@ class NPC extends GameObject {
     }
 
     Update() {
-        this.manager.update()
+        this.actor.update()
+        if (this.manager !== undefined) {
+            this.manager.update()
+        }
         this.hitbox.update(this.actor.centre)
     }
 }

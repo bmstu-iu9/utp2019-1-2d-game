@@ -16,21 +16,23 @@ class Room extends GameObject {
         this.updatableObjects = []
         this.backgroundTiles = new Array(height).fill().map(x => new Array(width))
         this.solidTiles = []
+        this.movedObjects = []
         this.middlegroundTiles = new Array(height).fill().map(x => new Array(width).fill().map(y => new HashMap))
         this.foregroundTiles = new Array(height).fill().map(x => new Array(width))
-
         this.rnd = Game.roomRnd;
         this.manager = new RoomManager(this);
         this.collisionManager = new CollisionManager(this);
-        this.quadTree = new QuadTree(new Rectangle(0, 0, canvas.width, canvas.height), 16);
+        this.quadTree = new QuadTree(new Rectangle(0, 0, this.width * Game.tileWidth, this.height * Game.tileHeight), 16);
     }
+
     /**
-     * 
+     * Добавляет GameObject в Room, а также добавляет
+     * ссылки во вспомогательные контейнеры
      * @param {GameObject} obj 
      */
     Add(obj) {
         this.roomObjects.push(obj)
-        if (obj.manager !== undefined) {
+        if (obj.Update !== undefined) {
             this.updatableObjects.push(obj)
         }
         let i = 0
@@ -65,7 +67,7 @@ class Room extends GameObject {
     }
 
     /**
-     * Предполагается,что здесь будет происходить обработка коллизий
+     * Обработка коллизий
      */
     collide() {
         this.collisionManager.collide();
