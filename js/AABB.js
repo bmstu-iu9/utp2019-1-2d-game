@@ -256,6 +256,15 @@ class Collision{
         this.distance=dist
         this.obstacle=obstacle
     }
+
+    round(){
+        let xSign=this.distance.x < 0 ? -1 : 1
+        let ySign=this.distance.y < 0 ? -1 : 1
+
+        this.distance.set(Math.abs(this.distance.x),Math.abs(this.distance.y))
+        this.distance.set(Math.ceil(this.distance.x),Math.ceil(this.distance.y))
+        this.distance.set(this.distance.x*xSign,this.distance.y*ySign)
+    }
 }
 
 

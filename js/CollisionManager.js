@@ -23,7 +23,7 @@ class CollisionManager {
                     if (!objects[i].hitbox.equals(object.hitbox)) {
                         collision = getCollision(object.hitbox,objects[i].hitbox)
                         if (collision) {
-                            collision.distance.set(Math.ceil(collision.distance.x), Math.ceil(collision.distance.y))
+                            collision.round()
                             if (objects[i].actor instanceof MovableActor){
                                 collision.distance.mul(1/2)
                                 collision.distance.set(Math.ceil(collision.distance.x), Math.ceil(collision.distance.y))
