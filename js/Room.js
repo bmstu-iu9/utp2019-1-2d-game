@@ -97,6 +97,17 @@ class Room extends GameObject {
                     return obj
                 }
             }
+            for (const obj of node.parent.objects){
+                const object=obj.hitbox.getHitbox()
+                const minMaxX=object.getMinMaxX()
+                const minMaxY=object.getMinMaxY()
+
+                const xEstimation=minMaxX.min<coords.x && minMaxX.max>coords.x
+                const yEstimation=minMaxY.min<coords.y && minMaxY.max>coords.y
+                if (xEstimation && yEstimation){
+                    return obj
+                }
+            }
         }
         return getElement(this.quadTree)
     }
