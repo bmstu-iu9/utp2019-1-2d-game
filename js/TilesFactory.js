@@ -45,12 +45,12 @@ class TilesFactory {
      * @param {Number} y 
      */
     static CreateTestGrassTile(x = 0, y = 0) {
-        let tile = new StaticObject(100, 100, 125, 125, new DrawableObject("middleground", Game.GrassTexture));
+        let tile = new StaticObject(x, y, x+26, y+26, new DrawableObject("middleground", Game.GrassTexture));
         tile.hitbox = new AABB(new Vector2d(tile.actor.centre), [
-            tile.actor.centre.add(-25, -25, new Vector2d()),
-            tile.actor.centre.add(25, -25, new Vector2d()),
-            tile.actor.centre.add(25, 40, new Vector2d()),
-            tile.actor.centre.add(-25, 40, new Vector2d())
+            tile.actor.centre.add(-26, -26, new Vector2d()),
+            tile.actor.centre.add(26, -26, new Vector2d()),
+            tile.actor.centre.add(26, 26, new Vector2d()),
+            tile.actor.centre.add(-26, 26, new Vector2d())
         ]);
         return tile
     }

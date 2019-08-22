@@ -20,8 +20,9 @@ class CollisionManager {
     }
 
     collide() {
-        let objects, collision, object
+        let objects, collision, object, cnt=0
         for (let j = 0; j < this.room.movedObjects.length; j++) {
+            cnt++
             object = this.room.movedObjects[j]
             this.room.quadTree.update(object)
             objects = this.room.quadTree.retrieve([], object)
@@ -46,6 +47,7 @@ class CollisionManager {
                 }
             }
         }
+        console.log(cnt)
     }
 }
 

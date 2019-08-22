@@ -14,6 +14,8 @@ let imagesSrc = [
     'test.jpg',
     'ghost_shriek.png',
     'try.png',
+    'Floor.png',
+    'Wall.png'
 ];
 
 let Game = {
@@ -23,15 +25,15 @@ let Game = {
         Game.dt = 0;
         Game.step = 1 / Game.fps
         Game.last = 0;
-        Game.tileWidth = 70
-        Game.tileHeight = 70
+        Game.tileWidth = 52
+        Game.tileHeight = 52
         Game.objCnt = 0;
         Game.now = 0;
     },
 
     InitLogic() {
-        Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.test)
-        Game.GrassTexture = TilesFactory.CreateTexture(imagesStorage.try)
+        Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.Floor)
+        Game.GrassTexture = TilesFactory.CreateTexture(imagesStorage.Wall)
         Game.GhostSpritePattern = new SpritePattern(imagesStorage.ghost_shriek, [0, 1, 2, 3], "horizontal", 0, 0, 80, 64)
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
