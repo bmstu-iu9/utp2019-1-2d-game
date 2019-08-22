@@ -1,6 +1,6 @@
 'use strict'
 class SpriteFactory {
     static CreateTestSprite() {
-        return new Sprite(1.5, false, Game.GhostBox)
+        return new Sprite(1, Game.GhostBox)
     }
 }

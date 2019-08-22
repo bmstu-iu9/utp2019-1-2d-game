@@ -1,7 +1,7 @@
 'use strict';
 class HashMap {
     constructor() {
-        this.map = {};
+        this.map = {}
     }
 
     /**

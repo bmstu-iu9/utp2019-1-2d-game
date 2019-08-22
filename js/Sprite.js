@@ -10,42 +10,46 @@ class Sprite {
     dir; // vertical or horizontal
     spriteMapCoord;
     last;
-    constructor(speed, once, pattern) {
+    constructor(speed, pattern) {
         this.last = performance.now()
-        this.pattern = pattern;
-        this.once = once;
+        this.pattern = pattern
         this.speed = speed;
-        this.switch(pattern.current.id)
+        this.current = undefined
+        this.switch(Object.keys(pattern.data.map)[6])
+        console.log(this.current)
+    }
+    changeSpeed(speed) {
+        this.speed = speed
     }
     switch(id) {
         this.reset()
-        this.pattern.switch(id)
-        this.frames = this.pattern.current.frames
-        this.img = this.pattern.current.img
-        this.dir = this.pattern.current.dir
-        this.spriteMapCoord = this.pattern.current.spriteMapCoord
-        this.width = this.pattern.current.width
-        this.height = this.pattern.current.height
+        this.current = this.pattern.data.get(id)
+        this.frames = this.current.frames
+        this.img = this.current.img
+        this.dir = this.current.dir
+        this.spriteMapCoord = this.current.spriteMapCoord
+        this.width = this.current.width
+        this.height = this.current.height
     }
     update(dt) {
-        this.index += this.speed * dt;
+        this.index += this.speed * dt * this.current.speed
     }
     reset() {
-        this.index = 0;
+        this.index = 0
     }
     render(canvasCoord) {
         this.update((Game.now - this.last) / 1000)
         let frame = 0;
-        if (this.speed > 0) {
+        if (this.speed * this.current.speed > 0) {
             let max = this.frames.length;
             let id = ~~(this.index);
             frame = this.frames[id % max];
-            if (this.once && id  >= max) {
+            if (this.current.once && id  >= max) {
                 return;
             }
         }
-        let x = this.spriteMapCoord.x;
-        let y = this.spriteMapCoord.y
+        let x = this.spriteMapCoord.x * this.height
+        let y = this.spriteMapCoord.y * this.width
         if (this.dir == 'vertical') {
             y += frame * this.height;
         } else if (this.dir == 'horizontal') {

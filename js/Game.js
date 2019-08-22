@@ -14,6 +14,7 @@ let imagesSrc = [
     'test.jpg',
     'ghost_shriek.png',
     'try.png',
+    'knight.png',
     'Floor.png',
     'Wall.png'
 ];
@@ -34,7 +35,7 @@ let Game = {
     InitLogic() {
         Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.Floor)
         Game.GrassTexture = TilesFactory.CreateTexture(imagesStorage.Wall)
-        Game.GhostBox = BoxFactory.CreateGhostBox()
+        Game.GhostBox = BoxFactory.CreateKnightBox()
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
         Game.currentWorld = WorldFactory.CreateTestWorld()

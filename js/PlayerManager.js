@@ -13,7 +13,7 @@ class PlayerManager {
     }
 
     update() {
-        let speed = 10
+        let speed = 4
         let xDirection = 0
         let yDirection = 0
         if (keyboard.KeyW || keyboard.ArrowUp) {
