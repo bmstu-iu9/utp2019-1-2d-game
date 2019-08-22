@@ -7,7 +7,7 @@ class HashMap {
     /**
      * Присваивание ключу хеш карты key.id (id GameObject) значение
      * ссылки на объект key
-     * @param {GameObject}  key
+     * @param {Object}  key
      */
     set(key) {
         if (this.hasId(key.id)) {
@@ -29,11 +29,11 @@ class HashMap {
      * Возвращает объект с ключем keyid или кидает ошибку
      * если такого объекта нет
      * @param {String}  keyid
-     * @returns {GameObject}
+     * @returns {Object}
      */
     get(keyid) {
         if (this.hasId(keyid)) {
-            return this.map[kayid]
+            return this.map[keyid]
         }
 
         throw Error("map has not current id " + keyid)
@@ -41,7 +41,7 @@ class HashMap {
     }
     /**
      * Удаление из карты
-     * @param {GameObject}  key
+     * @param {Object}  key
      */
     delete(key) {
         delete this.map[key.id]

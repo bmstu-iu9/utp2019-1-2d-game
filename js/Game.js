@@ -34,7 +34,7 @@ let Game = {
     InitLogic() {
         Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.Floor)
         Game.GrassTexture = TilesFactory.CreateTexture(imagesStorage.Wall)
-        Game.GhostSpritePattern = new SpritePattern(imagesStorage.ghost_shriek, [0, 1, 2, 3], "horizontal", 0, 0, 80, 64)
+        Game.GhostBox = BoxFactory.CreateGhostBox()
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
         Game.currentWorld = WorldFactory.CreateTestWorld()

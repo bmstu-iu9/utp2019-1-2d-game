@@ -15,12 +15,17 @@ class Sprite {
         this.pattern = pattern;
         this.once = once;
         this.speed = speed;
-        this.frames = pattern.frames;
-        this.img = pattern.img;
-        this.dir = pattern.dir;
-        this.spriteMapCoord = pattern.spriteMapCoord;
-        this.width = pattern.width;
-        this.height = pattern.height;
+        this.switch(pattern.current.id)
+    }
+    switch(id) {
+        this.reset()
+        this.pattern.switch(id)
+        this.frames = this.pattern.current.frames
+        this.img = this.pattern.current.img
+        this.dir = this.pattern.current.dir
+        this.spriteMapCoord = this.pattern.current.spriteMapCoord
+        this.width = this.pattern.current.width
+        this.height = this.pattern.current.height
     }
     update(dt) {
         this.index += this.speed * dt;

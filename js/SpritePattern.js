@@ -1,7 +1,8 @@
 'use strict'
 
 class SpritePattern {
-    constructor(image, frames, dir, x, y, height, width) {
+    constructor(id, image, frames, dir, x, y, height, width) {
+        this.id = id
         this.img = image;
         this.frames = frames;
         this.dir = dir;
