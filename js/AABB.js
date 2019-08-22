@@ -30,21 +30,50 @@ const overlap = (pr1, pr2) => {
     return min - max
 }
 
-const AABBvsCircle=(object,obstacle)=> {
-    let axis = obstacle.centre.sub(object.centre, new Vector2d())
-    let thisProjection = minMaxProjection(axis, object)
-
-    let centreProjection = obstacle.centre.vectorProjection(axis)
-
-    let struct = {
-        min: centreProjection - obstacle.radius,
-        max: centreProjection + obstacle.radius
+const getMin = (dx, dy, firstAxis, secondAxis) => {
+    let depth, axis
+    if (dx < dy) {
+        depth = dy
+        axis = new Vector2d(secondAxis)
+    } else {
+        depth = dx
+        axis = new Vector2d(firstAxis)
     }
+    return {
+        depth: depth,
+        axis: axis
+    }
+}
 
-    let depth
+const circleProjection=(axis,circle)=>{
+    const centreProjection=circle.centre.vectorProjection(axis)
+    return {
+        min:centreProjection-circle.radius,
+        max:centreProjection+circle.radius
+    }
+}
 
-    if ((depth = overlap(thisProjection, struct)) < 0) {
-        return new Collision(axis.normalize().mul(depth), obstacle)
+
+/**
+ *
+ * @param {AABB} object
+ * @param {CircleHitbox} obstacle
+ * @constructor
+ */
+const AABBvsCircle=(object,obstacle)=> {
+    let thisPr1=minMaxProjection(object.firstAxis,object)
+    let thisPr2=minMaxProjection(object.secondAxis,object)
+
+    let circlePr1=circleProjection(object.firstAxis,obstacle)
+    let circlePr2=circleProjection(object.secondAxis,obstacle)
+
+    let dx,dy;
+    if ((dx=overlap(thisPr1,circlePr1))<0 && (dy=overlap(thisPr2,circlePr2))<0){
+        const res=getMin(dx,dy,object.firstAxis,object.secondAxis)
+
+        const centre_to_centre=obstacle.centre.sub(object.centre,new Vector2d())
+        if (centre_to_centre.vectorProjection(res.axis)<0) res.axis.mul(-1)
+        return new Collision(res.axis.normalize().mul(res.depth),obstacle)
     }
     return null
 }
@@ -68,7 +97,7 @@ const getCollision=(objectCommon,obstacleCommon)=>{
                 collision.distance.mul(-1)
                 collision.obstacle=obstacle
             }
-        return collision
+            return collision
         }else if (obstacle instanceof CircleHitbox){
             return object.getCollision(obstacle)
         }
@@ -103,20 +132,6 @@ class AABB {
         if ((dx = overlap(thisPr1, objPr1)) < 0 && (dy = overlap(thisPr2, objPr2)) < 0
             && (dX = overlap(secThisPr1, secObjPr1)) < 0 && (dY = overlap(secThisPr2, secObjPr2)) < 0) {
 
-            const getMin = (dx, dy, firstAxis, secondAxis) => {
-                let depth, axis
-                if (dx < dy) {
-                    depth = dy
-                    axis = new Vector2d(secondAxis)
-                } else {
-                    depth = dx
-                    axis = new Vector2d(firstAxis)
-                }
-                return {
-                    depth: depth,
-                    axis: axis
-                }
-            }
 
             let thisMin = getMin(dx, dy, this.firstAxis, this.secondAxis)
             let objMin = getMin(dX, dY, obstacle.firstAxis, obstacle.secondAxis)
@@ -255,15 +270,6 @@ class Collision{
     constructor(dist,obstacle){
         this.distance=dist
         this.obstacle=obstacle
-    }
-
-    round(){
-        let xSign=this.distance.x < 0 ? -1 : 1
-        let ySign=this.distance.y < 0 ? -1 : 1
-
-        this.distance.set(Math.abs(this.distance.x),Math.abs(this.distance.y))
-        this.distance.set(Math.ceil(this.distance.x),Math.ceil(this.distance.y))
-        this.distance.set(this.distance.x*xSign,this.distance.y*ySign)
     }
 }
 
