@@ -22,11 +22,9 @@ class DrawableObject {
      *
      * @param {DrawableObject} object
      */
-
     static fromJSON(object){
         let drawableObj = new DrawableObject(object.placement,Texture.fromJSON(object.drowable))
         drawableObj.canvasCoord = Vector2d.fromJSON(object.canvasCoord)
         return drawableObj
-        return new DrawableObject(object.placement,Texture.fromJSON(object.drowable),Vector2d.fromJSON(object.canvasCoord))
     }
 }

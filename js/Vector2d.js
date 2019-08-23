@@ -181,7 +181,6 @@ class Vector2d{
      *
      * @param {Vector2d} object
      */
-
     static fromJSON(object){
         return new Vector2d(object)
     }

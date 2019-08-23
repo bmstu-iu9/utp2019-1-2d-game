@@ -18,37 +18,35 @@ const SaveLoad = {
             db = openRequest.result;
         };
     },
-            save()
-        {
-            // продолжить работу с базой данных, используя объект db
-            let transaction = db.transaction('file', "readwrite")
-            let storage = transaction.objectStore("file")
-            let js = JSON.stringify(Game.currentWorld)
-            let request = storage.put(js, 1)
-            request.onsuccess = () => {
-                console.log("Игра Сохранена", request.result);
+    save() {
+        // продолжить работу с базой данных, используя объект db
+        let transaction = db.transaction('file', "readwrite")
+        let storage = transaction.objectStore("file")
+        let js = JSON.stringify(Game.currentWorld)
+        let request = storage.put(js, 1)
+        request.onsuccess = () => {
+            console.log("Игра Сохранена", request.result);
 
-                request.onerror = () => {
-                    console.log("Ошибка", request.error);
-                    alert("Игра не сохранилась")
-                };
-            }
-        },
-
-        load()
-        {
-            let transaction = db.transaction('file',"readwrite")
-            let storage = transaction.objectStore("file")
-            let obj = storage.get(1)
-            if (obj !== undefined)
-                obj.onsuccess = () => {
-                    Game.currentWorld = World.fromJSON(JSON.parse(obj.result))
-                }
-            else {
-                alert("У вас нет сохранений")
-            }
-
+            request.onerror = () => {
+                console.log("Ошибка", request.error);
+                alert("Игра не сохранилась")
+            };
         }
+    },
+
+    load() {
+        let transaction = db.transaction('file', "readwrite")
+        let storage = transaction.objectStore("file")
+        let obj = storage.get(1)
+        if (obj !== undefined)
+            obj.onsuccess = () => {
+                Game.currentWorld = World.fromJSON(JSON.parse(obj.result))
+            }
+        else {
+            alert("У вас нет сохранений")
+        }
+
+    }
 
 }
 

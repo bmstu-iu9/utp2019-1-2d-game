@@ -67,7 +67,6 @@ class StatsManager {
      *
      * @param {StatsManager}object
      */
-
     static fromJSON(object){
         return new StatsManager(Stats.fromJSON(object.stats))
     }

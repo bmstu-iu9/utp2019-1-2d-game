@@ -34,7 +34,6 @@ class Effect {
      *
      * @param  {Effect} object
      */
-
     static fromJSON(object){
         return new Effect(object.remainTime)
     }

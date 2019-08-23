@@ -192,7 +192,6 @@ class CircleHitbox {
      *
      * @param {CircleHitbox} object
      */
-
     static fromJSON(object){
         return new CircleHitbox(Vector2d.fromJSON(object.centre),object.radius)
     }

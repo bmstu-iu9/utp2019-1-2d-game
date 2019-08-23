@@ -19,9 +19,7 @@ class Actor {
     /**
      *
      * @param {Actor} object
-     * @returns {Actor}
      */
-
     static fromJSON(object){
         return new Actor(Vector2d.fromJSON(object.position),Vector2d.fromJSON(object.centre))
     }

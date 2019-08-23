@@ -42,7 +42,6 @@ class NPC extends GameObject {
      *
      * @param {NPC} object
      */
-
     static fromJSON(object){
         let npc
         if (object.manager === true){

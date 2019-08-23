@@ -66,7 +66,6 @@ class Sprite {
      *
      * @param {Sprite}object
      */
-
     static fromJSON(object){
         let sprite = new Sprite(object.speed,object.once,SpritePattern.fromJSON(object.pattern))
     }
