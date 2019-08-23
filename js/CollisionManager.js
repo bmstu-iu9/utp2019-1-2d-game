@@ -61,26 +61,29 @@ class Hitbox {
      * @param {Vector2d[],Number} vertices_or_radius
      */
     constructor(type, centre, vertices_or_radius) {
-        const getCopy = (type, hitbox) => {
+        if(type !== undefined && centre !== undefined && vertices_or_radius !== undefined){
             if (type === HITBOX_AABB) {
-                return new AABB(new Vector2d(hitbox.centre), [
-                    new Vector2d(hitbox.vertices[0]),
-                    new Vector2d(hitbox.vertices[1]),
-                    new Vector2d(hitbox.vertices[2]),
-                    new Vector2d(hitbox.vertices[3]),
-                ], undefined).setId(hitbox.id)
+                this.hitbox = new AABB(centre, vertices_or_radius)
             } else if (type === HITBOX_CIRCLE) {
-                return new CircleHitbox(new Vector2d(hitbox.centre), hitbox.radius, undefined)
-                    .setId(hitbox.id);
+                this.hitbox = new CircleHitbox(centre, vertices_or_radius)
             }
+            this.type = type
+            this.hitboxPrevState = this.getCopy(type, this.hitbox)
         }
-        if (type === HITBOX_AABB) {
-            this.hitbox = new AABB(centre, vertices_or_radius)
-        } else if (type === HITBOX_CIRCLE) {
-            this.hitbox = new CircleHitbox(centre, vertices_or_radius)
-        }
-        this.hitboxPrevState = getCopy(type, this.hitbox)
+    }
 
+    getCopy (type, hitbox){
+        if (type === HITBOX_AABB) {
+            return new AABB(new Vector2d(hitbox.centre), [
+                new Vector2d(hitbox.vertices[0]),
+                new Vector2d(hitbox.vertices[1]),
+                new Vector2d(hitbox.vertices[2]),
+                new Vector2d(hitbox.vertices[3]),
+            ], undefined).setId(hitbox.id)
+        } else if (type === HITBOX_CIRCLE) {
+            return new CircleHitbox(new Vector2d(hitbox.centre), hitbox.radius, undefined)
+                .setId(hitbox.id);
+        }
     }
 
     equals(arg) {
@@ -116,6 +119,34 @@ class Hitbox {
      */
     correctPosition(collision) {
         this.hitbox.correctPosition(collision)
+    }
+
+    toJSON(){
+        return{
+            type :   this.type,
+            current : this.hitbox,
+            prev : this.hitboxPrevState
+        } 
+    }
+
+    /**
+     * 
+     * @param {Hitbox} obj 
+     */
+    static fromJSON(obj){
+        let h = new Hitbox()
+        if (obj.type === HITBOX_AABB) {
+            h.hitboxPrevState = AABB.fromJSON(obj.prev)
+            h.hitbox = AABB.fromJSON(obj.current)
+            h.type = obj.type
+        }
+
+        else if (obj.type === HITBOX_CIRCLE) {
+            h.hitboxPrevState = CircleHitbox.fromJSON(obj.prev)
+            h.hitbox = CircleHitbox.fromJSON(obj.current)
+            h.type = obj.type
+        }
+        return h
     }
 }
 

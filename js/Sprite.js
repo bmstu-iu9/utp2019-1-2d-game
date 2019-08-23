@@ -49,4 +49,27 @@ class Sprite {
         ctx.drawImage(this.img, x, y, this.width, this.height, canvasCoord.x, canvasCoord.y, this.width, this.height);
         this.last = Game.now
     }
+
+    toJSON(){
+        return {
+            pattern : this.pattern,
+            once : this.once,
+            speed : this.speed,
+            frames : this.frames,
+            img : this.img, // нужно будет только id
+            index : this.index,
+            dir : this.dir,
+            spriteMapCoord : this.spriteMapCoord,
+            width : this.width,
+            height : this.height
+        }
+    }
+
+    /**
+     *
+     * @param {Sprite}object
+     */
+    static fromJSON(object){
+        let sprite = new Sprite(object.speed,object.once,SpritePattern.fromJSON(object.pattern))
+    }
 }

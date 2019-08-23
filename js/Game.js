@@ -59,6 +59,10 @@ let Game = {
         Game.Render();
         Game.last = Game.now;
         requestAnimationFrame(Game.Loop)
+        if (keyboard.KeyZ === true)
+            SaveLoad.save()
+        if (keyboard.KeyX === true)
+            SaveLoad.load()
     },
 
     Update() {

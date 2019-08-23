@@ -33,4 +33,23 @@ class World extends GameObject{
         this.manager.Update()
     }
 
+    toJSON(){
+        return  {
+            id : this.id,
+            roomContaier : this.roomContaier,
+            currentRoom : this.currentRoom// Для тестирования, потом будет изменено на id
+        };
+    }
+
+    /**
+     *
+     * @param {World} object
+     */
+    static fromJSON(object){
+        let world = new World(object.id)
+        object.roomContaier.forEach(room => world.AddRoom(Room.fromJSON(room)))
+        world.currentRoom = world.roomContaier.find(room => room.id === object.id)
+        world.currentRoom = Room.fromJSON(object.currentRoom)
+        return world;
+    }
 }

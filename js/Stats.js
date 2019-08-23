@@ -41,4 +41,23 @@ class Stats {
         return new Stats(-this.hp, -this.mana, -this.strenght,
             -this.agility, -this.intelligence, -this.speed)
     }
+
+    toJSON(){
+        return {
+            hp : this.hp,
+            mana : this.mana,
+            strenght : this.strenght,
+            agility : this.agility,
+            intelligence : this.intelligence,
+            speed : this.speed
+        }
+    }
+
+    /**
+     *
+     * @param {Stats} object
+     */
+    static fromJSON(object){
+        return new Stats(object.hp,object.mana,object.strenght,object.agility,object.intelligence,object.speed)
+    }
 }

@@ -170,6 +170,21 @@ class Vector2d {
         return new Vector2d(-this.y, this.x);
     }
 
+    toJSON(){
+        return {
+            x : this.x,  //Потом можно будет удалить
+            y : this.y
+        }
+    }
+
+    /**
+     *
+     * @param {Vector2d} object
+     */
+    static fromJSON(object){
+        return new Vector2d(object)
+    }
+
     /**
      * Округление вектора.
      * Осторожно, после применения метода может 

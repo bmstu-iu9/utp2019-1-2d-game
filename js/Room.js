@@ -56,6 +56,7 @@ class Room extends GameObject {
         }
         if (obj.hitbox !== undefined) {
             this.solidTiles.push(obj)
+            this.quadTree.add(obj)
         }
     }
 
@@ -64,6 +65,34 @@ class Room extends GameObject {
      */
     Update() {
         this.manager.Update()
+    }
+
+    toJSON() {
+
+        return {
+            id: this.id,
+            height: this.height,
+            width: this.width,
+            roomObjects : this.roomObjects
+        };
+    }
+
+    /**
+     *
+     * @param {Room} object
+     */
+    static fromJSON(object){
+        let room = new Room(object.id,object.height,object.width)
+        for (let i = 0;i < object.roomObjects.length;i++){
+            if ("hitbox" in object.roomObjects[i]){
+                console.log(NPC.fromJSON(object.roomObjects[i]))
+                room.Add(NPC.fromJSON(object.roomObjects[i]))
+            }
+            else {
+                room.Add(StaticObject.fromJSON(object.roomObjects[i]))
+            }
+        }
+        return room
     }
 
     /**

@@ -159,6 +159,26 @@ class AABB {
         this.changePosition(this.centre.add(collision.distance,new Vector2d()))
     }
 
+    toJSON() {
+        return {
+            centre: this.centre,
+            vertices: this.vertices,
+            firstAxis: this.firstAxis,
+            secondAxis: this.secondAxis
+        }
+    }
+
+
+    /**
+     *
+     * @param {AABB} object
+     */
+    static fromJSON(object){
+        let vertices = []
+        vertices.push(object.vertices.forEach(vertex => Vector2d.fromJSON(vertex)))
+        return new AABB(Vector2d.fromJSON(object.centre),vertices)
+    }
+
     getMinMaxX(){
         let min,max
         min=max=this.vertices[0].x
@@ -171,8 +191,8 @@ class AABB {
             }
         }
         return {
-            max:max,
-            min:min
+            max: max,
+            min: min
         }
     }
 
@@ -240,6 +260,22 @@ class CircleHitbox {
             min:this.centre.x-this.radius
         }
     }
+
+    toJSON() {
+        return {
+            radius: this.radius,
+            centre: this.centre
+        }
+    }
+
+    /**
+     *
+     * @param {CircleHitbox} object
+     */
+    static fromJSON(object){
+        return new CircleHitbox(Vector2d.fromJSON(object.centre),object.radius)
+    }
+
 
     getMinMaxY(){
         return {

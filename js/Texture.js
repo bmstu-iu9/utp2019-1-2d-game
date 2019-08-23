@@ -28,5 +28,16 @@ class Texture {
     render(canvasCoord) {
         ctx.drawImage(this.img, canvasCoord.x, canvasCoord.y);
     }
+
+    toJSON(){
+        return this.img.src
+    }
+    /**
+     *
+     * @param {Texture} object
+     */
+    static fromJSON(object){
+        return textureStorage[object] //Как появится id нужно будет удалить
+    }
 }
 

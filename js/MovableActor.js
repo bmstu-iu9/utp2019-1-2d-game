@@ -38,4 +38,22 @@ class MovableActor extends Actor {
         this.offset.x = 0
         this.offset.y = 0
     }
+
+    toJSON() {
+        let jsonObj = super.toJSON()
+        jsonObj.offset = this.offset
+        jsonObj.prevPosition = this.prevPosition
+        return jsonObj
+    }
+
+    /**
+     *
+     * @param {MovableActor} object
+     */
+    static fromJSON(object){
+        let movableActor = new MovableActor(Vector2d.fromJSON(object.position),Vector2d.fromJSON(object.centre))
+        movableActor.offset = Vector2d.fromJSON(object.offset)
+        movableActor.prevPosition = Vector2d.fromJSON(object.prevPosition)
+        return movableActor;
+    }
 }

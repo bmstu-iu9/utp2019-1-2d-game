@@ -35,4 +35,37 @@ class NPC extends GameObject {
        this.hitbox.correctPosition(collision);
        this.actor.changePosition(collision.distance);
     }
+
+    toJSON(){
+        return {
+            id : this.id,
+            actor : this.actor,
+            drawable : this.drawable,
+            hitbox : this.hitbox,
+            manager : this.manager !== undefined
+        }
+    }
+
+    /**
+     *
+     * @param {NPC} object
+     */
+    static fromJSON(object){
+        let npc
+        if (object.manager === true){
+            npc = TilesFactory.CreatePlayer()
+            npc.id = object.id
+            npc.actor = MovableActor.fromJSON(object.actor)
+            npc.hitbox = Hitbox.fromJSON(object.hitbox)
+            Game.camera.focusOn(npc.actor)
+        }
+        else {
+            npc = TilesFactory.CreateStaticNPC(0,0)
+            npc.id = object.id
+            npc.actor = MovableActor.fromJSON(object.actor)
+            npc.hitbox = Hitbox.fromJSON(object.hitbox)
+        }
+
+        return npc
+    }
 }
