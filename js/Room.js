@@ -85,7 +85,6 @@ class Room extends GameObject {
         let room = new Room(object.id,object.height,object.width)
         for (let i = 0;i < object.roomObjects.length;i++){
             if ("hitbox" in object.roomObjects[i]){
-                console.log(NPC.fromJSON(object.roomObjects[i]))
                 room.Add(NPC.fromJSON(object.roomObjects[i]))
             }
             else {

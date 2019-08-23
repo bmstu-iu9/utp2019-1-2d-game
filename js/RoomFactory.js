@@ -16,14 +16,12 @@ class RoomFactory {
 
         room.Add(grassTile)
         room.Add(player)
-        //room.quadTree.add(player)
         Game.camera.focusOn(player.actor)
 
         for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
                 let t = TilesFactory.CreateStaticNPC((2 + j) * 125, (2 + i) * 125);
                 room.Add(t);
-                //room.quadTree.add(t);
             }
         }
         room.quadTree.add(grassTile)
