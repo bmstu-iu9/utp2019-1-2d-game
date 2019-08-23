@@ -73,7 +73,8 @@ const AABBvsCircle=(object,obstacle)=> {
 
         const centre_to_centre=obstacle.centre.sub(object.centre,new Vector2d())
         if (centre_to_centre.vectorProjection(res.axis)<0) res.axis.mul(-1)
-        return new Collision(res.axis.normalize().mul(res.depth),obstacle)
+        //hotfix
+        return new Collision(centre_to_centre.normalize().mul(res.depth),obstacle)
     }
     return null
 }
