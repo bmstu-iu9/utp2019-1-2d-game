@@ -35,11 +35,9 @@ class Texture {
      */
 
     toJSON(){
-        console.log(this.img.src)
         return this.img.src
     }
     static fromJSON(object){
-        console.log(object)
         return textureStorage[object] //Как появится id нужно будет удалить
     }
 }

@@ -50,6 +50,7 @@ class NPC extends GameObject {
             npc.id = object.id
             npc.actor = MovableActor.fromJSON(object.actor)
             npc.hitbox = CircleHitbox.fromJSON(object.hitbox)
+            Game.camera.focusOn(npc.actor)
         }
         else {
             npc = TilesFactory.CreateStaticNPC(0,0)

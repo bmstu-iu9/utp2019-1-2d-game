@@ -42,8 +42,8 @@ const SaveLoad = {
             let obj = storage.get(1)
             if (obj !== undefined)
                 obj.onsuccess = () => {
-                Game.currentWorld = World.fromJSON(JSON.parse(obj.result))
-            }
+                    Game.currentWorld = World.fromJSON(JSON.parse(obj.result))
+                }
             else {
                 alert("У вас нет сохранений")
             }
