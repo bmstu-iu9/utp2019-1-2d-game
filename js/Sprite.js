@@ -15,7 +15,7 @@ class Sprite {
         this.pattern = pattern
         this.speed = speed;
         this.current = undefined
-        this.switch(Object.keys(pattern.data.map)[6])
+        this.switch(Object.keys(pattern.data.map)[9])
         console.log(this.current)
     }
     changeSpeed(speed) {
