@@ -77,12 +77,27 @@ class StatsManager {
         this.effectsContainer = this.effectsContainer.filter(effect => effect.remainTime > 0)
     }
 
+    toJSON(){
+        return {
+            stats : this.stats,
+            hpLimit : this.hpLimit,
+            manaLimit : this.manaLimit,
+            effectsContainer : this.effectsContainer,
+            modifiersContainer : this.modifiersContainer
+        }
+    }
+
     /**
      *
      * @param {StatsManager}object
      */
     static fromJSON(object) {
-        return new StatsManager(Stats.fromJSON(object.stats))
+        let statsManager = new StatsManager(Stats.fromJSON(object.stats))
+        statsManager.hpLimit = object.hpLimit
+        statsManager.manaLimit = object.manaLimit
+        statsManager.effectsContainer = object.effectsContainer
+        statsManager.modifiersContainer = object.modifiersContainer
+        return statsManager
     }
 }
 
