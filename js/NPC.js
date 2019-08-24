@@ -17,6 +17,8 @@ class NPC extends GameObject {
         this.drawable = new DrawableObject("middleground", SpriteFactory.CreateTestSprite());
         this.manager = manager
         this.hitbox = new Hitbox(HITBOX_CIRCLE, new Vector2d(centre), 26);
+        this.direction = new Vector2d(0,0)
+        this.walking = false
     }
 
     render() {
@@ -27,6 +29,10 @@ class NPC extends GameObject {
         this.actor.update()
         if (this.manager !== undefined) {
             this.manager.update()
+            /*if (this.walking === false)
+                this.drawable.switch("idle",this.direction)
+            else
+                this.drawable.switch("go",this.direction)*/
         }
         this.hitbox.update(this.actor.centre)
     }

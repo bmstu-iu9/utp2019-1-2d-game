@@ -31,7 +31,12 @@ class PlayerManager {
         if (xDirection !== 0 && yDirection !== 0) {
             xDirection = ~~(xDirection / Math.sqrt(2))
             yDirection = ~~(yDirection / Math.sqrt(2))
+            this.player.walking = true
         }
+        else
+            this.player.walking = false
+        this.player.direction.x = xDirection
+        this.player.direction.y = yDirection
         this.player.actor.update()
         this.player.actor.changePosition(new Vector2d(xDirection, yDirection))
     }
