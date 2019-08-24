@@ -72,14 +72,14 @@ class TilesFactory {
     static createTile(x = 0, y = 0, w = 0, h = 0, drawable) {
         let height = drawable.drowable.height
         let width = drawable.drowable.width
-        let xCentre = ~~(x + width - w / 2)
+        let xCentre = ~~(x + width / 2)
         let yCentre = ~~(y + height - h / 2)
         let tile = new StaticObject(x, y, xCentre, yCentre, drawable)
         tile.hitbox = new AABB(new Vector2d(tile.actor.centre), [
-            tile.actor.centre.add(-25, -25, new Vector2d()),
-            tile.actor.centre.add(25, -25, new Vector2d()),
-            tile.actor.centre.add(25, 25, new Vector2d()),
-            tile.actor.centre.add(-25, 25, new Vector2d())
+            new Vector2d(x + width / 2 - w / 2, y + height - h),
+            new Vector2d(x + width / 2 + w / 2, y + height - h),
+            new Vector2d(x + width / 2 + w / 2, y + height),
+            new Vector2d(x + width / 2 - w / 2, y + height)
         ])
         return tile
     }
