@@ -10,6 +10,8 @@ class StatsManager {
      */
     constructor(stats) {
         this.stats = stats
+        this.hpLimit = stats.hp
+        this.manaLimit = stats.mana
         this.effectsContainer = []
         this.modifiersContainer = new Map()
     }
@@ -55,6 +57,18 @@ class StatsManager {
     }
 
     /**
+     * correct hp and mana if it's necessary
+     */
+    correctStats() {
+        if (this.stats.hp > this.hpLimit) {
+            this.stats.hp = this.hpLimit
+        }
+        if (this.stats.mana > this.manaLimit) {
+            this.stats.mana = this.manaLimit
+        }
+    }
+
+    /**
      *
      * @param {Number} dt
      */
@@ -67,7 +81,7 @@ class StatsManager {
      *
      * @param {StatsManager}object
      */
-    static fromJSON(object){
+    static fromJSON(object) {
         return new StatsManager(Stats.fromJSON(object.stats))
     }
 }
