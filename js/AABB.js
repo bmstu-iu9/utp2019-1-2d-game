@@ -45,14 +45,75 @@ const getMin = (dx, dy, firstAxis, secondAxis) => {
     }
 }
 
-const circleProjection=(axis,circle)=>{
-    const centreProjection=circle.centre.vectorProjection(axis)
-    return {
-        min:centreProjection-circle.radius,
-        max:centreProjection+circle.radius
-    }
+
+const gramSchmidt=(axis,vector)=>{
+    return vector.sub(axis.mul(vector.dotProduct(axis)/axis.dotProduct(axis)),new Vector2d())
 }
 
+const intersect=(A,B,C,D)=>{
+    const x1=B.x,x0=A.x,y1=B.y,y0=A.y
+    const a=C.x,b=C.y,c=D.x,d=D.y
+    const l=c-a,q=d-b,n=x1-x0,m=y1-y0
+    const t=(n*(y0-b)+m*(a-x0))/(q*n-m*l)
+    const x=a+t*l,y=b+t*q
+    return new Vector2d(x,y)
+}
+
+const findClosest=(box,dot)=>{
+    let inter=calcLine(box.vertices[0],box.vertices[1],dot)
+    let guid=inter.sub(dot,new Vector2d())
+    for (let i=1;i<4;i++) {
+        const inters = calcLine(box.vertices[i%4], box.vertices[(i + 1) % 4], dot)
+        const guids=inters.sub(dot,new Vector2d())
+        if (guid.lengthSquared()>guids.lengthSquared()){
+            inter=inters
+            guid=guids
+        }
+    }
+    return inter
+}
+
+const determineLine=(ortho,point)=>{
+    if (ortho.x===0){
+        return new Vector2d(point.x,0)
+    }
+    if (ortho.y===0){
+        return new Vector2d(0,point.y)
+    }
+    return new Vector2d(0,-ortho.y*point.x/ortho.x+point.y)
+}
+
+const calcLine=(a,b,point)=>{
+    const vector=b.sub(a,new Vector2d())
+    const ortho=gramSchmidt(vector,point.sub(a,new Vector2d()))
+    const inter=intersect(a,b,point,determineLine(ortho,point))
+    let minX,minY,maxX,maxY
+    if (a.x<b.x){
+        minX=a.x
+        maxX=b.x
+    }else {
+        minX=b.x
+        maxX=a.x
+    }
+    if (a.y<b.y){
+        minY=a.y
+        maxY=b.y
+    }else {
+        minY=b.y
+        maxY=a.y
+    }
+    if (minX<=inter.x && inter.x<=maxX && inter.y<=maxY && inter.y>=minY){
+        return inter
+    }else {
+        let q=point.sub(a,new Vector2d())
+        let l=point.sub(b,new Vector2d())
+        if (q.lengthSquared()<l.lengthSquared()){
+            return a
+        }else {
+            return b
+        }
+    }
+}
 
 /**
  *
@@ -61,21 +122,11 @@ const circleProjection=(axis,circle)=>{
  * @constructor
  */
 const AABBvsCircle=(object,obstacle)=> {
-    let thisPr1=minMaxProjection(object.firstAxis,object)
-    let thisPr2=minMaxProjection(object.secondAxis,object)
-
-    let circlePr1=circleProjection(object.firstAxis,obstacle)
-    let circlePr2=circleProjection(object.secondAxis,obstacle)
-
-    let dx,dy;
-    if ((dx=overlap(thisPr1,circlePr1))<0 && (dy=overlap(thisPr2,circlePr2))<0){
-        const res=getMin(dx,dy,object.firstAxis,object.secondAxis)
-
-        const centre_to_centre=obstacle.centre.sub(object.centre,new Vector2d())
-        if (centre_to_centre.vectorProjection(res.axis)<0) res.axis.mul(-1)
-        //hotfix
-        return new Collision(centre_to_centre.normalize().mul(res.depth),obstacle)
-    }
+    const intersectionPoint=findClosest(object,obstacle.centre)
+    let axis=intersectionPoint.sub(obstacle.centre,new Vector2d())
+    const distance=obstacle.radius-axis.length()
+    if (distance>0)
+        return new Collision(axis.normalize().mul(distance),obstacle)
     return null
 }
 
@@ -309,5 +360,3 @@ class Collision{
         this.obstacle=obstacle
     }
 }
-
-
