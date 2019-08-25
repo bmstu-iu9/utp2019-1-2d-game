@@ -29,10 +29,10 @@ class NPC extends GameObject {
         this.actor.update()
         if (this.manager !== undefined) {
             this.manager.update()
-            /*if (this.walking === false)
-                this.drawable.switch("idle",this.direction)
+            if (this.walking === false)
+                this.drawable.drowable.switch("idle",this.direction)
             else
-                this.drawable.switch("go",this.direction)*/
+                this.drawable.drowable.switch("go",this.direction)
         }
         this.hitbox.update(this.actor.centre)
     }

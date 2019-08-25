@@ -28,15 +28,17 @@ class PlayerManager {
         if (keyboard.KeyD || keyboard.ArrowRight) {
             xDirection += speed
         }
+        this.player.walking = true
         if (xDirection !== 0 && yDirection !== 0) {
             xDirection = ~~(xDirection / Math.sqrt(2))
             yDirection = ~~(yDirection / Math.sqrt(2))
-            this.player.walking = true
         }
-        else
+        if (xDirection == 0 && yDirection == 0) {
             this.player.walking = false
-        this.player.direction.x = xDirection
-        this.player.direction.y = yDirection
+        } else {
+            this.player.direction.x = xDirection
+            this.player.direction.y = yDirection
+        }
         this.player.actor.update()
         this.player.actor.changePosition(new Vector2d(xDirection, yDirection))
     }
