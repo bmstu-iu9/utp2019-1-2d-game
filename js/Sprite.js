@@ -26,15 +26,14 @@ class Sprite {
         let data = this.pattern.data.get(name)
         let vec = 2 - polarAngle(vector) / Math.PI
         if (data.length == 4) {
-            if (vec < 0.25 || vec > 1.75) {
+            if (vec <= 0.25 || vec >= 1.75) {
                 this.current = data[0]
+            } else if (vec >= 0.75 && vec <= 1.25) {
+                this.current = data[2]
             } else {
                 this.current = data[Math.ceil((vec - 0.25) / 0.5)]
             }
         }
-        console.log(Math.ceil((vec - 0.25) / 0.5))
-        console.log(data)
-        console.log(this.current)
         this.frames = this.current.frames
         this.img = this.current.img
         this.dir = this.current.dir
