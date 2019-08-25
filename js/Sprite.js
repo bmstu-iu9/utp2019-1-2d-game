@@ -10,29 +10,37 @@ class Sprite {
     dir; // vertical or horizontal
     spriteMapCoord;
     last;
-    constructor(speed, pattern) {
+    constructor(speed, pattern, firstPatternName = "idle", isAngleEnabled = false) {
+        this.isAngleEnabled = isAngleEnabled
         this.last = performance.now()
         this.pattern = pattern
         this.speed = speed;
         this.current = undefined
-        this.switch("go", new Vector2d(0, 2))
-        console.log(this.current)
+        this.switch(firstPatternName, new Vector2d(0, 1))
     }
     changeSpeed(speed) {
         this.speed = speed
     }
     switch(name, vector) {
         //this.reset()
-        let data = this.pattern.data.get(name)
-        let vec = 2 - polarAngle(vector) / Math.PI
-        if (data.length == 4) {
-            if (vec <= 0.25 || vec >= 1.75) {
-                this.current = data[0]
-            } else if (vec >= 0.75 && vec <= 1.25) {
-                this.current = data[2]
-            } else {
-                this.current = data[Math.ceil((vec - 0.25) / 0.5)]
+        if (this.isAngleEnabled) {
+            let data = this.pattern.data.get(name)
+            let vec = Math.atan2(vector.y, vector.x)
+            this.angle = vec
+            this.current = data[0]
+        } else {
+            let data = this.pattern.data.get(name)
+            let vec = 2 - polarAngle(vector) / Math.PI
+            if (data.length == 4) {
+                if (vec <= 0.25 || vec >= 1.75) {
+                    this.current = data[0]
+                } else if (vec >= 0.75 && vec <= 1.25) {
+                    this.current = data[2]
+                } else {
+                    this.current = data[Math.ceil((vec - 0.25) / 0.5)]
+                }
             }
+            else { this.current = data[0] }
         }
         this.frames = this.current.frames
         this.img = this.current.img
@@ -44,9 +52,11 @@ class Sprite {
     update(dt) {
         this.index += this.speed * dt * this.current.speed
     }
+    
     reset() {
         this.index = 0
     }
+
     render(canvasCoord) {
         this.update((Game.now - this.last) / 1000)
         let frame = 0;
@@ -54,7 +64,7 @@ class Sprite {
             let max = this.frames.length;
             let id = ~~(this.index);
             frame = this.frames[id % max];
-            if (this.current.once && id  >= max) {
+            if (this.current.once && id >= max) {
                 return
             }
         }
@@ -65,7 +75,18 @@ class Sprite {
         } else if (this.dir == 'horizontal') {
             x += frame * this.width;
         }
-        ctx.drawImage(this.img, x, y, this.width, this.height, canvasCoord.x, canvasCoord.y, this.width, this.height);
+
+        if (this.isAngleEnabled) {
+            ctx.save();
+            ctx.translate(canvasCoord.x + this.width / 2, canvasCoord.y + this.height / 2);
+            ctx.rotate(this.current.baseAngle + this.angle);
+            ctx.translate(-(canvasCoord.x + this.width / 2), -(canvasCoord.y + this.height / 2));
+            ctx.drawImage(this.img, x, y, this.width, this.height, canvasCoord.x, canvasCoord.y, this.width, this.height);
+            ctx.restore();
+        } else {
+            ctx.drawImage(this.img, x, y, this.width, this.height, canvasCoord.x, canvasCoord.y, this.width, this.height);
+        }
+
         this.last = Game.now
     }
 }

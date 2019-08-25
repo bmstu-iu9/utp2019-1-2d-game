@@ -10,13 +10,11 @@ let textureStorage = {}
 
 
 let imagesSrc = [
-    'test2.png',
-    'test.jpg',
     'ghost_shriek.png',
-    'try.png',
     'knight.png',
     'Floor.png',
-    'Wall.png'
+    'Wall.png',
+    'fire_ball.png'
 ];
 
 let Game = {
@@ -36,6 +34,7 @@ let Game = {
         Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.Floor)
         Game.GrassTexture = TilesFactory.CreateTexture(imagesStorage.Wall)
         Game.GhostBox = BoxFactory.CreateKnightBox()
+        Game.FireBallBox = BoxFactory.CreateFireBallBox()
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
         Game.currentWorld = WorldFactory.CreateTestWorld()
