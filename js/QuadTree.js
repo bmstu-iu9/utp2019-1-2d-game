@@ -30,12 +30,24 @@ class QuadTree{
 
     /**
      *
-     * @param {AABB,CircleHitbox} object
+     * @param {AABB,CircleHitbox,Vector2d} object
      * @returns {{left: boolean, right: boolean, up: boolean, down: boolean}}
      */
     getEstimation(object){
-        const minMaxY=object.getMinMaxY()
-        const minMaxX=object.getMinMaxX()
+        let minMaxX,minMaxY
+        if (object instanceof Vector2d){
+            minMaxX={
+                min:object.x,
+                max:object.x
+            }
+            minMaxY={
+                min:object.y,
+                max:object.y
+            }
+        }else {
+            minMaxY=object.getMinMaxY()
+            minMaxX=object.getMinMaxX()
+        }
 
         const xCentre=this.bounds.x+(~~this.bounds.width/2)
         const yCentre=this.bounds.y+(~~this.bounds.height/2)
