@@ -230,7 +230,9 @@ class QuadTree{
 
     determineElement(node,point){
         for (const obj of node.objects){
-            const object=obj.hitbox.getHitbox()||obj
+            let object
+            if (obj.hitbox===undefined) object=obj
+            else object=obj.hitbox.getHitbox()
             const minMaxX=object.getMinMaxX()
             const minMaxY=object.getMinMaxY()
 
