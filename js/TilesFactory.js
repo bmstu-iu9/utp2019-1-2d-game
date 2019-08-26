@@ -60,7 +60,7 @@ class TilesFactory {
      * @param {String} alignment Options : LeftTop, LeftBot, RightTop, RightBot, Center, Bot
      * @returns {StaticObject}
      */
-    static createTile(x = 0, y = 0, w = Game.tileWidth, h = Game.tileHeight, drawable, alignment) {
+    static createTile(x = 0, y = 0, w = Game.tileWidth, h = Game.tileHeight, drawable = undefined, alignment = "Bot") {
         if (drawable.placement !== "middleground")
             throw "Solid object placement can be middleground only"
         let height = drawable.drowable.height

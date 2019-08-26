@@ -8,7 +8,7 @@ class StatsManager {
      *
      * @param {Stats} stats
      */
-    constructor(stats) {
+    constructor(stats = new Stats()) {
         this.stats = stats
         this.effectsContainer = []
         this.modifiersContainer = new Map()
@@ -67,7 +67,7 @@ class StatsManager {
      *
      * @param {StatsManager}object
      */
-    static fromJSON(object){
+    static fromJSON(object) {
         return new StatsManager(Stats.fromJSON(object.stats))
     }
 }
