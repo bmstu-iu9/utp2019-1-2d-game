@@ -12,11 +12,11 @@ class NPC extends GameObject {
      * @param id
      */
     constructor(coords = new Vector2d(0, 0), centre = new Vector2d(0, 0), manager = undefined, id = Game.getUniqId()) {
-        super(id);
-        this.actor = new MovableActor(coords, centre);
+        super(id)
+        this.actor = new MovableActor(coords, centre)
         this.drawable = new DrawableObject("middleground", SpriteFactory.CreateTestSprite());
         this.manager = manager
-        this.hitbox = new Hitbox(HITBOX_CIRCLE, new Vector2d(centre), 26);
+        this.hitbox = new Hitbox(HITBOX_CIRCLE, new Vector2d(centre), 26)
     }
 
     render() {
