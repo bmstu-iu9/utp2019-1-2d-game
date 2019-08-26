@@ -65,7 +65,10 @@ class QuadTree{
     getIndex(obj){
         let index
 
-        const object=obj.getHitbox()||obj
+        let object
+        if (obj.getHitbox!==undefined)
+            object=obj.getHitbox()
+        else  object=obj
 
         const estimation=this.getEstimation(object)
 
@@ -213,5 +216,31 @@ class QuadTree{
         this.delete(object.hitbox.hitboxPrevState)
         this.add(object)
         object.hitbox.update()
+    }
+
+    getElement(node,point){
+        if (node.next[0]!=null){
+            const index=node.getIndex(point)
+            if (index.index!==undefined){
+                return this.getElement(node.next[index.index],point)
+            }
+        }
+        return this.determineElement(node,point)
+    }
+
+    determineElement(node,point){
+        for (const obj of node.objects){
+            const object=obj.hitbox.getHitbox()||obj
+            const minMaxX=object.getMinMaxX()
+            const minMaxY=object.getMinMaxY()
+
+            const xEstimation=minMaxX.min<point.x && minMaxX.max>point.x
+            const yEstimation=minMaxY.min<point.y && minMaxY.max>point.y
+            if (xEstimation && yEstimation){
+                return obj
+            }
+        }
+        if (node.parent!==node)
+            return this.determineElement(node.parent,point)
     }
 }
