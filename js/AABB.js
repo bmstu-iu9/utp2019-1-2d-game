@@ -18,16 +18,11 @@ const minMaxProjection = (axis, object) => {
 }
 
 const overlap = (pr1, pr2) => {
-    let max, min
-
     if (pr1.max < pr2.max) {
-        max = pr1.max
-        min = pr2.min
+        return  pr2.min-pr1.max
     } else {
-        max = pr2.max
-        min = pr1.min
+        return  pr1.min-pr2.max
     }
-    return min - max
 }
 
 const getMin = (dx, dy, firstAxis, secondAxis) => {
@@ -88,20 +83,10 @@ const calcLine=(a,b,point)=>{
     const ortho=gramSchmidt(vector,point.sub(a,new Vector2d()))
     const inter=intersect(a,b,point,determineLine(ortho,point))
     let minX,minY,maxX,maxY
-    if (a.x<b.x){
-        minX=a.x
-        maxX=b.x
-    }else {
-        minX=b.x
-        maxX=a.x
-    }
-    if (a.y<b.y){
-        minY=a.y
-        maxY=b.y
-    }else {
-        minY=b.y
-        maxY=a.y
-    }
+    minX=Math.min(a.x,b.x)
+    maxX=Math.max(a.x,b.x)
+    minY=Math.min(a.y,b.y)
+    maxY=Math.max(a.y,b.y)
     if (minX<=inter.x && inter.x<=maxX && inter.y<=maxY && inter.y>=minY){
         return inter
     }else {
@@ -193,7 +178,7 @@ class AABB {
 
             if (centre_to_centre.vectorProjection(res.axis) < 0) res.axis.mul(-1)
 
-            return new Collision(res.axis.normalize().mul(res.depth), obstacle)
+            return new Collision(res.axis.mul(res.depth), obstacle)
         }
         return null
     }
@@ -358,5 +343,51 @@ class Collision{
     constructor(dist,obstacle){
         this.distance=dist
         this.obstacle=obstacle
+    }
+}
+
+class RotatingAABB extends AABB{
+    constructor(centre,vertices,id=Game.getUniqId()){
+        super(centre,vertices,id)
+        this.processed=0
+        this.startPosition=[]
+        for (let i=0;i<vertices.length;i++){
+            this.startPosition.push(new Vector2d(vertices[i]))
+        }
+    }
+
+    /**
+     *
+     * @param {Number} dps
+     * @param {Number} angle
+     * @param {Vector2d} dot
+     */
+    rotate(dps,angle,dot=undefined){
+        angle*=Math.PI/180
+        if (this.processed<angle) {
+            dps/=60
+            const omega = dps * Math.PI / 180
+            const cos = Math.cos(omega)
+            const sin = Math.sin(omega)
+            if (dot === undefined) {
+                for (let v of this.vertices) {
+                    v.set(v.x * cos - v.y * sin, v.x * sin + v.y * cos)
+                }
+            } else {
+                for (let v of this.vertices) {
+                    v.set(dot.x + (v.x - dot.x) * cos - (v.y - dot.y) * sin, dot.y + (v.x - dot.x) * sin + (v.y - dot.y) * cos)
+                }
+            }
+            this.processed+=omega
+        }else {
+            this.processed=0
+            for (let i=0;i<this.vertices.length;i++){
+                this.vertices[i].set(this.startPosition[i])
+            }
+        }
+        let firstSide=this.vertices[1].sub(this.vertices[0],new Vector2d())
+        let secondSide=this.vertices[2].sub(this.vertices[1],new Vector2d())
+        this.firstAxis=firstSide.normal()
+        this.secondAxis=secondSide.normal()
     }
 }
