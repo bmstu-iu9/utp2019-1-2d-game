@@ -11,7 +11,7 @@ class RoomFactory {
         }
 
 
-        let grassTile = TilesFactory.CreateTestGrassTile();
+        let grassTile = TilesFactory.CreateTestGrassTile(100, 100);
         let player = TilesFactory.CreatePlayer(350, 370)
 
         room.Add(grassTile)
@@ -24,7 +24,6 @@ class RoomFactory {
                 room.Add(t);
             }
         }
-        room.quadTree.add(grassTile)
         return room
     }
 }

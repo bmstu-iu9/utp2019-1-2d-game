@@ -9,13 +9,11 @@ class ResourceLoader {
      * @param {*} dest 
      * @param {String} src путь к файлу формата jpg, png, svg
      */
-    static loadImage(src, width, height) {
+    static loadImage(src) {
         let img = new Image()
         loaded++
         img.onload = ResourceLoader.onLoad
         img.src = src
-        img.width = width
-        img.height = height
         return img
     }
 
@@ -28,7 +26,7 @@ class ResourceLoader {
     static InitResourceRep(dest, path, srcArray) {
         srcArray.forEach(file => {
             let name = file.split('.')[0]
-            dest[name] = ResourceLoader.loadImage(path + file, 50, 50)
+            dest[name] = ResourceLoader.loadImage(path + file)
         });
     }
 
