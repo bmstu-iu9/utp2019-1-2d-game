@@ -8,7 +8,7 @@ class StatsAffector {
      *
      * @param {StatsManager} target
      */
-    constructor(target) {
+    constructor(target = undefined) {
         this.target = target
     }
 
@@ -48,9 +48,9 @@ class StatsAffector {
         target.gainAction(action)
     }
 
-    toJSON(){
+    toJSON() {
         return {
-            target : this.target //Возможно нужно будет удалить
+            target: this.target //Возможно нужно будет удалить
         }
     }
 
@@ -59,7 +59,7 @@ class StatsAffector {
      * @param {StatsAffector}object
      */
 
-    static fromJSON(object){
+    static fromJSON(object) {
         return new StatsAffector(StatsManager.fromJSON(object.target))
     }
 }

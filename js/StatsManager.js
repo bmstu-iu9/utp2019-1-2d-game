@@ -8,7 +8,7 @@ class StatsManager {
      *
      * @param {Stats} stats
      */
-    constructor(stats) {
+    constructor(stats = new Stats()) {
         this.stats = stats
         this.hpLimit = stats.hp
         this.manaLimit = stats.mana

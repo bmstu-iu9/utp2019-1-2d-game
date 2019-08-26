@@ -19,6 +19,8 @@ class NPC extends GameObject {
         this.drawable = drawable
         this.hitbox = hitbox
         this.manager = manager
+        this.statsAffector = new StatsAffector()
+        this.statsManager = new StatsManager()
     }
 
     render() {

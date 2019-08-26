@@ -15,7 +15,7 @@ class Stats {
      * @param {Number} speed
      */
 
-    constructor(hp = 0, mana = 0, strength = 0, agility = 0, intelligence = 0, speed = 0) {
+    constructor(hp = 100, mana = 50, strength = 1, agility = 1, intelligence = 1, speed = 6) {
         this.hp = hp
         this.mana = mana
         this.strenght = strength
@@ -42,14 +42,14 @@ class Stats {
             -this.agility, -this.intelligence, -this.speed)
     }
 
-    toJSON(){
+    toJSON() {
         return {
-            hp : this.hp,
-            mana : this.mana,
-            strenght : this.strenght,
-            agility : this.agility,
-            intelligence : this.intelligence,
-            speed : this.speed
+            hp: this.hp,
+            mana: this.mana,
+            strenght: this.strenght,
+            agility: this.agility,
+            intelligence: this.intelligence,
+            speed: this.speed
         }
     }
 
@@ -57,7 +57,7 @@ class Stats {
      *
      * @param {Stats} object
      */
-    static fromJSON(object){
-        return new Stats(object.hp,object.mana,object.strenght,object.agility,object.intelligence,object.speed)
+    static fromJSON(object) {
+        return new Stats(object.hp, object.mana, object.strenght, object.agility, object.intelligence, object.speed)
     }
 }
