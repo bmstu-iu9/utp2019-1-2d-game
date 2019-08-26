@@ -8,7 +8,8 @@ let keyboard={
     KeyW:false,
     KeyA:false,
     KeyS:false,
-    KeyD:false
+    KeyD:false,
+    KeyF:false
 };
 
 let mouse={

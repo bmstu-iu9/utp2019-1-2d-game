@@ -54,8 +54,10 @@ class Room extends GameObject {
                 this.foreground[i][j] = obj
                 break
         }
+
         if (obj.hitbox !== undefined) {
             this.solidTiles.push(obj)
+            this.quadTree.add(obj)
         }
     }
 

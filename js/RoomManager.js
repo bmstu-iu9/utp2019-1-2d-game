@@ -41,7 +41,7 @@ class RoomManager {
             this.refreshPosition(element)
             element.Update()
             //Проверяем, переместился ли объект
-            if (element.actor.offset !== undefined && (element.actor.offset.x !== 0 || element.actor.offset.y !== 0)) { 
+            if (element.hitbox !== undefined && element.actor.offset !== undefined && (element.actor.offset.x !== 0 || element.actor.offset.y !== 0)) { 
                 this.managableObj.movedObjects.push(element)
             }
         }

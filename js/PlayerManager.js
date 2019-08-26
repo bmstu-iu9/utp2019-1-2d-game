@@ -39,6 +39,12 @@ class PlayerManager {
             this.player.direction.x = xDirection
             this.player.direction.y = yDirection
         }
+
+        let vec = new Vector2d(xDirection, yDirection)
+        if (keyboard.KeyF) {
+            SpellFactory.CreateFireBall(this.player.actor.centre.x + xDirection * 10, this.player.actor.centre.y + yDirection * 10, vec)
+        }
+
         this.player.actor.update()
         this.player.actor.changePosition(new Vector2d(xDirection, yDirection))
     }

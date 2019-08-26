@@ -44,7 +44,7 @@ class RoomFactory {
         let player = TilesFactory.CreatePlayer(350, 370)
 
         room.Add(player)
-        room.quadTree.add(player)
+        //room.quadTree.add(player)
         Game.camera.focusOn(player.actor)
 
         for (let i = 0; i < 10; i++) {
@@ -58,7 +58,7 @@ class RoomFactory {
                 //     t.actor.move(player.actor.position.sub(t.actor.position, new Vector2d).normalize().mul(Math.random()* 6))
                 //     t.hitbox.update(t.actor.centre)
                 // }
-                room.quadTree.add(t);
+                //room.quadTree.add(t);
             }
         }
 
@@ -67,7 +67,7 @@ class RoomFactory {
                 if (i === 0 || j === 0 || i === (testRoomSize - 2) || j  === (testRoomSize - 2)){
                     let t = TilesFactory.CreateTestGrassTile(j * Game.tileWidth, i * Game.tileHeight);
                     room.Add(t);
-                    room.quadTree.add(t)
+                    //room.quadTree.add(t)
                 }
             }
         }
