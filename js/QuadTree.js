@@ -53,7 +53,7 @@ class QuadTree{
     getIndex(obj){
         let index
 
-        const object=obj.getHitbox()
+        const object=obj.getHitbox()||obj
 
         const estimation=this.getEstimation(object)
 
@@ -84,7 +84,7 @@ class QuadTree{
      */
     add(object){
         if (this.next[0]!=null){
-            const index=this.getIndex(object.hitbox)
+            const index=this.getIndex(object.hitbox||object)
             if (index.index!==undefined){
                 this.next[index.index].add(object)
             }
@@ -94,9 +94,9 @@ class QuadTree{
             if (this.objects.length>this.capacity){
                 this.divide()
                 for (let i=0;i<this.objects.length;){
-                    const index=this.getIndex(this.objects[i].hitbox)
+                    const index=this.getIndex(this.objects[i].hitbox||object)
                     if (index.index!==undefined){
-                        this.next[index.index].add(this.objects.removeHitboxByIndex(i))
+                        this.next[index.index].add(this.objects.splice(i,1)[0])
                     }else {
                         i++
                     }
