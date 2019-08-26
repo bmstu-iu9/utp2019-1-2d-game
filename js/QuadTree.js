@@ -30,12 +30,24 @@ class QuadTree{
 
     /**
      *
-     * @param {AABB,CircleHitbox} object
+     * @param {AABB,CircleHitbox,Vector2d} object
      * @returns {{left: boolean, right: boolean, up: boolean, down: boolean}}
      */
     getEstimation(object){
-        const minMaxY=object.getMinMaxY()
-        const minMaxX=object.getMinMaxX()
+        let minMaxX,minMaxY
+        if (object instanceof Vector2d){
+            minMaxX={
+                min:object.x,
+                max:object.x
+            }
+            minMaxY={
+                min:object.y,
+                max:object.y
+            }
+        }else {
+            minMaxY=object.getMinMaxY()
+            minMaxX=object.getMinMaxX()
+        }
 
         const xCentre=this.bounds.x+(~~this.bounds.width/2)
         const yCentre=this.bounds.y+(~~this.bounds.height/2)
@@ -53,7 +65,10 @@ class QuadTree{
     getIndex(obj){
         let index
 
-        const object=obj.getHitbox()||obj
+        let object
+        if (obj.getHitbox!==undefined)
+            object=obj.getHitbox()
+        else  object=obj
 
         const estimation=this.getEstimation(object)
 
@@ -94,7 +109,7 @@ class QuadTree{
             if (this.objects.length>this.capacity){
                 this.divide()
                 for (let i=0;i<this.objects.length;){
-                    const index=this.getIndex(this.objects[i].hitbox||object)
+                    const index=this.getIndex(this.objects[i].hitbox||this.objects[i])
                     if (index.index!==undefined){
                         this.next[index.index].add(this.objects.splice(i,1)[0])
                     }else {
@@ -201,5 +216,33 @@ class QuadTree{
         this.delete(object.hitbox.hitboxPrevState)
         this.add(object)
         object.hitbox.update()
+    }
+
+    getElement(node,point){
+        if (node.next[0]!=null){
+            const index=node.getIndex(point)
+            if (index.index!==undefined){
+                return this.getElement(node.next[index.index],point)
+            }
+        }
+        return this.determineElement(node,point)
+    }
+
+    determineElement(node,point){
+        for (const obj of node.objects){
+            let object
+            if (obj.hitbox===undefined) object=obj
+            else object=obj.hitbox.getHitbox()
+            const minMaxX=object.getMinMaxX()
+            const minMaxY=object.getMinMaxY()
+
+            const xEstimation=minMaxX.min<point.x && minMaxX.max>point.x
+            const yEstimation=minMaxY.min<point.y && minMaxY.max>point.y
+            if (xEstimation && yEstimation){
+                return obj
+            }
+        }
+        if (node.parent!==node)
+            return this.determineElement(node.parent,point)
     }
 }

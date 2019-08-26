@@ -14,11 +14,11 @@ class Room extends GameObject {
         this.width = width
         this.roomObjects = []
         this.updatableObjects = []
-        this.backgroundTiles = new Array(height).fill().map(x => new Array(width))
+        this.backgroundTiles = new Array(height).fill().map(() => new Array(width))
         this.solidTiles = []
         this.movedObjects = []
-        this.middlegroundTiles = new Array(height).fill().map(x => new Array(width).fill().map(y => new HashMap))
-        this.foregroundTiles = new Array(height).fill().map(x => new Array(width))
+        this.middlegroundTiles = new Array(height).fill().map(() => new Array(width).fill().map(y => new HashMap))
+        this.foregroundTiles = new Array(height).fill().map(() => new Array(width))
         this.rnd = Game.roomRnd;
         this.manager = new RoomManager(this);
         this.collisionManager = new CollisionManager(this);
@@ -77,35 +77,9 @@ class Room extends GameObject {
      * @param {Vector2d} clickCoords
      */
     getElementByClick(clickCoords){
-        const coords=clickCoords.add(this.rnd.camera.position,new Vector2d())
-        const point=new CircleHitbox(coords,0,undefined)
-        return this.getElement(this.quadTree,point,coords)
+        const point=clickCoords.add(this.rnd.camera.position,new Vector2d())
+        return this.quadTree.getElement(this.quadTree,point)
     }
 
-    getElement=(node,point,coords)=>{
-        if (node.next[0]!=null){
-            const index=node.getIndex(point)
-            if (index.index!==undefined){
-                return this.getElement(node.next[index.index],point,coords)
-            }
-        }
-        return this.determineElement(node,coords)
-    }
-
-    determineElement=(node,coords)=>{
-        for (const obj of node.objects){
-            const object=obj.hitbox.getHitbox()
-            const minMaxX=object.getMinMaxX()
-            const minMaxY=object.getMinMaxY()
-
-            const xEstimation=minMaxX.min<coords.x && minMaxX.max>coords.x
-            const yEstimation=minMaxY.min<coords.y && minMaxY.max>coords.y
-            if (xEstimation && yEstimation){
-                return obj
-            }
-        }
-        if (node.parent!==node)
-            return this.determineElement(node.parent,coords)
-    }
 
 }

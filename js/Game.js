@@ -10,12 +10,11 @@ let textureStorage = {}
 
 
 let imagesSrc = [
-    'test2.png',
-    'test.jpg',
     'ghost_shriek.png',
-    'try.png',
+    'knight.png',
     'Floor.png',
-    'Wall.png'
+    'Wall.png',
+    //'fire_ball.png'
 ];
 
 let Game = {
@@ -34,7 +33,8 @@ let Game = {
     InitLogic() {
         Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.Floor)
         Game.GrassTexture = TilesFactory.CreateTexture(imagesStorage.Wall)
-        Game.GhostSpritePattern = new SpritePattern(imagesStorage.ghost_shriek, [0, 1, 2, 3], "horizontal", 0, 0, 80, 64)
+        Game.GhostBox = BoxFactory.CreateKnightBox()
+        Game.FireBallBox = BoxFactory.CreateFireBallBox()
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
         Game.currentWorld = WorldFactory.CreateTestWorld()
@@ -76,6 +76,31 @@ let Game = {
     }
 };
 
-Game.InitConfig();
+let graph = new Graph()
+graph.add(100, 100)
+graph.add(110, 110)
+graph.add(90, 100)
+graph.add(90, 110)
+graph.add(110, 90)
+graph.add(100, 110)
+graph.addEdge(0, 1)
+graph.addEdge(0, 2)
+graph.addEdge(0, 3)
+graph.addEdge(0, 4)
+graph.addEdge(0, 5)
+graph.addEdge(3, 5)
+graph.addEdge(5, 1)
+graph.addEdge(2, 4)
+graph.addEdge(1, 4)
+graph.addEdge(2, 3)
+graph.add(89, 120)
+graph.addEdge(6, 2)
+graph.addEdge(6,3)
+let first = new Vector2d(106, 100)
+let last = new Vector2d(89, 120)
+let mesh = new NavMesh(graph, 120, 120)
+let ai = new AIManager()
+mesh.savePath(first, last, ai)
+Game.InitConfig()
 ResourceLoader.setCallback(Game.InitLogic)
 ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc)
