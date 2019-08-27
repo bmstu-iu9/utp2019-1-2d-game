@@ -14,7 +14,7 @@ class PlayerManager {
     }
 
     update() {
-        let speed = 4
+        let speed = this.player.statsManager.stats.speed
         let xDirection = 0
         let yDirection = 0
         if (keyboard.KeyW || keyboard.ArrowUp) {
@@ -42,7 +42,8 @@ class PlayerManager {
         }
         this.Direction.set(xDirection, yDirection)
         if (keyboard.KeyF) {
-            SpellFactory.CreateFireBall(this.player.actor.centre.x + xDirection * 20, this.player.actor.centre.y + yDirection * 20, new Vector2d(this.Direction))
+            // SpellFactory.CreateFireBall(this.player.actor.centre.x + xDirection * 20, this.player.actor.centre.y + yDirection * 20, new Vector2d(this.Direction))
+            this.player.abilities[0].cast()
         }
 
         if (this.Direction.x !== 0 || this.Direction.y !== 0) {

@@ -20,10 +20,11 @@ class NPC extends GameObject {
         this.manager = manager
         this.statsAffector = new StatsAffector()
         this.statsManager = new StatsManager()
-        this.hitbox =  hitbox//new Hitbox(HITBOX_CIRCLE, new Vector2d(centre), 26);
+        this.hitbox = hitbox//new Hitbox(HITBOX_CIRCLE, new Vector2d(centre), 26);
         this.direction = new Vector2d(0, 0)
         this.walking = false
         this.collisonSolveStrategy = "stay"
+        this.abilities = [AbilityFactory.createFireBallAbility(this)]
     }
 
     render() {
@@ -41,6 +42,11 @@ class NPC extends GameObject {
         else
             this.drawable.drowable.switch("go", this.direction)
         this.hitbox.update(this.actor.centre)
+        for (let ability of this.abilities) {
+            ability.update(Game.step)
+        }
+        this.statsManager.stats.mana += 0.5
+        this.statsManager.correctStats()
     }
 
     onCollide(collision) {
