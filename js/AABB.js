@@ -146,11 +146,15 @@ class AABB {
     constructor(centre,vertices,id=Game.getUniqId()){
         this.centre=centre
         this.vertices=vertices
-        let firstSide=this.vertices[1].sub(this.vertices[0],new Vector2d())
-        let secondSide=this.vertices[2].sub(this.vertices[1],new Vector2d())
-        this.firstAxis=firstSide.normal()
-        this.secondAxis=secondSide.normal()
+        this.setNormals()
         this.id=id
+    }
+
+    setNormals=()=>{
+        const firstSide=this.vertices[1].sub(this.vertices[0],new Vector2d())
+        const secondSide=this.vertices[2].sub(this.vertices[1],new Vector2d())
+        this.firstAxis=firstSide.normal().normalize()
+        this.secondAxis=secondSide.normal().normalize()
     }
 
     getCollision(obstacle) {
@@ -385,9 +389,6 @@ class RotatingAABB extends AABB{
                 this.vertices[i].set(this.startPosition[i])
             }
         }
-        let firstSide=this.vertices[1].sub(this.vertices[0],new Vector2d())
-        let secondSide=this.vertices[2].sub(this.vertices[1],new Vector2d())
-        this.firstAxis=firstSide.normal()
-        this.secondAxis=secondSide.normal()
+        this.setNormals()
     }
 }
