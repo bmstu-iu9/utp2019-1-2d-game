@@ -19,8 +19,8 @@ class QuadTree{
     }
 
     divide(){
-        const halfHeight=~~this.bounds.height/2
-        const halfWidth=~~this.bounds.width/2
+        const halfHeight=this.bounds.height/2
+        const halfWidth=this.bounds.width/2
 
         this.next[0]=new QuadTree(new Rectangle(this.bounds.x+halfWidth,this.bounds.y,halfWidth,halfHeight),this.capacity,this)
         this.next[1]=new QuadTree(new Rectangle(this.bounds.x,this.bounds.y,halfWidth,halfHeight),this.capacity,this)
@@ -37,8 +37,8 @@ class QuadTree{
         const minMaxY=object.getMinMaxY()
         const minMaxX=object.getMinMaxX()
 
-        const xCentre=this.bounds.x+(~~this.bounds.width/2)
-        const yCentre=this.bounds.y+(~~this.bounds.height/2)
+        const xCentre=this.bounds.x+this.bounds.width/2
+        const yCentre=this.bounds.y+this.bounds.height/2
         return{
             right:minMaxX.min>xCentre,
             left:minMaxX.max<xCentre,
