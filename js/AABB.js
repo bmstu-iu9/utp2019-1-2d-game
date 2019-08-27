@@ -236,10 +236,10 @@ class AABB {
         let min,max
         min=max=this.vertices[0].y
         for (let i=1;i<4;i++){
-            if (this.vertices[i].x>max){
+            if (this.vertices[i].y>max){
                 max=this.vertices[i].y
             }
-            if (this.vertices[i].x<min){
+            if (this.vertices[i].y<min){
                 min=this.vertices[i].y
             }
         }
