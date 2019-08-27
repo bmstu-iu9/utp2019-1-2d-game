@@ -14,7 +14,12 @@ let imagesSrc = [
     'knight.png',
     'Floor.png',
     'Wall.png',
-    'fire_ball.png'
+    'fire_ball.png',
+    'rocks1.png',
+    'rocks2.png',
+    'rocks3.png',
+    'rocks4.png'
+
 ];
 
 let Game = {
@@ -33,6 +38,10 @@ let Game = {
     InitLogic() {
         Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.Floor)
         Game.GrassTexture = TilesFactory.CreateTexture(imagesStorage.Wall)
+        Game.Rock1Texture = TilesFactory.CreateTexture(imagesStorage.rocks1)
+        Game.Rock2Texture= TilesFactory.CreateTexture(imagesStorage.rocks2)
+        Game.Rock3Texture= TilesFactory.CreateTexture(imagesStorage.rocks3)
+        Game.Rock4Texture= TilesFactory.CreateTexture(imagesStorage.rocks4)
         Game.GhostBox = BoxFactory.CreateKnightBox()
         Game.FireBallBox = BoxFactory.CreateFireBallBox()
         Game.camera = new Camera(canvas.width, canvas.height)
@@ -53,7 +62,7 @@ let Game = {
         Game.now = performance.now()
         Game.dt = Game.dt + Math.min(1, (Game.now - Game.last) / 1000)
         while (Game.dt > Game.step) {
-            Game.dt = Game.dt - Game.step
+            Game.dt -= Game.step
             Game.Update()
             Game.Collide();
             Game.camera.Update()
@@ -68,7 +77,7 @@ let Game = {
     },
 
     Collide() {
-        this.currentWorld.currentRoom.collide()
+        this.currentWorld.currentRoom.collisionManager.collide();
     },
 
     Render() {

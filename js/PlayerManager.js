@@ -10,6 +10,7 @@ class PlayerManager {
      */
     constructor(player) {
         this.player = player
+        this.Direction = new Vector2d(0, 0)
     }
 
     update() {
@@ -39,13 +40,17 @@ class PlayerManager {
             this.player.direction.x = xDirection
             this.player.direction.y = yDirection
         }
-
-        let vec = new Vector2d(xDirection, yDirection)
+        this.Direction.set(xDirection, yDirection)
         if (keyboard.KeyF) {
-            SpellFactory.CreateFireBall(this.player.actor.centre.x + xDirection * 10, this.player.actor.centre.y + yDirection * 10, vec)
+            SpellFactory.CreateFireBall(this.player.actor.centre.x + xDirection * 20, this.player.actor.centre.y + yDirection * 20, new Vector2d(this.Direction))
         }
 
+        if (this.Direction.x !== 0 || this.Direction.y !== 0) {
+            this.player.collisonSolveStrategy = 'move'
+        } else {
+            this.player.collisonSolveStrategy = 'stay'
+        }
         this.player.actor.update()
-        this.player.actor.changePosition(new Vector2d(xDirection, yDirection))
+        this.player.actor.changePosition(this.Direction)
     }
 }

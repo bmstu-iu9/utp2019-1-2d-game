@@ -255,6 +255,7 @@ class Collision{
     constructor(dist,obstacle){
         this.distance=dist
         this.obstacle=obstacle
+        this.obstacleObject  = undefined
     }
 
     round(){
