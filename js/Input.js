@@ -10,7 +10,8 @@ let keyboard={
     KeyS:false,
     KeyD:false,
     KeyZ:false, // save()
-    KeyX:false //load()
+    KeyX:false, //load()
+    KeyF:false
 };
 
 let mouse={

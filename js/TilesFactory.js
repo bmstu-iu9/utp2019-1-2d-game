@@ -20,6 +20,11 @@ class TilesFactory {
     static CreateTestTile(x = 0, y = 0) {
         return new StaticObject(x, y, x, y, new DrawableObject("background", Game.BrickTexture));
     }
+    static CreateRock(x = 0, y = 0) {
+        let src = [Game.Rock1Texture, Game.Rock2Texture, Game.Rock3Texture, Game.Rock4Texture]
+        return new StaticObject(x, y, x, y, new DrawableObject("middleground", src[~~(Math.random() * 3)]));
+    }
+
 
     /**
      * Порождает и Player по заданным игровым координатам

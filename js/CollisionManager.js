@@ -12,11 +12,28 @@ class CollisionManager {
      * @param {(NPC\|StaticObject)} object 
      * @param {Collision} collision 
      */
-    updateConfig(object, collision) {
+    solveCollision(object, collision) {
+        collision.distance.round()
+        object.hitbox.correctPosition(collision);
+        object.actor.changePosition(collision.distance);
         object.hitbox.update()
-        object.onCollide(collision)
         this.room.quadTree.update(object)
-       
+        collision.distance.round()
+    }
+
+    solveForBoth(a, b, collision) {
+        collision.distance.mul(1 / 1.5)
+        collision.distance.round()
+        a.hitbox.correctPosition(collision);
+        a.actor.changePosition(collision.distance);
+        a.hitbox.update()
+        this.room.quadTree.update(a)
+        collision.distance.mul(-1)
+        collision.distance.round()
+        b.hitbox.correctPosition(collision);
+        b.actor.changePosition(collision.distance);
+        b.hitbox.update()
+        this.room.quadTree.update(b)
     }
 
     collide() {
@@ -26,21 +43,27 @@ class CollisionManager {
             this.room.quadTree.update(object)
             objects = this.room.quadTree.retrieve([], object)
             for (let i = 0; i < objects.length; i++) {
+                if (object.collisonSolveStrategy === 'none' && objects[i].collisonSolveStrategy === 'none') {
+                    continue
+                }
                 if (!objects[i].hitbox.equals(object.hitbox)) {
                     collision = getCollision(object.hitbox, objects[i].hitbox)
                     if (collision) {
-                        collision.distance.round()
-                        if (objects[i].actor instanceof MovableActor) {
-                            collision.distance.mul(1 / 2)
-                            collision.distance.round()
-                            this.updateConfig(object, collision)
+                        collision.obstacleObject = objects[i]
+                        if (objects[i].collisonSolveStrategy === 'stay') {
+                            this.solveCollision(object, collision)
                             this.room.movedObjects.push(object)
-                            collision.distance.mul(-1)
-                            this.updateConfig(objects[i], collision)
+                        } 
+                        else if (objects[i].collisonSolveStrategy === 'move') {
+                            this.solveForBoth(object, objects[i], collision)
+                            this.room.movedObjects.push(object)
                             this.room.movedObjects.push(objects[i])
-                        } else {
-                            this.updateConfig(object, collision)
-                            this.room.movedObjects.push(object)
+                        }
+                        if (object.onCollide) {
+                            object.onCollide(collision)
+                        }
+                        if (objects[i].onCollide) {
+                            objects[i].onCollide(collision)
                         }
                     }
                 }

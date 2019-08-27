@@ -1,9 +1,10 @@
 'use strict';
 class StaticObject extends GameObject {
     constructor(x, y, xcentre, ycentre, drawable, id = Game.getUniqId()) {
-        super(id);
-        this.actor = new Actor(new Vector2d(x, y), new Vector2d(xcentre, ycentre));
-        this.drawable = drawable;
+        super(id)
+        this.actor = new Actor(new Vector2d(x, y), new Vector2d(xcentre, ycentre))
+        this.drawable = drawable
+        this.collisonSolveStrategy = "stay"
     }
 
     render() {
