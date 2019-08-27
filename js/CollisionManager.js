@@ -47,7 +47,6 @@ class CollisionManager {
                 }
             }
         }
-        console.log(cnt)
     }
 }
 

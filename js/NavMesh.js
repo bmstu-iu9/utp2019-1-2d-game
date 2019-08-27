@@ -39,13 +39,13 @@ class Triangle {
     }
     getMinMaxY(){
         let min,max
-        min=max=this.point[0].Y
+        min=max=this.point[0].y
         for (let i=1;i<3;i++){
-            if (this.point[i].Y>max){
-                max=this.point[i].Y
+            if (this.point[i].y>max){
+                max=this.point[i].y
             }
-            if (this.point[i].Y<min){
-                min=this.point[i].Y
+            if (this.point[i].y<min){
+                min=this.point[i].y
             }
         }
         return {
@@ -93,7 +93,7 @@ class NavMesh {
         graph.sort()
         this.dataHash = new HashMap()
         this.triangle = new Array()
-        this.tree = new QuadTree(new Rectangle(-100, -100, this.width * Game.tileWidth, this.height * Game.tileHeight), 16)
+        this.tree = new QuadTree(new Rectangle(0, 0 , width * Game.tileWidth, height * Game.tileHeight), 16)
         let first
         let triangle
         let last
@@ -137,6 +137,7 @@ class NavMesh {
             }
             triangle.connect(firsttriangle)
         })
+        console.log(this)
     }
     h(first, last) {
         return Math.sqrt((first.centre.x - last.centre.x) ** 2 + (first.centre.y -last.centre.y) ** 2)
@@ -254,8 +255,8 @@ class NavMesh {
         let first = this.findTriangle(fir)
         let last = this.findTriangle(las)
         this.getPath(first.index, last.index, ai)
-        this.getPath(last, ai)
-        this.funnel(first, last, ai)
+        this.getPath2(las, ai)
+        this.funnel(fir, las, ai)
     }
     funnel(first, last, ai) {
         let left
@@ -276,6 +277,7 @@ class NavMesh {
                 ai.resultPath.push(ai.path[ai.path.length - 1])
                 break
             }
+            console.log(ai.resultPath)
             if (right + 2 < ai.path.length) {
                 portalRight = ai.path[right + 2]
                 if (this.s(current, portalRight, ai.path[right]) >= 0) {

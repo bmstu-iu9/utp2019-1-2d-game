@@ -219,12 +219,13 @@ class QuadTree{
     }
 
     getElement(node,point){
-        if (node.next[0]!=null){
+        if (node.next[0]!==null){
             const index=node.getIndex(point)
             if (index.index!==undefined){
                 return this.getElement(node.next[index.index],point)
             }
         }
+        //console.log(this.determineElement(node,point))
         return this.determineElement(node,point)
     }
 
@@ -235,10 +236,10 @@ class QuadTree{
             else object=obj.hitbox.getHitbox()
             const minMaxX=object.getMinMaxX()
             const minMaxY=object.getMinMaxY()
-
             const xEstimation=minMaxX.min<point.x && minMaxX.max>point.x
             const yEstimation=minMaxY.min<point.y && minMaxY.max>point.y
             if (xEstimation && yEstimation){
+                //console.log(obj)
                 return obj
             }
         }
