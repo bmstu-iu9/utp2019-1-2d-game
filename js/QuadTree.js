@@ -232,15 +232,27 @@ class QuadTree{
     determineElement(node,point){
         for (const obj of node.objects){
             let object
-            if (obj.hitbox===undefined) object=obj
-            else object=obj.hitbox.getHitbox()
-            const minMaxX=object.getMinMaxX()
-            const minMaxY=object.getMinMaxY()
-            const xEstimation=minMaxX.min<point.x && minMaxX.max>point.x
-            const yEstimation=minMaxY.min<point.y && minMaxY.max>point.y
-            if (xEstimation && yEstimation){
-                //console.log(obj)
-                return obj
+            if (obj instanceof Triangle) {
+                object=obj
+                let flag=[]
+                for (let i=0;i<3;i++){
+                    const q=(object.point[i].x-point.x)*(object.point[(i+1)%3].y-object.point[i].y)
+                    const w=(object.point[(i+1)%3].x-object.point[i].x)*(object.point[i].y-point.y)
+                    flag.push(q-w)
+                }
+                if ((flag[0]<=0 && flag[1]<=0 && flag[2]<=0) || (flag[1]>=0 && flag[0]>=0 && flag[2]>=0)){
+                    return obj
+                }
+            }else {
+                object=obj.hitbox.getHitbox()
+                const minMaxX = object.getMinMaxX()
+                const minMaxY = object.getMinMaxY()
+
+                const xEstimation = minMaxX.min <= point.x && minMaxX.max >= point.x
+                const yEstimation = minMaxY.min <= point.y && minMaxY.max >= point.y
+                if (xEstimation && yEstimation) {
+                    return obj
+                }
             }
         }
         if (node.parent!==node)
