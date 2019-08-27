@@ -124,8 +124,6 @@ class NavMesh {
                             triangle = this.dataHash.get(triangle.id)
                         }
                         triangle.connect(lasttriangle)
-                        console.log(triangle)
-                        console.log(lasttriangle)
                         last = element[i]
                         lasttriangle = triangle
                         break
@@ -137,7 +135,6 @@ class NavMesh {
             }
             triangle.connect(firsttriangle)
         })
-        console.log(this)
     }
     h(first, last) {
         return Math.sqrt((first.centre.x - last.centre.x) ** 2 + (first.centre.y -last.centre.y) ** 2)
@@ -277,7 +274,6 @@ class NavMesh {
                 ai.resultPath.push(ai.path[ai.path.length - 1])
                 break
             }
-            console.log(ai.resultPath)
             if (right + 2 < ai.path.length) {
                 portalRight = ai.path[right + 2]
                 if (this.s(current, portalRight, ai.path[right]) >= 0) {
