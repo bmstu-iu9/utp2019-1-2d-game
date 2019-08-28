@@ -67,6 +67,9 @@ class NPC extends GameObject {
         }
     }
 
+    
+
+
     /**
      *
      * @param {NPC} object
