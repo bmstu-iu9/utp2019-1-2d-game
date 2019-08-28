@@ -27,11 +27,18 @@ class NPC extends GameObject {
         this.abilities = [AbilityFactory.createFireBallAbility(this)]
     }
 
+    isDead(){
+        return this.statsManager.stats.hp === 0 
+    }
+
     render() {
         this.drawable.render();
     }
 
     Update() {
+        if(this.isDead()){
+            Game.currentWorld.currentRoom.delete(this)
+        }
         this.actor.update()
         if (this.manager !== undefined) {
             this.manager.update()
