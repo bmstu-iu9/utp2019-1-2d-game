@@ -9,7 +9,7 @@ class CollisionManager {
 
     /**
      * Разрешает коллизию, обновляет элементы в QuadTree
-     * @param {(NPC\|StaticObject)} object 
+     * @param {(NPC|StaticObject)} object
      * @param {Collision} collision 
      */
     solveCollision(object, collision) {
@@ -60,7 +60,7 @@ class CollisionManager {
                 if (!objects[i].hitbox.equals(object.hitbox)) {
                     collision = getCollision(object.hitbox, collideWith.hitbox)
                     if (collision) {
-                        isCollided = true && (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none')
+                        isCollided = (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none')
                         collision.obstacleObject = collideWith
                         if (object.collisonSolveStrategy !== 'none') {
                             if (collideWith.collisonSolveStrategy === 'stay') {
@@ -85,7 +85,7 @@ class CollisionManager {
                 }
             }
             if (isCollided && collideOffset.isNullVector()) {
-                throw "Collisions don't solved" // Если коллизии разрешить не удалось
+                throw "Collisions were not solved"
             }
 
         }

@@ -6,7 +6,7 @@ class SpellFactory {
         let data = new Action(new Stats(-50, 0, 0, 0, 0, 0))
         let actor = new MovableActor(new Vector2d(x, y), new Vector2d(x + 8, y + 8))
         let result = new Spell(hitbox, data, new DrawableObject("middleground", SpriteFactory.CreateFireBallSprite()), actor)
-        let speed = 3;
+        let speed = 7;
         vector.normalize()
         result.collisonSolveStrategy = "none"
         result.Update = () => {
