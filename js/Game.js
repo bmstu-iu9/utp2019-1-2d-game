@@ -25,7 +25,6 @@ let imagesSrc = [
     'wall_NE.png',
     'wall_SW.png',
     'wall_SE.png',
-
 ];
 
 let Game = {

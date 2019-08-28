@@ -76,30 +76,35 @@ class Room extends GameObject {
         let t
         switch (data) {
             case 'z':
-                t = TilesFactory.CreateDungeonWallSW(x + 17, y - 52)
+                t = TilesFactory.CreateDungeonWallSW(x + 17, y)
                 break
             case 'a':
                 t = TilesFactory.CreateDungeonWallRight(x, y)
                 break
             case 's':
-                t = TilesFactory.CreateDungeonWall(x, y - 52)
+                t = TilesFactory.CreateDungeonWall(x, y)
                 break
             case 'd':
                 t = TilesFactory.CreateDungeonWallLeft(x, y)
                 break
             case 'w':
-                t = TilesFactory.CreateDungeonWall(x, y - 52)
+                t = TilesFactory.CreateDungeonWall(x, y)
                 break
-            case 'c':
-                t = TilesFactory.CreateDungeonWallSE(x -17, y - 52)
+            case 'x':
+                t = TilesFactory.CreateDungeonWallSE(x - 17, y)
                 break
             case 'q':
-                t = TilesFactory.CreateDungeonWallNW(x, y - 52)
-                ty = TilesFactory.CreateDungeonWallRight(x, y)
+                t = TilesFactory.CreateDungeonWallNW(x, y)
                 break
             case 'e':
-                t = TilesFactory.CreateDungeonWallNE(x, y - 52)
-                ty = TilesFactory.CreateDungeonWallLeft(x, y)
+                t = TilesFactory.CreateDungeonWallNE(x, y)
+                //ty = TilesFactory.CreateDungeonWallLeft(x, y)
+                break
+            case '1':
+                t = TilesFactory.CreateDungeonWallSW(x, y)
+                break
+            case '2':
+                t = TilesFactory.CreateDungeonWallSE(x, y)
                 break
         }
         if (t != undefined) {
