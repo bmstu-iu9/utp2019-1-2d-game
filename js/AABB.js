@@ -83,10 +83,20 @@ const calcLine=(a,b,point)=>{
     const ortho=gramSchmidt(vector,point.sub(a,new Vector2d()))
     const inter=intersect(a,b,point,determineLine(ortho,point))
     let minX,minY,maxX,maxY
-    minX=Math.min(a.x,b.x)
-    maxX=Math.max(a.x,b.x)
-    minY=Math.min(a.y,b.y)
-    maxY=Math.max(a.y,b.y)
+    if (a.x<b.x){
+        maxX=b.x
+        minX=a.x
+    }else {
+        maxX=a.x
+        minX=b.x
+    }
+    if (a.y<b.y){
+        maxY=b.y
+        minY=a.y
+    }else {
+        maxY=a.y
+        minY=b.y
+    }
     if (minX<=inter.x && inter.x<=maxX && inter.y<=maxY && inter.y>=minY){
         return inter
     }else {
