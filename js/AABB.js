@@ -269,6 +269,23 @@ class AABB {
     getHitbox(){
         return this
     }
+
+    /**
+     * @param {Number} angle
+     * @param {Vector2d} dot
+     */
+    rotate(angle,dot=undefined) {
+        angle *= Math.PI / 180
+        const cos = Math.cos(angle)
+        const sin = Math.sin(angle)
+        if (dot === undefined) {
+            dot = this.centre
+        }
+        for (let v of this.vertices) {
+            v.set(dot.x + (v.x - dot.x) * cos - (v.y - dot.y) * sin, dot.y + (v.x - dot.x) * sin + (v.y - dot.y) * cos)
+        }
+        this.setNormals()
+    }
 }
 
 class CircleHitbox {
@@ -348,48 +365,5 @@ class Collision{
         this.distance=dist
         this.obstacle=obstacle
         this.obstacleObject  = undefined
-    }
-}
-
-class RotatingAABB extends AABB{
-    constructor(centre,vertices,id=Game.getUniqId()){
-        super(centre,vertices,id)
-        this.processed=0
-        this.startPosition=[]
-        for (let i=0;i<vertices.length;i++){
-            this.startPosition.push(new Vector2d(vertices[i]))
-        }
-    }
-
-    /**
-     *
-     * @param {Number} dps
-     * @param {Number} angle
-     * @param {Vector2d} dot
-     */
-    rotate(dps,angle,dot=undefined){
-        angle*=Math.PI/180
-        if (this.processed<angle) {
-            dps/=60
-            const omega = dps * Math.PI / 180
-            const cos = Math.cos(omega)
-            const sin = Math.sin(omega)
-            if (dot === undefined) {
-                for (let v of this.vertices) {
-                    v.set(v.x * cos - v.y * sin, v.x * sin + v.y * cos)
-                }
-            } else {
-                for (let v of this.vertices) {
-                    v.set(dot.x + (v.x - dot.x) * cos - (v.y - dot.y) * sin, dot.y + (v.x - dot.x) * sin + (v.y - dot.y) * cos)
-                }
-            }
-            this.processed+=omega
-        }else {
-            this.processed=0
-            for (let i=0;i<this.vertices.length;i++){
-                this.vertices[i].set(this.startPosition[i])
-            }
-        }
-        this.setNormals()
     }
 }
