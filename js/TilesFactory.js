@@ -61,7 +61,6 @@ class TilesFactory {
         return TilesFactory.createTile(x, y - 52, 26, Game.tileHeight, new DrawableObject("middleground", Game.DungeonWallRightTexture),"LeftBot")
     }
     static CreateDungeonWallNW(x = 0, y = 0) {
-        console.log(Game.DungeonWallNWTexture)
         return TilesFactory.createTile(x, y - 52, 35, 35, new DrawableObject("middleground", Game.DungeonWallNWTexture),"RightBot")
     }
     static CreateDungeonWallNE(x = 0, y = 0) {

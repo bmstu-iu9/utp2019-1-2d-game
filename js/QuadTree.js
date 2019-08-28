@@ -30,12 +30,24 @@ class QuadTree{
 
     /**
      *
-     * @param {AABB,CircleHitbox} object
+     * @param {AABB,CircleHitbox,Vector2d} object
      * @returns {{left: boolean, right: boolean, up: boolean, down: boolean}}
      */
     getEstimation(object){
-        const minMaxY=object.getMinMaxY()
-        const minMaxX=object.getMinMaxX()
+        let minMaxX,minMaxY
+        if (object instanceof Vector2d){
+            minMaxX={
+                min:object.x,
+                max:object.x
+            }
+            minMaxY={
+                min:object.y,
+                max:object.y
+            }
+        }else {
+            minMaxY=object.getMinMaxY()
+            minMaxX=object.getMinMaxX()
+        }
 
         const xCentre=this.bounds.x+this.bounds.width/2
         const yCentre=this.bounds.y+this.bounds.height/2
@@ -53,7 +65,10 @@ class QuadTree{
     getIndex(obj){
         let index
 
-        const object=obj.getHitbox()
+        let object
+        if (obj.getHitbox!==undefined)
+            object=obj.getHitbox()
+        else  object=obj
 
         const estimation=this.getEstimation(object)
 
@@ -84,7 +99,7 @@ class QuadTree{
      */
     add(object){
         if (this.next[0]!=null){
-            const index=this.getIndex(object.hitbox)
+            const index=this.getIndex(object.hitbox||object)
             if (index.index!==undefined){
                 this.next[index.index].add(object)
             }
@@ -94,9 +109,9 @@ class QuadTree{
             if (this.objects.length>this.capacity){
                 this.divide()
                 for (let i=0;i<this.objects.length;){
-                    const index=this.getIndex(this.objects[i].hitbox)
+                    const index=this.getIndex(this.objects[i].hitbox||this.objects[i])
                     if (index.index!==undefined){
-                        this.next[index.index].add(this.objects.removeHitboxByIndex(i))
+                        this.next[index.index].add(this.objects.splice(i,1)[0])
                     }else {
                         i++
                     }
@@ -201,5 +216,46 @@ class QuadTree{
         this.delete(object.hitbox.hitboxPrevState)
         this.add(object)
         object.hitbox.update()
+    }
+
+    getElement(node,point){
+        if (node.next[0]!==null){
+            const index=node.getIndex(point)
+            if (index.index!==undefined){
+                return this.getElement(node.next[index.index],point)
+            }
+        }
+        //console.log(this.determineElement(node,point))
+        return this.determineElement(node,point)
+    }
+
+    determineElement(node,point){
+        for (const obj of node.objects){
+            let object
+            if (obj instanceof Triangle) {
+                object=obj
+                let flag=[]
+                for (let i=0;i<3;i++){
+                    const q=(object.point[i].x-point.x)*(object.point[(i+1)%3].y-object.point[i].y)
+                    const w=(object.point[(i+1)%3].x-object.point[i].x)*(object.point[i].y-point.y)
+                    flag.push(q-w)
+                }
+                if ((flag[0]<=0 && flag[1]<=0 && flag[2]<=0) || (flag[1]>=0 && flag[0]>=0 && flag[2]>=0)){
+                    return obj
+                }
+            }else {
+                object=obj.hitbox.getHitbox()
+                const minMaxX = object.getMinMaxX()
+                const minMaxY = object.getMinMaxY()
+
+                const xEstimation = minMaxX.min <= point.x && minMaxX.max >= point.x
+                const yEstimation = minMaxY.min <= point.y && minMaxY.max >= point.y
+                if (xEstimation && yEstimation) {
+                    return obj
+                }
+            }
+        }
+        if (node.parent!==node)
+            return this.determineElement(node.parent,point)
     }
 }
