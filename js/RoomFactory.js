@@ -72,7 +72,40 @@ class RoomFactory {
                 }
             }
         }
-        room.addMap(2, 2, 'qwwwwwwe')
+        room.addMap(2, 14,
+            'qwwwwwwe\n' +
+                  'a      d\n' +
+                  'zw     c\n')
         return room
+    }
+    static addWall(room, x, y, length, data) {
+        let t = ''
+        switch (data) {
+            case 'l':
+                for (let i = 0; i < length - 1; i++) {
+                    t.push('a\n')
+                }
+                break
+            case 't':
+                t = 'q'
+                for (let i = 0; i < length; i++) {
+                    t.push('w')
+                }
+                t = 'e'
+                break
+            case 'b':
+                t = 'z'
+                for (let i = 0; i < length; i++) {
+                    t.push('x')
+                }
+                t = 'c'
+                break
+            case 'r':
+                for (let i = 0; i < length - 1; i++) {
+                    t.push('d\n')
+                }
+                break
+        }
+        room.addMap(x, y, t)
     }
 }
