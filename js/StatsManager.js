@@ -66,6 +66,9 @@ class StatsManager {
         if (this.stats.mana > this.manaLimit) {
             this.stats.mana = this.manaLimit
         }
+        if (this.stats.hp < 0) {
+            this.stats.hp = 0
+        }
     }
 
     /**
@@ -77,13 +80,13 @@ class StatsManager {
         this.effectsContainer = this.effectsContainer.filter(effect => effect.remainTime > 0)
     }
 
-    toJSON(){
+    toJSON() {
         return {
-            stats : this.stats,
-            hpLimit : this.hpLimit,
-            manaLimit : this.manaLimit,
-            effectsContainer : this.effectsContainer,
-            modifiersContainer : this.modifiersContainer
+            stats: this.stats,
+            hpLimit: this.hpLimit,
+            manaLimit: this.manaLimit,
+            effectsContainer: this.effectsContainer,
+            modifiersContainer: this.modifiersContainer
         }
     }
 
