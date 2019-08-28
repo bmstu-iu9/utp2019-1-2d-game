@@ -37,10 +37,14 @@ class NPC extends GameObject {
             this.manager.update()
 
         }
-        if (this.walking === false)
+        if (this.walking === false) {
             this.drawable.drowable.switch("idle", this.direction)
-        else
+            this.collisonSolveStrategy = 'stay'
+        }
+        else {
             this.drawable.drowable.switch("go", this.direction)
+            this.collisonSolveStrategy = 'move'
+        }
         this.hitbox.update(this.actor.centre)
         for (let ability of this.abilities) {
             ability.update(Game.step)

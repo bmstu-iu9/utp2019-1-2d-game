@@ -50,14 +50,16 @@ class CollisionManager {
                     collision = getCollision(object.hitbox, objects[i].hitbox)
                     if (collision) {
                         collision.obstacleObject = objects[i]
-                        if (objects[i].collisonSolveStrategy === 'stay') {
-                            this.solveCollision(object, collision)
-                            this.room.movedObjects.push(object)
-                        } 
-                        else if (objects[i].collisonSolveStrategy === 'move') {
-                            this.solveForBoth(object, objects[i], collision)
-                            this.room.movedObjects.push(object)
-                            this.room.movedObjects.push(objects[i])
+                        if (object.collisonSolveStrategy !== 'none') {
+                            if (objects[i].collisonSolveStrategy === 'stay') {
+                                this.solveCollision(object, collision)
+                                this.room.movedObjects.push(object)
+                            }
+                            else if (objects[i].collisonSolveStrategy === 'move') {
+                                this.solveForBoth(object, objects[i], collision)
+                                this.room.movedObjects.push(object)
+                                this.room.movedObjects.push(objects[i])
+                            }
                         }
                         if (object.onCollide) {
                             object.onCollide(collision)
@@ -84,7 +86,7 @@ class Hitbox {
      * @param {Vector2d[],Number} vertices_or_radius
      */
     constructor(type, centre, vertices_or_radius) {
-        if(type !== undefined && centre !== undefined && vertices_or_radius !== undefined){
+        if (type !== undefined && centre !== undefined && vertices_or_radius !== undefined) {
             if (type === HITBOX_AABB) {
                 this.hitbox = new AABB(centre, vertices_or_radius)
             } else if (type === HITBOX_CIRCLE) {
@@ -95,7 +97,7 @@ class Hitbox {
         }
     }
 
-    getCopy (type, hitbox){
+    getCopy(type, hitbox) {
         if (type === HITBOX_AABB) {
             return new AABB(new Vector2d(hitbox.centre), [
                 new Vector2d(hitbox.vertices[0]),
@@ -144,19 +146,19 @@ class Hitbox {
         this.hitbox.correctPosition(collision)
     }
 
-    toJSON(){
-        return{
-            type :   this.type,
-            current : this.hitbox,
-            prev : this.hitboxPrevState
-        } 
+    toJSON() {
+        return {
+            type: this.type,
+            current: this.hitbox,
+            prev: this.hitboxPrevState
+        }
     }
 
     /**
      * 
      * @param {Hitbox} obj 
      */
-    static fromJSON(obj){
+    static fromJSON(obj) {
         let h = new Hitbox()
         if (obj.type === HITBOX_AABB) {
             h.hitboxPrevState = AABB.fromJSON(obj.prev)

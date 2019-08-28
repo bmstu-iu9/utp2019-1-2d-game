@@ -46,11 +46,6 @@ class PlayerManager {
             this.player.abilities[0].cast()
         }
 
-        if (this.Direction.x !== 0 || this.Direction.y !== 0) {
-            this.player.collisonSolveStrategy = 'move'
-        } else {
-            this.player.collisonSolveStrategy = 'stay'
-        }
         this.player.actor.update()
         this.player.actor.changePosition(this.Direction)
     }
