@@ -47,8 +47,7 @@ class NPC extends GameObject {
         if (this.walking === false) {
             this.drawable.drowable.switch("idle", this.direction)
             this.collisonSolveStrategy = 'stay'
-        }
-        else {
+        } else {
             this.drawable.drowable.switch("go", this.direction)
             this.collisonSolveStrategy = 'move'
         }
@@ -62,8 +61,12 @@ class NPC extends GameObject {
         this.statsManager.correctStats()
     }
 
-    onCollide(collision) {
+    /**
+     *
+     * @param {Collision} collision
+     */
 
+    onCollide(collision) {
     }
 
     toJSON() {
@@ -72,7 +75,10 @@ class NPC extends GameObject {
             actor: this.actor,
             drawable: this.drawable,
             hitbox: this.hitbox,
-            manager: this.manager !== undefined
+            manager: this.manager !== undefined,
+            direction: this.direction,
+            collisonSolveStrategy: this.collisonSolveStrategy,
+            walking: this.walking
         }
     }
 
@@ -86,13 +92,20 @@ class NPC extends GameObject {
             npc = TilesFactory.CreatePlayer()
             npc.id = object.id
             npc.actor = MovableActor.fromJSON(object.actor)
-            npc.hitbox = Hitbox.fromJSON(object.hitbox)
+            npc.hitbox = ("type" in object.hitbox) ? Hitbox.fromJSON(object.hitbox) : ("radius" in object.hitbox)
+                ? CircleHitbox.fromJSON(object.hitbox) : AABB.fromJSON(object.hitbox)
+            npc.direction = Vector2d.fromJSON(object.direction)
+            npc.collisonSolveStrategy = object.collisonSolveStrategy
+            npc.walking = object.walking
             Game.camera.focusOn(npc.actor)
         } else {
             npc = TilesFactory.CreateStaticNPC(0, 0)
             npc.id = object.id
             npc.actor = MovableActor.fromJSON(object.actor)
             npc.hitbox = Hitbox.fromJSON(object.hitbox)
+            npc.direction = Vector2d.fromJSON(object.direction)
+            npc.collisonSolveStrategy = object.collisonSolveStrategy
+            npc.walking = object.walking
         }
 
         return npc

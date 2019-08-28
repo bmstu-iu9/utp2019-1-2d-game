@@ -54,6 +54,8 @@ class CollisionManager {
             collideOffset.set(0, 0)
             for (let i = 0; i < objects.length; i++) {
                 collideWith = objects[i]
+               // console.log(collideWith)
+                //console.log(object)
                 if (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none') {
                     continue
                 }
@@ -167,8 +169,8 @@ class Hitbox {
     toJSON() {
         return {
             type: this.type,
-            current: this.hitbox,
-            prev: this.hitboxPrevState
+            hitbox: this.hitbox,
+            hitboxPrevState: this.hitboxPrevState
         }
     }
 
@@ -177,16 +179,17 @@ class Hitbox {
      * @param {Hitbox} obj 
      */
     static fromJSON(obj) {
-        let h = new Hitbox()
+        let h = new Hitbox(HITBOX_AABB,new Vector2d(0,0),[new Vector2d(0,0),
+            new Vector2d(0,0),new Vector2d(0,0),new Vector2d(0,0)])
         if (obj.type === HITBOX_AABB) {
-            h.hitboxPrevState = AABB.fromJSON(obj.prev)
-            h.hitbox = AABB.fromJSON(obj.current)
+            h.hitboxPrevState = AABB.fromJSON(obj.hitboxPrevState)
+            h.hitbox = AABB.fromJSON(obj.hitbox)
             h.type = obj.type
         }
 
-        else if (obj.type === HITBOX_CIRCLE) {
-            h.hitboxPrevState = CircleHitbox.fromJSON(obj.prev)
-            h.hitbox = CircleHitbox.fromJSON(obj.current)
+        else {
+            h.hitboxPrevState = CircleHitbox.fromJSON(obj.hitboxPrevState)
+            h.hitbox = CircleHitbox.fromJSON(obj.hitbox)
             h.type = obj.type
         }
         return h
