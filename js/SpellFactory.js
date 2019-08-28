@@ -27,9 +27,7 @@ class SpellFactory {
 
             }
             //TODO realize fireball deletinig
-            result.actor.update()
-            result.Update = () => {
-            }
+            Game.currentWorld.currentRoom.delete(result)
         }
 
         result.drawable.drowable.switch("fly", vector)

@@ -12,10 +12,9 @@ class Room extends GameObject {
         super(id)
         this.height = height
         this.width = width
-        this.roomObjects = []
-        this.updatableObjects = []
+        this.roomObjects = new HashMap()
+        this.updatableObjects = new HashMap()
         this.backgroundTiles = new Array(height).fill().map(x => new Array(width))
-        this.solidTiles = []
         this.movedObjects = []
         this.middlegroundTiles = new Array(height).fill().map(x => new Array(width).fill().map(y => new HashMap))
         this.foregroundTiles = new Array(height).fill().map(x => new Array(width))
@@ -31,9 +30,9 @@ class Room extends GameObject {
      * @param {GameObject} obj 
      */
     Add(obj) {
-        this.roomObjects.push(obj)
+        this.roomObjects.set(obj)
         if (obj.Update !== undefined) {
-            this.updatableObjects.push(obj)
+            this.updatableObjects.set(obj)
         }
         let i = 0
         let j = 0
@@ -56,10 +55,41 @@ class Room extends GameObject {
         }
 
         if (obj.hitbox !== undefined) {
-            this.solidTiles.push(obj)
             this.quadTree.add(obj)
         }
     }
+
+    delete(obj){
+        this.roomObjects.delete(obj)
+        if (obj.Update !== undefined) {
+            this.updatableObjects.delete(obj)
+        }
+        let i = 0
+        let j = 0
+        if (obj.drawable !== undefined) {
+            i = ~~(obj.actor.position.y / Game.tileHeight)
+            j = ~~(obj.actor.position.x / Game.tileWidth)
+        }
+        switch (obj.drawable.placement) {
+            case undefined:
+                break
+            case "background":
+                this.backgroundTiles[i][j] = undefined
+                break
+            case "middleground":
+                this.middlegroundTiles[i][j].delete(obj)
+                break
+            case "foreground":
+                this.foreground[i][j] = undefined
+                break
+        }
+
+        if (obj.hitbox !== undefined) {
+            this.quadTree.delete(obj.hitbox)
+        }
+
+    }
+
     addMap(x, y, map) {
         map = map.split('\n')
         for (let i = 0; i < map.length; i++) {

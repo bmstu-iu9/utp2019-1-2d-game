@@ -36,15 +36,13 @@ class RoomManager {
      */
     Update() {
         this.managableObj.movedObjects.splice(0)
-        
-        for (let i = 0, n = this.managableObj.updatableObjects.length; i < n; i++) {
-            this.element = this.managableObj.updatableObjects[i]
-            this.refreshPosition(this.element)
-            this.element.Update()
+        this.managableObj.updatableObjects.forEach((element)=>{
+            this.refreshPosition(element)
+            element.Update()
             //Проверяем, переместился ли объект
-            if (this.element.hitbox !== undefined && this.element.actor.offset !== undefined && (this.element.actor.offset.x !== 0 || this.element.actor.offset.y !== 0)) { 
-                this.managableObj.movedObjects.push(this.element)
+            if (element.hitbox !== undefined && element.actor.offset !== undefined && (element.actor.offset.x !== 0 || element.actor.offset.y !== 0)) {
+                this.managableObj.movedObjects.push(element)
             }
-        }
+        })
     }
 }
