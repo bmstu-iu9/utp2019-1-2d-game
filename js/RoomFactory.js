@@ -67,7 +67,7 @@ class RoomFactory {
         for (let i = 0; i < testRoomSize; i++) {
             for (let j = 0; j < testRoomSize; j++) {
                 if (i === 0 || j === 0 || i === (testRoomSize - 2) || j === (testRoomSize - 2)) {
-                    let t = TilesFactory.CreateTestGrassTile(j * Game.tileWidth, i * Game.tileHeight);
+                    let t = TilesFactory.CreateDungeonWall(j * Game.tileWidth, i * Game.tileHeight);
                     room.Add(t);
                 }
             }

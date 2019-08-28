@@ -32,7 +32,7 @@ class TilesFactory {
      * @param {Number} y
      */
     static CreatePlayer(x = 0, y = 0) {
-        let player = TilesFactory.createNPC(x, y, 10, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()));
+        let player = TilesFactory.createNPC(x, y, 15, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()));
         player.manager = new PlayerManager(player)
         return player
     }
@@ -55,6 +55,27 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, Game.GrassTexture.width, 15, new DrawableObject("middleground", Game.GrassTexture));
     }
 
+    static CreateDungeonWallRight(x = 0, y = 0) {
+        return TilesFactory.createTile(x, y, 26, Game.tileHeight, new DrawableObject("middleground", Game.DungeonWallLeftTexture),"RightTop")
+    }
+    static CreateDungeonWallLeft(x = 0, y = 0) {
+        return TilesFactory.createTile(x, y, 26, Game.tileHeight, new DrawableObject("middleground", Game.DungeonWallRightTexture),"LeftTop")
+    }
+    static CreateDungeonWallNW(x = 0, y = 0) {
+        return TilesFactory.createTile(x, y, 35, 35, new DrawableObject("middleground", Game.DungeonWallNWTexture),"LeftBot")
+    }
+    static CreateDungeonWallNE(x = 0, y = 0) {
+        return TilesFactory.createTile(x, y, 35, 35, new DrawableObject("middleground", Game.DungeonWallNETexture),"RightBot")
+    }
+    static CreateDungeonWallSW(x = 0, y = 0) {
+        return TilesFactory.createTile(x, y, 52, 2 * Game.tileHeight, new DrawableObject("middleground", Game.DungeonWallSWTexture),"LeftTop")
+    }
+    static CreateDungeonWallSE(x = 0, y = 0) {
+        return TilesFactory.createTile(x, y, 52, 2 * Game.tileHeight, new DrawableObject("middleground", Game.DungeonWallSETexture),"RightTop")
+    }
+    static CreateDungeonWall(x = 0, y = 0) {
+        return TilesFactory.createTile(x, y, Game.tileWidth, 26, new DrawableObject("middleground", Game.DungeonWallTexture),"LeftBot")
+    }
     /**
      * create tile with hitbox
      * @param x

@@ -13,12 +13,18 @@ let imagesSrc = [
     'ghost_shriek.png',
     'knight.png',
     'Floor.png',
-    'Wall.png',
+    'wall2.png',
     'fire_ball.png',
     'rocks1.png',
     'rocks2.png',
     'rocks3.png',
-    'rocks4.png'
+    'rocks4.png',
+    'dungeon_wall_right.png',
+    'dungeon_wall_left.png',
+    'wall_NW.png',
+    'wall_NE.png',
+    'wall_SW.png',
+    'wall_SE.png',
 
 ];
 
@@ -37,11 +43,17 @@ let Game = {
 
     InitLogic() {
         Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.Floor)
-        Game.GrassTexture = TilesFactory.CreateTexture(imagesStorage.Wall)
+        Game.DungeonWallTexture = TilesFactory.CreateTexture(imagesStorage.wall2)
         Game.Rock1Texture = TilesFactory.CreateTexture(imagesStorage.rocks1)
         Game.Rock2Texture= TilesFactory.CreateTexture(imagesStorage.rocks2)
         Game.Rock3Texture= TilesFactory.CreateTexture(imagesStorage.rocks3)
         Game.Rock4Texture= TilesFactory.CreateTexture(imagesStorage.rocks4)
+        Game.DungeonWallLeftTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_wall_right)
+        Game.DungeonWallRightTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_wall_left)
+        Game.DungeonWallNWTexture = TilesFactory.CreateTexture(imagesStorage.wall_NW)
+        Game.DungeonWallNETexture = TilesFactory.CreateTexture(imagesStorage.wall_NE)
+        Game.DungeonWallSWTexture = TilesFactory.CreateTexture(imagesStorage.wall_SW)
+        Game.DungeonWallSETexture = TilesFactory.CreateTexture(imagesStorage.wall_SE)
         Game.GhostBox = BoxFactory.CreateKnightBox()
         Game.FireBallBox = BoxFactory.CreateFireBallBox()
         Game.camera = new Camera(canvas.width, canvas.height)
