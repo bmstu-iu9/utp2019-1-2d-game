@@ -158,8 +158,8 @@ class Vector2d {
      * Возвращает орт вектора
      * @return {*|undefined}
      */
-    ort(){
-        return this.mul(1.0/this.length(),new Vector2d())
+    ort() {
+        return this.mul(1.0 / this.length(), new Vector2d())
     }
 
     /**
@@ -168,8 +168,8 @@ class Vector2d {
      на который нужно спроецировать.
      */
     vectorProjection(vector_to_project_on) {
-        const len=vector_to_project_on.lengthSquared()
-        if (0.99<=len&&len<=1) return this.dotProduct(vector_to_project_on)
+        const len = vector_to_project_on.lengthSquared()
+        if (0.99 <= len && len <= 1) return this.dotProduct(vector_to_project_on)
         return this.dotProduct(vector_to_project_on.ort());
     }
 
@@ -180,10 +180,10 @@ class Vector2d {
         return new Vector2d(-this.y, this.x);
     }
 
-    toJSON(){
+    toJSON() {
         return {
-            x : this.x,  //Потом можно будет удалить
-            y : this.y
+            x: this.x,  //Потом можно будет удалить
+            y: this.y
         }
     }
 
@@ -191,7 +191,7 @@ class Vector2d {
      *
      * @param {Vector2d} object
      */
-    static fromJSON(object){
+    static fromJSON(object) {
         return new Vector2d(object)
     }
 
@@ -212,5 +212,9 @@ class Vector2d {
         } else {
             this.y = Math.floor(this.y)
         }
+    }
+
+    isNullVector() {
+        return this.x === 0 && this.y === 0
     }
 }

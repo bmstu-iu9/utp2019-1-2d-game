@@ -35,13 +35,23 @@ class CollisionManager {
         b.hitbox.update()
         this.room.quadTree.update(b)
     }
-
+    
+    /**
+     * Needs refactoring
+     */
     collide() {
-        let objects, collision, object
+        let objects,                             //Обекты проверяемые на наличие коллизии с object
+            collision,                           //Объякт коллизии
+            object,                              //Объект для которого проверяется наличие коллизий
+            collideOffset = new Vector2d(0, 0),  //смещение объекта после разрешения коллизии
+            isCollided                           //была ли коллизися хотя бы с одним объектом
+
         for (let j = 0; j < this.room.movedObjects.length; j++) {
+            isCollided = false
             object = this.room.movedObjects[j]
             this.room.quadTree.update(object)
             objects = this.room.quadTree.retrieve([], object)
+            collideOffset.set(0, 0)
             for (let i = 0; i < objects.length; i++) {
                 if (object.collisonSolveStrategy === 'none' && objects[i].collisonSolveStrategy === 'none') {
                     continue
@@ -49,10 +59,13 @@ class CollisionManager {
                 if (!objects[i].hitbox.equals(object.hitbox)) {
                     collision = getCollision(object.hitbox, objects[i].hitbox)
                     if (collision) {
+                        isCollided = true && (object.collisonSolveStrategy === 'none' && objects[i].collisonSolveStrategy === 'none')
                         collision.obstacleObject = objects[i]
                         if (object.collisonSolveStrategy !== 'none') {
                             if (objects[i].collisonSolveStrategy === 'stay') {
+                                collideOffset.add(object.actor.offset)
                                 this.solveCollision(object, collision)
+                                collideOffset.sub(object.actor.offset)
                                 this.room.movedObjects.push(object)
                             }
                             else if (objects[i].collisonSolveStrategy === 'move') {
@@ -70,6 +83,10 @@ class CollisionManager {
                     }
                 }
             }
+            if (isCollided && collideOffset.isNullVector()) {
+                throw "Collisions don't solved" // Если коллизии разрешить не удалось
+            }
+
         }
     }
 }
