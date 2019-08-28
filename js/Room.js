@@ -60,7 +60,46 @@ class Room extends GameObject {
             this.quadTree.add(obj)
         }
     }
-
+    addMap(x, y, map) {
+        map = map.split('\n')
+        for (let i = 0; i < map.length; i++) {
+            for (let j = 0; j < map[i].length; j++) {
+                this.addChar(j + x, i + y, map[i][j])
+            }
+        }
+    }
+    addChar(x, y, data) {
+        x = x * Game.tileWidth
+        y = y * Game.tileWidth
+        let t
+        switch (data) {
+            case 'z':
+                t = TilesFactory.CreateDungeonWallSW(x, y - 52)
+                break
+            case 'a':
+                t = TilesFactory.CreateDungeonWallLeft(x, y)
+                break
+            case 's':
+                t = TilesFactory.CreateDungeonWall(x, y - 52)
+                break
+            case 'd':
+                t = TilesFactory.CreateDungeonWallRight(x, y)
+                break
+            case 'w':
+                t = TilesFactory.CreateDungeonWall(x, y - 52)
+                break
+            case 'c':
+                t = TilesFactory.CreateDungeonWallSE(x, y - 52)
+                break
+            case 'q':
+                t = TilesFactory.CreateDungeonWallNW(x, y)
+                break
+            case 'e':
+                t = TilesFactory.CreateDungeonWallNE(x, y)
+                break
+        }
+        this.Add(t)
+    }
     /**
      * Обновление игровой логики Room 
      */

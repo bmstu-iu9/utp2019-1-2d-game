@@ -54,7 +54,6 @@ class TilesFactory {
     static CreateTestGrassTile(x = 0, y = 0) {
         return TilesFactory.createTile(x, y, Game.GrassTexture.width, 15, new DrawableObject("middleground", Game.GrassTexture));
     }
-
     static CreateDungeonWallRight(x = 0, y = 0) {
         return TilesFactory.createTile(x, y, 26, Game.tileHeight, new DrawableObject("middleground", Game.DungeonWallLeftTexture),"RightTop")
     }
