@@ -52,7 +52,7 @@ class TilesFactory {
      * @param {Number} y
      */
     static CreateTestGrassTile(x = 0, y = 0) {
-        return TilesFactory.createTile(x, y, Game.GrassTexture.width, 15, new DrawableObject("middleground", Game.GrassTexture));
+        return TilesFactory.createTile(x, y, Game.GrassTexture1.width, 15, new DrawableObject("middleground", Game.GrassTexture1));
     }
     static CreateDungeonWallRight(x = 0, y = 0) {
         return TilesFactory.createTile(x, y, 26, Game.tileHeight, new DrawableObject("middleground", Game.DungeonWallLeftTexture),"RightTop")
@@ -73,8 +73,10 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, 52, 2 * Game.tileHeight, new DrawableObject("middleground", Game.DungeonWallSETexture),"RightTop")
     }
     static CreateDungeonWall(x = 0, y = 0) {
-        return TilesFactory.createTile(x, y, Game.tileWidth, 26, new DrawableObject("middleground", Game.DungeonWallTexture),"LeftBot")
+        console.log();
+        return TilesFactory.createTile(x, y, Game.tileWidth, 26, new DrawableObject("middleground", Game.DungeonWallTexture1),"LeftBot")
     }
+
     /**
      * create tile with hitbox
      * @param x

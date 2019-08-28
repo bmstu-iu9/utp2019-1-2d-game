@@ -80,7 +80,7 @@ let Game = {
     },
 
     InitLogic() {
-        Game.BigBirchTexture = TilesFactory.CreateTexture(imagesStorage.big_birch)
+          Game.BigBirchTexture = TilesFactory.CreateTexture(imagesStorage.big_birch)
         Game.BigOakTexture = TilesFactory.CreateTexture(imagesStorage.big_oak)
         Game.BigTentTexture = TilesFactory.CreateTexture(imagesStorage.big_tent)
         Game.BranchesTexture = TilesFactory.CreateTexture(imagesStorage.branches)
