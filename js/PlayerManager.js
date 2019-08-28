@@ -42,8 +42,11 @@ class PlayerManager {
         }
         this.Direction.set(xDirection, yDirection)
         if (keyboard.KeyF) {
-            // SpellFactory.CreateFireBall(this.player.actor.centre.x + xDirection * 20, this.player.actor.centre.y + yDirection * 20, new Vector2d(this.Direction))
             this.player.abilities[0].cast()
+        }
+
+        if (mouse.isRightClicked) {
+            this.player.abilities[1].cast()
         }
 
         this.player.actor.update()

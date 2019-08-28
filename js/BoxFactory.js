@@ -48,4 +48,12 @@ class BoxFactory {
         result.add("fly", fly)
         return result
     }
+
+    static CreateLigthningBox() {
+        let seq = Array(62).fill(1).map((e, i) => i)
+        let strike = new SpritePattern('lighthning_strike', imagesStorage.lightning, seq, "horizontal", 0, 0, 85, 40, true, 2)
+        let result = new SpriteBox()
+        result.add("strike", strike)
+        return result
+    }
 }

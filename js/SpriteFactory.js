@@ -7,4 +7,8 @@ class SpriteFactory {
     static CreateFireBallSprite() {
         return new Sprite(60, Game.FireBallBox, "fly", true)
     }
+
+    static CreateLightningSprite() {
+        return new Sprite(50, Game.LightningBox, "strike")
+    }
 }

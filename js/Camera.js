@@ -31,6 +31,10 @@ class Camera {
         tile.actor.position.sub(this.position, tile.drawable.canvasCoord)
     }
 
+    setGameCoord(vector){
+        vector.add(this.position)
+    }
+
     /**
      * Возвращает позицию камеры
      * @returns {Vector2d}

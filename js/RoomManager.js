@@ -37,7 +37,9 @@ class RoomManager {
     Update() {
         this.managableObj.movedObjects.splice(0)
         this.managableObj.updatableObjects.forEach((element)=>{
-            this.refreshPosition(element)
+            if(element.actor instanceof MovableActor){
+               this.refreshPosition(element)
+            }
             element.Update()
             //Проверяем, переместился ли объект
             if (element.hitbox !== undefined && element.actor.offset !== undefined && (element.actor.offset.x !== 0 || element.actor.offset.y !== 0)) {

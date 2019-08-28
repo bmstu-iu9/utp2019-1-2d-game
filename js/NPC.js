@@ -24,11 +24,11 @@ class NPC extends GameObject {
         this.direction = new Vector2d(0, 0)
         this.walking = false
         this.collisonSolveStrategy = "stay"
-        this.abilities = [AbilityFactory.createFireBallAbility(this)]
+        this.abilities = [AbilityFactory.createFireBallAbility(this), AbilityFactory.createLigthningAbility(this)]
     }
 
-    isDead(){
-        return this.statsManager.stats.hp === 0 
+    isDead() {
+        return this.statsManager.stats.hp === 0
     }
 
     render() {
@@ -36,7 +36,7 @@ class NPC extends GameObject {
     }
 
     Update() {
-        if(this.isDead()){
+        if (this.isDead()) {
             Game.currentWorld.currentRoom.delete(this)
         }
         this.actor.update()
@@ -54,7 +54,9 @@ class NPC extends GameObject {
         }
         this.hitbox.update(this.actor.centre)
         for (let ability of this.abilities) {
-            ability.update(Game.step)
+            if (ability !== undefined) {
+                ability.update(Game.step)
+            }
         }
         this.statsManager.stats.mana += 0.5
         this.statsManager.correctStats()

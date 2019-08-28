@@ -25,6 +25,7 @@ let imagesSrc = [
     'wall_NE.png',
     'wall_SW.png',
     'wall_SE.png',
+    'lightning.png',
 
 ];
 
@@ -56,6 +57,7 @@ let Game = {
         Game.DungeonWallSETexture = TilesFactory.CreateTexture(imagesStorage.wall_SE)
         Game.GhostBox = BoxFactory.CreateKnightBox()
         Game.FireBallBox = BoxFactory.CreateFireBallBox()
+        Game.LightningBox = BoxFactory.CreateLigthningBox()
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
         Game.currentWorld = WorldFactory.CreateTestWorld()

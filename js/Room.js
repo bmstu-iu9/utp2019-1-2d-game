@@ -34,6 +34,10 @@ class Room extends GameObject {
         if (obj.Update !== undefined) {
             this.updatableObjects.set(obj)
         }
+        if (obj.actor === undefined) {
+            console.log("PANIC")
+            return
+        }
         let i = 0
         let j = 0
         if (obj.drawable !== undefined) {
@@ -59,7 +63,7 @@ class Room extends GameObject {
         }
     }
 
-    delete(obj){
+    delete(obj) {
         this.roomObjects.delete(obj)
         if (obj.Update !== undefined) {
             this.updatableObjects.delete(obj)
@@ -143,7 +147,7 @@ class Room extends GameObject {
             id: this.id,
             height: this.height,
             width: this.width,
-            roomObjects : this.roomObjects
+            roomObjects: this.roomObjects
         };
     }
 
@@ -151,10 +155,10 @@ class Room extends GameObject {
      *
      * @param {Room} object
      */
-    static fromJSON(object){
-        let room = new Room(object.id,object.height,object.width)
-        for (let i = 0;i < object.roomObjects.length;i++){
-            if ("hitbox" in object.roomObjects[i]){
+    static fromJSON(object) {
+        let room = new Room(object.id, object.height, object.width)
+        for (let i = 0; i < object.roomObjects.length; i++) {
+            if ("hitbox" in object.roomObjects[i]) {
                 room.Add(NPC.fromJSON(object.roomObjects[i]))
             }
             else {
@@ -174,36 +178,36 @@ class Room extends GameObject {
     /**
      * @param {Vector2d} clickCoords
      */
-    getElementByClick(clickCoords){
-        const coords=clickCoords.add(this.rnd.camera.position,new Vector2d())
-        const point=new CircleHitbox(coords,0,undefined)
-        return this.getElement(this.quadTree,point,coords)
+    getElementByClick(clickCoords) {
+        const coords = clickCoords.add(this.rnd.camera.position, new Vector2d())
+        const point = new CircleHitbox(coords, 0, undefined)
+        return this.getElement(this.quadTree, point, coords)
     }
 
-    getElement=(node,point,coords)=>{
-        if (node.next[0]!=null){
-            const index=node.getIndex(point)
-            if (index.index!==undefined){
-                return this.getElement(node.next[index.index],point,coords)
+    getElement = (node, point, coords) => {
+        if (node.next[0] != null) {
+            const index = node.getIndex(point)
+            if (index.index !== undefined) {
+                return this.getElement(node.next[index.index], point, coords)
             }
         }
-        return this.determineElement(node,coords)
+        return this.determineElement(node, coords)
     }
 
-    determineElement=(node,coords)=>{
-        for (const obj of node.objects){
-            const object=obj.hitbox.getHitbox()
-            const minMaxX=object.getMinMaxX()
-            const minMaxY=object.getMinMaxY()
+    determineElement = (node, coords) => {
+        for (const obj of node.objects) {
+            const object = obj.hitbox.getHitbox()
+            const minMaxX = object.getMinMaxX()
+            const minMaxY = object.getMinMaxY()
 
-            const xEstimation=minMaxX.min<coords.x && minMaxX.max>coords.x
-            const yEstimation=minMaxY.min<coords.y && minMaxY.max>coords.y
-            if (xEstimation && yEstimation){
+            const xEstimation = minMaxX.min < coords.x && minMaxX.max > coords.x
+            const yEstimation = minMaxY.min < coords.y && minMaxY.max > coords.y
+            if (xEstimation && yEstimation) {
                 return obj
             }
         }
-        if (node.parent!==node)
-            return this.determineElement(node.parent,coords)
+        if (node.parent !== node)
+            return this.determineElement(node.parent, coords)
     }
 
 }

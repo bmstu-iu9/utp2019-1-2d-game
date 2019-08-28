@@ -10,37 +10,42 @@ class Sprite {
     dir; // vertical or horizontal
     spriteMapCoord;
     last;
-    constructor(speed, pattern, firstPatternName = "idle", isAngleEnabled = false) {
+    constructor(speed, pattern, firstPatternName = "idle", isAngleEnabled = false, onceCallback) {
         this.isAngleEnabled = isAngleEnabled
         this.last = performance.now()
         this.pattern = pattern
         this.speed = speed;
         this.current = undefined
-        this.switch(firstPatternName, new Vector2d(0, 1))
+        this.switch(firstPatternName, undefined)
     }
     changeSpeed(speed) {
         this.speed = speed
     }
     switch(name, vector) {
         //this.reset()
-        if (this.isAngleEnabled) {
-            let data = this.pattern.data.get(name)
-            let vec = Math.atan2(vector.y, vector.x)
-            this.angle = vec
-            this.current = data[0]
+        if (vector !== undefined) {
+            if (this.isAngleEnabled) {
+                let data = this.pattern.data.get(name)
+                let vec = Math.atan2(vector.y, vector.x)
+                this.angle = vec
+                this.current = data[0]
+            } else {
+                let data = this.pattern.data.get(name)
+                let vec = 2 - polarAngle(vector) / Math.PI
+                if (data.length == 4) {
+                    if (vec <= 0.25 || vec >= 1.75) {
+                        this.current = data[0]
+                    } else if (vec >= 0.75 && vec <= 1.25) {
+                        this.current = data[2]
+                    } else {
+                        this.current = data[Math.ceil((vec - 0.25) / 0.5)]
+                    }
+                }
+                else { this.current = data[0] }
+            }
         } else {
             let data = this.pattern.data.get(name)
-            let vec = 2 - polarAngle(vector) / Math.PI
-            if (data.length == 4) {
-                if (vec <= 0.25 || vec >= 1.75) {
-                    this.current = data[0]
-                } else if (vec >= 0.75 && vec <= 1.25) {
-                    this.current = data[2]
-                } else {
-                    this.current = data[Math.ceil((vec - 0.25) / 0.5)]
-                }
-            }
-            else { this.current = data[0] }
+            this.current = data[0]
         }
         this.frames = this.current.frames
         this.img = this.current.img
@@ -52,7 +57,7 @@ class Sprite {
     update(dt) {
         this.index += this.speed * dt * this.current.speed
     }
-    
+
     reset() {
         this.index = 0
     }
@@ -65,6 +70,9 @@ class Sprite {
             let id = ~~(this.index);
             frame = this.frames[id % max];
             if (this.current.once && id >= max) {
+                if (this.onceCallback) {
+                    this.onceCallback()
+                }
                 return
             }
         }
@@ -90,18 +98,18 @@ class Sprite {
         this.last = Game.now
     }
 
-    toJSON(){
+    toJSON() {
         return {
-            pattern : this.pattern,
-            once : this.once,
-            speed : this.speed,
-            frames : this.frames,
-            img : this.img, // нужно будет только id
-            index : this.index,
-            dir : this.dir,
-            spriteMapCoord : this.spriteMapCoord,
-            width : this.width,
-            height : this.height
+            pattern: this.pattern,
+            once: this.once,
+            speed: this.speed,
+            frames: this.frames,
+            img: this.img, // нужно будет только id
+            index: this.index,
+            dir: this.dir,
+            spriteMapCoord: this.spriteMapCoord,
+            width: this.width,
+            height: this.height
         }
     }
 
@@ -109,8 +117,8 @@ class Sprite {
      *
      * @param {Sprite}object
      */
-    static fromJSON(object){
-        let sprite = new Sprite(object.speed,object.once,SpritePattern.fromJSON(object.pattern))
+    static fromJSON(object) {
+        let sprite = new Sprite(object.speed, object.once, SpritePattern.fromJSON(object.pattern))
     }
 }
 
