@@ -155,12 +155,22 @@ class Vector2d {
     }
 
     /**
+     * Возвращает орт вектора
+     * @return {*|undefined}
+     */
+    ort(){
+        return this.mul(1.0/this.length(),new Vector2d())
+    }
+
+    /**
      * @param {Vector2d} vector_to_project_on
      Проекция на вектор. Метод в какчестве параметра принмает вектор,
      на который нужно спроецировать.
      */
     vectorProjection(vector_to_project_on) {
-        return this.dotProduct(vector_to_project_on.normalize());
+        const len=vector_to_project_on.lengthSquared()
+        if (0.99<=len&&len<=1) return this.dotProduct(vector_to_project_on)
+        return this.dotProduct(vector_to_project_on.ort());
     }
 
     /**

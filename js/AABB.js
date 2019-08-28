@@ -18,16 +18,11 @@ const minMaxProjection = (axis, object) => {
 }
 
 const overlap = (pr1, pr2) => {
-    let max, min
-
     if (pr1.max < pr2.max) {
-        max = pr1.max
-        min = pr2.min
+        return  pr2.min-pr1.max
     } else {
-        max = pr2.max
-        min = pr1.min
+        return  pr1.min-pr2.max
     }
-    return min - max
 }
 
 const getMin = (dx, dy, firstAxis, secondAxis) => {
@@ -45,14 +40,65 @@ const getMin = (dx, dy, firstAxis, secondAxis) => {
     }
 }
 
-const circleProjection=(axis,circle)=>{
-    const centreProjection=circle.centre.vectorProjection(axis)
-    return {
-        min:centreProjection-circle.radius,
-        max:centreProjection+circle.radius
-    }
+
+const gramSchmidt=(axis,vector)=>{
+    return vector.sub(axis.mul(vector.dotProduct(axis)/axis.dotProduct(axis)),new Vector2d())
 }
 
+const intersect=(A,B,C,D)=>{
+    const x1=B.x,x0=A.x,y1=B.y,y0=A.y
+    const a=C.x,b=C.y,c=D.x,d=D.y
+    const l=c-a,q=d-b,n=x1-x0,m=y1-y0
+    const t=(n*(y0-b)+m*(a-x0))/(q*n-m*l)
+    const x=a+t*l,y=b+t*q
+    return new Vector2d(x,y)
+}
+
+const findClosest=(box,dot)=>{
+    let inter=calcLine(box.vertices[0],box.vertices[1],dot)
+    let guid=inter.sub(dot,new Vector2d())
+    for (let i=1;i<4;i++) {
+        const inters = calcLine(box.vertices[i%4], box.vertices[(i + 1) % 4], dot)
+        const guids=inters.sub(dot,new Vector2d())
+        if (guid.lengthSquared()>guids.lengthSquared()){
+            inter=inters
+            guid=guids
+        }
+    }
+    return inter
+}
+
+const determineLine=(ortho,point)=>{
+    if (ortho.x===0){
+        return new Vector2d(point.x,0)
+    }
+    if (ortho.y===0){
+        return new Vector2d(0,point.y)
+    }
+    return new Vector2d(0,-ortho.y*point.x/ortho.x+point.y)
+}
+
+const calcLine=(a,b,point)=>{
+    const vector=b.sub(a,new Vector2d())
+    const ortho=gramSchmidt(vector,point.sub(a,new Vector2d()))
+    const inter=intersect(a,b,point,determineLine(ortho,point))
+    let minX,minY,maxX,maxY
+    minX=Math.min(a.x,b.x)
+    maxX=Math.max(a.x,b.x)
+    minY=Math.min(a.y,b.y)
+    maxY=Math.max(a.y,b.y)
+    if (minX<=inter.x && inter.x<=maxX && inter.y<=maxY && inter.y>=minY){
+        return inter
+    }else {
+        let q=point.sub(a,new Vector2d())
+        let l=point.sub(b,new Vector2d())
+        if (q.lengthSquared()<l.lengthSquared()){
+            return a
+        }else {
+            return b
+        }
+    }
+}
 
 /**
  *
@@ -61,21 +107,11 @@ const circleProjection=(axis,circle)=>{
  * @constructor
  */
 const AABBvsCircle=(object,obstacle)=> {
-    let thisPr1=minMaxProjection(object.firstAxis,object)
-    let thisPr2=minMaxProjection(object.secondAxis,object)
-
-    let circlePr1=circleProjection(object.firstAxis,obstacle)
-    let circlePr2=circleProjection(object.secondAxis,obstacle)
-
-    let dx,dy;
-    if ((dx=overlap(thisPr1,circlePr1))<0 && (dy=overlap(thisPr2,circlePr2))<0){
-        const res=getMin(dx,dy,object.firstAxis,object.secondAxis)
-
-        const centre_to_centre=obstacle.centre.sub(object.centre,new Vector2d())
-        if (centre_to_centre.vectorProjection(res.axis)<0) res.axis.mul(-1)
-        //hotfix
-        return new Collision(centre_to_centre.normalize().mul(res.depth),obstacle)
-    }
+    const intersectionPoint=findClosest(object,obstacle.centre)
+    let axis=intersectionPoint.sub(obstacle.centre,new Vector2d())
+    const distance=obstacle.radius-axis.length()
+    if (distance>0)
+        return new Collision(axis.normalize().mul(distance),obstacle)
     return null
 }
 
@@ -110,11 +146,15 @@ class AABB {
     constructor(centre,vertices,id=Game.getUniqId()){
         this.centre=centre
         this.vertices=vertices
-        let firstSide=this.vertices[1].sub(this.vertices[0],new Vector2d())
-        let secondSide=this.vertices[2].sub(this.vertices[1],new Vector2d())
-        this.firstAxis=firstSide.normal()
-        this.secondAxis=secondSide.normal()
+        this.setNormals()
         this.id=id
+    }
+
+    setNormals=()=>{
+        const firstSide=this.vertices[1].sub(this.vertices[0],new Vector2d())
+        const secondSide=this.vertices[2].sub(this.vertices[1],new Vector2d())
+        this.firstAxis=firstSide.normal().normalize()
+        this.secondAxis=secondSide.normal().normalize()
     }
 
     getCollision(obstacle) {
@@ -142,7 +182,7 @@ class AABB {
 
             if (centre_to_centre.vectorProjection(res.axis) < 0) res.axis.mul(-1)
 
-            return new Collision(res.axis.normalize().mul(res.depth), obstacle)
+            return new Collision(res.axis.mul(res.depth), obstacle)
         }
         return null
     }
@@ -200,10 +240,10 @@ class AABB {
         let min,max
         min=max=this.vertices[0].y
         for (let i=1;i<4;i++){
-            if (this.vertices[i].x>max){
+            if (this.vertices[i].y>max){
                 max=this.vertices[i].y
             }
-            if (this.vertices[i].x<min){
+            if (this.vertices[i].y<min){
                 min=this.vertices[i].y
             }
         }
@@ -311,4 +351,45 @@ class Collision{
     }
 }
 
+class RotatingAABB extends AABB{
+    constructor(centre,vertices,id=Game.getUniqId()){
+        super(centre,vertices,id)
+        this.processed=0
+        this.startPosition=[]
+        for (let i=0;i<vertices.length;i++){
+            this.startPosition.push(new Vector2d(vertices[i]))
+        }
+    }
 
+    /**
+     *
+     * @param {Number} dps
+     * @param {Number} angle
+     * @param {Vector2d} dot
+     */
+    rotate(dps,angle,dot=undefined){
+        angle*=Math.PI/180
+        if (this.processed<angle) {
+            dps/=60
+            const omega = dps * Math.PI / 180
+            const cos = Math.cos(omega)
+            const sin = Math.sin(omega)
+            if (dot === undefined) {
+                for (let v of this.vertices) {
+                    v.set(v.x * cos - v.y * sin, v.x * sin + v.y * cos)
+                }
+            } else {
+                for (let v of this.vertices) {
+                    v.set(dot.x + (v.x - dot.x) * cos - (v.y - dot.y) * sin, dot.y + (v.x - dot.x) * sin + (v.y - dot.y) * cos)
+                }
+            }
+            this.processed+=omega
+        }else {
+            this.processed=0
+            for (let i=0;i<this.vertices.length;i++){
+                this.vertices[i].set(this.startPosition[i])
+            }
+        }
+        this.setNormals()
+    }
+}
