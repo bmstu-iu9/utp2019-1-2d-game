@@ -18,7 +18,6 @@ class CollisionManager {
         object.actor.changePosition(collision.distance);
         object.hitbox.update()
         this.room.quadTree.update(object)
-        collision.distance.round()
     }
 
     solveForBoth(a, b, collision) {
@@ -41,10 +40,11 @@ class CollisionManager {
      */
     collide() {
         let objects,                             //Обекты проверяемые на наличие коллизии с object
-            collision,                           //Объякт коллизии
+            collision,                           //Объект коллизии
             object,                              //Объект для которого проверяется наличие коллизий
             collideOffset = new Vector2d(0, 0),  //смещение объекта после разрешения коллизии
-            isCollided                           //была ли коллизися хотя бы с одним объектом
+            isCollided,                          //была ли коллизися хотя бы с одним объектом
+            collideWith
 
         for (let j = 0; j < this.room.movedObjects.length; j++) {
             isCollided = false
@@ -53,30 +53,31 @@ class CollisionManager {
             objects = this.room.quadTree.retrieve([], object)
             collideOffset.set(0, 0)
             for (let i = 0; i < objects.length; i++) {
-                if (object.collisonSolveStrategy === 'none' && objects[i].collisonSolveStrategy === 'none') {
+                collideWith = objects[i]
+                if (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none') {
                     continue
                 }
                 if (!objects[i].hitbox.equals(object.hitbox)) {
-                    collision = getCollision(object.hitbox, objects[i].hitbox)
+                    collision = getCollision(object.hitbox, collideWith.hitbox)
                     if (collision) {
-                        isCollided = true && (object.collisonSolveStrategy === 'none' && objects[i].collisonSolveStrategy === 'none')
-                        collision.obstacleObject = objects[i]
+                        isCollided = true && (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none')
+                        collision.obstacleObject = collideWith
                         if (object.collisonSolveStrategy !== 'none') {
-                            if (objects[i].collisonSolveStrategy === 'stay') {
+                            if (collideWith.collisonSolveStrategy === 'stay') {
                                 collideOffset.add(object.actor.offset)
                                 this.solveCollision(object, collision)
                                 collideOffset.sub(object.actor.offset)
                                 this.room.movedObjects.push(object)
                             }
-                            else if (objects[i].collisonSolveStrategy === 'move') {
+                            else if (collideWith.collisonSolveStrategy === 'move') {
                                 this.solveForBoth(object, objects[i], collision)
                                 this.room.movedObjects.push(object)
                                 this.room.movedObjects.push(objects[i])
                             }
                         }
-                        if (object.onCollide) {
-                            object.onCollide(collision)
-                        }
+                            if (object.onCollide) {
+                                object.onCollide(collision)
+                            }
                         if (objects[i].onCollide) {
                             objects[i].onCollide(collision)
                         }
