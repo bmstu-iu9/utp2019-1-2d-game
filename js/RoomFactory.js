@@ -72,6 +72,7 @@ class RoomFactory {
                 }
             }
         }
+        room.addMap(2, 2, 'qwwwwwwe')
         return room
     }
 }
