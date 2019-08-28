@@ -42,13 +42,13 @@ class RoomFactory {
             }
         }
 
-        let player = TilesFactory.CreatePlayer(400, 990)
+        let player = TilesFactory.CreatePlayer(1200, 990)
 
         room.Add(player)
         Game.camera.focusOn(player.actor)
 
         for (let i = 18; i < 20; i++) {
-            for (let j = 5; j < 7; j++) {
+            for (let j = 21; j < 23; j++) {
                 let t = TilesFactory.CreateStaticNPC((2 + j) * 60, (2 + i) * 60);
                 room.Add(t);
                 // Следование за игроком
@@ -72,11 +72,11 @@ class RoomFactory {
         //         }
         //     }
         // }
-        room.addMap(2, 14,
+        room.addMap(17, 14,
             'qwwwwwwwwe              qwwwwwwwwwwe                                                               \n' +
-            'a        d              a          d                                                                 \n' +
-            'a        d              a          d                                                                 \n' +
-            'a        d     qwwwwwwww2          d                                                                          \n' +
+            'a        d              a          d                                                               \n' +
+            'a        d              a          d                                                               \n' +
+            'a        d     qwwwwwwww2          d                                                               \n' +
             'a        d     a                   d                                                               \n' +
             'zsssse qsx     a qsssssse qsssssssse                                                                                   \n' +
             '     d a       a a      d a        1wwe                                                                      \n' +
