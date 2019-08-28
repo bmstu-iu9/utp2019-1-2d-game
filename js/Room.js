@@ -72,7 +72,7 @@ class Room extends GameObject {
         let i = 0
         let j = 0
         if (obj.drawable !== undefined) {
-            this.manager.refreshPosition(obj)
+            if (obj.actor instanceof MovableActor) this.manager.refreshPosition(obj)
             i = ~~(obj.actor.position.y / Game.tileHeight)
             j = ~~(obj.actor.position.x / Game.tileWidth)
         }
