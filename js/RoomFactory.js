@@ -42,13 +42,13 @@ class RoomFactory {
             }
         }
 
-        let player = TilesFactory.CreatePlayer(350, 370)
+        let player = TilesFactory.CreatePlayer(400, 990)
 
         room.Add(player)
         Game.camera.focusOn(player.actor)
 
-        for (let i = 10; i < 15; i++) {
-            for (let j = 10; j < 15; j++) {
+        for (let i = 18; i < 20; i++) {
+            for (let j = 5; j < 7; j++) {
                 let t = TilesFactory.CreateStaticNPC((2 + j) * 60, (2 + i) * 60);
                 room.Add(t);
                 // Следование за игроком
@@ -64,15 +64,87 @@ class RoomFactory {
             }
         }
 
-        for (let i = 0; i < testRoomSize; i++) {
-            for (let j = 0; j < testRoomSize; j++) {
-                if (i === 0 || j === 0 || i === (testRoomSize - 2) || j === (testRoomSize - 2)) {
-                    let t = TilesFactory.CreateDungeonWall(j * Game.tileWidth, i * Game.tileHeight);
-                    room.Add(t);
-                }
-            }
-        }
-        room.addMap(2, 2, 'qwwwwwwe')
+        // for (let i = 0; i < testRoomSize; i++) {
+        //     for (let j = 0; j < testRoomSize; j++) {
+        //         if (i === 1 || j === 1 || i === (testRoomSize - 3) || j === (testRoomSize - 3)) {
+        //             let t = TilesFactory.CreateDungeonWall(j * Game.tileWidth, i * Game.tileHeight);
+        //             room.Add(t);
+        //         }
+        //     }
+        // }
+        room.addMap(2, 14,
+            'qwwwwwwwwe              qwwwwwwwwwwe                                                               \n' +
+            'a        d              a          d                                                                 \n' +
+            'a        d              a          d                                                                 \n' +
+            'a        d     qwwwwwwww2          d                                                                          \n' +
+            'a        d     a                   d                                                               \n' +
+            'zsssse qsx     a qsssssse qsssssssse                                                                                   \n' +
+            '     d a       a a      d a        1wwe                                                                      \n' +
+            ' qwwwx zwwwwe  a a      d a        d  1wwe                                                                       \n' +
+            ' a          1ww2 zwwwwwwx zwwwwwwwwx     1wwe                                                                              \n' +
+            ' a                                          1e                                                        \n' +
+            ' a                                           1e                                                       \n' +
+            ' a          qsssssssse qssssssssse            d                                                                   \n' +
+            ' zse qsse qs2        d a         d            d                                                               \n' +
+            '   d a  d a          d a         d           qx                                                       \n' +
+            '   d a  d a   qwwwwwwx zwwwwwwwwwx          q2                                                        \n' +
+            '   d a  d a   a                          qss2                                                         \n' +
+            '   d a  d a   a                       qss2                                                            \n' +
+            ' qsx zwwx ze  a    qe   qe   qe    qss2\n' +
+            ' a         d  a    zx   zx   zx    a                                                       \n' +
+            ' a         d  a                    a                                                              \n' +
+            ' a         d  zssssssssssssssssssss2                                                                                       \n' +
+            ' zsssssssssx                                                                                                 \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                                                                   \n' +
+            '                                                ')
+        RoomFactory.addWall(room, 3, 28, 3, 'l')
         return room
+    }
+    static addWall(room, x, y, length, data) {
+        let t = ''
+        switch (data) {
+            case 'lt':
+                for (let i = 0; i < length - 1; i++) {
+                    t +='a\n'
+                }
+                t += 'z'
+                break
+            case 'tr':
+                t = 'q'
+                for (let i = 0; i < length; i++) {
+                    t += 'w'
+                }
+                break
+            case 'b':
+                t = 'z'
+                for (let i = 0; i < length; i++) {
+                    t += 'x'
+                }
+                t += 'c'
+                break
+            case 'r':
+                for (let i = 0; i < length - 1; i++) {
+                    t += 'd\n'
+                }
+                break
+            case 'tb':
+                t = ''
+                for (let i = 0; i < length - 1; i++) {
+                    t +='a\n'
+                }
+                break
+        }
+        room.addMap(x, y, t)
     }
 }

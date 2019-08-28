@@ -102,37 +102,51 @@ class Room extends GameObject {
             }
         }
     }
+
     addChar(x, y, data) {
         x = x * Game.tileWidth
         y = y * Game.tileWidth
+        let ty
         let t
         switch (data) {
             case 'z':
-                t = TilesFactory.CreateDungeonWallSW(x, y - 52)
+                t = TilesFactory.CreateDungeonWallSW(x + 17, y)
                 break
             case 'a':
-                t = TilesFactory.CreateDungeonWallLeft(x, y)
-                break
-            case 's':
-                t = TilesFactory.CreateDungeonWall(x, y - 52)
-                break
-            case 'd':
                 t = TilesFactory.CreateDungeonWallRight(x, y)
                 break
-            case 'w':
-                t = TilesFactory.CreateDungeonWall(x, y - 52)
+            case 's':
+                t = TilesFactory.CreateDungeonWall(x, y)
                 break
-            case 'c':
-                t = TilesFactory.CreateDungeonWallSE(x, y - 52)
+            case 'd':
+                t = TilesFactory.CreateDungeonWallLeft(x, y)
+                break
+            case 'w':
+                t = TilesFactory.CreateDungeonWall(x, y)
+                break
+            case 'x':
+                t = TilesFactory.CreateDungeonWallSE(x - 17, y)
                 break
             case 'q':
                 t = TilesFactory.CreateDungeonWallNW(x, y)
                 break
             case 'e':
                 t = TilesFactory.CreateDungeonWallNE(x, y)
+                //ty = TilesFactory.CreateDungeonWallLeft(x, y)
+                break
+            case '1':
+                t = TilesFactory.CreateDungeonWallSW(x, y)
+                break
+            case '2':
+                t = TilesFactory.CreateDungeonWallSE(x, y)
                 break
         }
-        this.Add(t)
+        if (t != undefined) {
+            this.Add(t)
+        }
+        if (ty != undefined) {
+            this.Add(ty)
+        }
     }
     /**
      * Обновление игровой логики Room 
