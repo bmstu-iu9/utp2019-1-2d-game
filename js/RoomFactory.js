@@ -31,11 +31,13 @@ class RoomFactory {
     static CreateRoundedRoom() {
         let testRoomSize = 120;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
-
         for (let i = 0; i < testRoomSize; i++) {
             for (let j = 0; j < testRoomSize; j++) {
-                room.Add(TilesFactory.CreateTestTile(j * Game.tileWidth, i * Game.tileHeight))
-                //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a 
+                //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
+                //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
+                //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
+                room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
+                //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
                 //     if (Math.random() < 0.4) {
                 //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
                 //     }
