@@ -28,7 +28,7 @@ class NPC extends GameObject {
     }
 
     render() {
-        this.drawable.render();
+        this.drawable.render()
     }
 
     Update() {
@@ -67,7 +67,7 @@ class NPC extends GameObject {
         }
     }
 
-    
+
 
 
     /**
