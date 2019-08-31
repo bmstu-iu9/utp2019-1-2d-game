@@ -23,8 +23,7 @@ class NPC extends GameObject {
         this.hitbox = hitbox//new Hitbox(HITBOX_CIRCLE, new Vector2d(centre), 26);
         this.direction = new Vector2d(0, 0)
         this.walking = false
-        this.atacking=false
-        this.temp=0
+        this.attacking=false
         this.collisonSolveStrategy = "stay"
         this.abilities = [AbilityFactory.createFireBallAbility(this), AbilityFactory.createLigthningAbility(this),AbilityFactory.Hit(this)]
     }
@@ -53,7 +52,7 @@ class NPC extends GameObject {
             this.drawable.drowable.switch("go", this.direction)
             this.collisonSolveStrategy = 'move'
         }
-        if (this.atacking){
+        if (this.attacking){
             this.drawable.drowable.switch('beat',this.direction)
         }
         this.hitbox.update(this.actor.centre)

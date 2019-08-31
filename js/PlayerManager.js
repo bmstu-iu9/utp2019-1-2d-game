@@ -50,9 +50,9 @@ class PlayerManager {
         }
 
         if (keyboard.KeyE){
-            this.player.atacking=true
+            this.player.attacking=true
             this.player.abilities[2].cast()
-        }else this.player.atacking=false
+        }else this.player.attacking=false
 
         this.player.actor.update()
         this.player.actor.changePosition(this.Direction)
