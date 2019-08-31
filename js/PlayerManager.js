@@ -49,7 +49,7 @@ class PlayerManager {
             this.player.abilities[1].cast()
         }
 
-        if (keyboard.KeyE){
+        if (keyboard.Space){
             this.player.attacking=true
             this.player.abilities[2].cast()
         }else this.player.attacking=false

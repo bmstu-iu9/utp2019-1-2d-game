@@ -12,7 +12,7 @@ let keyboard={
     KeyZ:false, // save()
     KeyX:false, //load()
     KeyF:false,
-    KeyE:false
+    Space:false
 };
 
 let mouse={
