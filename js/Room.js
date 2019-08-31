@@ -173,8 +173,8 @@ class Room extends GameObject {
         let room = new Room(object.id, object.height, object.width)
         for (let i in object.roomObjects.map) {
             if ("data" in object.roomObjects.map[i]) {
-                room.Add(Spell.fromJSON(object.roomObjects.map[i]))
-            } else if ("direction" in object.roomObjects.map[i])
+                //room.Add(Spell.fromJSON(object.roomObjects.map[i]))
+                     } else if ("direction" in object.roomObjects.map[i])
                 room.Add(NPC.fromJSON(object.roomObjects.map[i]))
             else {
                 room.Add(StaticObject.fromJSON(object.roomObjects.map[i]))

@@ -40,10 +40,12 @@ class MovableActor extends Actor {
     }
 
     toJSON() {
-        let jsonObj = super.toJSON()
-        jsonObj.offset = this.offset
-        jsonObj.prevPosition = this.prevPosition
-        return jsonObj
+        return {
+            position : this.position,
+            centre : this.centre,
+            offset : this.offset,
+            prevPosition : this.prevPosition
+        }
     }
 
     /**
