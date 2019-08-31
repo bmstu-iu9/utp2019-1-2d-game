@@ -54,8 +54,6 @@ class CollisionManager {
             collideOffset.set(0, 0)
             for (let i = 0; i < objects.length; i++) {
                 collideWith = objects[i]
-               // console.log(collideWith)
-                //console.log(object)
                 if (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none') {
                     continue
                 }
@@ -78,6 +76,7 @@ class CollisionManager {
                             }else if (collideWith.collisonSolveStrategy==='hit'){
                                 this.solveCollision(object,collision)
                                 this.room.movedObjects.push(object)
+                                Game.currentWorld.currentRoom.delete(collideWith)
                             }
                         }
                             if (object.onCollide) {
