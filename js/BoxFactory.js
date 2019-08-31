@@ -47,7 +47,7 @@ class BoxFactory {
         let seq = Array(61).fill(1).map((e, i) => i)
         let fly = new SpritePattern('fireball_fly_bot', imagesStorage.fire_ball, seq, "horizontal", 0, 0, 52, 52, false, 2, -Math.PI / 2)
         seq = Array(36).fill(1).map((e, i) => i)
-        let explode = new SpritePattern('fireball_explosion', imagesStorage.explosion, seq, "horizontal", 0, 0, 84, 100, true, 2)
+        let explode = new SpritePattern('fireball_explosion', imagesStorage.explosion, seq, "horizontal", 0, 0, 84, 119, true, 1)
         let result = new SpriteBox()
         result.add("fly", fly)
         result.add("explode", explode)

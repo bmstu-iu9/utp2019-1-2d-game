@@ -4,7 +4,7 @@ class SpellFactory {
     static CreateFireBall(x, y, vector, caster) {
         let hitbox = new Hitbox('CircleHitbox', new Vector2d(x, y), 16)
         let data = new Action(new Stats(-50, 0, 0, 0, 0, 0))
-        let actor = new MovableActor(new Vector2d(x, ~~(y - 3 * caster.drawable.drowable.height / 4)), new Vector2d(x + 8, y + 8))
+        let actor = new MovableActor(new Vector2d(x, ~~(y - 3 * caster.drawable.drowable.height / 4)), new Vector2d(x, y))
         let sprite = SpriteFactory.CreateFireBallSprite()
         let result = new Spell(hitbox, data, new DrawableObject("middleground", sprite), actor)
         sprite.onceCallback = () => {
@@ -30,6 +30,7 @@ class SpellFactory {
             }
             result.Update = function () {
             }
+            result.actor.position.set(collision.obstacleObject.actor.position)
             result.drawable.drowable.switch("explode")
         }
 
