@@ -26,4 +26,16 @@ class AbilityFactory {
         }
         return lightning
     }
+
+    static Hit(npc){
+        let hit=new Ability(npc,5,1.5,0.5)
+        hit.cast=function () {
+            if (this.npc.statsManager.stats.mana >= this.manaCost && this.coolDownTime === 0) {
+                this.npc.statsManager.stats.mana -= this.manaCost
+                SpellFactory.Hit(npc)
+                this.coolDownTime = this.coolDown
+            }
+        }
+        return hit
+    }
 }

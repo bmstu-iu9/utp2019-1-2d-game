@@ -75,6 +75,9 @@ class CollisionManager {
                                 this.solveForBoth(object, objects[i], collision)
                                 this.room.movedObjects.push(object)
                                 this.room.movedObjects.push(objects[i])
+                            }else if (collideWith.collisonSolveStrategy==='hit'){
+                                this.solveCollision(object,collision)
+                                this.room.movedObjects.push(object)
                             }
                         }
                             if (object.onCollide) {
@@ -164,6 +167,22 @@ class Hitbox {
      */
     correctPosition(collision) {
         this.hitbox.correctPosition(collision)
+    }
+
+    /**
+     * @param {Number} angle
+     * @param {Vector2d} dot
+     */
+    rotateRadian(angle,dot=undefined){
+        this.hitbox.rotateRadian(angle,dot)
+    }
+
+    /**
+     * @param {Number} angle
+     * @param {Vector2d} dot
+     */
+    rotateDegrees(angle,dot=undefined){
+        this.hitbox.rotateDegrees(angle,dot)
     }
 
     toJSON() {
