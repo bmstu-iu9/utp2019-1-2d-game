@@ -3,7 +3,7 @@
 let canvas = document.getElementById("canvas")
 canvas.width = document.body.clientWidth
 canvas.height = document.body.clientHeight
-let ctx = canvas.getContext("2d", { alpha: false })
+let ctx = canvas.getContext("2d", {alpha: false})
 
 let imagesStorage = {}
 let textureStorage = {}
@@ -26,7 +26,7 @@ let imagesSrc = [
     'wall_SW.png',
     'wall_SE.png',
     'lightning.png',
-
+    'explosion.png'
 ];
 
 let Game = {
@@ -46,9 +46,9 @@ let Game = {
         Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.Floor)
         Game.DungeonWallTexture = TilesFactory.CreateTexture(imagesStorage.wall2)
         Game.Rock1Texture = TilesFactory.CreateTexture(imagesStorage.rocks1)
-        Game.Rock2Texture= TilesFactory.CreateTexture(imagesStorage.rocks2)
-        Game.Rock3Texture= TilesFactory.CreateTexture(imagesStorage.rocks3)
-        Game.Rock4Texture= TilesFactory.CreateTexture(imagesStorage.rocks4)
+        Game.Rock2Texture = TilesFactory.CreateTexture(imagesStorage.rocks2)
+        Game.Rock3Texture = TilesFactory.CreateTexture(imagesStorage.rocks3)
+        Game.Rock4Texture = TilesFactory.CreateTexture(imagesStorage.rocks4)
         Game.DungeonWallLeftTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_wall_right)
         Game.DungeonWallRightTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_wall_left)
         Game.DungeonWallNWTexture = TilesFactory.CreateTexture(imagesStorage.wall_NW)
@@ -123,7 +123,7 @@ graph.addEdge(1, 4)
 graph.addEdge(2, 3)
 graph.add(80, 120)
 graph.addEdge(6, 2)
-graph.addEdge(6,3)
+graph.addEdge(6, 3)
 let first = new Vector2d(106, 100)
 let last = new Vector2d(95, 105)
 let mesh = new NavMesh(graph, 120, 120)
