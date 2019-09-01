@@ -25,6 +25,7 @@ class NPC extends GameObject {
         this.walking = false
         this.collisonSolveStrategy = "stay"
         this.abilities = [AbilityFactory.createFireBallAbility(this), AbilityFactory.createLigthningAbility(this)]
+        this.type = "npc"
     }
 
     isDead() {
@@ -70,18 +71,8 @@ class NPC extends GameObject {
     }
 
     toJSON() {
-        return {
-            id: this.id,
-            actor: this.actor,
-            drawable: this.drawable,
-            hitbox: this.hitbox,
-            manager: this.manager !== undefined,
-            direction: this.direction,
-            collisonSolveStrategy: this.collisonSolveStrategy,
-            walking: this.walking
-        }
+        return Serializations[this.type](this)
     }
-
 
     /**
      *
@@ -98,6 +89,8 @@ class NPC extends GameObject {
             npc.direction = Vector2d.fromJSON(object.direction)
             npc.collisonSolveStrategy = object.collisonSolveStrategy
             npc.walking = object.walking
+         //   npc.statsManager = StatsManager.fromJSON(object.statsManager)
+          //  npc.statsAffector = StatsAffector.fromJSON(object.statsAffector)
             Game.camera.focusOn(npc.actor)
         } else {
             npc = TilesFactory.CreateStaticNPC(0, 0)
@@ -107,6 +100,8 @@ class NPC extends GameObject {
             npc.direction = Vector2d.fromJSON(object.direction)
             npc.collisonSolveStrategy = object.collisonSolveStrategy
             npc.walking = object.walking
+         //   npc.statsManager = StatsManager.fromJSON(object.statsManager)
+         //   npc.statsAffector = StatsAffector.fromJSON(object.statsAffector)
         }
 
         return npc

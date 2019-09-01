@@ -5,6 +5,7 @@ class StaticObject extends GameObject {
         this.actor = new Actor(new Vector2d(x, y), new Vector2d(xcentre, ycentre))
         this.drawable = drawable
         this.collisonSolveStrategy = "stay"
+        this.type = "staticObject"
     }
 
     render() {
@@ -12,13 +13,7 @@ class StaticObject extends GameObject {
     }
 
     toJSON(){
-        return {
-            id : this.id,
-            actor : this.actor,
-            drawable : this.drawable, // возможно нужен будет id
-            collisonSolveStrategy : this.collisonSolveStrategy,
-            hitbox : this.hitbox
-        }
+        return Serializations[this.type](this)
     }
 
     /**
@@ -31,7 +26,7 @@ class StaticObject extends GameObject {
             DrawableObject.fromJSON(object.drawable),object.id)
         staticObject.collisonSolveStrategy = object.collisonSolveStrategy
         if ("hitbox" in object) {
-            staticObject.hitbox = ("type" in object.hitbox) ? Hitbox.fromJSON(object.hitbox) : ("radius" in object.hitbox)
+            staticObject.hitbox = ("name" in object.hitbox) ? Hitbox.fromJSON(object.hitbox) : ("radius" in object.hitbox)
                 ? CircleHitbox.fromJSON(object.hitbox) : AABB.fromJSON(object.hitbox)
         }
         return staticObject

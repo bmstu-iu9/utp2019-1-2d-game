@@ -16,6 +16,7 @@ class Vector2d {
         } else {
             this.set(vector2d_or_x, y);
         }
+        this.type = "vector2D"
     }
 
     /**
@@ -181,10 +182,7 @@ class Vector2d {
     }
 
     toJSON() {
-        return {
-            x: this.x,  //Потом можно будет удалить
-            y: this.y
-        }
+        return Serializations[this.type](this)
     }
 
     /**

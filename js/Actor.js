@@ -7,13 +7,11 @@ class Actor {
     constructor(coords = new Vector2d(0, 0), centre = new Vector2d(0, 0)) {
         this.position = coords
         this.centre = centre
+        this.type = "actor"
     }
 
     toJSON(){
-        return {
-            position : this.position,
-            centre : this.centre
-        }
+        return Serializations[this.type](this)
     }
 
     /**

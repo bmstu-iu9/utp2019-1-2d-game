@@ -14,6 +14,7 @@ class StatsManager {
         this.manaLimit = stats.mana
         this.effectsContainer = []
         this.modifiersContainer = new Map()
+        this.type = "statsManager"
     }
 
     /**
@@ -81,13 +82,7 @@ class StatsManager {
     }
 
     toJSON() {
-        return {
-            stats: this.stats,
-            hpLimit: this.hpLimit,
-            manaLimit: this.manaLimit,
-            effectsContainer: this.effectsContainer,
-            modifiersContainer: this.modifiersContainer
-        }
+        return Serializations[this.type](this)
     }
 
     /**
@@ -98,8 +93,8 @@ class StatsManager {
         let statsManager = new StatsManager(Stats.fromJSON(object.stats))
         statsManager.hpLimit = object.hpLimit
         statsManager.manaLimit = object.manaLimit
-        statsManager.effectsContainer = object.effectsContainer
-        statsManager.modifiersContainer = object.modifiersContainer
+        object.effectsContainer.forEach((obj) => statsManager.effectsContainer.push(obj))
+        object.modifiersContainer.forEach(obj => statsManager.modifiersContainer.set(Modifier.fromJSON(obj),obj.id))
         return statsManager
     }
 }

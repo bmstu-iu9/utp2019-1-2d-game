@@ -22,6 +22,7 @@ class Room extends GameObject {
         this.manager = new RoomManager(this);
         this.collisionManager = new CollisionManager(this);
         this.quadTree = new QuadTree(new Rectangle(0, 0, this.width * Game.tileWidth, this.height * Game.tileHeight), 16);
+        this.type = "room"
     }
 
     /**
@@ -156,14 +157,9 @@ class Room extends GameObject {
     }
 
     toJSON() {
-
-        return {
-            id: this.id,
-            height: this.height,
-            width: this.width,
-            roomObjects: this.roomObjects
-        };
+        return Serializations[this.type](this)
     }
+
 
     /**
      *

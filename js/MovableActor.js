@@ -12,6 +12,7 @@ class MovableActor extends Actor {
         super(coords, centre)
         this.offset = new Vector2d(0, 0)
         this.prevPosition = new Vector2d(0, 0)
+        this.type = "movableActor"
     }
 
     /**
@@ -40,12 +41,7 @@ class MovableActor extends Actor {
     }
 
     toJSON() {
-        return {
-            position : this.position,
-            centre : this.centre,
-            offset : this.offset,
-            prevPosition : this.prevPosition
-        }
+        return Serializations[this.type](this)
     }
 
     /**

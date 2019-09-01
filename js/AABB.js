@@ -158,6 +158,7 @@ class AABB {
         this.vertices=vertices
         this.setNormals()
         this.id=id
+        this.type = "AABB"
     }
 
     setNormals=()=>{
@@ -210,11 +211,7 @@ class AABB {
     }
 
     toJSON() {
-        return {
-            centre: this.centre,
-            vertices: this.vertices,
-            id : this.id
-        }
+        return Serializations[this.type](this)
     }
 
 
@@ -302,6 +299,7 @@ class CircleHitbox {
         this.radius=radius
         this.centre=centre
         this.id=id
+        this.type = "CircleHitbox"
     }
 
     getCollision(obstacle) {
@@ -328,11 +326,7 @@ class CircleHitbox {
     }
 
     toJSON() {
-        return {
-            radius: this.radius,
-            centre: this.centre,
-            id : this.id
-        }
+        return Serializations[this.type](this)
     }
 
     /**

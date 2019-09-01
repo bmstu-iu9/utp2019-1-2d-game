@@ -13,13 +13,11 @@ class Modifier extends GameObject {
     constructor(stats, id) {
         super(id)
         this.stats = stats
+        this.type = "modifier"
     }
 
     toJSON(){
-        return{
-            stats : this.stats,
-            id : this.id
-        }
+        return Serializations[this.type](this)
     }
 
     /**

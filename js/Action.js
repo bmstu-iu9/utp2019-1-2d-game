@@ -11,6 +11,7 @@ class Action {
      */
     constructor(stats = new Stats()) {
         this.stats = stats
+        this.type = "action"
     }
 
     /**
@@ -22,9 +23,7 @@ class Action {
     }
 
     toJSON(){
-        return {
-            stats : this.stats
-        }
+        return Serializations[this.type](this)
     }
 
     /**

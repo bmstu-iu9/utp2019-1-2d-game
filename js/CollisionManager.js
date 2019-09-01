@@ -114,6 +114,7 @@ class Hitbox {
             }
             this.type = type
             this.hitboxPrevState = this.getCopy(type, this.hitbox)
+            this.name = "Hitbox"
         }
     }
 
@@ -167,11 +168,7 @@ class Hitbox {
     }
 
     toJSON() {
-        return {
-            type: this.type,
-            hitbox: this.hitbox,
-            hitboxPrevState: this.hitboxPrevState
-        }
+        return Serializations[this.name](this)
     }
 
     /**

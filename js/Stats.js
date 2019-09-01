@@ -22,6 +22,7 @@ class Stats {
         this.agility = agility
         this.intelligence = intelligence
         this.speed = speed
+        this.type = "stats"
     }
 
     /**
@@ -43,14 +44,7 @@ class Stats {
     }
 
     toJSON() {
-        return {
-            hp: this.hp,
-            mana: this.mana,
-            strenght: this.strenght,
-            agility: this.agility,
-            intelligence: this.intelligence,
-            speed: this.speed
-        }
+        return Serializations[this.type](this)
     }
 
     /**

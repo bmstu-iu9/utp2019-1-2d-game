@@ -10,6 +10,7 @@ class StatsAffector {
      */
     constructor(target = undefined) {
         this.target = target
+        this.type = "statsAffector"
     }
 
     /**
@@ -49,9 +50,7 @@ class StatsAffector {
     }
 
     toJSON() {
-        return {
-            target: this.target //Возможно нужно будет удалить
-        }
+        return Serializations[this.type](this)
     }
 
     /**

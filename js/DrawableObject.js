@@ -5,6 +5,7 @@ class DrawableObject {
         this.placement = placement;
         this.drowable = drowable
         this.canvasCoord = new Vector2d(0, 0)
+        this.type = "drawableObject"
     }
 
     render() {
@@ -12,11 +13,7 @@ class DrawableObject {
     }
 
     toJSON() {
-        return {
-            placement: this.placement,
-            drowable: this.drowable, //Нужно поменять на id
-            canvasCoord: this.canvasCoord
-        }
+        return Serializations[this.type](this)
     }
 
     /**

@@ -7,6 +7,7 @@ class Texture {
      */
     constructor(image) {
         this.setImage(image);
+        this.type = "texture"
     }
     /**
      * 
@@ -30,14 +31,14 @@ class Texture {
     }
 
     toJSON(){
-        return this.img.src
+        return Serializations[this.type](this)
     }
     /**
      *
      * @param {Texture} object
      */
     static fromJSON(object){
-        return textureStorage[object] //Как появится id нужно будет удалить
+        return textureStorage[object.src] //Как появится id нужно будет удалить
     }
 }
 
