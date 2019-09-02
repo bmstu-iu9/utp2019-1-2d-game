@@ -23,6 +23,25 @@ class TilesFactory {
         return new StaticObject(x, y, x, y, new DrawableObject("middleground", src[~~(Math.random() * 3)]));
     }
 
+    static CreateRandomForest(x = 0, y = 0) {
+      let src = [Game.TreeTexture, Game.BigOakTexture, Game.BigBirchTexture, Game.MediumOakTexture, Game.MediumBirchTexture, Game.SmallOakTexture, Game.SmallBirchTexture]
+      return TilesFactory.createTile(x, y, ~~(Game.TreeTexture.width / 4), ~~(Game.TreeTexture.height / 5), new DrawableObject("middleground", src[~~(Math.random() * 7)]),"Bot")
+    }
+
+    static CreateBigForest(x = 0, y = 0) {
+      let src = [Game.TreeTexture, Game.BigOakTexture, Game.BigBirchTexture]
+      return TilesFactory.createTile(x, y, ~~(Game.TreeTexture.width / 4), ~~(Game.TreeTexture.height / 5), new DrawableObject("middleground", src[~~(Math.random() * 2)]),"Bot");
+    }
+
+    static CreateMediumForest(x = 0,y = 0) {
+      let src = [Game.MediumOakTexture, Game.MediumBirchTexture]
+      return TilesFactory.createTile(x, y, ~~(Game.MediumOakTexture.width / 2), ~~(Game.MediumOakTexture.height / 5), new DrawableObject("middleground", src[~~(Math.random() * 2)]),"Bot");
+    }
+
+    static CreateSmallForest(x = 0,y = 0) {
+      let src = [Game.SmallOakTexture, Game.SmallBirchTexture]
+      return TilesFactory.createTile(x, y, ~~(Game.SmallBirchTexture.width / 3), ~~(Game.SmallBirchTexture.height / 4), new DrawableObject("middleground", src[~~(Math.random() * 2)]),"Bot");
+    }
 
     /**
      * Порождает и Player по заданным игровым координатам
@@ -161,8 +180,8 @@ class TilesFactory {
         return new StaticObject(x, y, x, y, new DrawableObject("background", Game.GroundTexture));
     }
 
-    static CreateLuke(x = 0, y = 0) {
-        return TilesFactory.createTile(x, y, Game.LukeTexture.width, ~~(Game.LukeTexture.height / 2), new DrawableObject("middleground", Game.LukeTexture), "Bot")
+    static CreateLukeTile(x = 0, y = 0) {
+        return new StaticObject(x, y, x, y, new DrawableObject("background", Game.LukeTexture));
     }
 
     static CreateMediumBirch(x = 0, y = 0) {
@@ -224,6 +243,7 @@ class TilesFactory {
     static CreateWell(x = 0, y = 0) {
         return TilesFactory.createTile(x, y, Game.WellTexture.width, ~~(Game.WellTexture.height / 5), new DrawableObject("middleground", Game.WellTexture), "Bot")
     }
+
 
     /**
      * create tile with hitbox

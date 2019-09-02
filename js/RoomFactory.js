@@ -31,18 +31,12 @@ class RoomFactory {
     static CreateRoundedRoom() {
         let testRoomSize = 120;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
-        for (let i = 0; i < testRoomSize; i++) {
-            for (let j = 0; j < testRoomSize; j++) {
-                //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
-                //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
-                //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
-                room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
-                //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
-                //     if (Math.random() < 0.4) {
-                //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
-                //     }
-            }
-        }
+        room.drawFloor(0, 0, 119, 119);
+        //room.drawBigForest(0, 0, 10, 5);
+        //room.drawMediumForest(0, 0, 5, 5);
+        //room.drawSmallForest(0, 0, 10, 5);
+        room.drawGrass1(0, 0, 10, 10)
+        room.drawRandomForest(0, 0, 10, 10)
 
         let player = TilesFactory.CreatePlayer(1200, 990)
 
@@ -84,7 +78,7 @@ class RoomFactory {
             '     d a       a a      d a        1wwe                                                                      \n' +
             ' qwwwx zwwwwe  a a      d a        d  1wwe                                                                       \n' +
             ' a          1ww2 zwwwwwwx zwwwwwwwwx     1wwe                                                                              \n' +
-            ' a                                          1e                                                        \n' +
+            '                                           1e                                                        \n' +
             ' a                                           1e                                                       \n' +
             ' a          qsssssssse qssssssssse            d                                                                   \n' +
             ' zse qsse qs2        d a         d            d                                                               \n' +
