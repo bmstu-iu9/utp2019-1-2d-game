@@ -28,13 +28,15 @@ class AbilityFactory {
     }
 
     static Hit(npc){
-        let hit=new Ability(npc,5,1.5,0.5)
+        let hit=new Ability(npc,5,1.5,28)
         hit.cast=function () {
             if (this.npc.statsManager.stats.mana >= this.manaCost && this.coolDownTime === 0) {
                 this.npc.statsManager.stats.mana -= this.manaCost
                 SpellFactory.Hit(npc)
                 this.coolDownTime = this.coolDown
+                this.castTime=this.initCastTime
             }
+            return this.castTime-- > 0
         }
         return hit
     }

@@ -67,15 +67,16 @@ class CollisionManager {
                                 collideOffset.add(object.actor.offset)
                                 this.solveCollision(object, collision)
                                 collideOffset.sub(object.actor.offset)
-                                this.room.movedObjects.push(object)
+                                if (!this.room.movedObjects.includes(object))
+                                    this.room.movedObjects.push(object)
                             }
                             else if (collideWith.collisonSolveStrategy === 'move') {
                                 this.solveForBoth(object, objects[i], collision)
-                                this.room.movedObjects.push(object)
-                                this.room.movedObjects.push(objects[i])
+                                if (!this.room.movedObjects.includes(object))
+                                    this.room.movedObjects.push(object)
+                                if (!this.room.movedObjects.includes(objects[i]))
+                                    this.room.movedObjects.push(objects[i])
                             }else if (collideWith.collisonSolveStrategy==='hit'){
-                                this.solveCollision(object,collision)
-                                this.room.movedObjects.push(object)
                                 Game.currentWorld.currentRoom.delete(collideWith)
                             }
                         }

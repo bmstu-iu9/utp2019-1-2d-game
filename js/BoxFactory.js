@@ -9,10 +9,10 @@ class BoxFactory {
         return result
     }
     static CreateKnightBox() {
-        let idle = [new SpritePattern("knight_idle_right", imagesStorage.knight, [0], "horizontal", 0, 3, 84, 84, false, 1),
-        new SpritePattern("knight_idle_top", imagesStorage.knight, [0], "horizontal", 9, 2, 84, 84, false, 3),
-        new SpritePattern("knight_idle_left", imagesStorage.knight, [0], "horizontal", 0, 2, 84, 84, false, 1),
-        new SpritePattern("knight_idle_bot", imagesStorage.knight, [0, 1, 2, 3], "horizontal", 0, 0, 84, 84, false, 1)]
+        let idle = [new SpritePattern("knight_idle_right", imagesStorage.knight, [0], "horizontal", 0, 3, 84, 84, false, 1.85),
+        new SpritePattern("knight_idle_top", imagesStorage.knight, [0], "horizontal", 9, 2, 84, 84, false, 1.85),
+        new SpritePattern("knight_idle_left", imagesStorage.knight, [0], "horizontal", 0, 2, 84, 84, false, 1.85),
+        new SpritePattern("knight_idle_bot", imagesStorage.knight, [0, 1, 2, 3], "horizontal", 0, 0, 84, 84, false, 1.85)]
         let beat = [new SpritePattern("knight_sword_right", imagesStorage.knight, [0, 1, 2], "horizontal", 4, 0, 84, 84, false, 5),
         new SpritePattern("knight_sword_top", imagesStorage.knight, [0, 1, 2], "horizontal", 6, 2, 84, 84, false, 5),
         new SpritePattern("knight_sword_left", imagesStorage.knight, [0, 1, 2], "horizontal", 7, 0, 84, 84, false, 5),

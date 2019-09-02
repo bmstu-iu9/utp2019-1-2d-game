@@ -81,8 +81,13 @@ class SpellFactory {
                 }
             }
         }
+
+        result.Update=function(){
+            Game.currentWorld.currentRoom.delete(result)
+        }
+
         Game.currentWorld.currentRoom.Add(result)
-        //Game.currentWorld.currentRoom.movedObjects.push(result)
+        Game.currentWorld.currentRoom.movedObjects.push(result)
         return result
     }
 }

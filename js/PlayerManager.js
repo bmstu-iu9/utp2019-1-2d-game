@@ -29,13 +29,13 @@ class PlayerManager {
         if (keyboard.KeyD || keyboard.ArrowRight) {
             xDirection += speed
         }
-        this.player.walking = true
+        this.player.state=STATE.walk
         if (xDirection !== 0 && yDirection !== 0) {
             xDirection = ~~(xDirection / Math.sqrt(2))
             yDirection = ~~(yDirection / Math.sqrt(2))
         }
-        if (xDirection == 0 && yDirection == 0) {
-            this.player.walking = false
+        if (xDirection === 0 && yDirection === 0) {
+            this.player.state=STATE.idle
         } else {
             this.player.direction.x = xDirection
             this.player.direction.y = yDirection
@@ -50,9 +50,9 @@ class PlayerManager {
         }
 
         if (keyboard.Space){
-            this.player.attacking=true
-            this.player.abilities[2].cast()
-        }else this.player.attacking=false
+            if (this.player.abilities[2].cast())
+                this.player.state=STATE.attack
+        }
 
         this.player.actor.update()
         this.player.actor.changePosition(this.Direction)
