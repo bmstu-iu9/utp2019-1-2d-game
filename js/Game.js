@@ -78,6 +78,7 @@ let Game = {
         Game.tileHeight = 52
         Game.objCnt = 0;
         Game.now = 0;
+        Game.result = new Array()
     },
 
     InitLogic() {
@@ -157,6 +158,7 @@ let Game = {
         }
         Game.Render();
         Game.last = Game.now;
+        //console.log(mouse.clickPosition.add(Game.camera.position, new Vector2d()))
         requestAnimationFrame(Game.Loop)
         if (keyboard.KeyZ === true)
             SaveLoad.save()
@@ -178,30 +180,5 @@ let Game = {
 };
 
 Game.InitConfig()
-let graph = new Graph()
-graph.add(100, 100)
-graph.add(110, 110)
-graph.add(90, 100)
-graph.add(90, 110)
-graph.add(110, 90)
-graph.add(100, 110)
-graph.addEdge(0, 1)
-graph.addEdge(0, 2)
-graph.addEdge(0, 3)
-graph.addEdge(0, 4)
-graph.addEdge(0, 5)
-graph.addEdge(3, 5)
-graph.addEdge(5, 1)
-graph.addEdge(2, 4)
-graph.addEdge(1, 4)
-graph.addEdge(2, 3)
-graph.add(80, 120)
-graph.addEdge(6, 2)
-graph.addEdge(6,3)
-let first = new Vector2d(106, 100)
-let last = new Vector2d(95, 105)
-let mesh = new NavMesh(graph, 120, 120)
-let ai = new AIManager()
-mesh.savePath(first, last, ai)
 ResourceLoader.setCallback(Game.InitLogic)
 ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc)

@@ -11,7 +11,9 @@ let keyboard={
     KeyD:false,
     KeyZ:false, // save()
     KeyX:false, //load()
-    KeyF:false
+    KeyF: false,
+    KeyQ: false,
+    KeyE: false
 };
 
 let mouse={
