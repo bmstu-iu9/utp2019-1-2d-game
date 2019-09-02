@@ -32,11 +32,11 @@ class RoomFactory {
         let testRoomSize = 120;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
         room.drawFloor(0, 0, 119, 119);
-        //room.drawBigForest(0, 0, 10, 5);
-        //room.drawMediumForest(0, 0, 5, 5);
+        room.drawBigForest(0, 0, 10, 5);
+        room.drawMediumForest(1000, 100, 10, 5);
         //room.drawSmallForest(0, 0, 10, 5);
-        room.drawGrass1(0, 0, 10, 10)
-        room.drawRandomForest(0, 0, 10, 10)
+        //room.drawGrass1(0, 0, 100, 100)
+        //room.drawForest(0, 0, 5, 10)
 
         let player = TilesFactory.CreatePlayer(1200, 990)
 
@@ -78,7 +78,7 @@ class RoomFactory {
             '     d a       a a      d a        1wwe                                                                      \n' +
             ' qwwwx zwwwwe  a a      d a        d  1wwe                                                                       \n' +
             ' a          1ww2 zwwwwwwx zwwwwwwwwx     1wwe                                                                              \n' +
-            '                                           1e                                                        \n' +
+            ' a                                          1e                                                        \n' +
             ' a                                           1e                                                       \n' +
             ' a          qsssssssse qssssssssse            d                                                                   \n' +
             ' zse qsse qs2        d a         d            d                                                               \n' +

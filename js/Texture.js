@@ -2,15 +2,15 @@
 
 class Texture {
     /**
-     * 
-     * @param {Image} image 
+     *
+     * @param {Image} image
      */
     constructor(image) {
         this.setImage(image);
     }
     /**
-     * 
-     * @param {Image} img 
+     *
+     * @param {Image} img
      */
     setImage(img) {
         if (img instanceof Image) {
@@ -22,8 +22,8 @@ class Texture {
 
     }
     /**
-     * 
-     * @param {Vector2D} canvasCoord 
+     *
+     * @param {Vector2D} canvasCoord
      */
     render(canvasCoord) {
         ctx.drawImage(this.img, canvasCoord.x, canvasCoord.y);
@@ -40,4 +40,3 @@ class Texture {
         return textureStorage[object] //Как появится id нужно будет удалить
     }
 }
-

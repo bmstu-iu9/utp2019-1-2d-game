@@ -165,50 +165,42 @@ class Room extends GameObject {
       }
     }
 
-    drawRandomForest(x, y, width, height) {
-      x = x * Game.tileWidth / 2
-      y = y * Game.tileHeight / 2
+    drawForest(x, y, width, height) {
       for(let i = 0; i < width; i++) {
           for(let j = 0; j < height; j++) {
-            //if (Math.random() < 0.3) {
-              this.Add(TilesFactory.CreateRandomForest(x + (j * Game.tileWidth), y + (i * Game.tileWidth)))
-            //}
+            if (Math.random() < 0.8) {
+              this.Add(TilesFactory.CreateForest(x + i * 130, y + j * 130))
+            }
           }
       }
     }
 
     drawBigForest(x, y, width, height) {
-      x = x * Game.tileWidth // 2
-      y = y * Game.tileHeight // 2
       for(let i = 0; i < width; i++) {
           for(let j = 0; j < height; j++) {
-            //if (Math.random() < 0.0002) {
-              this.Add(TilesFactory.CreateBigForest(x + (j * Game.tileWidth), y + (i * Game.tileWidth)))
-            //}
+            if (Math.random() < 0.8) {
+              this.Add(TilesFactory.CreateBigForest(x + i * 90, y + j * 90))
+            }
           }
       }
     }
 
     drawMediumForest(x, y, width, height) {
-      x = x * Game.tileWidth // 2
-      y = y * Game.tileHeight // 2
       for(let i = 0; i < width; i++) {
           for(let j = 0; j < height; j++) {
-            //if (Math.random() < 0.00025) {
-              this.Add(TilesFactory.CreateMediumForest(x + (j * Game.tileWidth), y + (i * Game.tileWidth)))
-            //}
+            if (Math.random() < 0.7) {
+              this.Add(TilesFactory.CreateMediumForest(x + i * 70, y + j * 70))
+            }
           }
       }
     }
 
     drawSmallForest(x, y, width, height) {
-      x = x * Game.tileWidth // 2
-      y = y * Game.tileHeight // 2
       for(let i = 0; i < width; i++) {
           for(let j = 0; j < height; j++) {
-            //if (Math.random() < 0.3) {
-              this.Add(TilesFactory.CreateSmallForest(x + (j * Game.tileWidth), y + (i * Game.tileWidth)))
-            //}
+            if (Math.random() < 0.5) {
+              this.Add(TilesFactory.CreateSmallForest(x + i * 50, y + j * 50))
+            }
           }
       }
     }
