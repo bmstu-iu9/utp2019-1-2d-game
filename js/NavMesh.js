@@ -157,8 +157,8 @@ class NavMesh {
                         } else {
                             triangle = this.dataHash.get(triangle.id)
                         }
-                        console.log(triangle)
-                        console.log(lasttriangle)
+                      //  console.log(triangle)
+                      //  console.log(lasttriangle)
                         //triangle.connect(lasttriangle)
                         last = element[i]
                         lasttriangle = triangle
@@ -169,7 +169,7 @@ class NavMesh {
                 }
                 last = element[i]
             }
-            console.log(this)
+          //  console.log(this)
             //triangle.connect(firsttriangle)
         })
         for (let i = 0; i < this.triangle.length; i++) {
@@ -370,7 +370,7 @@ class NavMesh {
 
             }
         }
-        console.log(222)
+       // console.log(222)
     }
 
     render() {

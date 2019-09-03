@@ -60,7 +60,7 @@ const SaveLoad = {
         }
     },
 
-     "room" : (obj) => {
+     "roundedRoom" : (obj) => {
         return {
             id: obj.id,
             height: obj.height,
@@ -70,20 +70,55 @@ const SaveLoad = {
         }
      },
 
-     "npc" : (obj) => {
+     "testRoom" : (obj) => {
+         return {
+             id: obj.id,
+             height: obj.height,
+             width: obj.width,
+             roomObjects: obj.roomObjects,
+             type : obj.type
+         }
+     },
+
+     "staticNpc" : (obj) => {
         return {
             id: obj.id,
             actor: obj.actor,
             drawable: obj.drawable,
             hitbox: obj.hitbox,
-            manager: obj.manager !== undefined,
             direction: obj.direction,
             collisonSolveStrategy: obj.collisonSolveStrategy,
             walking: obj.walking,
             type : obj.type,
-            statsAffector : obj.statsAffector,
-            statsManager : obj.statsManager
+            //statsAffector : obj.statsAffector,
+           // statsManager : obj.statsManager
         }
+     },
+
+     "player" : (obj) => {
+        return {
+            id: obj.id,
+            actor: obj.actor,
+            drawable: obj.drawable,
+            hitbox: obj.hitbox,
+            direction: obj.direction,
+            collisonSolveStrategy: obj.collisonSolveStrategy,
+            walking: obj.walking,
+            type : obj.type,
+        }
+     },
+
+     "npc" : (obj) => {
+         return {
+             id: obj.id,
+             actor: obj.actor,
+             drawable: obj.drawable,
+             hitbox: obj.hitbox,
+             direction: obj.direction,
+             collisonSolveStrategy: obj.collisonSolveStrategy,
+             walking: obj.walking,
+             type: obj.type,
+         }
      },
 
      "actor" : (obj) => {
@@ -194,15 +229,15 @@ const SaveLoad = {
          }
      },
 
-     "statsAffector" : (obj) => {
+     /*"statsAffector" : (obj) => {
          console.log(obj)
          return {
              target: obj.target, //Возможно нужно будет удалить
              type : obj.type
          }
-     },
+     },*/
 
-     "statsManager" : (obj) => {
+    /* "statsManager" : (obj) => {
          let arr = []
          obj.modifiersContainer.forEach(elem => arr.push(elem))
          return {
@@ -213,7 +248,7 @@ const SaveLoad = {
              modifiersContainer: arr,
              type : obj.type
          }
-     },
+     },*/
 
      "texture" : (obj) => {
          return {

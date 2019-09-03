@@ -1,9 +1,9 @@
 'use strict';
 class RoomFactory {
-    static CreateTestRoom() {
+    static CreateTestRoom(object = undefined) {
         let testRoomSize = 120;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
-
+        room.type = "testRoom"
         for (let i = 0; i < testRoomSize; i++) {
             for (let j = 0; j < testRoomSize; j++) {
                 room.Add(TilesFactory.CreateTestTile(j * Game.tileWidth, i * Game.tileHeight))
@@ -12,59 +12,65 @@ class RoomFactory {
 
 
         let grassTile = TilesFactory.CreateTestGrassTile(100, 100);
-        let player = TilesFactory.CreatePlayer(350, 370)
-
         room.Add(grassTile)
-        room.Add(player)
-        Game.camera.focusOn(player.actor)
+        if (object === undefined) {
+            let player = TilesFactory.CreatePlayer(350, 370)
+            room.Add(player)
+            Game.camera.focusOn(player.actor)
 
-        for (let i = 0; i < 10; i++) {
-            for (let j = 0; j < 10; j++) {
-                let t = TilesFactory.CreateStaticNPC((2 + j) * 125, (2 + i) * 125);
-                room.Add(t);
+
+            for (let i = 0; i < 10; i++) {
+                for (let j = 0; j < 10; j++) {
+                    let t = TilesFactory.CreateStaticNPC((2 + j) * 125, (2 + i) * 125);
+                    room.Add(t);
+                }
             }
         }
         return room
     }
 
 
-    static CreateRoundedRoom() {
+    static CreateRoundedRoom(object = undefined) {
         let testRoomSize = 120;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
-        for (let i = 0; i < testRoomSize; i++) {
-            for (let j = 0; j < testRoomSize; j++) {
-                //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
-                //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
-                //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
-                room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
-                //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
-                //     if (Math.random() < 0.4) {
-                //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
-                //     }
+        if (object === undefined) {
+            room.type = "roundedRoom"
+            for (let i = 0; i < testRoomSize; i++) {
+                for (let j = 0; j < testRoomSize; j++) {
+                    //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
+                    //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
+                    //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
+                    room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
+                    //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
+                    //     if (Math.random() < 0.4) {
+                    //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
+                    //     }
+                }
             }
+
+            let player = TilesFactory.CreatePlayer(1280, 1300)
+
+            room.Add(player)
+            Game.player = player
+            Game.camera.focusOn(player.actor)
         }
-
-        let player = TilesFactory.CreatePlayer(1280, 1300)
-
-        room.Add(player)
-        Game.player = player
-        Game.camera.focusOn(player.actor)
         room.nav = RoomFactory.initNavMesh(testRoomSize, testRoomSize)
-
         for (let i = 15; i < 16; i++) {
-            for (let j = 16; j < 17; j++) {
-                let t = TilesFactory.CreateStaticNPC(j * 60, i * 60, room.nav);
-                room.Add(t);
-                // Следование за игроком
-                // t.manager = new Object(t)
-                // t.manager.update = () => {
-                //     t.actor.update()
-                //     t.actor.move(player.actor.position.sub(t.actor.position, new Vector2d).normalize().mul(2))
-                //     t.hitbox.update(t.actor.centre)
-                //     t.collisonSolveStrategy = 'move'
-                //     t.walking = (t.actor.offset.x !== 0 || t.actor.offset.y !== 0)
-                //     t.direction = t.actor.offset
-                // }
+            if (object === undefined) {
+                for (let j = 16; j < 17; j++) {
+                    let t = TilesFactory.CreateStaticNPC(j * 60, i * 60, room.nav);
+                    room.Add(t);
+                    // Следование за игроком
+                    // t.manager = new Object(t)
+                    // t.manager.update = () => {
+                    //     t.actor.update()
+                    //     t.actor.move(player.actor.position.sub(t.actor.position, new Vector2d).normalize().mul(2))
+                    //     t.hitbox.update(t.actor.centre)
+                    //     t.collisonSolveStrategy = 'move'
+                    //     t.walking = (t.actor.offset.x !== 0 || t.actor.offset.y !== 0)
+                    //     t.direction = t.actor.offset
+                    // }
+                }
             }
         }
 

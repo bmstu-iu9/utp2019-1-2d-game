@@ -32,6 +32,7 @@ class TilesFactory {
     static CreatePlayer(x = 0, y = 0) {
         let player = TilesFactory.createNPC(x, y, 24, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()));
         player.manager = new PlayerManager(player)
+        player.type = "player"
         return player
     }
 
@@ -43,6 +44,7 @@ class TilesFactory {
     static CreateStaticNPC(x, y, nav) {
         let t = TilesFactory.createNPC(x, y, 22, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()))
         t.manager = new AIManager(t, nav)
+        t.type = "staticNpc"
         return t
     }
 

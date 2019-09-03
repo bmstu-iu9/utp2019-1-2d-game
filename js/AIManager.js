@@ -25,7 +25,7 @@ class AIManager {
         }
         direction.normalize()
         direction.mul(2)
-        console.log(this)
+       // console.log(this)
         this.character.walking = true
         if (direction.x == 0 && direction.y == 0) {
             this.character.walking = false
