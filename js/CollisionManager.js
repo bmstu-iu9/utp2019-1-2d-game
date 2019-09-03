@@ -42,16 +42,15 @@ class CollisionManager {
         let objects,                             //Обекты проверяемые на наличие коллизии с object
             collision,                           //Объект коллизии
             object,                              //Объект для которого проверяется наличие коллизий
-            collideOffset = new Vector2d(0, 0),  //смещение объекта после разрешения коллизии
-            isCollided,                          //была ли коллизися хотя бы с одним объектом
-            collideWith
+            collideWith,
+            next=[]
 
         for (let j = 0; j < this.room.movedObjects.length; j++) {
-            isCollided = false
             object = this.room.movedObjects[j]
-            this.room.quadTree.update(object)
+            if (!(object instanceof Spell))
+                this.room.quadTree.update(object)
             objects = this.room.quadTree.retrieve([], object)
-            collideOffset.set(0, 0)
+            console.log(objects.length)
             for (let i = 0; i < objects.length; i++) {
                 collideWith = objects[i]
                 if (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none') {
@@ -60,40 +59,38 @@ class CollisionManager {
                 if (!objects[i].hitbox.equals(object.hitbox)) {
                     collision = getCollision(object.hitbox, collideWith.hitbox)
                     if (collision) {
-                        isCollided = (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none')
                         collision.obstacleObject = collideWith
                         if (object.collisonSolveStrategy !== 'none') {
                             if (collideWith.collisonSolveStrategy === 'stay') {
-                                collideOffset.add(object.actor.offset)
-                                this.solveCollision(object, collision)
-                                collideOffset.sub(object.actor.offset)
-                                if (!this.room.movedObjects.includes(object))
-                                    this.room.movedObjects.push(object)
+                                if (object.collisonSolveStrategy==='hit'){
+                                    Game.currentWorld.currentRoom.delete(object)
+                                }else {
+                                    this.solveCollision(object, collision)
+                                    next.push(object)
+                                }
                             }
                             else if (collideWith.collisonSolveStrategy === 'move') {
-                                this.solveForBoth(object, objects[i], collision)
-                                if (!this.room.movedObjects.includes(object))
-                                    this.room.movedObjects.push(object)
-                                if (!this.room.movedObjects.includes(objects[i]))
-                                    this.room.movedObjects.push(objects[i])
+                                if (object.collisonSolveStrategy==='hit'){
+                                    Game.currentWorld.currentRoom.delete(object)
+                                }else {
+                                    this.solveForBoth(object, objects[i], collision)
+                                    next.push(object,objects[i])
+                                }
                             }else if (collideWith.collisonSolveStrategy==='hit'){
                                 Game.currentWorld.currentRoom.delete(collideWith)
                             }
                         }
-                            if (object.onCollide) {
-                                object.onCollide(collision)
-                            }
+                        if (object.onCollide) {
+                            object.onCollide(collision)
+                        }
                         if (objects[i].onCollide) {
                             objects[i].onCollide(collision)
                         }
                     }
                 }
             }
-            if (isCollided && collideOffset.isNullVector()) {
-                throw "Collisions were not solved"
-            }
-
         }
+        this.room.movedObjects=next
     }
 }
 

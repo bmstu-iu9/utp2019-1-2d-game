@@ -55,17 +55,17 @@ class SpellFactory {
     }
 
     static Hit(caster){
-        let data = new Action(new Stats(-100,0,0,0,0,0))
+        let data = new Action(new Stats(-34,0,0,0,0,0))
         let centre=caster.actor.centre.add(20,0,new Vector2d())
         const centre_to_centre=centre.sub(caster.actor.centre,new Vector2d())
         const cos=centre_to_centre.dotProduct(caster.direction)/Math.sqrt(centre_to_centre.lengthSquared()*caster.direction.lengthSquared())
         let angle=Math.acos(cos)
         if (angle*caster.direction.y<0) angle*=-1
         let hitbox=new Hitbox(HITBOX_AABB,centre,[
-            centre.add(-20,-2,new Vector2d()),
-            centre.add(20,-2,new Vector2d()),
-            centre.add(20,2,new Vector2d()),
-            centre.add(-20,2,new Vector2d()),
+            centre.add(-20,-8,new Vector2d()),
+            centre.add(20,-8,new Vector2d()),
+            centre.add(20,8,new Vector2d()),
+            centre.add(-20,8,new Vector2d()),
         ])
         hitbox.rotateRadian(angle,caster.actor.centre)
         let result=new Spell(hitbox,data,new DrawableObject("middlegorund",SpriteFactory.CreateTestSprite()),new MovableActor(centre.sub(5,1,new Vector2d())),centre)
@@ -80,10 +80,6 @@ class SpellFactory {
                     console.log(collision.obstacleObject)
                 }
             }
-        }
-
-        result.Update=function(){
-            Game.currentWorld.currentRoom.delete(result)
         }
 
         Game.currentWorld.currentRoom.Add(result)
