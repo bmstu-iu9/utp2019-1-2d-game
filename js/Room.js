@@ -361,7 +361,7 @@ class Room extends GameObject {
         room.id = object.id
         room.height = object.height
         room.width = object.width
-        room.roomObjects.map = {}
+        room.type = object.type;
         for (let i in object.roomObjects.map) {
             if ("data" in object.roomObjects.map[i]) {
                 //room.Add(Spell.fromJSON(object.roomObjects.map[i]))
