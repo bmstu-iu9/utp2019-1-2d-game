@@ -4,9 +4,9 @@
  */
 class Room extends GameObject {
     /**
-     * @param {String} id
-     * @param {Number} height
-     * @param {Number} width
+     * @param {String} id 
+     * @param {Number} height 
+     * @param {Number} width 
      */
     constructor(id = Game.getUniqId(), height = 10, width = 10) {
         super(id)
@@ -28,7 +28,7 @@ class Room extends GameObject {
     /**
      * Добавляет GameObject в Room, а также добавляет
      * ссылки во вспомогательные контейнеры
-     * @param {GameObject} obj
+     * @param {GameObject} obj 
      */
     Add(obj) {
         this.roomObjects.set(obj)
@@ -72,6 +72,7 @@ class Room extends GameObject {
         let i = 0
         let j = 0
         if (obj.drawable !== undefined) {
+            if (obj.actor instanceof MovableActor) this.manager.refreshPosition(obj)
             i = ~~(obj.actor.position.y / Game.tileHeight)
             j = ~~(obj.actor.position.x / Game.tileWidth)
         }
@@ -342,7 +343,7 @@ class Room extends GameObject {
         }
     }
     /**
-     * Обновление игровой логики Room
+     * Обновление игровой логики Room 
      */
     Update() {
         this.manager.Update()
@@ -351,7 +352,6 @@ class Room extends GameObject {
     toJSON() {
         return Serializations[this.type](this)
     }
-
 
     /**
      *
@@ -367,7 +367,6 @@ class Room extends GameObject {
             else {
                 room.Add(StaticObject.fromJSON(object.roomObjects.map[i]))
             }
-
         }
         return room
     }
@@ -382,9 +381,9 @@ class Room extends GameObject {
     /**
      * @param {Vector2d} clickCoords
      */
-    getElementByClick(clickCoords){
-        const point=clickCoords.add(this.rnd.camera.position,new Vector2d())
-        return this.quadTree.getElement(this.quadTree,point)
+    getElementByClick(clickCoords) {
+        const point = clickCoords.add(this.rnd.camera.position, new Vector2d())
+        return this.quadTree.getElement(this.quadTree, point)
     }
 
 

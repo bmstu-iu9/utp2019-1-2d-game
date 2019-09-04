@@ -7,6 +7,8 @@ class AbilityFactory {
         let fireBallAbility = new Ability(npc, 5, 1.5, 0.5)
         fireBallAbility.cast = function () {
             if (this.npc.statsManager.stats.mana >= this.manaCost && this.coolDownTime === 0) {
+                this.npc.drawable.drowable.switch("cast", this.npc.direction)
+                this.npc.casting = 30
                 this.npc.statsManager.stats.mana -= this.manaCost
                 SpellFactory.CreateFireBall(npc.actor.centre.x, npc.actor.centre.y, Object.create(npc.direction), npc)
                 this.coolDownTime = this.coolDown
@@ -19,6 +21,8 @@ class AbilityFactory {
         let lightning = new Ability(npc, 5, 1.5, 0.5)
         lightning.cast = function () {
             if (this.npc.statsManager.stats.mana >= this.manaCost && this.coolDownTime === 0) {
+                this.npc.drawable.drowable.switch("cast", this.npc.direction)
+                this.npc.casting = 30
                 this.npc.statsManager.stats.mana -= this.manaCost
                 SpellFactory.CastLightning(npc)
                 this.coolDownTime = this.coolDown

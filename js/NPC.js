@@ -23,6 +23,7 @@ class NPC extends GameObject {
         this.hitbox = hitbox//new Hitbox(HITBOX_CIRCLE, new Vector2d(centre), 26);
         this.direction = new Vector2d(0, 0)
         this.walking = false
+        this.casting = 0
         this.collisonSolveStrategy = "stay"
         this.abilities = [AbilityFactory.createFireBallAbility(this), AbilityFactory.createLigthningAbility(this)]
         this.type = "npc"
@@ -56,7 +57,9 @@ class NPC extends GameObject {
             this.manager.update()
 
         }
-        if (this.walking === false) {
+        if (this.casting) {
+            this.casting--
+        } else if (this.walking === false) {
             this.drawable.drowable.switch("idle", this.direction)
             this.collisonSolveStrategy = 'stay'
         } else {

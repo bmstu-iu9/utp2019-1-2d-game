@@ -4,8 +4,12 @@ class SpellFactory {
     static CreateFireBall(x, y, vector, caster) {
         let hitbox = new Hitbox('CircleHitbox', new Vector2d(x, y), 16)
         let data = new Action(new Stats(-50, 0, 0, 0, 0, 0))
-        let actor = new MovableActor(new Vector2d(x, y), new Vector2d(x + 8, y + 8))
-        let result = new Spell(hitbox, data, new DrawableObject("middleground", SpriteFactory.CreateFireBallSprite()), actor)
+        let actor = new MovableActor(new Vector2d(x, ~~(y - 3 * caster.drawable.drowable.height / 4)), new Vector2d(x, y))
+        let sprite = SpriteFactory.CreateFireBallSprite()
+        let result = new Spell(hitbox, data, new DrawableObject("middleground", sprite), actor)
+        sprite.onceCallback = () => {
+            Game.currentWorld.currentRoom.delete(result)
+        }
         let speed = 7;
         vector.normalize()
         result.collisonSolveStrategy = "none"
@@ -23,15 +27,16 @@ class SpellFactory {
             }
             if (collision.obstacleObject instanceof NPC) {
                 collision.obstacleObject.statsManager.gainAction(result.data)
-                console.log(collision.obstacleObject)
-
             }
-            Game.currentWorld.currentRoom.delete(result)
+            result.Update = function () {
+            }
+            result.actor.position.set(collision.obstacleObject.actor.position)
+            result.drawable.drowable.switch("explode")
         }
 
         result.drawable.drowable.switch("fly", vector)
         Game.currentWorld.currentRoom.Add(result)
-        return result   
+        return result
     }
 
     static CastLightning(caster) {
@@ -42,9 +47,9 @@ class SpellFactory {
         sprite.onceCallback = () => {
             Game.currentWorld.currentRoom.delete(result)
         }
-        let actor = new Actor(new Vector2d(pos.x, pos.y - 80), new Vector2d(pos.x, pos.y))
+        let actor = new Actor(new Vector2d(pos.x - 20, pos.y - 50), new Vector2d(pos.x, pos.y))
         let result = new Spell(undefined, data, new DrawableObject("middleground", sprite), actor)
-        let dest = Game.currentWorld.currentRoom.getElementByClick(mouse.clickPosition)
+        let dest = Game.currentWorld.currentRoom.getElementByClick(mouse.clickPosition.add(0, 50))
         result.drawable.drowable.switch("strike")
 
         Game.currentWorld.currentRoom.Add(result)
