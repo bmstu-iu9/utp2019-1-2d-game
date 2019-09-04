@@ -32,11 +32,13 @@ class NPC extends GameObject {
     }
 
     drawHPBar() {
-      let hpB = this.drawable.canvasCoord.add(~~(this.drawable.drowable.width / 2 - Game.HealthBarBackgroudTexture.width / 2), -4, new Vector2d())
-      let hp = Object.create(Game.HealthBarOverlayTexture)
-      Game.HealthBarBackgroudTexture.render(hpB)
-      let frac = this.statsManager.stats.hp / this.statsManager.hpLimit
-      ctx.drawImage(hp.img, hpB.x + 1, hpB.y + 1, ~~(hp.img.width * frac) ,hp.img.height)
+      if(this.statsManager.stats.hp != this.statsManager.hpLimit){
+        let hpB = this.drawable.canvasCoord.add(~~(this.drawable.drowable.width / 2 - Game.HealthBarBackgroudTexture.width / 2), -4, new Vector2d())
+        let hp = Object.create(Game.HealthBarOverlayTexture)
+        Game.HealthBarBackgroudTexture.render(hpB)
+        let frac = this.statsManager.stats.hp / this.statsManager.hpLimit
+        ctx.drawImage(hp.img, hpB.x + 1, hpB.y + 1, ~~(hp.img.width * frac) ,hp.img.height)
+      }
     }
 
     render() {
