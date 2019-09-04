@@ -31,18 +31,12 @@ class RoomFactory {
     static CreateRoundedRoom() {
         let testRoomSize = 120;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
-        for (let i = 0; i < testRoomSize; i++) {
-            for (let j = 0; j < testRoomSize; j++) {
-                //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
-                //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
-                //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
-                room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
-                //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
-                //     if (Math.random() < 0.4) {
-                //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
-                //     }
-            }
-        }
+        room.drawFloor(0, 0, 119, 119);
+        room.drawBigForest(0, 0, 10, 5);
+        room.drawMediumForest(1000, 100, 10, 5);
+        //room.drawSmallForest(0, 0, 10, 5);
+        //room.drawGrass1(0, 0, 100, 100)
+        //room.drawForest(0, 0, 5, 10)
 
         let player = TilesFactory.CreatePlayer(1200, 990)
 
