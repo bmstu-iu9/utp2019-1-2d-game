@@ -217,11 +217,12 @@ class NavMesh {
                 } else if (!u.hasId(element.id) || tentativeScore < g[element.index]) {
                     parent[element.index] = current
                     if (f[element.index] === undefined) {
+                        g[element.index] = tentativeScore
+                        f[element.index] = g[element.index] + this.h(element, last)
                         q.insert(element)
                     }
                     g[element.index] = tentativeScore
                     f[element.index] = g[element.index] + this.h(element, last)
-
                 }
 
             })

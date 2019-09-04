@@ -19,13 +19,20 @@ class AIManager {
             this.character.walking = false
             return
         }
+        if (direction.length() > 350) {
+            this.character.walking = false
+            return
+        }
         this.resultPath[0].sub(this.character.actor.centre, direction)
         if (direction.length() <= this.character.hitbox.hitbox.radius * 2 / 3) {
             this.resultPath.splice(0, 1)
+        } else {
+            this.nav.savePath(character, target, this)
         }
+        this.resultPath[0].sub(this.character.actor.centre, direction)
         direction.normalize()
         direction.mul(2)
-       // console.log(this)
+       
         this.character.walking = true
         if (direction.x == 0 && direction.y == 0) {
             this.character.walking = false

@@ -55,6 +55,7 @@ class RoomFactory {
             Game.camera.focusOn(player.actor)
         }
         room.nav = RoomFactory.initNavMesh(testRoomSize, testRoomSize)
+        console.log(room.nav)
         for (let i = 15; i < 16; i++) {
             if (object === undefined) {
                 for (let j = 16; j < 17; j++) {
@@ -123,7 +124,6 @@ class RoomFactory {
             '                                                                                                   \n' +
             '                                                     ')
         RoomFactory.addWall(room, 3, 28, 3, 'l')
-
         return room
     }
 
