@@ -49,8 +49,9 @@ class TilesFactory {
      * @param {Number} y
      */
     static CreatePlayer(x = 0, y = 0) {
-        let player = TilesFactory.createNPC(x, y, 17, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()));
+        let player = TilesFactory.createNPC(x, y, 24, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()));
         player.manager = new PlayerManager(player)
+        player.type = "player"
         return player
     }
 
@@ -59,8 +60,11 @@ class TilesFactory {
      * @param {Number} x
      * @param {Number} y
      */
-    static CreateStaticNPC(x, y) {
-        return TilesFactory.createNPC(x, y, 10, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()))
+    static CreateStaticNPC(x, y, nav) {
+        let t = TilesFactory.createNPC(x, y, 22, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()))
+        t.manager = new AIManager(t, nav)
+        t.type = "staticNpc"
+        return t
     }
 
     /**
@@ -340,7 +344,7 @@ class TilesFactory {
         return new NPC(new Vector2d(x, y),
             new Vector2d(xCentre, yCentre),
             drawable,
-            new Hitbox(HITBOX_CIRCLE, new Vector2d(xCentre, yCentre), r)
+            new Hitbox(HITBOX_CIRCLE, new Vector2d(xCentre, yCentre), r),
         )
     }
 }

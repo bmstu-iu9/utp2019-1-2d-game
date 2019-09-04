@@ -8,10 +8,24 @@ class Triangle {
         this.edge = new HashMap()
         this.point.push(c)
         this.centre = new Vector2d(~~((a.x + b.x + c.x) / 3), ~~((a.y + b.y + c.y) / 3))
-        this.id = this.centre.x.toString() + " " +this.centre.y.toString()
+        this.id = this.centre.x.toString() + " " + this.centre.y.toString()
     }
     connect(triangle) {
         if (triangle == undefined) {
+            return
+        }
+        if (this === triangle) {
+            return
+        }
+        let u = 0
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (this.point[i] == triangle.point[j]) {
+                    u++
+                }
+            }
+        }
+        if (u < 2) {
             return
         }
         if (!this.edge.hasId(triangle.id)) {
@@ -65,7 +79,7 @@ class Graph {
     }
     addEdge(a, b) {
         this.data[a].push(b)
-        this.data[b].push(a)
+        //this.data[b].push(a)
     }
     sortVert(vert) {
         this.data[vert].sort((fir, sec) => {
@@ -83,6 +97,26 @@ class Graph {
         for (let i = 0; i < this.data.length; i++) {
             this.sortVert(i)
         }
+    }
+
+    render() {
+        let t
+        let n = Game.camera.position
+        for (let i = 0; i < this.point.length; i++) {
+            t = this.point[i]
+            ctx.fillRect(t.x - n.x, t.y - n.y, 10, 10)
+        }
+        for (let i = 0; i < this.data.length; i++) {
+            for (let j = 0; j < this.data[i].length; j++) {
+                t = this.point[i]
+                ctx.beginPath()
+                ctx.moveTo(t.x - n.x, t.y - n.y)
+                t = this.point[this.data[i][j]]
+                ctx.lineTo(t.x - n.x, t.y - n.y)
+                ctx.stroke()
+            }
+        }
+
     }
 }
 class NavMesh {
@@ -123,7 +157,9 @@ class NavMesh {
                         } else {
                             triangle = this.dataHash.get(triangle.id)
                         }
-                        triangle.connect(lasttriangle)
+                      //  console.log(triangle)
+                      //  console.log(lasttriangle)
+                        //triangle.connect(lasttriangle)
                         last = element[i]
                         lasttriangle = triangle
                         break
@@ -133,11 +169,17 @@ class NavMesh {
                 }
                 last = element[i]
             }
-            triangle.connect(firsttriangle)
+          //  console.log(this)
+            //triangle.connect(firsttriangle)
         })
+        for (let i = 0; i < this.triangle.length; i++) {
+            this.triangle.forEach((element) => {
+                this.triangle[i].connect(element)
+            })
+        }
     }
     h(first, last) {
-        return Math.sqrt((first.centre.x - last.centre.x) ** 2 + (first.centre.y -last.centre.y) ** 2)
+        return Math.sqrt((first.centre.x - last.centre.x) ** 2 + (first.centre.y - last.centre.y) ** 2)
     }
     getPath(fir, las, ai) {
         ai.trianglePath = []
@@ -175,11 +217,12 @@ class NavMesh {
                 } else if (!u.hasId(element.id) || tentativeScore < g[element.index]) {
                     parent[element.index] = current
                     if (f[element.index] === undefined) {
+                        g[element.index] = tentativeScore
+                        f[element.index] = g[element.index] + this.h(element, last)
                         q.insert(element)
                     }
                     g[element.index] = tentativeScore
                     f[element.index] = g[element.index] + this.h(element, last)
-
                 }
 
             })
@@ -244,6 +287,7 @@ class NavMesh {
             trian = next
         }
         ai.path.push(last)
+        ai.path.push(last)
     }
     findTriangle(vector) {
         return this.tree.getElement(this.tree, vector)
@@ -251,6 +295,9 @@ class NavMesh {
     savePath(fir, las, ai) {
         let first = this.findTriangle(fir)
         let last = this.findTriangle(las)
+        if (last == undefined || first == undefined) {
+            return
+        }
         this.getPath(first.index, last.index, ai)
         this.getPath2(las, ai)
         this.funnel(fir, las, ai)
@@ -261,19 +308,31 @@ class NavMesh {
 
         let current = first
         let delta = 0
+        ai.resultPath = []
+        if (ai.trianglePath.length < 2) {
+            ai.resultPath = [last]
+            return
+        }
         if (this.s(first, ai.path[0], ai.path[1]) <= 0) {
             delta = 1
         }
         left = delta
         right = 1 - delta
-        ai.resultPath = [first]
         let portalRight
         let portalLeft
-        while (ai.resultPath.length == 1 || ai.resultPath[ai.resultPath.length - 1] != last) {
-            if (right == ai.path.length - 1 || left == ai.path.length - 1) {
+        let t
+        let las = 0
+        while (ai.resultPath.length == 0 || ai.resultPath[ai.resultPath.length - 1] != last) {
+            if (ai.path[right] == last || ai.path[left] == last) {
                 ai.resultPath.push(ai.path[ai.path.length - 1])
                 break
             }
+            if (las == 100) {
+                throw Error()
+                return
+            }
+            las++
+            t = false
             if (right + 2 < ai.path.length) {
                 portalRight = ai.path[right + 2]
                 if (this.s(current, portalRight, ai.path[right]) >= 0) {
@@ -286,6 +345,8 @@ class NavMesh {
                         left += 2
                         continue
                     }
+                } else {
+                    t = true
                 }
             }
             if (left + 2 < ai.path.length) {
@@ -300,8 +361,20 @@ class NavMesh {
                         right += 2
                         continue
                     }
+                } else {
+                    t = true
                 }
             }
+            if (t) {
+                current = new Vector2d(~~((ai.path[left].x + ai.path[right].x) / 2), ~~((ai.path[left].y + ai.path[right].y) / 2))
+                ai.resultPath.push(current)
+
+            }
         }
+       // console.log(222)
+    }
+
+    render() {
+        this.graph.render()
     }
 }

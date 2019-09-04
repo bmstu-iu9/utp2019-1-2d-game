@@ -22,7 +22,6 @@ class Room extends GameObject {
         this.manager = new RoomManager(this);
         this.collisionManager = new CollisionManager(this);
         this.quadTree = new QuadTree(new Rectangle(0, 0, this.width * Game.tileWidth, this.height * Game.tileHeight), 16);
-        this.type = "room"
     }
 
     /**
@@ -358,12 +357,18 @@ class Room extends GameObject {
      * @param {Room} object
      */
     static fromJSON(object) {
-        let room = new Room(object.id, object.height, object.width)
+        let room = (object.type === "roundedRoom") ? RoomFactory.CreateRoundedRoom(object) : RoomFactory.CreateTestRoom(object)
+        room.id = object.id
+        room.height = object.height
+        room.width = object.width
+        room.roomObjects.map = {}
         for (let i in object.roomObjects.map) {
             if ("data" in object.roomObjects.map[i]) {
                 //room.Add(Spell.fromJSON(object.roomObjects.map[i]))
-                     } else if ("direction" in object.roomObjects.map[i])
+                     } else if ("direction" in object.roomObjects.map[i]) {
+                object.roomObjects.map[i].nav = room.nav
                 room.Add(NPC.fromJSON(object.roomObjects.map[i]))
+            }
             else {
                 room.Add(StaticObject.fromJSON(object.roomObjects.map[i]))
             }

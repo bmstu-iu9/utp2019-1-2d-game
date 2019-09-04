@@ -1,9 +1,9 @@
 'use strict';
 class RoomFactory {
-    static CreateTestRoom() {
+    static CreateTestRoom(object = undefined) {
         let testRoomSize = 120;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
-
+        room.type = "testRoom"
         for (let i = 0; i < testRoomSize; i++) {
             for (let j = 0; j < testRoomSize; j++) {
                 room.Add(TilesFactory.CreateTestTile(j * Game.tileWidth, i * Game.tileHeight))
@@ -12,51 +12,66 @@ class RoomFactory {
 
 
         let grassTile = TilesFactory.CreateTestGrassTile(100, 100);
-        let player = TilesFactory.CreatePlayer(350, 370)
-
         room.Add(grassTile)
-        room.Add(player)
-        Game.camera.focusOn(player.actor)
+        if (object === undefined) {
+            let player = TilesFactory.CreatePlayer(350, 370)
+            room.Add(player)
+            Game.camera.focusOn(player.actor)
 
-        for (let i = 0; i < 10; i++) {
-            for (let j = 0; j < 10; j++) {
-                let t = TilesFactory.CreateStaticNPC((2 + j) * 125, (2 + i) * 125);
-                room.Add(t);
+
+            for (let i = 0; i < 10; i++) {
+                for (let j = 0; j < 10; j++) {
+                    let t = TilesFactory.CreateStaticNPC((2 + j) * 125, (2 + i) * 125);
+                    room.Add(t);
+                }
             }
         }
         return room
     }
 
 
-    static CreateRoundedRoom() {
+    static CreateRoundedRoom(object = undefined) {
         let testRoomSize = 120;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
-        room.drawFloor(0, 0, 119, 119);
-        room.drawBigForest(0, 0, 10, 5);
-        room.drawMediumForest(1000, 100, 10, 5);
-        //room.drawSmallForest(0, 0, 10, 5);
-        //room.drawGrass1(0, 0, 100, 100)
-        //room.drawForest(0, 0, 5, 10)
+        if (object === undefined) {
+            room.type = "roundedRoom"
+            for (let i = 0; i < testRoomSize; i++) {
+                for (let j = 0; j < testRoomSize; j++) {
+                    //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
+                    //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
+                    //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
+                    room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
+                    //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
+                    //     if (Math.random() < 0.4) {
+                    //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
+                    //     }
+                }
+            }
 
-        let player = TilesFactory.CreatePlayer(1200, 990)
+            let player = TilesFactory.CreatePlayer(1280, 1300)
 
-        room.Add(player)
-        Game.camera.focusOn(player.actor)
-
-        for (let i = 18; i < 20; i++) {
-            for (let j = 21; j < 23; j++) {
-                let t = TilesFactory.CreateStaticNPC((2 + j) * 60, (2 + i) * 60);
-                room.Add(t);
-                // Следование за игроком
-                // t.manager = new Object(t)
-                // t.manager.update = () => {
-                //     t.actor.update()
-                //     t.actor.move(player.actor.position.sub(t.actor.position, new Vector2d).normalize().mul(2))
-                //     t.hitbox.update(t.actor.centre)
-                //     t.collisonSolveStrategy = 'move'
-                //     t.walking = (t.actor.offset.x !== 0 || t.actor.offset.y !== 0)
-                //     t.direction = t.actor.offset
-                // }
+            room.Add(player)
+            Game.player = player
+            Game.camera.focusOn(player.actor)
+        }
+        room.nav = RoomFactory.initNavMesh(testRoomSize, testRoomSize)
+        console.log(room.nav)
+        for (let i = 15; i < 16; i++) {
+            if (object === undefined) {
+                for (let j = 16; j < 17; j++) {
+                    let t = TilesFactory.CreateStaticNPC(j * 60, i * 60, room.nav);
+                    room.Add(t);
+                    // Следование за игроком
+                    // t.manager = new Object(t)
+                    // t.manager.update = () => {
+                    //     t.actor.update()
+                    //     t.actor.move(player.actor.position.sub(t.actor.position, new Vector2d).normalize().mul(2))
+                    //     t.hitbox.update(t.actor.centre)
+                    //     t.collisonSolveStrategy = 'move'
+                    //     t.walking = (t.actor.offset.x !== 0 || t.actor.offset.y !== 0)
+                    //     t.direction = t.actor.offset
+                    // }
+                }
             }
         }
 
@@ -69,35 +84,39 @@ class RoomFactory {
         //     }
         // }
         room.addMap(17, 14,
-            'qwwwwwwwwe              qwwwwwwwwwwe                                                               \n' +
-            'a        d              a          d                                                               \n' +
-            'a        d              a          d                                                               \n' +
-            'a        d     qwwwwwwww2          d                                                               \n' +
-            'a        d     a                   d                                                               \n' +
-            'zsssse qsx     a qsssssse qsssssssse                                                                                   \n' +
-            '     d a       a a      d a        1wwe                                                                      \n' +
-            ' qwwwx zwwwwe  a a      d a        d  1wwe                                                                       \n' +
-            ' a          1ww2 zwwwwwwx zwwwwwwwwx     1wwe                                                                              \n' +
-            ' a                                          1e                                                        \n' +
+            '         qwwe       qwwe                                                                 \n' +
+            'qwwwwwwww2  1wwwwwww2  1wwwwwwwwwwe                                                                 \n' +
+            'a        a  d       a  d          1e                                                         \n' +
+            'a        a  d       a  d           1e                                             \n' +
+            'a        a  d       a  d           qx                                                       \n' +
+            'a        a  d       a  d          q2                                                          \n' +
+            'zsssse qs2  1sse qss2  1e qsssssssx                                                                               \n' +
+            'a    d a       d a      d a       1wwe                                                                      \n' +
+            'zqwwwx zwwwwe  d a      d a       d  1wwe                                                                       \n' +
+            ' a          1wwx zwwwwwwx zwwwwwwwx     1wwe                                                                              \n' +
+            ' a                                         1we                                                        \n' +
             ' a                                           1e                                                       \n' +
             ' a          qsssssssse qssssssssse            d                                                                   \n' +
             ' zse qsse qs2        d a         d            d                                                               \n' +
-            '   d a  d a          d a         d           qx                                                       \n' +
-            '   d a  d a   qwwwwwwx zwwwwwwwwwx          q2                                                        \n' +
-            '   d a  d a   a                          qss2                                                         \n' +
-            '   d a  d a   a                       qss2                                                            \n' +
-            ' qsx zwwx ze  a    qe   qe   qe    qss2\n' +
-            ' a         d  a    zx   zx   zx    a                                                       \n' +
-            ' a         d  a                    a                                                              \n' +
-            ' a         d  zssssssssssssssssssss2                                                                                       \n' +
-            ' zsssssssssx                                                                                                 \n' +
-            '                                                                                                   \n' +
-            '                                                                                                   \n' +
-            '                                                                                                   \n' +
-            '                                                                                                   \n' +
-            '                                                                                                   \n' +
-            '                                                                                                   \n' +
-            '                                                                                                   \n' +
+            '   d a  d a          d a         d            d                                                      \n' +
+            '   d a  d a   qwwwwwwx zwwwwwwwwwx            d                                                        \n' +
+            '   d a  d a   a                  d           qx                                                         \n' +
+            '   d a  d a   a                  d         qs2                                                     \n' +
+            ' qsx zwwx zse a   qe   qe   qe   1e     qss2                                            \n' +
+            ' a          d a   zx   zx   zx    d  qss2                                                     \n' +
+            ' a          d a                   1ss2                                                        \n' +
+            ' a          d a                   d                                          \n' +
+            ' zssse  qsssx a                   d                                                                               \n' +
+            ' a   d  a     a                   d                                                              \n' +
+            ' qsssx  zssse zsssssssssssssssssssx                                                                                         \n' +
+            ' a          d                                                                                     \n' +
+            ' a          d                                                                                     \n' +
+            ' a          d                                                                                     \n' +
+            ' a                                                                                               \n' +
+            ' a                                                                                                 \n' +
+            ' a          d                                                                                       \n' +
+            ' a          d                                                                                       \n' +
+            ' zssssssssssx                                                                                                  \n' +
             '                                                                                                   \n' +
             '                                                                                                   \n' +
             '                                                                                                   \n' +
@@ -106,6 +125,132 @@ class RoomFactory {
             '                                                ')
         RoomFactory.addWall(room, 3, 28, 3, 'l')
         return room
+    }
+
+    static initNavMesh(roomSizeX, roomSizeY) {
+        let t = [1355, 855, 1350, 1043, 1254, 1036, 1190, 1036, 959, 1043, 959, 855, 1219, 855, 1484, 1215, 1490, 1265, 1505, 1354, 1501, 1406, 1414, 1398, 1348, 1397, 1151, 1398, 1082, 1398, 1012, 1406, 1012, 1215, 1191, 1215, 1264, 1215,
+            1598, 1272, 1714, 1268, 1775, 1271, 2064, 1272, 2175, 1271, 2244, 1271, 2620, 1272, 2575, 1354, 2205, 1354, 2087, 1346, 2017, 1345, 1854, 1354, 1726, 1354, 1630, 1354,
+            1926, 856, 1922, 1042, 1776, 1034, 1565, 1042, 1558, 856, 1756, 856,
+            2628, 856, 2643, 907, 2680, 908, 2697, 960, 2697, 981, 2654, 985, 2633, 1042, 2252, 1033, 2173, 1033, 2130, 1033, 2130, 856, 2229, 856, 1701, 1033,
+            2784, 1168, 2799, 1219, 2940, 1220, 2951, 1269, 3096, 1272, 3107, 1321, 3200, 1324, 3208, 1371, 3252, 1376, 3252, 1553, 3231, 1554, 3217, 1614, 3133, 1605, 3113, 1666, 2979, 1657, 2957, 1718, 2823, 1709, 2801, 1770, 2702, 1766, 2702, 1661, 2650, 1657, 2647, 1347, 2699, 1270, 2702, 1168,
+            2085, 1582, 2167, 1584, 2362, 1584, 2576, 1584, 2585, 1736, 2628, 1740, 2628, 1978, 2448, 1668, 2439, 1790, 2339, 1785, 2356, 1657, 2184, 1663, 2178, 1790, 2091, 1792, 2091, 1657, 1924, 1663, 1913, 1792, 1828, 1791, 1820, 1663, 2166, 1978, 2086, 1978, 1688, 1978, 1688, 1781, 1688, 1678, 1688, 1584, 1837, 1584, 2023, 1584
+        ]
+        let q = [[1, 2, 6],
+            [0, 2],
+            [6, 0, 3, 1],
+            [2, 6, 4, 5],
+            [3, 5],
+            [6, 3, 4],
+            [3, 0, 2, 5],
+            [18, 8],
+            [18, 11, 9],
+            [8, 10, 11],
+            [9, 11],
+            [18, 10, 12, 8, 9],
+            [11, 18, 13],
+            [18, 17, 12, 14],
+            [17, 13, 16, 15],
+            [16, 14],
+            [17, 14, 15],
+            [18, 14, 3, 13, 16],
+            [12, 2, 3, 7, 8, 11, 13, 17],
+            [8, 9, 20, 32],
+            [19, 21, 31, 32, 35],
+            [20, 22, 31, 30, 35],
+            [21, 23, 30, 29, 28],
+            [22, 24, 28, 27, 47, 46],
+            [23, 25, 27, 26, 46],
+            [24, 26, 73, 74, 73],
+            [24, 25, 27],
+            [26, 28, 23, 24],
+            [29, 27, 22, 23, 102, 76],
+            [28, 30, 22, 102],
+            [31, 29, 21, 22],
+            [32, 30, 20, 21],
+            [31, 19, 20, 9],
+            [38, 35, 34],
+            [33, 35],
+            [33, 34, 51, 38, 20, 21],
+            [37, 51],
+            [36, 51, 38],
+            [37, 33, 51, 35],
+            [40, 50],
+            [50, 39, 41, 42],
+            [40, 42],
+            [41, 40, 43],
+            [42, 44],
+            [45, 43, 42, 40, 50, 46],
+            [44, 46],
+            [23, 24, 44, 45, 47, 50],
+            [46, 48, 49, 50, 23],
+            [49, 47],
+            [48, 50],
+            [49, 39, 40, 44, 47, 46],
+            [36, 37, 38, 35, 20],
+            [75, 53],
+            [52, 75, 54, 55, 73, 74],
+            [53, 55],
+            [53, 54, 56, 57, 66, 72, 71, 73],
+            [55, 57],
+            [56, 58, 55, 66, 64, 59],
+            [57, 59],
+            [58, 57, 64, 62, 60],
+            [59, 61, 62],
+            [60, 62],
+            [59, 60, 61, 63, 64],
+            [62, 64],
+            [62, 63, 57, 59, 65, 66],
+            [66, 64],
+            [55, 57, 64, 65, 68, 67, 71],
+            [68, 66],
+            [70, 69, 67, 71],
+            [70, 68],
+            [71, 68, 69],
+            [66, 68, 72, 70],
+            [55, 71, 55, 73],
+            [72, 26, 25, 74, 53, 55],
+            [25, 73, 75, 53],
+            [74, 52, 53],
+            [28, 102, 90, 77],
+            [76, 78, 87, 90],
+            [77, 79, 86, 87, 83],
+            [78, 80, 83],
+            [83, 79, 81, 82, 84],
+            [80, 82],
+            [80, 81, 85, 84, 95],
+            [80, 78, 79, 84, 86],
+            [80, 82, 85, 83],
+            [86, 88, 84, 95, 82],
+            [78, 83, 87, 85, 88],
+            [86, 88, 77, 90, 78],
+            [86, 87, 85, 89, 95],
+            [96, 95, 88, 90, 92, 97],
+            [76, 77, 102, 91, 92, 87, 89],
+            [101, 102, 90, 94, 92],
+            [91, 90, 89, 97, 93],
+            [97, 92, 94, 98],
+            [100, 101, 91, 99, 98, 93],
+            [82, 96, 88, 89, 85],
+            [89, 95, 97],
+            [98, 96, 93, 92, 89],
+            [99, 97, 93, 94],
+            [100, 94, 98],
+            [99, 94, 101],
+            [100, 102, 91, 94],
+            [29, 28, 101, 76, 90, 91]
+        ]
+        let graph = new Graph()
+        for (let i = 0; i < t.length; i += 2) {
+            graph.add(t[i], t[i + 1])
+        }
+        console.log(graph)
+        for (let i = 0; i < q.length; i++) {
+            for (let j = 0; j < q[i].length; j++) {
+                graph.addEdge(i, q[i][j])
+            }
+        }
+        let nav = new NavMesh(graph, roomSizeX, roomSizeY)
+        return nav
     }
     static addWall(room, x, y, length, data) {
         let t = ''
