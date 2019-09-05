@@ -42,48 +42,35 @@ class CollisionManager {
         let objects,                             //Обекты проверяемые на наличие коллизии с object
             collision,                           //Объект коллизии
             object,                              //Объект для которого проверяется наличие коллизий
-            collideWith,
             next=[]
 
-        for (let j = 0; j < this.room.movedObjects.length; j++) {
-            object = this.room.movedObjects[j]
-            if (!(object instanceof Spell))
+        while (this.room.movedObjects.length>0){
+            object=this.room.movedObjects.pop()
+            if (object.hitbox.type!==undefined)
                 this.room.quadTree.update(object)
-            objects = this.room.quadTree.retrieve([], object)
-            console.log(objects.length)
-            for (let i = 0; i < objects.length; i++) {
-                collideWith = objects[i]
-                if (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none') {
-                    continue
-                }
-                if (!objects[i].hitbox.equals(object.hitbox)) {
-                    collision = getCollision(object.hitbox, collideWith.hitbox)
-                    if (collision) {
-                        collision.obstacleObject = collideWith
-                        if (object.collisonSolveStrategy !== 'none') {
-                            if (collideWith.collisonSolveStrategy === 'stay') {
-                                if (object.collisonSolveStrategy==='hit'){
-                                    Game.currentWorld.currentRoom.delete(object)
-                                }else {
-                                    this.solveCollision(object, collision)
-                                    next.push(object)
-                                }
-                            }
-                            else if (collideWith.collisonSolveStrategy === 'move') {
-                                if (object.collisonSolveStrategy==='hit'){
-                                    Game.currentWorld.currentRoom.delete(object)
-                                }else {
-                                    this.solveForBoth(object, objects[i], collision)
-                                    next.push(object,objects[i])
-                                }
-                            }else if (collideWith.collisonSolveStrategy==='hit'){
-                                Game.currentWorld.currentRoom.delete(collideWith)
+            objects=this.room.quadTree.retrieve([],object)
+            for (let i=0;i<objects.length;i++){
+                if (!object.hitbox.equals(objects[i].hitbox)){
+                    collision=getCollision(object.hitbox,objects[i].hitbox)
+                    if (collision){
+                        collision.obstacleObject=objects[i]
+                        if (object.collisonSolveStrategy!=='none'){
+                            if (object.collisonSolveStrategy==='hit') {
+                                Game.currentWorld.currentRoom.delete(object)
+                            }else if (objects[i].collisonSolveStrategy==='stay'){
+                                this.solveCollision(object,collision)
+                                next.push(object)
+                            }else if (objects[i].collisonSolveStrategy==='move'){
+                                this.solveForBoth(object,objects[i],collision)
+                                next.push(object,objects[i])
+                            }else if (objects[i].collisonSolveStrategy==='hit'){
+                                Game.currentWorld.currentRoom.delete(objects[i])
                             }
                         }
-                        if (object.onCollide) {
+                        if (object.onCollide!==undefined){
                             object.onCollide(collision)
                         }
-                        if (objects[i].onCollide) {
+                        if (objects[i].onCollide!==undefined){
                             objects[i].onCollide(collision)
                         }
                     }

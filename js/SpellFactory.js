@@ -23,7 +23,6 @@ class SpellFactory {
             }
             if (collision.obstacleObject instanceof NPC) {
                 collision.obstacleObject.statsManager.gainAction(result.data)
-                console.log(collision.obstacleObject)
 
             }
             Game.currentWorld.currentRoom.delete(result)
@@ -61,7 +60,7 @@ class SpellFactory {
         const cos=centre_to_centre.dotProduct(caster.direction)/Math.sqrt(centre_to_centre.lengthSquared()*caster.direction.lengthSquared())
         let angle=Math.acos(cos)
         if (angle*caster.direction.y<0) angle*=-1
-        let hitbox=new Hitbox(HITBOX_AABB,centre,[
+        let hitbox=new AABB(centre,[
             centre.add(-20,-8,new Vector2d()),
             centre.add(20,-8,new Vector2d()),
             centre.add(20,8,new Vector2d()),
