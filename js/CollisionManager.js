@@ -46,7 +46,7 @@ class CollisionManager {
 
         while (this.room.movedObjects.length>0){
             object=this.room.movedObjects.pop()
-            if (object.hitbox.type!==undefined)
+            if (object.hitbox instanceof Hitbox)
                 this.room.quadTree.update(object)
             objects=this.room.quadTree.retrieve([],object)
             for (let i=0;i<objects.length;i++){

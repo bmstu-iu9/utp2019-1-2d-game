@@ -13,9 +13,8 @@ let keyboard={
     KeyX:false, //load()
     KeyF: false,
     KeyQ: false,
-    KeyE: false
-    KeyF:false,
-    Space:false
+    KeyE: false,
+    Space:false,
 };
 
 let mouse={
