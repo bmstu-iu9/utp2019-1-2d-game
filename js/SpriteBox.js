@@ -7,7 +7,7 @@ class SpriteBox {
         if (this.data.hasId(name)) {
             this.data.map[name].push(pattern)
         } else {
-            this.data.map[name] = new Array()
+            this.data.map[name] = []
             this.data.map[name].push(pattern)
         }
     }

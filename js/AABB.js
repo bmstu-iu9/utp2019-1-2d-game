@@ -280,8 +280,7 @@ class AABB {
      * @param {Number} angle
      * @param {Vector2d} dot
      */
-    rotate(angle,dot=undefined) {
-        angle *= Math.PI / 180
+    rotateRadian(angle,dot=undefined) {
         const cos = Math.cos(angle)
         const sin = Math.sin(angle)
         if (dot === undefined) {
@@ -291,6 +290,15 @@ class AABB {
             v.set(dot.x + (v.x - dot.x) * cos - (v.y - dot.y) * sin, dot.y + (v.x - dot.x) * sin + (v.y - dot.y) * cos)
         }
         this.setNormals()
+    }
+
+    /**
+     * @param {Number} angle
+     * @param {Vector2d} dot
+     */
+    rotateDegrees(angle,dot=undefined){
+        angle*=Math.PI/180
+        this.rotateRadian(angle,dot)
     }
 }
 

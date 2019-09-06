@@ -58,4 +58,37 @@ class SpellFactory {
         }
         return result
     }
+
+    static Hit(caster){
+        let data = new Action(new Stats(-34,0,0,0,0,0))
+        let centre=caster.actor.centre.add(20,0,new Vector2d())
+        const centre_to_centre=centre.sub(caster.actor.centre,new Vector2d())
+        const cos=centre_to_centre.dotProduct(caster.direction)/Math.sqrt(centre_to_centre.lengthSquared()*caster.direction.lengthSquared())
+        let angle=Math.acos(cos)
+        if (angle*caster.direction.y<0) angle*=-1
+        let hitbox=new AABB(centre,[
+            centre.add(-20,-8,new Vector2d()),
+            centre.add(20,-8,new Vector2d()),
+            centre.add(20,8,new Vector2d()),
+            centre.add(-20,8,new Vector2d()),
+        ])
+        hitbox.rotateRadian(angle,caster.actor.centre)
+        let result=new Spell(hitbox,data,new DrawableObject("middlegorund",SpriteFactory.CreateTestSprite()),new MovableActor(centre.sub(5,1,new Vector2d())),centre)
+        result.collisonSolveStrategy="hit"
+        /**
+         * @param {Collision} collision
+         */
+        result.onCollide=function (collision) {
+            if (collision.obstacleObject!==caster){
+                if (collision.obstacleObject instanceof NPC){
+                    collision.obstacleObject.statsManager.gainAction(result.data)
+                    console.log(collision.obstacleObject)
+                }
+            }
+        }
+
+        Game.currentWorld.currentRoom.Add(result)
+        Game.currentWorld.currentRoom.movedObjects.push(result)
+        return result
+    }
 }

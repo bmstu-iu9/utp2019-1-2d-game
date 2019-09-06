@@ -20,12 +20,12 @@ class NPC extends GameObject {
         this.manager = manager
         this.statsAffector = new StatsAffector()
         this.statsManager = new StatsManager()
-        this.hitbox = hitbox//new Hitbox(HITBOX_CIRCLE, new Vector2d(centre), 26);
+        this.hitbox = hitbox
         this.direction = new Vector2d(0, 0)
-        this.walking = false
         this.casting = 0
+        this.state=STATE.idle
         this.collisonSolveStrategy = "stay"
-        this.abilities = [AbilityFactory.createFireBallAbility(this), AbilityFactory.createLigthningAbility(this)]
+        this.abilities = [AbilityFactory.createFireBallAbility(this), AbilityFactory.createLigthningAbility(this),AbilityFactory.Hit(this)]
     }
 
     isDead() {
@@ -58,12 +58,17 @@ class NPC extends GameObject {
         }
         if (this.casting) {
             this.casting--
-        } else if (this.walking === false) {
-            this.drawable.drowable.switch("idle", this.direction)
-            this.collisonSolveStrategy = 'stay'
-        } else {
-            this.drawable.drowable.switch("go", this.direction)
-            this.collisonSolveStrategy = 'move'
+        }else switch (this.state) {
+            case STATE.walk:
+                this.drawable.drowable.switch("go", this.direction)
+                this.collisonSolveStrategy = 'move'
+                break
+            case STATE.attack:
+                this.drawable.drowable.switch('beat',this.direction)
+                break
+            default:
+                this.drawable.drowable.switch("idle", this.direction)
+                this.collisonSolveStrategy = 'stay'
         }
         this.hitbox.update(this.actor.centre)
         for (let ability of this.abilities) {
@@ -120,4 +125,10 @@ class NPC extends GameObject {
 
         return npc
     }
+}
+
+const STATE={
+    idle:0,
+    walk:1,
+    attack:2
 }
