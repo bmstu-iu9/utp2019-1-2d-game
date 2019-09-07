@@ -16,7 +16,6 @@ class CollisionManager {
         collision.distance.round()
         object.hitbox.correctPosition(collision);
         object.actor.changePosition(collision.distance);
-        object.hitbox.update()
         this.room.quadTree.update(object)
     }
 
@@ -25,13 +24,11 @@ class CollisionManager {
         collision.distance.round()
         a.hitbox.correctPosition(collision);
         a.actor.changePosition(collision.distance);
-        a.hitbox.update()
         this.room.quadTree.update(a)
         collision.distance.mul(-1)
         collision.distance.round()
         b.hitbox.correctPosition(collision);
         b.actor.changePosition(collision.distance);
-        b.hitbox.update()
         this.room.quadTree.update(b)
     }
     
