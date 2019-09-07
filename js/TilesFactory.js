@@ -24,6 +24,16 @@ class TilesFactory {
         return new StaticObject(x, y, x, y, new DrawableObject("middleground", src[~~(Math.random() * 3)]));
     }
 
+    static CreateRandomGrass(x = 0, y = 0) {
+      let src = [Game.GrassTexture1, Game.GrassTexture2, Game.GrassTexture3]
+      return new StaticObject(x, y, x, y, new DrawableObject("background", src[~~(Math.random() * 3)]));
+    }
+
+    static CreateRandomDirtGrass(x = 0, y = 0) {
+      let src = [Game.GrassTexture1, Game.GroundTexture]
+      return new StaticObject(x, y, x, y, new DrawableObject("background", src[~~(Math.random() * 2)]));
+    }
+
     static CreateForest(x = 0, y = 0) {
       return TilesFactory.createTile(x, y, ~~(Game.TreeTexture.width / 4), ~~(Game.TreeTexture.height / 5), new DrawableObject("middleground", Game.TreeTexture), "Bot")
     }

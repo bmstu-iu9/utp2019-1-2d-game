@@ -31,22 +31,86 @@ class RoomFactory {
 
 
     static CreateRoundedRoom(object = undefined) {
-        let testRoomSize = 120;
-        let room = new Room("Test Room", testRoomSize, testRoomSize);
+        let testRoomSize = 75;
+        let room = new Room("Test Room", ~~(testRoomSize * 0.8), testRoomSize);
         if (object === undefined) {
             room.type = "roundedRoom"
-            for (let i = 0; i < testRoomSize; i++) {
-                for (let j = 0; j < testRoomSize; j++) {
-                    //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
-                    //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
-                    //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
-                    room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
-                    //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
-                    //     if (Math.random() < 0.4) {
-                    //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
-                    //     }
-                }
-            }
+            // for (let i = 0; i < testRoomSize; i++) {
+            //     for (let j = 0; j < testRoomSize; j++) {
+            //         //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
+            //         //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
+            //         //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
+            //         room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
+            //         //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
+            //         //     if (Math.random() < 0.4) {
+            //         //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
+            //         //     }
+            //     }
+            // }
+            room.drawGround(0, 0, 74, 59)
+            room.drawRandomGrass(0, 0, 73, 10)
+            room.drawRandomGrass(0, 11, 14, 47)
+            room.drawRandomGrass(15, 51, 58, 7)
+            room.drawRandomGrass(67, 11, 6, 39)
+            room.drawRandomGrass(55, 11, 11, 9)
+            room.drawRandomGrass(53, 11, 2, 1)
+            room.drawRandomGrass(55, 37, 11, 13)
+            room.drawRandomGrass(63, 35, 3, 1)
+            room.drawRandomGrass(14, 0, 11, 13)
+            room.drawRandomDirtGrass(14, 11, 0, 10)
+            room.drawRandomDirtGrass(15, 22, 0, 28)
+            room.drawRandomDirtGrass(15, 50, 39, 0)
+            room.drawRandomDirtGrass(54, 38, 0, 12)
+            room.drawRandomDirtGrass(54, 38, 3, 0)
+            room.drawRandomDirtGrass(57, 37, 2, 0)
+            room.drawRandomDirtGrass(60, 36, 2, 0)
+            room.drawRandomDirtGrass(63, 35, 1, 0)
+            room.drawRandomDirtGrass(65, 34, 1, 0)
+            room.drawRandomDirtGrass(66, 21, 0, 12)
+            room.drawRandomDirtGrass(65, 21, 0, 0)
+            room.drawRandomDirtGrass(61, 20, 3, 0)
+            room.drawRandomDirtGrass(60, 19, 0, 0)
+            room.drawRandomDirtGrass(57, 18, 2, 0)
+            room.drawRandomDirtGrass(56, 13, 0, 5)
+            room.drawRandomDirtGrass(54, 13, 1, 0)
+            room.drawRandomDirtGrass(53, 12, 0, 0)
+            room.drawRandomDirtGrass(42, 11, 10, 0)
+            room.drawRandomDirtGrass(36, 10, 5, 0)
+            room.drawRandomDirtGrass(31, 11, 4, 0)
+            room.drawRandomDirtGrass(25, 10, 5, 0)
+            room.drawRandomDirtGrass(15, 11, 15, 0)
+            room.drawDirt(15, 14, 1, 10)
+            room.drawDirt(16, 24, 1, 24)
+            room.drawDirt(16, 48, 36, 1)
+            room.drawDirt(52, 36, 1, 13)
+            room.drawDirt(52, 36, 3, 1)
+            room.drawDirt(56, 35, 0, 2)
+            room.drawDirt(57, 35, 2, 1)
+            room.drawDirt(59, 34, 3, 1)
+            room.drawDirt(62, 33, 1, 1)
+            room.drawDirt(62, 33, 2, 1)
+            room.drawDirt(62, 33, 2, 1)
+            room.drawDirt(64, 22, 1, 11)
+            room.drawDirt(62, 21, 2, 1)
+            room.drawDirt(61, 21, 0, 1)
+            room.drawDirt(61, 21, 3, 1)
+            room.drawDirt(59, 20, 1, 1)
+            room.drawDirt(58, 20, 0, 0)
+            room.drawDirt(55, 19, 4, 1)
+            room.drawDirt(54, 16, 1, 3)
+            room.drawDirt(55, 19, 1, 1)
+            room.drawDirt(54, 14, 1, 1)
+            room.drawDirt(15, 12, 10, 1)
+            room.drawDirt(25, 11, 5, 1)
+            room.drawDirt(30, 12, 6, 1)
+            room.drawDirt(36, 11, 5, 1)
+            room.drawDirt(41, 12, 10, 1)
+            room.drawDirt(52, 12, 0, 2)
+            room.drawDirt(53, 13, 0, 2)
+
+            // room.drawBigForest(2, 6, 50, 2)
+            // room.drawBigForest(2, 10, 10, 45)
+            // room.drawBigForest(12, 51, 53, 4)
 
             let player = TilesFactory.CreatePlayer(1280, 1300)
 
