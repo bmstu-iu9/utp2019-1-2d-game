@@ -39,7 +39,7 @@ class CollisionManager {
         let objects,                             //Обекты проверяемые на наличие коллизии с object
             collision,                           //Объект коллизии
             object,                              //Объект для которого проверяется наличие коллизий
-            next=[]
+            next=new Set()
 
         while (this.room.movedObjects.length>0){
             object=this.room.movedObjects.pop()
@@ -56,10 +56,11 @@ class CollisionManager {
                                 Game.currentWorld.currentRoom.delete(object)
                             }else if (objects[i].collisonSolveStrategy==='stay'){
                                 this.solveCollision(object,collision)
-                                next.push(object)
+                                next.add(object)
                             }else if (objects[i].collisonSolveStrategy==='move'){
                                 this.solveForBoth(object,objects[i],collision)
-                                next.push(object,objects[i])
+                                next.add(object)
+                                next.add(objects[i])
                             }else if (objects[i].collisonSolveStrategy==='hit'){
                                 Game.currentWorld.currentRoom.delete(objects[i])
                             }
@@ -74,7 +75,8 @@ class CollisionManager {
                 }
             }
         }
-        this.room.movedObjects=next
+        for (let o of next)
+            this.room.movedObjects.push(o)
     }
 }
 
