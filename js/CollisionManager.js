@@ -16,7 +16,6 @@ class CollisionManager {
         collision.distance.round()
         object.hitbox.correctPosition(collision);
         object.actor.changePosition(collision.distance);
-        object.hitbox.update()
         this.room.quadTree.update(object)
     }
 
@@ -25,13 +24,11 @@ class CollisionManager {
         collision.distance.round()
         a.hitbox.correctPosition(collision);
         a.actor.changePosition(collision.distance);
-        a.hitbox.update()
         this.room.quadTree.update(a)
         collision.distance.mul(-1)
         collision.distance.round()
         b.hitbox.correctPosition(collision);
         b.actor.changePosition(collision.distance);
-        b.hitbox.update()
         this.room.quadTree.update(b)
     }
     
@@ -42,55 +39,44 @@ class CollisionManager {
         let objects,                             //Обекты проверяемые на наличие коллизии с object
             collision,                           //Объект коллизии
             object,                              //Объект для которого проверяется наличие коллизий
-            collideOffset = new Vector2d(0, 0),  //смещение объекта после разрешения коллизии
-            isCollided,                          //была ли коллизися хотя бы с одним объектом
-            collideWith
+            next=new Set()
 
-        for (let j = 0; j < this.room.movedObjects.length; j++) {
-            isCollided = false
-            object = this.room.movedObjects[j]
-            this.room.quadTree.update(object)
-            objects = this.room.quadTree.retrieve([], object)
-            collideOffset.set(0, 0)
-            for (let i = 0; i < objects.length; i++) {
-                collideWith = objects[i]
-               // console.log(collideWith)
-                //console.log(object)
-                if (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none') {
-                    continue
-                }
-                if (!objects[i].hitbox.equals(object.hitbox)) {
-                    collision = getCollision(object.hitbox, collideWith.hitbox)
-                    if (collision) {
-                        isCollided = (object.collisonSolveStrategy === 'none' && collideWith.collisonSolveStrategy === 'none')
-                        collision.obstacleObject = collideWith
-                        if (object.collisonSolveStrategy !== 'none') {
-                            if (collideWith.collisonSolveStrategy === 'stay') {
-                                collideOffset.add(object.actor.offset)
-                                this.solveCollision(object, collision)
-                                collideOffset.sub(object.actor.offset)
-                                this.room.movedObjects.push(object)
-                            }
-                            else if (collideWith.collisonSolveStrategy === 'move') {
-                                this.solveForBoth(object, objects[i], collision)
-                                this.room.movedObjects.push(object)
-                                this.room.movedObjects.push(objects[i])
+        while (this.room.movedObjects.length>0){
+            object=this.room.movedObjects.pop()
+            if (object.hitbox instanceof Hitbox)
+                this.room.quadTree.update(object)
+            objects=this.room.quadTree.retrieve([],object)
+            for (let i=0;i<objects.length;i++){
+                if (!object.hitbox.equals(objects[i].hitbox)){
+                    collision=getCollision(object.hitbox,objects[i].hitbox)
+                    if (collision){
+                        collision.obstacleObject=objects[i]
+                        if (object.collisonSolveStrategy!=='none'){
+                            if (object.collisonSolveStrategy==='hit') {
+                                Game.currentWorld.currentRoom.delete(object)
+                            }else if (objects[i].collisonSolveStrategy==='stay'){
+                                this.solveCollision(object,collision)
+                                next.add(object)
+                            }else if (objects[i].collisonSolveStrategy==='move'){
+                                this.solveForBoth(object,objects[i],collision)
+                                next.add(object)
+                                next.add(objects[i])
+                            }else if (objects[i].collisonSolveStrategy==='hit'){
+                                Game.currentWorld.currentRoom.delete(objects[i])
                             }
                         }
-                            if (object.onCollide) {
-                                object.onCollide(collision)
-                            }
-                        if (objects[i].onCollide) {
+                        if (object.onCollide!==undefined){
+                            object.onCollide(collision)
+                        }
+                        if (objects[i].onCollide!==undefined){
                             objects[i].onCollide(collision)
                         }
                     }
                 }
             }
-            if (isCollided && collideOffset.isNullVector()) {
-                throw "Collisions were not solved"
-            }
-
         }
+        for (let o of next)
+            this.room.movedObjects.push(o)
     }
 }
 
@@ -165,6 +151,22 @@ class Hitbox {
      */
     correctPosition(collision) {
         this.hitbox.correctPosition(collision)
+    }
+
+    /**
+     * @param {Number} angle
+     * @param {Vector2d} dot
+     */
+    rotateRadian(angle,dot=undefined){
+        this.hitbox.rotateRadian(angle,dot)
+    }
+
+    /**
+     * @param {Number} angle
+     * @param {Vector2d} dot
+     */
+    rotateDegrees(angle,dot=undefined){
+        this.hitbox.rotateDegrees(angle,dot)
     }
 
     toJSON() {

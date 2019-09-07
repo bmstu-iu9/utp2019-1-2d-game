@@ -35,7 +35,6 @@ class RoomManager {
      * Обновляет все игровые объекты внури managebleObj (Room)
      */
     Update() {
-        this.managableObj.movedObjects.splice(0)
         this.managableObj.updatableObjects.forEach((element)=>{
             if(element.actor instanceof MovableActor){
                this.refreshPosition(element)

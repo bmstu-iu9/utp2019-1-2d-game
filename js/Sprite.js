@@ -75,6 +75,7 @@ class Sprite {
             let id = ~~(this.index);
             frame = this.frames[id % max];
             if (this.current.once && id >= max) {
+                console.log(this.index)
                 if (this.onceCallback) {
                     this.onceCallback()
                 }

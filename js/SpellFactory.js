@@ -3,8 +3,8 @@
 class SpellFactory {
     static CreateFireBall(x, y, vector, caster) {
         let hitbox = new Hitbox('CircleHitbox', new Vector2d(x, y), 16)
-        let data = new Action(new Stats(-50, 0, 0, 0, 0, 0))
-        let actor = new MovableActor(new Vector2d(x, ~~(y - 3 * caster.drawable.drowable.height / 4)), new Vector2d(x, y))
+        let data = new Action(new Stats(-30, 0, 0, 0, 0, 0))
+        let actor = new MovableActor(new Vector2d(x - 27, ~~(y - 70)), new Vector2d(x, y))
         let sprite = SpriteFactory.CreateFireBallSprite()
         let result = new Spell(hitbox, data, new DrawableObject("middleground", sprite), actor)
         sprite.onceCallback = () => {
@@ -22,16 +22,21 @@ class SpellFactory {
          * @param {Collision} collision
          */
         result.onCollide = (collision) => {
-            if (collision.obstacleObject == result || collision.obstacleObject == caster) {
+            if (collision.obstacleObject === result || collision.obstacleObject === caster) {
                 return
             }
-            if (collision.obstacleObject instanceof NPC) {
+            if (collision.obstacleObject instanceof NPC && result.drawable.drowable.current.id != 'fireball_explosion') {
                 collision.obstacleObject.statsManager.gainAction(result.data)
             }
             result.Update = function () {
             }
-            result.actor.position.set(collision.obstacleObject.actor.position)
-            result.drawable.drowable.switch("explode")
+            //result.actor.position.set(collision.obstacleObject.actor.position)
+            if (result.drawable.drowable.current.id != 'fireball_explosion') {
+                result.actor.position.x -= 30
+                result.actor.position.y -= 20
+                result.drawable.drowable.reset()
+                result.drawable.drowable.switch("explode")
+            }
         }
 
         result.drawable.drowable.switch("fly", vector)
@@ -56,6 +61,39 @@ class SpellFactory {
         if (dest instanceof NPC && dest !== caster) {
             dest.statsManager.gainAction(result.data)
         }
+        return result
+    }
+
+    static Hit(caster){
+        let data = new Action(new Stats(-34,0,0,0,0,0))
+        let centre=caster.actor.centre.add(20,0,new Vector2d())
+        const centre_to_centre=centre.sub(caster.actor.centre,new Vector2d())
+        const cos=centre_to_centre.dotProduct(caster.direction)/Math.sqrt(centre_to_centre.lengthSquared()*caster.direction.lengthSquared())
+        let angle=Math.acos(cos)
+        if (angle*caster.direction.y<0) angle*=-1
+        let hitbox=new AABB(centre,[
+            centre.add(-20,-8,new Vector2d()),
+            centre.add(20,-8,new Vector2d()),
+            centre.add(20,8,new Vector2d()),
+            centre.add(-20,8,new Vector2d()),
+        ])
+        hitbox.rotateRadian(angle,caster.actor.centre)
+        let result=new Spell(hitbox,data,new DrawableObject("middlegorund",SpriteFactory.CreateTestSprite()),new MovableActor(centre.sub(5,1,new Vector2d())),centre)
+        result.collisonSolveStrategy="hit"
+        /**
+         * @param {Collision} collision
+         */
+        result.onCollide=function (collision) {
+            if (collision.obstacleObject!==caster){
+                if (collision.obstacleObject instanceof NPC){
+                    collision.obstacleObject.statsManager.gainAction(result.data)
+                    console.log(collision.obstacleObject)
+                }
+            }
+        }
+
+        Game.currentWorld.currentRoom.Add(result)
+        Game.currentWorld.currentRoom.movedObjects.push(result)
         return result
     }
 }

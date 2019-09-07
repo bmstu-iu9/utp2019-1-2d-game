@@ -32,9 +32,19 @@ Array.prototype.removeHitbox=function(object){
  * @param {Number} index
  * @return {AABB,CircleHitbox}
  */
-Array.prototype.removeHitboxByIndex=function(index){
-    const res=this[index]
-    arrange(index,this)
-    return res
+Array.prototype.indexOfHitbox=function(object){
+    let i;
+    for (i=0;i<this.length;i++)
+        if (this[i].hitbox.equals(object)) break
+    return i<this.length ? i : -1
+}
+
+Array.prototype.remove=function (object) {
+    for (let i=0;i<this.length;i++){
+        if (this[i].hitbox.equals(object)){
+            this.splice(i,1)
+            return true
+        }
+    }
 }
 
