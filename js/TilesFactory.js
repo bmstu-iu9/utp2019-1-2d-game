@@ -49,7 +49,7 @@ class TilesFactory {
      * @param {Number} y
      */
     static CreatePlayer(x = 0, y = 0) {
-        let player = TilesFactory.createNPC(x, y, 24, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()));
+        let player = TilesFactory.createNPC(x, y, 33, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()));
         player.manager = new PlayerManager(player)
         player.type = "player"
         return player
@@ -61,7 +61,7 @@ class TilesFactory {
      * @param {Number} y
      */
     static CreateStaticNPC(x, y, nav) {
-        let t = TilesFactory.createNPC(x, y, 22, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()))
+        let t = TilesFactory.createNPC(x, y, 30, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()))
         t.manager = new AIManager(t, nav)
         t.type = "staticNpc"
         return t

@@ -27,8 +27,10 @@ class RoomRenderer {
         for (let i = leftTop[0]; i < rightBot[0]; i++) {
             for (let j = leftTop[1]; j < rightBot[1]; j++) {
                 tile = room.backgroundTiles[j][i];
-                this.camera.setCanvasCoord(tile);
-                tile.render();
+                if (tile != undefined) {
+                    this.camera.setCanvasCoord(tile);
+                    tile.render();
+                }
             }
         }
         // Without sprites
