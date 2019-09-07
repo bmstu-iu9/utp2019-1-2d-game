@@ -42,7 +42,7 @@ class PlayerManager {
         }
         this.Direction.set(xDirection, yDirection)
         if (keyboard.KeyQ) {
-            if (Game.result.length == 0 || Game.result[Game.result.length - 1][0] !== this.player.actor.centre.x || Game.result[Game.result.length - 1][1] !== this.player.actor.centre.y) {
+            if (Game.result.length === 0 || Game.result[Game.result.length - 1][0] !== this.player.actor.centre.x || Game.result[Game.result.length - 1][1] !== this.player.actor.centre.y) {
                 Game.result.push([this.player.actor.centre.x, this.player.actor.centre.y])
             }
         }

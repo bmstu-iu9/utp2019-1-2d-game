@@ -16,7 +16,6 @@ class CollisionManager {
         collision.distance.round()
         object.hitbox.correctPosition(collision);
         object.actor.changePosition(collision.distance);
-        object.hitbox.update()
         this.room.quadTree.update(object)
     }
 
@@ -25,13 +24,11 @@ class CollisionManager {
         collision.distance.round()
         a.hitbox.correctPosition(collision);
         a.actor.changePosition(collision.distance);
-        a.hitbox.update()
         this.room.quadTree.update(a)
         collision.distance.mul(-1)
         collision.distance.round()
         b.hitbox.correctPosition(collision);
         b.actor.changePosition(collision.distance);
-        b.hitbox.update()
         this.room.quadTree.update(b)
     }
     
@@ -42,7 +39,7 @@ class CollisionManager {
         let objects,                             //Обекты проверяемые на наличие коллизии с object
             collision,                           //Объект коллизии
             object,                              //Объект для которого проверяется наличие коллизий
-            next=[]
+            next=new Set()
 
         while (this.room.movedObjects.length>0){
             object=this.room.movedObjects.pop()
@@ -59,10 +56,11 @@ class CollisionManager {
                                 Game.currentWorld.currentRoom.delete(object)
                             }else if (objects[i].collisonSolveStrategy==='stay'){
                                 this.solveCollision(object,collision)
-                                next.push(object)
+                                next.add(object)
                             }else if (objects[i].collisonSolveStrategy==='move'){
                                 this.solveForBoth(object,objects[i],collision)
-                                next.push(object,objects[i])
+                                next.add(object)
+                                next.add(objects[i])
                             }else if (objects[i].collisonSolveStrategy==='hit'){
                                 Game.currentWorld.currentRoom.delete(objects[i])
                             }
@@ -77,7 +75,8 @@ class CollisionManager {
                 }
             }
         }
-        this.room.movedObjects=next
+        for (let o of next)
+            this.room.movedObjects.push(o)
     }
 }
 

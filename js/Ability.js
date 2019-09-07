@@ -12,7 +12,6 @@ class Ability {
         this.coolDown = coolDown
         this.coolDownTime = 0
         this.castTime = castTime
-        this.initCastTime=castTime
     }
 
     /**
