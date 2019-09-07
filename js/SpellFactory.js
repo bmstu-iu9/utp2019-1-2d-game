@@ -3,8 +3,8 @@
 class SpellFactory {
     static CreateFireBall(x, y, vector, caster) {
         let hitbox = new Hitbox('CircleHitbox', new Vector2d(x, y), 16)
-        let data = new Action(new Stats(-50, 0, 0, 0, 0, 0))
-        let actor = new MovableActor(new Vector2d(x, ~~(y - 3 * caster.drawable.drowable.height / 4)), new Vector2d(x, y))
+        let data = new Action(new Stats(-30, 0, 0, 0, 0, 0))
+        let actor = new MovableActor(new Vector2d(x - 27, ~~(y - 70)), new Vector2d(x, y))
         let sprite = SpriteFactory.CreateFireBallSprite()
         let result = new Spell(hitbox, data, new DrawableObject("middleground", sprite), actor)
         sprite.onceCallback = () => {
@@ -25,13 +25,18 @@ class SpellFactory {
             if (collision.obstacleObject === result || collision.obstacleObject === caster) {
                 return
             }
-            if (collision.obstacleObject instanceof NPC) {
+            if (collision.obstacleObject instanceof NPC && result.drawable.drowable.current.id != 'fireball_explosion') {
                 collision.obstacleObject.statsManager.gainAction(result.data)
             }
             result.Update = function () {
             }
-            result.actor.position.set(collision.obstacleObject.actor.position)
-            result.drawable.drowable.switch("explode")
+            //result.actor.position.set(collision.obstacleObject.actor.position)
+            if (result.drawable.drowable.current.id != 'fireball_explosion') {
+                result.actor.position.x -= 30
+                result.actor.position.y -= 20
+                result.drawable.drowable.reset()
+                result.drawable.drowable.switch("explode")
+            }
         }
 
         result.drawable.drowable.switch("fly", vector)
