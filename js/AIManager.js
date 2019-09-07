@@ -2,9 +2,9 @@
 class AIManager {
     constructor(character, nav) {
         this.character = character
-        this.trianglePath = new Array()
-        this.resultPath = new Array()
-        this.path = new Array()
+        this.trianglePath = []
+        this.resultPath = []
+        this.path = []
         this.target = Game.player
         this.nav = nav
     }
@@ -16,11 +16,11 @@ class AIManager {
         let direction = new Vector2d(0, 0)
         target.sub(character, direction)
         if (direction.length() < 90) {
-            this.character.walking = false
+            this.character.state=STATE.idle
             return
         }
         if (direction.length() > 350) {
-            this.character.walking = false
+            this.character.state = STATE.idle
             return
         }
         this.resultPath[0].sub(this.character.actor.centre, direction)
@@ -33,9 +33,9 @@ class AIManager {
         direction.normalize()
         direction.mul(2)
        
-        this.character.walking = true
-        if (direction.x == 0 && direction.y == 0) {
-            this.character.walking = false
+        this.character.state= STATE.walk
+        if (direction.x === 0 && direction.y === 0) {
+            this.character.state = STATE.idle
         } else {
             this.character.direction.set(direction)
         }

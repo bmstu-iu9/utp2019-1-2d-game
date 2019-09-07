@@ -29,11 +29,11 @@ class NPC extends GameObject {
     }
 
     isDead() {
-        return this.statsManager.stats.hp === 0
+        return this.statsManager.stats.hp <= 0
     }
 
     drawHPBar() {
-      if(this.statsManager.stats.hp != this.statsManager.hpLimit){
+      if(this.statsManager.stats.hp !== this.statsManager.hpLimit){
         let hpB = this.drawable.canvasCoord.add(~~(this.drawable.drowable.width / 2 - Game.HealthBarBackgroudTexture.width / 2), -4, new Vector2d())
         let hp = Object.create(Game.HealthBarOverlayTexture)
         Game.HealthBarBackgroudTexture.render(hpB)
@@ -65,6 +65,7 @@ class NPC extends GameObject {
                 break
             case STATE.attack:
                 this.drawable.drowable.switch('beat',this.direction)
+                this.collisonSolveStrategy='move'
                 break
             default:
                 this.drawable.drowable.switch("idle", this.direction)

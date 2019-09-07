@@ -22,7 +22,7 @@ class SpellFactory {
          * @param {Collision} collision
          */
         result.onCollide = (collision) => {
-            if (collision.obstacleObject == result || collision.obstacleObject == caster) {
+            if (collision.obstacleObject === result || collision.obstacleObject === caster) {
                 return
             }
             if (collision.obstacleObject instanceof NPC) {
