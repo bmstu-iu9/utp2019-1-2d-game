@@ -54,6 +54,7 @@ class PlayerManager {
             console.log(Game.result.toString())
         }
         if (keyboard.KeyF) {
+            console.log(this.player.actor.centre)
             this.player.abilities[0].cast()
         }
 

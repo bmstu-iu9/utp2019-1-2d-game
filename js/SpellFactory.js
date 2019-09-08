@@ -77,7 +77,6 @@ class SpellFactory {
             centre.add(30, 20, new Vector2d()),
             centre.add(-30, 20, new Vector2d()),
         ])
-
         hitbox.rotateRadian(angle,caster.actor.centre)
         let result=new Spell(hitbox,data,new DrawableObject("middlegorund",SpriteFactory.CreateTestSprite()),new MovableActor(centre.sub(5,1,new Vector2d())),centre)
         result.collisonSolveStrategy="hit"
