@@ -59,7 +59,7 @@ class PlayerManager {
         }
 
         if (keyboard.Space){
-            if (this.player.abilities[2].cast())
+            if (this.player.abilities[2].cast(this.player.direction))
                 this.player.state=STATE.attack
         }
 

@@ -64,13 +64,13 @@ class SpellFactory {
         return result
     }
 
-    static Hit(caster){
+    static Hit(caster,vector){
         let data = new Action(new Stats(-34,0,0,0,0,0))
         let centre=caster.actor.centre.add(20,0,new Vector2d())
         const centre_to_centre=centre.sub(caster.actor.centre,new Vector2d())
-        const cos=centre_to_centre.dotProduct(caster.direction)/Math.sqrt(centre_to_centre.lengthSquared()*caster.direction.lengthSquared())
+        const cos=centre_to_centre.dotProduct(vector)/Math.sqrt(centre_to_centre.lengthSquared()*vector.lengthSquared())
         let angle=Math.acos(cos)
-        if (angle*caster.direction.y<0) angle*=-1
+        if (angle*vector.y<0) angle*=-1
         let hitbox=new AABB(centre,[
             centre.add(-20,-8,new Vector2d()),
             centre.add(20,-8,new Vector2d()),
