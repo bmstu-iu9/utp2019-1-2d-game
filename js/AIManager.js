@@ -36,13 +36,15 @@ class AIManager {
             this.agrro = true;
         }
         //}
-        this.resultPath[0].sub(this.character.actor.centre, direction)
+        if (this.resultPath[0] !== undefined)
+            this.resultPath[0].sub(this.character.actor.centre, direction)
         if (direction.length() <= this.character.hitbox.hitbox.radius * 2 / 3) {
             this.resultPath.splice(0, 1)
         } else {
             this.nav.savePath(character, target, this)
         }
-        this.resultPath[0].sub(this.character.actor.centre, direction)
+        if (this.resultPath[0] !== undefined)
+            this.resultPath[0].sub(this.character.actor.centre, direction)
         direction.normalize()
         direction.mul(3.)
        
