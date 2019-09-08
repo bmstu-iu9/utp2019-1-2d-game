@@ -123,9 +123,12 @@ class NPC extends GameObject {
             npc.collisonSolveStrategy = object.collisonSolveStrategy
             npc.statsManager = StatsManager.fromJSON(object.statsManager)
             npc.manager.resultPath.splice(0)
-            console.log(object.manager.resultPath)
+            npc.manager.path.splice(0)
+            npc.manager.trianglePath.splice(0)
             object.manager.resultPath.forEach(vector => npc.manager.resultPath.push(Vector2d.fromJSON(vector)))
-            console.log(object.manager.resultPath)
+            object.manager.path.forEach(vector => npc.manager.path.push(Vector2d.fromJSON(vector)))
+          //  object.manager.trianglePath.forEach(triangle => npc.manager.trianglePath.push(Triangle.fromJSON(triangle)))
+            npc.manager.agro = object.manager.agro
         }
 
         return npc

@@ -9,6 +9,7 @@ class Triangle {
         this.point.push(c)
         this.centre = new Vector2d(~~((a.x + b.x + c.x) / 3), ~~((a.y + b.y + c.y) / 3))
         this.id = this.centre.x.toString() + " " + this.centre.y.toString()
+        this.type = "triangle"
     }
     connect(triangle) {
         if (triangle == undefined) {
@@ -66,6 +67,26 @@ class Triangle {
             max:max,
             min:min
         }
+    }
+
+    toJSON() {
+        return Serializations[this.type](this)
+    }
+
+    /**
+     *
+     * @param {Triangle}obj
+     */
+    static fromJSON(obj){
+        let c = obj.point.pop()
+        let b = obj.point.pop()
+        let a = obj.point.pop()
+        let triangle = new Triangle(a,b,c,obj.index)
+        for (let i in obj.edge.map){
+            triangle.edge.set(obj.edge.map[i])
+        }
+        triangle.id = obj.id
+        return triangle
     }
 }
 class Graph {
@@ -377,4 +398,5 @@ class NavMesh {
     render() {
         this.graph.render()
     }
+
 }

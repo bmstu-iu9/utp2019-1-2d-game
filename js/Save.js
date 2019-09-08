@@ -199,14 +199,6 @@ const SaveLoad = {
          }
      },
 
-     /*"spell" : (obj) => {
-        return {
-
-        }
-     }*/
-
-     //sprite
-
      "staticObject" : (obj) => {
          return {
              id : obj.id,
@@ -258,7 +250,19 @@ const SaveLoad = {
 
      "AIManager" : (obj) => {
          return {
-             resultPath : obj.resultPath
+             resultPath : obj.resultPath,
+             agro : obj.agro,
+             path : obj.path,
+           //  trianglePath : obj.trianglePath
+         }
+     },
+
+     "triangle" : (obj) => {
+         return {
+             point : obj.point,
+             index : obj.index,
+             edge : obj.edge.map,
+             id : obj.id
          }
      }
 }
