@@ -62,7 +62,7 @@ class PlayerManager {
         }
 
         if (keyboard.Space){
-            if (this.player.abilities[2].cast())
+            if (this.player.abilities[2].cast(vector))
                 this.player.state=STATE.attack
         }
 

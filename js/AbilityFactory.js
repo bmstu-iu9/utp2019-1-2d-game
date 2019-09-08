@@ -34,11 +34,13 @@ class AbilityFactory {
     }
 
     static Hit(npc){
-        let hit=new Ability(npc,5,1.5,28)
-        hit.cast=function () {
+        let hit = new Ability(npc, 5, 1.2, 28)
+        hit.cast = function (vector) {
             if (this.npc.statsManager.stats.mana >= this.manaCost && this.coolDownTime === 0) {
+                this.npc.drawable.drowable.reset()
+                this.npc.drawable.drowable.switch('beat', vector)
                 this.npc.statsManager.stats.mana -= this.manaCost
-                SpellFactory.Hit(npc)
+                SpellFactory.Hit(npc, vector)
                 this.coolDownTime = this.coolDown
                 this.npc.casting=25
                 return true

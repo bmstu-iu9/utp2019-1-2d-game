@@ -58,8 +58,8 @@ class NPC extends GameObject {
         if (this.casting) {
             this.casting--
             if (this.state===STATE.attack){
-                this.drawable.drowable.switch('beat',this.direction)
-                this.collisonSolveStrategy='move'
+                //this.drawable.drowable.switch('beat',this.direction)
+                this.collisonSolveStrategy = 'stay'
             }
         }else switch (this.state) {
             case STATE.walk:

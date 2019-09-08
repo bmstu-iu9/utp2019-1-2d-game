@@ -16,7 +16,11 @@ class AIManager {
         let direction = new Vector2d(0, 0)
         target.sub(character, direction)
         if (direction.length() < 90) {
-            this.character.state=STATE.idle
+            if (this.character.abilities[2].cast(direction)) {
+                this.character.state = STATE.attack
+            } else {
+                this.character.state = STATE.idle
+            }
             return
         }
         if (direction.length() > 350) {
