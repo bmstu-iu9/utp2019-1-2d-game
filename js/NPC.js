@@ -111,9 +111,7 @@ class NPC extends GameObject {
                 ? CircleHitbox.fromJSON(object.hitbox) : AABB.fromJSON(object.hitbox)
             npc.direction = Vector2d.fromJSON(object.direction)
             npc.collisonSolveStrategy = object.collisonSolveStrategy
-            npc.walking = object.walking
-         //   npc.statsManager = StatsManager.fromJSON(object.statsManager)
-          //  npc.statsAffector = StatsAffector.fromJSON(object.statsAffector)
+            npc.statsManager = StatsManager.fromJSON(object.statsManager)
             Game.camera.focusOn(npc.actor)
             Game.player = npc
         } else if (object.type === "staticNpc") {
@@ -123,9 +121,11 @@ class NPC extends GameObject {
             npc.hitbox = Hitbox.fromJSON(object.hitbox)
             npc.direction = Vector2d.fromJSON(object.direction)
             npc.collisonSolveStrategy = object.collisonSolveStrategy
-            npc.walking = object.walking
-            //   npc.statsManager = StatsManager.fromJSON(object.statsManager)
-            //   npc.statsAffector = StatsAffector.fromJSON(object.statsAffector)
+            npc.statsManager = StatsManager.fromJSON(object.statsManager)
+            npc.manager.resultPath.splice(0)
+            console.log(object.manager.resultPath)
+            object.manager.resultPath.forEach(vector => npc.manager.resultPath.push(Vector2d.fromJSON(vector)))
+            console.log(object.manager.resultPath)
         }
 
         return npc

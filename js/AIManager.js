@@ -8,14 +8,13 @@ class AIManager {
         this.path = []
         this.target = Game.player
         this.nav = nav
+        this.type = "AIManager"
     }
 
     update() {
         let character = this.character.actor.centre
         let target = this.target.actor.centre
-        if (!this.agrro) {
-            this.nav.savePath(character, target, this)
-        }
+        this.nav.savePath(character, target, this)
         let direction = new Vector2d(0, 0)
         target.sub(character, direction)
         if (direction.length() < 59) {
@@ -26,8 +25,7 @@ class AIManager {
             }
             return
         }
-        //if (!this.agrro) {
-        if (direction.length() > 500 || (!this.agrro && this.resultPath.length > 1)) {
+        if (direction.length() > 350) {
             this.character.state = STATE.idle
             this.agrro = false
             return
@@ -54,4 +52,9 @@ class AIManager {
         this.character.actor.update()
         this.character.actor.changePosition(direction)
     }
+
+    toJSON(){
+        return Serializations[this.type](this)
+    }
+
 }

@@ -90,8 +90,8 @@ const SaveLoad = {
             collisonSolveStrategy: obj.collisonSolveStrategy,
             walking: obj.walking,
             type : obj.type,
-            //statsAffector : obj.statsAffector,
-           // statsManager : obj.statsManager
+            statsManager : obj.statsManager,
+            manager : obj.manager
         }
      },
 
@@ -105,6 +105,7 @@ const SaveLoad = {
             collisonSolveStrategy: obj.collisonSolveStrategy,
             walking: obj.walking,
             type : obj.type,
+            statsManager : obj.statsManager
         }
      },
 
@@ -228,16 +229,7 @@ const SaveLoad = {
              type : obj.type
          }
      },
-
-     /*"statsAffector" : (obj) => {
-         console.log(obj)
-         return {
-             target: obj.target, //Возможно нужно будет удалить
-             type : obj.type
-         }
-     },*/
-
-    /* "statsManager" : (obj) => {
+     "statsManager" : (obj) => {
          let arr = []
          obj.modifiersContainer.forEach(elem => arr.push(elem))
          return {
@@ -248,7 +240,7 @@ const SaveLoad = {
              modifiersContainer: arr,
              type : obj.type
          }
-     },*/
+     },
 
      "texture" : (obj) => {
          return {
@@ -261,6 +253,12 @@ const SaveLoad = {
          return {
              x: obj.x,
              y: obj.y
+         }
+     },
+
+     "AIManager" : (obj) => {
+         return {
+             resultPath : obj.resultPath
          }
      }
 }
