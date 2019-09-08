@@ -84,7 +84,7 @@ class SpellFactory {
          * @param {Collision} collision
          */
         result.onCollide=function (collision) {
-            if (collision.obstacleObject!==caster && !(caster.manager && collision.obstacleObject.manager instanceof AIManager)){
+            if (collision.obstacleObject!==caster && !(caster.manager instanceof AIManager && collision.obstacleObject.manager instanceof AIManager)){
                 if (collision.obstacleObject instanceof NPC){
                     collision.obstacleObject.statsManager.gainAction(result.data)
                 }
