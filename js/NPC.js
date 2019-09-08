@@ -81,6 +81,7 @@ class NPC extends GameObject {
             }
         }
         this.statsManager.stats.mana += 0.5
+        this.statsManager.stats.hp += 0.05
         this.statsManager.correctStats()
     }
 

@@ -62,7 +62,7 @@ class PlayerManager {
             this.player.abilities[1].cast()
         }
 
-        if (keyboard.Space){
+        if (mouse.isLeftClicked) {
             if (this.player.abilities[2].cast(vector))
                 this.player.state=STATE.attack
         }
