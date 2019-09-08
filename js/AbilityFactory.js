@@ -42,7 +42,7 @@ class AbilityFactory {
                 this.npc.statsManager.stats.mana -= this.manaCost
                 SpellFactory.Hit(npc, vector)
                 this.coolDownTime = this.coolDown
-                this.npc.casting=25
+                this.npc.casting=28
                 return true
             }
         }
