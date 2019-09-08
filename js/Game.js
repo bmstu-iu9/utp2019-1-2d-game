@@ -3,7 +3,7 @@
 let canvas = document.getElementById("canvas")
 canvas.width = document.body.clientWidth
 canvas.height = document.body.clientHeight
-let ctx = canvas.getContext("2d", { alpha: false })
+let ctx = canvas.getContext("2d", {alpha: false})
 
 let imagesStorage = {}
 let textureStorage = {}
@@ -64,7 +64,7 @@ let imagesSrc = [
     'wall2.png',
     'well.png',
     'lightning.png',
-
+    'enemy_knight.png'
 ];
 
 let Game = {
@@ -131,6 +131,7 @@ let Game = {
         Game.DungeonWallTexture2 = TilesFactory.CreateTexture(imagesStorage.Wall)
         Game.WellTexture = TilesFactory.CreateTexture(imagesStorage.well)
         Game.GhostBox = BoxFactory.CreateKnightBox()
+        Game.EnemyKnightBox = BoxFactory.CreateEnemyKnightBox()
         Game.FireBallBox = BoxFactory.CreateFireBallBox()
         Game.LightningBox = BoxFactory.CreateLigthningBox()
         Game.camera = new Camera(canvas.width, canvas.height)
