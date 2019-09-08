@@ -14,7 +14,9 @@ class AIManager {
     update() {
         let character = this.character.actor.centre
         let target = this.target.actor.centre
-        this.nav.savePath(character, target, this)
+        if (!this.agrro) {
+            this.nav.savePath(character, target, this)
+        }
         let direction = new Vector2d(0, 0)
         target.sub(character, direction)
         if (direction.length() < 59) {
@@ -25,7 +27,8 @@ class AIManager {
             }
             return
         }
-        if (direction.length() > 350) {
+        //if (!this.agrro) {
+        if (direction.length() > 500 || (!this.agrro && this.resultPath.length > 1)) {
             this.character.state = STATE.idle
             this.agrro = false
             return

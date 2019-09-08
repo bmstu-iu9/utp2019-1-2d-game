@@ -34,7 +34,6 @@ class RoomFactory {
         let testRoomSize = 120;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
         if (object === undefined) {
-            room.type = "roundedRoom"
             for (let i = 0; i < testRoomSize; i++) {
                 for (let j = 0; j < testRoomSize; j++) {
                     //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
@@ -48,6 +47,7 @@ class RoomFactory {
                 }
             }
 
+            room.type = "roundedRoom"
             let player = TilesFactory.CreatePlayer(1280, 1300)
 
             room.Add(player)
