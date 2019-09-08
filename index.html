@@ -6,7 +6,7 @@
         <title>Game</title>
     </head>
     <body oncontextmenu="return false;">
-        <canvas id="canvas"></canvas>
+    <canvas id="canvas" onmousemove="this.clickPositionX = event.clientX; this.clickPositionY = event.clientY"></canvas>
         <script src="js/GameObject.js"></script>
         <script src="js/AABB.js"></script>
         <script src="js/Spell.js"></script>

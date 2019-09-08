@@ -54,7 +54,6 @@ class NPC extends GameObject {
         this.actor.update()
         if (this.manager !== undefined) {
             this.manager.update()
-
         }
         if (this.casting) {
             this.casting--

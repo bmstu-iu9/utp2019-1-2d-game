@@ -3,6 +3,8 @@
 let canvas = document.getElementById("canvas")
 canvas.width = document.body.clientWidth
 canvas.height = document.body.clientHeight
+canvas.clickPositionX = 0;
+canvas.clickPositionY = 0;
 let ctx = canvas.getContext("2d", { alpha: false })
 
 let imagesStorage = {}

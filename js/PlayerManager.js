@@ -17,6 +17,10 @@ class PlayerManager {
         let speed = this.player.statsManager.stats.speed
         let xDirection = 0
         let yDirection = 0
+        let vector = new Vector2d(canvas.clickPositionX, canvas.clickPositionY).add(Game.camera.position).sub(this.player.actor.centre)
+        if (this.player.casting > 0) {
+            return
+        }
         if (keyboard.KeyW || keyboard.ArrowUp) {
             yDirection -= speed
         }
@@ -50,7 +54,6 @@ class PlayerManager {
             console.log(Game.result.toString())
         }
         if (keyboard.KeyF) {
-            console.log(this.player.actor.centre)
             this.player.abilities[0].cast()
         }
 
