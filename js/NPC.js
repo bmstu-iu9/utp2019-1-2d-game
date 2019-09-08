@@ -13,13 +13,13 @@ class NPC extends GameObject {
      * @param id
      * @param manager
      */
-    constructor(coords = new Vector2d(0, 0), centre = new Vector2d(0, 0), drawable, hitbox, id = Game.getUniqId(), manager = undefined) {
+    constructor(coords = new Vector2d(0, 0), centre = new Vector2d(0, 0), drawable, hitbox, stats, id = Game.getUniqId(), manager = undefined) {
         super(id)
         this.actor = new MovableActor(coords, centre)
         this.drawable = drawable
         this.manager = manager
         this.statsAffector = new StatsAffector()
-        this.statsManager = new StatsManager()
+        this.statsManager = new StatsManager(stats)
         this.hitbox = hitbox
         this.direction = new Vector2d(0, 0)
         this.casting = 0

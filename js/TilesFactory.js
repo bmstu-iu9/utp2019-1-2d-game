@@ -49,7 +49,8 @@ class TilesFactory {
      * @param {Number} y
      */
     static CreatePlayer(x = 0, y = 0) {
-        let player = TilesFactory.createNPC(x, y, 33, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()));
+        let stats = new Stats(100, 200)
+        let player = TilesFactory.createNPC(x, y, 33, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()), stats);
         player.manager = new PlayerManager(player)
         player.type = "player"
         return player
@@ -334,7 +335,7 @@ class TilesFactory {
      * @param {DrawableObject} drawable
      * @returns {NPC}
      */
-    static createNPC(x = 0, y = 0, r = ~~(Game.tileWidth / 2), drawable) {
+    static createNPC(x = 0, y = 0, r = ~~(Game.tileWidth / 2), drawable, stats) {
         if (drawable.placement !== "middleground")
             throw "Solid object placement can be middleground only"
         let height = drawable.drowable.height
@@ -345,6 +346,7 @@ class TilesFactory {
             new Vector2d(xCentre, yCentre),
             drawable,
             new Hitbox(HITBOX_CIRCLE, new Vector2d(xCentre, yCentre), r),
+            stats
         )
     }
 }
