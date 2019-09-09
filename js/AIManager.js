@@ -27,7 +27,7 @@ class AIManager {
             return
         }
         //if (!this.agrro) {
-        if (direction.length() > 500 || (!this.agrro && this.resultPath.length > 1)) {
+        if (direction.length() > 400 || (!this.agrro && this.resultPath.length > 1)) {
             this.character.state = STATE.idle
             this.agrro = false
             return
@@ -43,7 +43,7 @@ class AIManager {
         }
         this.resultPath[0].sub(this.character.actor.centre, direction)
         direction.normalize()
-        direction.mul(3.)
+        direction.mul(3.0)
        
         this.character.state= STATE.walk
         if (direction.x === 0 && direction.y === 0) {

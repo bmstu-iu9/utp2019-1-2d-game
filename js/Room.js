@@ -244,13 +244,13 @@ class Room extends GameObject {
                 t = TilesFactory.CreateDungeonWallSE(x, y)
                 break
             case '3':
-                t = TilesFactory.CreateDungeonColumnLeft(x, y)
+                t = TilesFactory.CreateDungeonColumnLeft(x, y - 50)
                 break
             case '4':
-                t = TilesFactory.CreateDungeonColumnMiddle(x, y)
+                t = TilesFactory.CreateDungeonColumnMiddle(x, y - 50)
                 break
             case '5':
-                t = TilesFactory.CreateDungeonColumnRight(x, y)
+                t = TilesFactory.CreateDungeonColumnRight(x, y - 50)
                 break
             case '6':
                 t = TilesFactory.CreateDungeonFloor1(x, y)
@@ -265,7 +265,7 @@ class Room extends GameObject {
                 t = TilesFactory.CreateGrassTile3(x, y)
                 break
             case '0':
-                t = TilesFactory.CreateLukeTiles(x, y)
+                t = TilesFactory.CreateLukeTile(x, y)
                 break
             case 'c':
                 t = TilesFactory.CreateTree(x - 55, y - 140)
