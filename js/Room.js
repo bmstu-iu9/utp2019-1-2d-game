@@ -114,12 +114,42 @@ class Room extends GameObject {
       }
     }
 
-    drawRandomDirtGrass(x, y, width, height) {
+    drawRandomDirtGrassB(x, y, width, height) {
       x = x * Game.tileWidth
       y = y * Game.tileHeight
       for(let i = width; i >= 0; i--) {
           for(let j = height; j >= 0; j--) {
-              this.Add(TilesFactory.CreateRandomDirtGrass(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+              this.Add(TilesFactory.CreateRandomDirtGrassT(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawRandomDirtGrassL(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateRandomDirtGrassR(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawRandomDirtGrassR(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateRandomDirtGrassL(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawRandomDirtGrassT(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateRandomDirtGrassB(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
           }
       }
     }

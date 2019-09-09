@@ -22,6 +22,18 @@ let imagesSrc = [
     'deadwood1.png',
     'deadwood2.png',
     'deadwood3.png',
+    'dirtB1.png',
+    'dirtB2.png',
+    'dirtB3.png',
+    'dirtL1.png',
+    'dirtL2.png',
+    'dirtL3.png',
+    'dirtR1.png',
+    'dirtR2.png',
+    'dirtR3.png',
+    'dirtT1.png',
+    'dirtT2.png',
+    'dirtT3.png',
     'dungeon_column_left.png',
     'dungeon_column_middle.png',
     'dungeon_column_right.png',
@@ -94,6 +106,18 @@ let Game = {
         Game.DeadWood1Texture = TilesFactory.CreateTexture(imagesStorage.deadwood1)
         Game.DeadWood2Texture = TilesFactory.CreateTexture(imagesStorage.deadwood2)
         Game.DeadWood3Texture = TilesFactory.CreateTexture(imagesStorage.deadwood3)
+        Game.DirtTextureB1 = TilesFactory.CreateTexture(imagesStorage.dirtB1)
+        Game.DirtTextureB2 = TilesFactory.CreateTexture(imagesStorage.dirtB2)
+        Game.DirtTextureB3 = TilesFactory.CreateTexture(imagesStorage.dirtB3)
+        Game.DirtTextureL1 = TilesFactory.CreateTexture(imagesStorage.dirtL1)
+        Game.DirtTextureL2 = TilesFactory.CreateTexture(imagesStorage.dirtL2)
+        Game.DirtTextureL3 = TilesFactory.CreateTexture(imagesStorage.dirtL3)
+        Game.DirtTextureR1 = TilesFactory.CreateTexture(imagesStorage.dirtR1)
+        Game.DirtTextureR2 = TilesFactory.CreateTexture(imagesStorage.dirtR2)
+        Game.DirtTextureR3 = TilesFactory.CreateTexture(imagesStorage.dirtR3)
+        Game.DirtTextureT1 = TilesFactory.CreateTexture(imagesStorage.dirtT1)
+        Game.DirtTextureT2 = TilesFactory.CreateTexture(imagesStorage.dirtT2)
+        Game.DirtTextureT3 = TilesFactory.CreateTexture(imagesStorage.dirtT3)
         Game.DungeonColumnLeftTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_column_left)
         Game.DungeonColumnMiddleTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_column_middle)
         Game.DungeonColumnRightTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_column_right)
@@ -182,5 +206,3 @@ let Game = {
 Game.InitConfig()
 ResourceLoader.setCallback(Game.InitLogic)
 ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc)
-
-
