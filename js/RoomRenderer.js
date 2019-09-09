@@ -50,7 +50,7 @@ class RoomRenderer {
             this.camera.setCanvasCoord(key);
             key.render();
         })
-        room.nav.render()
+        //room.nav.render()
     }
 }
 

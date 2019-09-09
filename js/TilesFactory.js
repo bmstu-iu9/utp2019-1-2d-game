@@ -24,6 +24,31 @@ class TilesFactory {
         return new StaticObject(x, y, x, y, new DrawableObject("middleground", src[~~(Math.random() * 3)]));
     }
 
+    static CreateRandomGrass(x = 0, y = 0) {
+      let src = [Game.GrassTexture1, Game.GrassTexture2, Game.GrassTexture3]
+      return new StaticObject(x, y, x, y, new DrawableObject("background", src[~~(Math.random() * 3)]));
+    }
+
+    static CreateRandomDirtGrassT(x = 0, y = 0) {
+      let src = [Game.DirtTextureB1, Game.DirtTextureB2, Game.DirtTextureB3]
+      return new StaticObject(x, y, x, y, new DrawableObject("background", src[~~(Math.random() * 3)]));
+    }
+
+    static CreateRandomDirtGrassR(x = 0, y = 0) {
+      let src = [Game.DirtTextureL1, Game.DirtTextureL2, Game.DirtTextureL3]
+      return new StaticObject(x, y, x, y, new DrawableObject("background", src[~~(Math.random() * 3)]));
+    }
+
+    static CreateRandomDirtGrassB(x = 0, y = 0) {
+      let src = [Game.DirtTextureT1, Game.DirtTextureT2, Game.DirtTextureT3]
+      return new StaticObject(x, y, x, y, new DrawableObject("background", src[~~(Math.random() * 3)]));
+    }
+
+    static CreateRandomDirtGrassL(x = 0, y = 0) {
+      let src = [Game.DirtTextureR1, Game.DirtTextureR2, Game.DirtTextureR3]
+      return new StaticObject(x, y, x, y, new DrawableObject("background", src[~~(Math.random() * 3)]));
+    }
+
     static CreateForest(x = 0, y = 0) {
       return TilesFactory.createTile(x, y, ~~(Game.TreeTexture.width / 4), ~~(Game.TreeTexture.height / 5), new DrawableObject("middleground", Game.TreeTexture), "Bot")
     }

@@ -25,6 +25,11 @@ class NPC extends GameObject {
         this.casting = 0
         this.state=STATE.idle
         this.collisonSolveStrategy = "stay"
+        
+        //
+        this.hpB = new Vector2d()
+        this.hp = Game.HealthBarOverlayTexture
+        //
         this.abilities = [AbilityFactory.createFireBallAbility(this), AbilityFactory.createLigthningAbility(this),AbilityFactory.Hit(this)]
     }
 
@@ -33,12 +38,11 @@ class NPC extends GameObject {
     }
 
     drawHPBar() {
-      if(this.statsManager.stats.hp !== this.statsManager.hpLimit){
-        let hpB = this.drawable.canvasCoord.add(~~(this.drawable.drowable.width / 2 - Game.HealthBarBackgroudTexture.width / 2), -4, new Vector2d())
-        let hp = Object.create(Game.HealthBarOverlayTexture)
-        Game.HealthBarBackgroudTexture.render(hpB)
+      if(this.statsManager.stats.hp < this.statsManager.hpLimit) {
+        this.drawable.canvasCoord.add(~~(this.drawable.drowable.width / 2 - Game.HealthBarBackgroudTexture.width / 2), -4, this.hpB)
+        Game.HealthBarBackgroudTexture.render(this.hpB)
         let frac = this.statsManager.stats.hp / this.statsManager.hpLimit
-        ctx.drawImage(hp.img, hpB.x + 1, hpB.y + 1, ~~(hp.img.width * frac) ,hp.img.height)
+        ctx.drawImage(this.hp.img, this.hpB.x + 1, this.hpB.y + 1, ~~(this.hp.img.width * frac) ,this.hp.img.height)
       }
     }
 

@@ -4,9 +4,9 @@
  */
 class Room extends GameObject {
     /**
-     * @param {String} id 
-     * @param {Number} height 
-     * @param {Number} width 
+     * @param {String} id
+     * @param {Number} height
+     * @param {Number} width
      */
     constructor(id = Game.getUniqId(), height = 10, width = 10) {
         super(id)
@@ -27,7 +27,7 @@ class Room extends GameObject {
     /**
      * Добавляет GameObject в Room, а также добавляет
      * ссылки во вспомогательные контейнеры
-     * @param {GameObject} obj 
+     * @param {GameObject} obj
      */
     Add(obj) {
         this.roomObjects.set(obj)
@@ -104,14 +104,72 @@ class Room extends GameObject {
         }
     }
 
+    drawRandomGrass(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateRandomGrass(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawRandomDirtGrassB(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateRandomDirtGrassT(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawRandomDirtGrassL(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateRandomDirtGrassR(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawRandomDirtGrassR(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateRandomDirtGrassL(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawRandomDirtGrassT(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateRandomDirtGrassB(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawDirt(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateGroundTile(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
     drawGrass1(x, y, width, height) {
       x = x * Game.tileWidth
       y = y * Game.tileHeight
-      // width = width * Game.tileWidth
-      // height = height * Game.tileHeight
       for(let i = width; i >= 0; i--) {
           for(let j = height; j >= 0; j--) {
-              this.Add(TilesFactory.CreateGrassTile1(x + (j * Game.tileWidth), y + (i * Game.tileWidth)))
+              this.Add(TilesFactory.CreateGrassTile1(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
           }
       }
     }
@@ -121,7 +179,7 @@ class Room extends GameObject {
       y = y * Game.tileHeight
       for(let i = width; i >= 0; i--) {
           for(let j = height; j >= 0; j--) {
-              this.Add(TilesFactory.CreateGrassTile2(x + (j * Game.tileWidth), y + (i * Game.tileWidth)))
+              this.Add(TilesFactory.CreateGrassTile2(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
           }
       }
     }
@@ -131,7 +189,7 @@ class Room extends GameObject {
       y = y * Game.tileHeight
       for(let i = width; i >= 0; i--) {
           for(let j = height; j >= 0; j--) {
-              this.Add(TilesFactory.CreateGrassTile3(x + (j * Game.tileWidth), y + (i * Game.tileWidth)))
+              this.Add(TilesFactory.CreateGrassTile3(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
           }
       }
     }
@@ -141,7 +199,7 @@ class Room extends GameObject {
       y = y * Game.tileHeight
       for(let i = width; i >= 0; i--) {
           for(let j = height; j >= 0; j--) {
-              this.Add(TilesFactory.CreateDungeonFloor1(x + (j * Game.tileWidth), y + (i * Game.tileWidth)))
+              this.Add(TilesFactory.CreateDungeonFloor1(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
           }
       }
     }
@@ -151,7 +209,7 @@ class Room extends GameObject {
       y = y * Game.tileHeight
       for(let i = width; i >= 0; i--) {
           for(let j = height; j >= 0; j--) {
-              this.Add(TilesFactory.CreateDungeonFloorBrick(x + (j * Game.tileWidth), y + (i * Game.tileWidth)))
+              this.Add(TilesFactory.CreateDungeonFloorBrick(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
           }
       }
     }
@@ -161,7 +219,7 @@ class Room extends GameObject {
       y = y * Game.tileHeight
       for(let i = width; i >= 0; i--) {
           for(let j = height; j >= 0; j--) {
-              this.Add(TilesFactory.CreateGroundTile(x + (j * Game.tileWidth), y + (i * Game.tileWidth)))
+              this.Add(TilesFactory.CreateDungeonFloor1(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
           }
       }
     }
@@ -177,10 +235,12 @@ class Room extends GameObject {
     }
 
     drawBigForest(x, y, width, height) {
-      for(let i = 0; i < width; i++) {
-          for(let j = 0; j < height; j++) {
-            if (Math.random() < 0.8) {
-              this.Add(TilesFactory.CreateBigForest(x + i * 90, y + j * 90))
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+            if (Math.random() < 0.5) {
+              this.Add(TilesFactory.CreateBigForest(x + i * Game.tileWidth, y + j * Game.tileHeight))
             }
           }
       }
@@ -267,6 +327,9 @@ class Room extends GameObject {
             case '0':
                 t = TilesFactory.CreateLukeTiles(x, y)
                 break
+            case '-':
+                t = TilesFactory.CreateDungeonFloorBrick(x, y)
+                break
             case 'c':
                 t = TilesFactory.CreateTree(x - 55, y - 140)
                 break
@@ -342,7 +405,7 @@ class Room extends GameObject {
         }
     }
     /**
-     * Обновление игровой логики Room 
+     * Обновление игровой логики Room
      */
     Update() {
         this.manager.Update()

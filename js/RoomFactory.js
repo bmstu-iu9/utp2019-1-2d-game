@@ -31,21 +31,100 @@ class RoomFactory {
 
 
     static CreateRoundedRoom(object = undefined) {
-        let testRoomSize = 120;
+        let testRoomSize = 80;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
         if (object === undefined) {
-            for (let i = 0; i < testRoomSize; i++) {
-                for (let j = 0; j < testRoomSize; j++) {
-                    //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
-                    //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
-                    //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
-                    //room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
-                    //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
-                    //     if (Math.random() < 0.4) {
-                    //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
-                    //     }
-                }
-            }
+            //room.type = "roundedRoom"
+            // for (let i = 0; i < testRoomSize; i++) {
+            //     for (let j = 0; j < testRoomSize; j++) {
+            //         //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
+            //         //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
+            //         //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
+            //         room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
+            //         //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
+            //         //     if (Math.random() < 0.4) {
+            //         //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
+            //         //     }
+            //     }
+            // }
+            room.drawGround(0, 0, 79, 79)
+            room.drawRandomGrass(0, 0, 73, 12)
+            room.drawRandomGrass(0, 11, 14, 67)
+            room.drawRandomGrass(15, 50, 58, 28)
+            room.drawRandomGrass(66, 11, 7, 39)
+            room.drawRandomGrass(55, 11, 11, 9)
+            room.drawRandomGrass(53, 11, 2, 1)
+            room.drawRandomGrass(55, 37, 11, 13)
+            room.drawRandomGrass(74, 0, 4, 78)
+            room.drawRandomGrass(63, 34, 3, 2)
+            room.drawRandomGrass(14, 0, 11, 13)
+            room.drawRandomDirtGrassR(14, 12, 0, 12)
+            room.drawRandomDirtGrassR(15, 22, 0, 27)
+            room.drawRandomDirtGrassT(16, 50, 37, 0)
+            room.drawRandomDirtGrassL(54, 38, 0, 11)
+            room.drawRandomDirtGrassT(54, 38, 3, 0)
+            room.drawRandomDirtGrassT(57, 37, 2, 0)
+            room.drawRandomDirtGrassT(60, 36, 2, 0)
+            room.drawRandomDirtGrassT(63, 35, 1, 0)
+            room.drawRandomDirtGrassT(65, 34, 0, 0)
+            room.drawRandomDirtGrassL(66, 22, 0, 11)
+            room.drawRandomDirtGrassB(65, 21, 0, 0)
+            room.drawRandomDirtGrassB(61, 20, 3, 0)
+            room.drawRandomDirtGrassL(60, 19, 0, 0)
+            room.drawRandomDirtGrassB(57, 18, 2, 0)
+            room.drawRandomDirtGrassL(56, 14, 0, 3)
+            room.drawRandomDirtGrassB(54, 13, 1, 0)
+            room.drawRandomDirtGrassB(53, 12, 0, 0)
+            room.drawRandomDirtGrassL(42, 11, 0, 0)
+            room.drawRandomDirtGrassB(43, 11, 8, 0)
+            room.drawRandomDirtGrassB(36, 10, 5, 0)
+            room.drawRandomDirtGrassR(35, 11, 0, 0)
+            room.drawRandomDirtGrassB(32, 11, 2, 0)
+            room.drawRandomDirtGrassL(31, 11, 0, 0)
+            room.drawRandomDirtGrassB(25, 10, 5, 0)
+            room.drawRandomDirtGrassR(24, 11, 0, 0)
+            room.drawRandomDirtGrassB(15, 11, 8, 0)
+            room.drawDirt(15, 14, 1, 10)
+            room.drawDirt(16, 24, 1, 24)
+            room.drawDirt(16, 48, 36, 1)
+            room.drawDirt(52, 36, 1, 13)
+            room.drawDirt(52, 36, 3, 1)
+            room.drawDirt(56, 35, 0, 2)
+            room.drawDirt(57, 35, 2, 1)
+            room.drawDirt(59, 34, 3, 1)
+            room.drawDirt(62, 33, 1, 1)
+            room.drawDirt(62, 33, 2, 1)
+            room.drawDirt(62, 33, 2, 1)
+            room.drawDirt(64, 22, 1, 11)
+            room.drawDirt(62, 21, 2, 1)
+            room.drawDirt(61, 21, 0, 1)
+            room.drawDirt(61, 21, 3, 1)
+            room.drawDirt(59, 20, 1, 1)
+            room.drawDirt(58, 20, 0, 0)
+            room.drawDirt(56, 18, 0, 0)
+            room.drawDirt(55, 19, 4, 1)
+            room.drawDirt(54, 16, 1, 3)
+            room.drawDirt(55, 19, 1, 1)
+            room.drawDirt(54, 14, 1, 1)
+            room.drawDirt(15, 12, 10, 1)
+            room.drawDirt(25, 11, 5, 1)
+            room.drawDirt(30, 12, 6, 1)
+            room.drawDirt(36, 11, 5, 1)
+            room.drawDirt(41, 12, 10, 1)
+            room.drawDirt(52, 12, 0, 2)
+            room.drawDirt(53, 13, 0, 2)
+            room.drawBigForest(2, 5, 70, 4)
+            room.drawBigForest(2, 10, 10, 13)
+            room.drawBigForest(3, 24, 10, 30)
+            room.drawBigForest(12, 50, 60, 5)
+            room.drawBigForest(60, 35, 5, 3)
+            room.drawBigForest(55,37,20,15)
+            room.drawBigForest(66, 20, 11, 17)
+            room.drawBigForest(53, 9, 24, 2)
+            room.drawBigForest(56, 12, 20, 4)
+            room.drawBigForest(61, 16, 14, 2)
+            room.drawBigForest(65, 18, 11, 2)
+
 
             room.type = "roundedRoom"
             let player = TilesFactory.CreatePlayer(1280, 1300)
@@ -107,7 +186,7 @@ class RoomFactory {
             ' a          d a                   1ss2                                                        \n' +
             ' a          d a                   d                                          \n' +
             ' zssse  qsssx a                   d                                                                               \n' +
-            ' a   d  a     a                   d                                                              \n' +
+            '     d  a     a                   d                                                              \n' +
             ' qsssx  zssse zsssssssssssssssssssx                                                                                         \n' +
             ' a          d                                                                                     \n' +
             ' a          d                                                                                     \n' +
@@ -123,46 +202,46 @@ class RoomFactory {
             '                                                                                                   \n' +
             '                                                                                                   \n' +
             '                                                ')
-        room.addMap(17, 14,
-            '                                                                       \n' +
-            '                                                                       \n' +
-            ' 666666666  666666666  666666666666666666666666666666666666666666666666\n' +
-            ' 666666666  666666666  666666666666666666666666666666666666666666666666\n' +
-            ' 666666666  666666666  666666666666666666666666666666666666666666666666\n' +
-            ' 666666666  666666666  666666666666666666666666666666666666666666666666\n' +
-            ' 666666666  666666666  666666666666666666666666666666666666666666666666\n' +
-            '     666       666       6666666666666666666666666666666666666666666666\n' +
-            '  6666666666   666       6666666666666666666666666666666666666666666666\n' +
-            '  666666666666666666666666666666666666666666666666666666666666666666666\n' +
-            '  666666666666666666666666666666666666666666666666666666666666666666666\n' +
-            '  666666666666666666666666666666666666666666666666666666666666666666666\n' +
-            '  666666666666666666666666666666666666666666666666666666666666666666666\n' +
-            '  66666666666        66666666666666666666666666666666666666666666666666\n' +
-            '   666  666          66666666666666666666666666666666666666666666666666\n' +
-            '   666  666    66666666666666666666666666666666666666666666666666666666\n' +
-            '   666  666    66666666666666666666666666666666666666666666666666666666\n' +
-            '   666  666    66666666666666666666666666666666666666666666666666666666\n' +
-            '   666  666    66666666666666666666666666666666666666666666666666666666\n' +
-            '  6666666666  66666666666666666666666666666666666666666666666666666666\n' +
-            '  6666666666  66666666666666666666666666666666666666666666666666666666\n' +
-            '  6666666666  66666666666666666666666666666666666666666666666666666666\n' +
-            '  6666666666  66666666666666666666666666666666666666666666666666666666\n' +
-            '  6666666666  66666666666666666666666666666666666666666666666666666666\n' +
-            '  6666666666  66666666666666666666666666666666666666666666666666666666\n' +
-            '  6666666666\n' +
-            '  6666666666\n' +
-            '  6666666666\n' +
-            '  6666666666\n' +
-            '  66666666666\n' +
-            '  66666666666\n' +
-            '  66666666666\n' +
-            '  66666666666\n' +
-            '  66666666666\n' +
-            '  66666666666\n' +
-            '  66666666666\n' +
-            '  66666666666\n' +
-            '  66666666666\n' +
-            '             ')
+        // room.addMap(17, 14,
+        //     '                                                                       \n' +
+        //     '                                                                       \n' +
+        //     ' 666666666  666666666  666666666666666666666666666666666666666666666666\n' +
+        //     ' 666666666  666666666  666666666666666666666666666666666666666666666666\n' +
+        //     ' 666666666  666666666  666666666666666666666666666666666666666666666666\n' +
+        //     ' 666666666  666666666  666666666666666666666666666666666666666666666666\n' +
+        //     ' 666666666  666666666  666666666666666666666666666666666666666666666666\n' +
+        //     '     666       666       6666666666666666666666666666666666666666666666\n' +
+        //     '  6666666666   666       6666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '   666  66666666666666666666666666666666666666666666666666666\n' +
+        //     '   666  66666666666666666666666666666666666666666666666666666666666\n' +
+        //     '   666  66666666666666666666666666666666666666666666666666666666666\n' +
+        //     '   666  66666666666666666666666666666666666666666666666666666666666\n' +
+        //     '   666  66666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  666666666666666666666666666666666666666666666666666666666666666666\n' +
+        //     '  6666666666\n' +
+        //     '  6666666666\n' +
+        //     '  6666666666\n' +
+        //     '  6666666666\n' +
+        //     '  66666666666\n' +
+        //     '  66666666666\n' +
+        //     '  66666666666\n' +
+        //     '  66666666666\n' +
+        //     '  66666666666\n' +
+        //     '  66666666666\n' +
+        //     '  66666666666\n' +
+        //     '  66666666666\n' +
+        //     '  66666666666\n' +
+        //     '             ')
         RoomFactory.addWall(room, 3, 28, 3, 'l')
         return room
     }
