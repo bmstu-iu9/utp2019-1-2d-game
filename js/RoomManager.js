@@ -35,6 +35,7 @@ class RoomManager {
      * Обновляет все игровые объекты внури managebleObj (Room)
      */
     Update() {
+        Game.BackgroundSound.play().catch(_=>{})
         this.managableObj.updatableObjects.forEach((element)=>{
             if(element.actor instanceof MovableActor){
                this.refreshPosition(element)

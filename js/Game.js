@@ -84,7 +84,8 @@ let imagesSrc = [
 const sounds=[
     'HitSound.wav',
     'FireballExplosion.wav',
-    'FireballCast.wav'
+    'FireballCast.wav',
+    'BackgroundSound.mp3',
 ]
 
 let Game = {
@@ -165,13 +166,16 @@ let Game = {
         Game.GhostBox = BoxFactory.CreateKnightBox()
         Game.FireBallBox = BoxFactory.CreateFireBallBox()
         Game.LightningBox = BoxFactory.CreateLigthningBox()
+        Game.BackgroundSound = soundStorage.BackgroundSound
+        Game.BackgroundSound.loop=true
+        Game.BackgroundSound.volume -= 0.98
         Game.HitSound = soundStorage.HitSound
         Game.FireballCast = soundStorage.FireballCast
         Game.FireballExplosion = soundStorage.FireballExplosion
         Game.HitSound.volume -= 0.9
         Game.HitSound.playbackRate = 0.85
-        Game.FireballCast.volume -= 0.9
-        Game.FireballExplosion.volume -= 0.9
+        Game.FireballCast.volume -= 0.95
+        Game.FireballExplosion.volume -= 0.95
         Game.FireballExplosion.playbackRate = 1.5
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
@@ -198,7 +202,6 @@ let Game = {
         }
         Game.Render();
         Game.last = Game.now;
-        //console.log(mouse.clickPosition.add(Game.camera.position, new Vector2d()))
         requestAnimationFrame(Game.Loop)
         if (keyboard.KeyZ === true)
             SaveLoad.save()
