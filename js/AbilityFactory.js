@@ -10,6 +10,7 @@ class AbilityFactory {
                 let vector = new Vector2d(canvas.clickPositionX, canvas.clickPositionY + 50).add(Game.camera.position).sub(npc.actor.centre)
                 this.npc.drawable.drowable.reset()
                 this.npc.drawable.drowable.switch("cast", vector)
+                Game.FireballCast.play()
                 this.npc.casting = 30
                 this.npc.statsManager.stats.mana -= this.manaCost
                 SpellFactory.CreateFireBall(npc.actor.centre.x, npc.actor.centre.y, vector, npc)
@@ -40,6 +41,7 @@ class AbilityFactory {
             if (this.npc.statsManager.stats.mana >= this.manaCost && this.coolDownTime === 0) {
                 this.npc.drawable.drowable.reset()
                 this.npc.drawable.drowable.switch('beat', vector)
+                Game.HitSound.play()
                 this.npc.statsManager.stats.mana -= this.manaCost
                 SpellFactory.Hit(npc, vector)
                 this.coolDownTime = this.coolDown
