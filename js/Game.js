@@ -169,6 +169,7 @@ let Game = {
         Game.FireballCast = soundStorage.FireballCast
         Game.FireballExplosion = soundStorage.FireballExplosion
         Game.HitSound.volume -= 0.9
+        Game.HitSound.playbackRate = 0.85
         Game.FireballCast.volume -= 0.9
         Game.FireballExplosion.volume -= 0.9
         Game.FireballExplosion.playbackRate = 1.5

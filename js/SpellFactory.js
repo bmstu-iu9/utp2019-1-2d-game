@@ -2,7 +2,7 @@
 
 class SpellFactory {
     static CreateFireBall(x, y, vector, caster) {
-        let hitbox = new Hitbox('CircleHitbox', new Vector2d(x, y), 16)
+        let hitbox = new Hitbox(HITBOX_CIRCLE, new Vector2d(x, y), 16)
         let data = new Action(new Stats(-30, 0, 0, 0, 0, 0))
         let actor = new MovableActor(new Vector2d(x - 27, ~~(y - 70)), new Vector2d(x, y))
         let sprite = SpriteFactory.CreateFireBallSprite()
@@ -37,7 +37,7 @@ class SpellFactory {
                 result.drawable.drowable.reset()
                 result.drawable.drowable.switch("explode")
             }
-            Game.FireballExplosion.play()
+            caster.soundBoard.fireballExplosionSound.play()
         }
 
         result.drawable.drowable.switch("fly", vector)
