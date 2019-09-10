@@ -9,7 +9,7 @@ let ctx = canvas.getContext("2d", { alpha: false })
 
 let imagesStorage = {}
 let textureStorage = {}
-
+let soundStorage={}
 
 let imagesSrc = [
     'big_birch.png',
@@ -69,6 +69,12 @@ let imagesSrc = [
 
 ];
 
+const sounds=[
+    'HitSound.wav',
+    'FireballExplosion.wav',
+    'FireballCast.wav'
+]
+
 let Game = {
     InitConfig() {
         Game.srcPath = "resources/"
@@ -80,7 +86,7 @@ let Game = {
         Game.tileHeight = 52
         Game.objCnt = 0;
         Game.now = 0;
-        Game.result = new Array()
+        Game.result = []
     },
 
     InitLogic() {
@@ -135,6 +141,9 @@ let Game = {
         Game.GhostBox = BoxFactory.CreateKnightBox()
         Game.FireBallBox = BoxFactory.CreateFireBallBox()
         Game.LightningBox = BoxFactory.CreateLigthningBox()
+        Game.HitSound = soundStorage.HitSound
+        Game.FireballCast = soundStorage.FireballCast
+        Game.FireballExplosion = soundStorage.FireballExplosion
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
         Game.currentWorld = WorldFactory.CreateTestWorld()
@@ -183,6 +192,7 @@ let Game = {
 
 Game.InitConfig()
 ResourceLoader.setCallback(Game.InitLogic)
+ResourceLoader.loadSounds(soundStorage,sounds)
 ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc)
 
 

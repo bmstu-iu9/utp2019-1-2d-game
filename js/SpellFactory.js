@@ -37,6 +37,7 @@ class SpellFactory {
                 result.drawable.drowable.reset()
                 result.drawable.drowable.switch("explode")
             }
+            Game.FireballExplosion.play()
         }
 
         result.drawable.drowable.switch("fly", vector)
