@@ -1,14 +1,10 @@
 'use strict';
 class RoomFactory {
     static CreateTestRoom(object = undefined) {
-        let testRoomSize = 120;
-        let room = new Room("Test Room", testRoomSize, testRoomSize);
+        let testRoomHeight = 160;
+        let testRoomWidth = 120;
+        let room = new Room("Test Room", testRoomHeight, testRoomWidth);
         room.type = "testRoom"
-        for (let i = 0; i < testRoomSize; i++) {
-            for (let j = 0; j < testRoomSize; j++) {
-                room.Add(TilesFactory.CreateTestTile(j * Game.tileWidth, i * Game.tileHeight))
-            }
-        }
 
 
         let grassTile = TilesFactory.CreateTestGrassTile(100, 100);
@@ -165,34 +161,34 @@ class RoomFactory {
         room.addMap(17, 14,
             '         qwwe       qwwe                                                                 \n' +
             'qwwwwwwww2  1wwwwwww2  1wwwwwwwwwwe                                                                 \n' +
-            'a        a  d       a  d          1e                                                         \n' +
+            'a        a  d       a  d     jg   1e                                                         \n' +
             'a        a  d       a  d           1e                                             \n' +
-            'a        a  d       a  d           qx                                                       \n' +
+            'a        a  d     gha  d           qx                                                       \n' +
             'a        a  d       a  d          q2                                                          \n' +
             'zsssse qs2  1sse qss2  1e qsssssssx                                                                               \n' +
             'a    d a       d a      d a       1wwe                                                                      \n' +
             'zqwwwx zwwwwe  d a      d a       d  1wwe                                                                       \n' +
-            ' a          1wwx zwwwwwwx zwwwwwwwx     1wwe                                                                              \n' +
+            ' a       g  1wwx zwwwwwwx zwwwwwwwx     1wwe                                                                              \n' +
             ' a                                         1we                                                        \n' +
             ' a                                           1e                                                       \n' +
-            ' a          qsssssssse qssssssssse            d                                                                   \n' +
+            ' a          qsssssssse qssssssssse    35      d                                                                   \n' +
             ' zse qsse qs2        d a         d            d                                                               \n' +
             '   d a  d a          d a         d            d                                                      \n' +
-            '   d a  d a   qwwwwwwx zwwwwwwwwwx            d                                                        \n' +
+            '   d a  d a   qwwwwwwx zwwwwwwwwwx    35      d                                                        \n' +
             '   d a  d a   a                  d           qx                                                         \n' +
             '   d a  d a   a                  d         qs2                                                     \n' +
             ' qsx zwwx zse a   qe   qe   qe   1e     qss2                                            \n' +
             ' a          d a   zx   zx   zx    d  qss2                                                     \n' +
             ' a          d a                   1ss2                                                        \n' +
-            ' a          d a                   d                                          \n' +
-            ' zssse  qsssx a                   d                                                                               \n' +
-            '     d  a     a                   d                                                              \n' +
+            ' a f        d a            f      d                                          \n' +
+            ' zssse  qsssx a      h            d                                                                               \n' +
+            ' a   d  a     a        g          d                                                              \n' +
             ' qsssx  zssse zsssssssssssssssssssx                                                                                         \n' +
             ' a          d                                                                                     \n' +
-            ' a          d                                                                                     \n' +
-            ' a          d                                                                                     \n' +
-            ' a                                                                                               \n' +
-            ' a                                                                                                 \n' +
+            ' a         fd                                                                                     \n' +
+            ' a          35                                                                                   \n' +
+            ' af   35                                                                                           \n' +
+            ' a          35                                                                                      \n' +
             ' a          d                                                                                       \n' +
             ' a          d                                                                                       \n' +
             ' zssssssssssx                                                                                                  \n' +
