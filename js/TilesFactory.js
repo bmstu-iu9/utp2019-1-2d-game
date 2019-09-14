@@ -308,6 +308,34 @@ class TilesFactory {
         return first_aid_kit
     }
 
+    static CreateAttackBonus(x=0,y=0){
+        let sword=TilesFactory.createTile(x,y,Game.Sword.width,~~(Game.Sword.height/2),new DrawableObject('middleground',Game.Sword),"Bot")
+        sword.collisonSolveStrategy='hit'
+        /**
+         *
+         * @param {Collision} collision
+         */
+        sword.onCollide=(collision)=>{
+            if (collision.obstacleObject.manager && collision.obstacleObject.manager instanceof PlayerManager){
+                let effect=new Effect(2)
+                effect.prevStat=collision.obstacleObject.statsManager.stats.strenght
+                /**
+                 * @param {StatsManager} statsManager
+                 * @param {Number} dt
+                 */
+                effect.update=function(statsManager,dt){
+                    this.remainTime-=dt;
+                    if (this.remainTime>0){
+                        statsManager.stats.strenght=this.prevStat*2
+                    }else statsManager.stats.strenght=this.prevStat
+                }
+                collision.obstacleObject.statsManager.gainEffect(effect)
+                Game.currentWorld.currentRoom.delete(sword)
+            }
+        }
+        return sword
+    }
+
     /**
      * create tile with hitbox
      * @param x

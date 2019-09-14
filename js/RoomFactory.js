@@ -123,6 +123,7 @@ class RoomFactory {
 
             room.Add(TilesFactory.CreateHPBottle(1300,1250))
             room.Add(TilesFactory.CreateManaBottle(1300,1200))
+            room.Add(TilesFactory.CreateAttackBonus(1400,1250))
 
             room.type = "roundedRoom"
             let player = TilesFactory.CreatePlayer(1280, 1300)

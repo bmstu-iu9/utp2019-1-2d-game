@@ -66,7 +66,7 @@ class SpellFactory {
     }
 
     static Hit(caster, vector) {
-        let data = new Action(new Stats(-34,0,0,0,0,0))
+        let data = new Action(new Stats(-34*caster.statsManager.stats.strenght,0,0,0,0,0))
         let centre=caster.actor.centre.add(20,0,new Vector2d())
         const centre_to_centre=centre.sub(caster.actor.centre,new Vector2d())
         const cos = centre_to_centre.dotProduct(vector) / Math.sqrt(centre_to_centre.lengthSquared() * vector.lengthSquared())

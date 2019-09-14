@@ -79,7 +79,8 @@ let imagesSrc = [
     'well.png',
     'lightning.png',
     'HPBottle.png',
-    'ManaBottle.png'
+    'ManaBottle.png',
+    'Sword.png'
 ];
 
 const sounds=[
@@ -165,6 +166,7 @@ let Game = {
         Game.WellTexture = TilesFactory.CreateTexture(imagesStorage.well)
         Game.HPBottle = TilesFactory.CreateTexture(imagesStorage.HPBottle)
         Game.ManaBottle = TilesFactory.CreateTexture(imagesStorage.ManaBottle)
+        Game.Sword = TilesFactory.CreateTexture(imagesStorage.Sword)
         Game.GhostBox = BoxFactory.CreateKnightBox()
         Game.FireBallBox = BoxFactory.CreateFireBallBox()
         Game.LightningBox = BoxFactory.CreateLigthningBox()
