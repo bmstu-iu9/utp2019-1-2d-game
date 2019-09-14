@@ -285,6 +285,7 @@ class TilesFactory {
             if (collision.obstacleObject.manager && collision.obstacleObject.manager instanceof PlayerManager){
                 collision.obstacleObject.statsManager.stats.hp+=50;
                 //collision.obstacleObject.statsManager.gainAction(new Action(new Stats(50,0,0,0,0,0)))
+                Game.currentWorld.currentRoom.delete(first_aid_kit)
             }
         }
         return first_aid_kit
@@ -301,6 +302,7 @@ class TilesFactory {
             if (collision.obstacleObject.manager && collision.obstacleObject.manager instanceof PlayerManager){
                 collision.obstacleObject.statsManager.stats.mana+=50;
                 //collision.obstacleObject.statsManager.gainAction(new Action(new Stats(0,50,0,0,0,0)))
+                Game.currentWorld.currentRoom.delete(first_aid_kit)
             }
         }
         return first_aid_kit

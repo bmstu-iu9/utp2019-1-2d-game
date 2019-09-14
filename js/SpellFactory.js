@@ -90,6 +90,7 @@ class SpellFactory {
                     collision.obstacleObject.statsManager.gainAction(result.data)
                 }
             }
+            Game.currentWorld.currentRoom.delete(result)
         }
 
         Game.currentWorld.currentRoom.Add(result)
