@@ -121,6 +121,8 @@ class RoomFactory {
             room.drawBigForest(61, 16, 14, 2)
             room.drawBigForest(65, 18, 11, 2)
 
+            room.Add(TilesFactory.CreateHPBottle(1300,1250))
+            room.Add(TilesFactory.CreateManaBottle(1300,1200))
 
             room.type = "roundedRoom"
             let player = TilesFactory.CreatePlayer(1280, 1300)

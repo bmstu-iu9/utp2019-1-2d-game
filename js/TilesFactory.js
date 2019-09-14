@@ -74,7 +74,7 @@ class TilesFactory {
      * @param {Number} y
      */
     static CreatePlayer(x = 0, y = 0) {
-        let stats = new Stats(250, 200)
+        let stats = new Stats(150, 200)
         let player = TilesFactory.createNPC(x, y, 24, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()), stats);
         player.manager = new PlayerManager(player)
         player.type = "player"
@@ -274,6 +274,37 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, Game.WellTexture.width, ~~(Game.WellTexture.height / 5), new DrawableObject("middleground", Game.WellTexture), "Bot")
     }
 
+    static CreateHPBottle(x=0, y=0){
+        let first_aid_kit=TilesFactory.createTile(x,y,Game.HPBottle.width,~~(Game.HPBottle.height/2),new DrawableObject("middleground",Game.HPBottle),"Bot")
+        first_aid_kit.collisonSolveStrategy='hit'
+        /**
+         *
+         * @param {Collision} collision
+         */
+        first_aid_kit.onCollide=(collision)=>{
+            if (collision.obstacleObject.manager && collision.obstacleObject.manager instanceof PlayerManager){
+                collision.obstacleObject.statsManager.stats.hp+=50;
+                //collision.obstacleObject.statsManager.gainAction(new Action(new Stats(50,0,0,0,0,0)))
+            }
+        }
+        return first_aid_kit
+    }
+
+    static CreateManaBottle(x=0,y=0){
+        let first_aid_kit=TilesFactory.createTile(x,y,Game.ManaBottle.width,~~(Game.ManaBottle.height/2),new DrawableObject("middleground",Game.ManaBottle),"Bot")
+        first_aid_kit.collisonSolveStrategy='hit'
+        /**
+         *
+         * @param {Collision} collision
+         */
+        first_aid_kit.onCollide=(collision)=>{
+            if (collision.obstacleObject.manager && collision.obstacleObject.manager instanceof PlayerManager){
+                collision.obstacleObject.statsManager.stats.mana+=50;
+                //collision.obstacleObject.statsManager.gainAction(new Action(new Stats(0,50,0,0,0,0)))
+            }
+        }
+        return first_aid_kit
+    }
 
     /**
      * create tile with hitbox

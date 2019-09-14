@@ -69,6 +69,7 @@ class CollisionManager {
                             object.onCollide(collision)
                         }
                         if (objects[i].onCollide!==undefined){
+                            collision.obstacleObject=object;
                             objects[i].onCollide(collision)
                         }
                     }
