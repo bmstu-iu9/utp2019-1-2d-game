@@ -58,9 +58,10 @@ class NPC extends GameObject {
 
     Update() {
         if (this.isDead()) {
-            if (this.manager instanceof PlayerManager){
+            if(this.manager instanceof PlayerManager) {
                 let tile = TilesFactory.CreateCross(this.actor.position.x,this.actor.position.y)
                 Game.currentWorld.currentRoom.Add(tile)
+
             }
             Game.currentWorld.currentRoom.delete(this)
         }
