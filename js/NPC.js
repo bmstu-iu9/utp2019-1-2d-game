@@ -31,6 +31,11 @@ class NPC extends GameObject {
         this.hp = Game.HealthBarOverlayTexture
         //
         this.abilities = [AbilityFactory.createFireBallAbility(this), AbilityFactory.createLigthningAbility(this),AbilityFactory.Hit(this)]
+        this.soundBoard={
+            hitSound:new Sound(Game.HitSound),
+            fireballCastSound:new Sound(Game.FireballCast),
+            fireballExplosionSound:new Sound(Game.FireballExplosion),
+        }
     }
 
     isDead() {
