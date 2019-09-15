@@ -5,11 +5,11 @@ canvas.width = document.body.clientWidth
 canvas.height = document.body.clientHeight
 canvas.clickPositionX = 0;
 canvas.clickPositionY = 0;
-let ctx = canvas.getContext("2d", { alpha: false })
+let ctx = canvas.getContext("2d", {alpha: false})
 
 let imagesStorage = {}
 let textureStorage = {}
-let soundStorage={}
+let soundStorage = {}
 
 let imagesSrc = [
     'big_birch.png',
@@ -81,7 +81,7 @@ let imagesSrc = [
 
 ];
 
-const sounds=[
+const sounds = [
     'HitSound.wav',
     'FireballExplosion.wav',
     'FireballCast.wav'
@@ -175,6 +175,7 @@ let Game = {
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.roomRnd = new RoomRenderer(2)
         Game.currentWorld = WorldFactory.CreateTestWorld()
+        Game.barControler = new BarControler(Game.player)
         requestAnimationFrame(Game.Loop)
     },
 
@@ -192,6 +193,7 @@ let Game = {
         while (Game.dt > Game.step) {
             Game.dt -= Game.step
             Game.Update()
+            Game.barControler.update()
             Game.Collide();
             Game.camera.Update()
         }
@@ -220,5 +222,5 @@ let Game = {
 
 Game.InitConfig()
 ResourceLoader.setCallback(Game.InitLogic)
-ResourceLoader.loadSounds(soundStorage,sounds)
+ResourceLoader.loadSounds(soundStorage, sounds)
 ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc)
