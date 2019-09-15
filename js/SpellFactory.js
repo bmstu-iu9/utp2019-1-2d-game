@@ -22,16 +22,18 @@ class SpellFactory {
          * @param {Collision} collision
          */
         result.onCollide = (collision) => {
-            if (collision.obstacleObject === result || collision.obstacleObject === caster) {
+            if (collision.obstacleObject instanceof Spell || collision.obstacleObject === caster
+                || collision.obstacleObject.collisonSolveStrategy==='hit'
+                || collision.obstacleObject.collisonSolveStrategy==='none') {
                 return
             }
-            if (collision.obstacleObject instanceof NPC && result.drawable.drowable.current.id != 'fireball_explosion') {
+            if (collision.obstacleObject instanceof NPC && result.drawable.drowable.current.id !== 'fireball_explosion') {
                 collision.obstacleObject.statsManager.gainAction(result.data)
             }
             result.Update = function () {
             }
             //result.actor.position.set(collision.obstacleObject.actor.position)
-            if (result.drawable.drowable.current.id != 'fireball_explosion') {
+            if (result.drawable.drowable.current.id !== 'fireball_explosion') {
                 result.actor.position.x -= 30
                 result.actor.position.y -= 20
                 result.drawable.drowable.reset()
