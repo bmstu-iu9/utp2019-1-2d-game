@@ -61,7 +61,17 @@ class NPC extends GameObject {
             if(this.manager instanceof PlayerManager) {
                 let tile = TilesFactory.CreateCross(this.actor.position.x,this.actor.position.y)
                 Game.currentWorld.currentRoom.Add(tile)
-
+            }else{
+                const random=Math.random()
+                let bonus
+                if (random<0.25){
+                    bonus=TilesFactory.CreateHPBottle(this.actor.centre.x,this.actor.centre.y)
+                }else if (random<0.5){
+                    bonus=TilesFactory.CreateAttackBonus(this.actor.centre.x,this.actor.centre.y)
+                }else if (random<0.75){
+                    bonus=TilesFactory.CreateManaBottle(this.actor.centre.x,this.actor.centre.y)
+                }
+                Game.currentWorld.currentRoom.Add(bonus)
             }
             Game.currentWorld.currentRoom.delete(this)
         }
