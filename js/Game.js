@@ -173,7 +173,7 @@ let Game = {
         Game.FireballExplosion.volume -= 0.9
         Game.FireballExplosion.playbackRate = 1.5
         Game.camera = new Camera(canvas.width, canvas.height)
-        Game.roomRnd = new RoomRenderer(2)
+        
         Game.currentWorld = WorldFactory.CreateTestWorld()
         requestAnimationFrame(Game.Loop)
     },
