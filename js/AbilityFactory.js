@@ -4,7 +4,7 @@ class AbilityFactory {
      * @param {NPC} npc
      */
     static createFireBallAbility(npc) {
-        let fireBallAbility = new Ability(npc, 31, 2, 0.5)
+        let fireBallAbility = new Ability(npc, 45, 2, 0.5)
         fireBallAbility.cast = function () {
             if (this.npc.statsManager.stats.mana >= this.manaCost && this.coolDownTime <= 0) {
                 let vector = new Vector2d(canvas.clickPositionX, canvas.clickPositionY + 50).add(Game.camera.position).sub(npc.actor.centre)
@@ -21,7 +21,7 @@ class AbilityFactory {
     }
 
     static createLigthningAbility(npc) {
-        let lightning = new Ability(npc, 31, 7, 0.5)
+        let lightning = new Ability(npc, 100, 7, 0.5)
         lightning.cast = function () {
             if (this.npc.statsManager.stats.mana >= this.manaCost && this.coolDownTime === 0) {
                 let vector = new Vector2d(canvas.clickPositionX, canvas.clickPositionY).add(Game.camera.position).sub(npc.actor.centre)
@@ -36,7 +36,7 @@ class AbilityFactory {
     }
 
     static Hit(npc){
-        let hit = new Ability(npc, 5, 1.2, 31)
+        let hit = new Ability(npc, 0, 1.2, 31)
         hit.cast = function (vector) {
             if (this.npc.statsManager.stats.mana >= this.manaCost && this.coolDownTime === 0) {
                 this.npc.drawable.drowable.reset()
