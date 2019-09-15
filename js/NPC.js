@@ -88,8 +88,7 @@ class NPC extends GameObject {
                 ability.update(Game.step)
             }
         }
-        this.statsManager.stats.mana += 0.5
-        this.statsManager.stats.hp += 0.05
+        this.statsManager.update(Game.step)
         this.statsManager.correctStats()
     }
 

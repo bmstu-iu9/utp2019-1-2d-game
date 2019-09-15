@@ -51,24 +51,21 @@ class CollisionManager {
                     collision=getCollision(object.hitbox,objects[i].hitbox)
                     if (collision){
                         collision.obstacleObject=objects[i]
-                        if (object.collisonSolveStrategy!=='none'){
-                            if (object.collisonSolveStrategy==='hit') {
-                                Game.currentWorld.currentRoom.delete(object)
-                            }else if (objects[i].collisonSolveStrategy==='stay'){
+                        if (object.collisonSolveStrategy!=='none' && object.collisonSolveStrategy!=='hit'){
+                            if (objects[i].collisonSolveStrategy==='stay'){
                                 this.solveCollision(object,collision)
                                 next.add(object)
                             }else if (objects[i].collisonSolveStrategy==='move'){
                                 this.solveForBoth(object,objects[i],collision)
                                 next.add(object)
                                 next.add(objects[i])
-                            }else if (objects[i].collisonSolveStrategy==='hit'){
-                                Game.currentWorld.currentRoom.delete(objects[i])
                             }
                         }
                         if (object.onCollide!==undefined){
                             object.onCollide(collision)
                         }
                         if (objects[i].onCollide!==undefined){
+                            collision.obstacleObject=object;
                             objects[i].onCollide(collision)
                         }
                     }
