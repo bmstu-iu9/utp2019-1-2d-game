@@ -275,7 +275,7 @@ class TilesFactory {
     }
 
     static CreateHPBottle(x=0, y=0){
-        let first_aid_kit=TilesFactory.createTile(x,y,Game.HPBottle.width,~~(Game.HPBottle.height/2),new DrawableObject("middleground",Game.HPBottle),"Bot")
+        let first_aid_kit=TilesFactory.createMovableObj(x,y,Game.HPBottle.width,~~(Game.HPBottle.height/2),new DrawableObject("middleground",Game.HPBottle),"Bot")
         first_aid_kit.collisonSolveStrategy='hit'
         /**
          *
@@ -283,8 +283,8 @@ class TilesFactory {
          */
         first_aid_kit.onCollide=(collision)=>{
             if (collision.obstacleObject.manager && collision.obstacleObject.manager instanceof PlayerManager){
-                collision.obstacleObject.statsManager.stats.hp+=50;
-                //collision.obstacleObject.statsManager.gainAction(new Action(new Stats(50,0,0,0,0,0)))
+                //collision.obstacleObject.statsManager.stats.hp+=50;
+                collision.obstacleObject.statsManager.gainAction(new Action(new Stats(50,0,0,0,0,0)))
                 Game.currentWorld.currentRoom.delete(first_aid_kit)
             }
         }
@@ -292,7 +292,7 @@ class TilesFactory {
     }
 
     static CreateManaBottle(x=0,y=0){
-        let first_aid_kit=TilesFactory.createTile(x,y,Game.ManaBottle.width,~~(Game.ManaBottle.height/2),new DrawableObject("middleground",Game.ManaBottle),"Bot")
+        let first_aid_kit=TilesFactory.createMovableObj(x,y,Game.ManaBottle.width,~~(Game.ManaBottle.height/2),new DrawableObject("middleground",Game.ManaBottle),"Bot")
         first_aid_kit.collisonSolveStrategy='hit'
         /**
          *
@@ -300,8 +300,8 @@ class TilesFactory {
          */
         first_aid_kit.onCollide=(collision)=>{
             if (collision.obstacleObject.manager && collision.obstacleObject.manager instanceof PlayerManager){
-                collision.obstacleObject.statsManager.stats.mana+=50;
-                //collision.obstacleObject.statsManager.gainAction(new Action(new Stats(0,50,0,0,0,0)))
+                //collision.obstacleObject.statsManager.stats.mana+=50;
+                collision.obstacleObject.statsManager.gainAction(new Action(new Stats(0,50,0,0,0,0)))
                 Game.currentWorld.currentRoom.delete(first_aid_kit)
             }
         }
@@ -309,7 +309,7 @@ class TilesFactory {
     }
 
     static CreateAttackBonus(x=0,y=0){
-        let sword=TilesFactory.createTile(x,y,Game.Sword.width,~~(Game.Sword.height/2),new DrawableObject('middleground',Game.Sword),"Bot")
+        let sword=TilesFactory.createMovableObj(x,y,Game.Sword.width,~~(Game.Sword.height/2),new DrawableObject('middleground',Game.Sword),"Bot")
         sword.collisonSolveStrategy='hit'
         /**
          *
