@@ -422,6 +422,7 @@ class Room extends GameObject {
     static fromJSON(object) {
         let room = (object.type === "roundedRoom") ? RoomFactory.CreateRoundedRoom(object) : RoomFactory.CreateTestRoom(object)
         room.id = object.id
+        
         room.height = object.height
         room.width = object.width
         room.type = object.type;
@@ -436,6 +437,7 @@ class Room extends GameObject {
                 room.Add(StaticObject.fromJSON(object.roomObjects.map[i]))
             }
         }
+        room.rnd = new RoomRenderer(4, room)
         return room
     }
 
