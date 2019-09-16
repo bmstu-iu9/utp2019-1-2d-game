@@ -63,6 +63,7 @@ class PlayerManager {
         }
 
         if (mouse.isLeftClicked) {
+          console.log(~~(this.player.actor.position.x/Game.tileWidth),~~(this.player.actor.position.y/Game.tileHeight));
             if (this.player.abilities[2].cast(vector))
                 this.player.state=STATE.attack
         }

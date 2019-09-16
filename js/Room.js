@@ -40,9 +40,13 @@ class Room extends GameObject {
         }
         let i = 0
         let j = 0
+        let i2 = 0
+        let j2 = 0
         if (obj.drawable !== undefined) {
             i = ~~(obj.actor.position.y / Game.tileHeight)
             j = ~~(obj.actor.position.x / Game.tileWidth)
+            i2 = ~~((obj.actor.position.y + obj.drawable.drowable.width) / Game.tileHeight)
+            j2 = ~~((obj.actor.position.x + obj.drawable.drowable.height)  / Game.tileWidth)
         }
         switch (obj.drawable.placement) {
             case undefined:
@@ -52,6 +56,7 @@ class Room extends GameObject {
                 break
             case "middleground":
                 this.middlegroundTiles[i][j].set(obj)
+                //this.middlegroundTiles[i2][j2].set(obj)
                 break
             case "foreground":
                 this.foreground[i][j] = obj
@@ -120,6 +125,76 @@ class Room extends GameObject {
       for(let i = width; i >= 0; i--) {
           for(let j = height; j >= 0; j--) {
               this.Add(TilesFactory.CreateRandomDirtGrassT(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawCarrot(x, y, width, height, object) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateCarrot(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawNecropolisFloor(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateNecropolisFloor(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawNecropolis(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateNecropolis(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawNecropolisDirt(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateNecropolisDirt(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawNecropolisDirt2(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateNecropolisDirt2(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawFence7(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateFence7(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
+    drawFen(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateFen(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
           }
       }
     }
@@ -214,6 +289,16 @@ class Room extends GameObject {
       }
     }
 
+    drawDeadDirt(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateDeadDirt(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
     drawGround(x, y, width, height) {
       x = x * Game.tileWidth
       y = y * Game.tileHeight
@@ -237,11 +322,55 @@ class Room extends GameObject {
     drawBigForest(x, y, width, height) {
       x = x * Game.tileWidth
       y = y * Game.tileHeight
-      for(let i = width; i >= 0; i--) {
-          for(let j = height; j >= 0; j--) {
-            if (Math.random() < 0.5) {
+      for(let i = width; i >= 0; i --) {
+          for(let j = height; j >= 0; j --) {
+              if (Math.random() < 0.15) {
+              this.Add(TilesFactory.CreateBigForest(x + i * Game.tileWidth, y + j * Game.tileHeight))
+              }
+          }
+      }
+    }
+
+    drawBigForestWithFrequecy(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i --) {
+          for(let j = height; j >= 0; j --) {
+            if (Math.random() < 0.6) {
               this.Add(TilesFactory.CreateBigForest(x + i * Game.tileWidth, y + j * Game.tileHeight))
             }
+          }
+      }
+    }
+
+    drawLineForest(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i -= 4) {
+          for(let j = height; j >= 0; j -= 4) {
+              this.Add(TilesFactory.CreateBigForest(x + i * Game.tileWidth, y + j *  Game.tileHeight))
+          }
+      }
+    }
+
+    drawTumbleForest(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i -= 1.5) {
+          for(let j = height; j >= 0; j -= 1.5) {
+            if (Math.random() < 0.35) {
+              this.Add(TilesFactory.CreateTumbleForest(x + i * Game.tileWidth, y + j *  Game.tileHeight))
+            }
+          }
+      }
+    }
+
+    drawPaving(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i --) {
+          for(let j = height; j >= 0; j --) {
+              this.Add(TilesFactory.CreatePaving(x + i * Game.tileWidth, y + j *  Game.tileHeight))
           }
       }
     }
@@ -249,7 +378,7 @@ class Room extends GameObject {
     drawMediumForest(x, y, width, height) {
       for(let i = 0; i < width; i++) {
           for(let j = 0; j < height; j++) {
-            if (Math.random() < 0.7) {
+            if (Math.random() < 0.6) {
               this.Add(TilesFactory.CreateMediumForest(x + i * 70, y + j * 70))
             }
           }

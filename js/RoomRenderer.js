@@ -1,7 +1,7 @@
 'use strict'
 class RoomRenderer {
     /**
-     * @param {Number} margin 
+     * @param {Number} margin
      */
     constructor(margin) {
         this.camera = Game.camera;
@@ -15,7 +15,7 @@ class RoomRenderer {
     }
 
     /**
-     * @param {Room} room 
+     * @param {Room} room
      */
     render(room) {
         ctx.fillRect(0, 0, this.ledWidth, this.ledHeight);
@@ -34,15 +34,22 @@ class RoomRenderer {
             }
         }
         // Without sprites
+        let data = new HashMap()
         let sortArray = [];
         for (let i = leftTop[0]; i < rightBot[0]; i++) {
             for (let j = leftTop[1]; j < rightBot[1]; j++) {
                 let drowableMap = room.middlegroundTiles[j][i];
                 drowableMap.forEach((key) => {
-                    sortArray.push(key);
+                  if (!data.hasId(key.id)) {
+                    data.set(key);
+                  }
                 })
             }
+            //console.log(data);
         }
+        data.forEach((key) => {
+          sortArray.push(key)
+        })
         sortArray.sort((a, b) => {
             return (a.actor.centre.y > b.actor.centre.y ? 1 : -1)
         });
@@ -53,4 +60,3 @@ class RoomRenderer {
         //room.nav.render()
     }
 }
-
