@@ -451,7 +451,7 @@ class Room extends GameObject {
                 t = TilesFactory.CreateGrassTile2(x, y)
                 break
             case '9':
-                t = TilesFactory.CreateGrassTile3(x, y)
+                t = TilesFactory.CreateGroundTile(x,y)
                 break
             case '0':
                 t = TilesFactory.CreateLukeTile(x, y)
