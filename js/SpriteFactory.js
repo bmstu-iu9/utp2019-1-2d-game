@@ -9,6 +9,10 @@ class SpriteFactory {
         return new Sprite(1, Game.EnemyKnightBox)
     }
 
+    static CreateGhostKnightSprite() {
+        return new Sprite(1, Game.GhostKnightBox)
+    }
+
     static CreateFireBallSprite() {
         return new Sprite(60, Game.FireBallBox, "fly", true)
     }

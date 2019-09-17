@@ -64,7 +64,8 @@ let imagesSrc = [
     'wall2.png',
     'well.png',
     'lightning.png',
-    'enemy_knight.png'
+    'enemy_knight.png',
+    'ghost_knight.png'
 ];
 
 let Game = {
@@ -132,6 +133,7 @@ let Game = {
         Game.WellTexture = TilesFactory.CreateTexture(imagesStorage.well)
         Game.GhostBox = BoxFactory.CreateKnightBox()
         Game.EnemyKnightBox = BoxFactory.CreateEnemyKnightBox()
+        Game.GhostKnightBox = BoxFactory.CreateGhostKnightBox()
         Game.FireBallBox = BoxFactory.CreateFireBallBox()
         Game.LightningBox = BoxFactory.CreateLigthningBox()
         Game.camera = new Camera(canvas.width, canvas.height)
