@@ -2,7 +2,7 @@
 
 class RoomRenderer {
     /**
-     * @param {Number} margin 
+     * @param {Number} margin
      * @param {Room} room
      */
     constructor(margin, room) {
@@ -28,7 +28,7 @@ class RoomRenderer {
 
     /**
      * Пререндеринг background
-     * @param {Room} room 
+     * @param {Room} room
      */
     bgPreRender(room) {
         this.backgroundCanvas.width = room.width * Game.tileWidth;
@@ -47,7 +47,7 @@ class RoomRenderer {
 
     /**
      * Пререндеринг middleground
-     * @param {Room} room 
+     * @param {Room} room
      */
     mPreRender(room) {
         this.sortArray.clear();
@@ -118,7 +118,7 @@ class RoomRenderer {
     }
 
     /**
-     * @param {Room} room 
+     * @param {Room} room
      */
     render(room) {
         this.sortArray.clear();
@@ -158,7 +158,7 @@ class RoomRenderer {
                         if (this.inCamera(key)) {
                             this.sortArray.add(key);
                             for (let u = Math.max(i - ~~(this.margin / 2), 0); u < i + ~~(this.margin / 2) + 1; u++) {
-                                for (let v = j; v < j + this.margin + 1; v++) {
+                                for (let v = j - this.margin; v < j + this.margin + 1; v++) {
                                     let drMap = room.middlegroundTiles[v][u];
                                     drMap.forEach((key1) => {
                                         if (key1 instanceof StaticObject) {
@@ -196,7 +196,7 @@ class RoomRenderer {
                 item.render();
             }
         }
-        //room.nav.render()
+        room.nav.render()
     }
 }
 
