@@ -395,6 +395,31 @@ class Room extends GameObject {
       }
     }
 
+    /**
+     *
+     * @param map 2D array with strings and zeroes, where zero means no tiles
+     * @param lan aliases for tiles in map
+     * @param {Number} xShift shift from left-top angle by x
+     * @param {number} yShift shift from left-top angle by y
+     * @param {Number} width count of columns in map
+     * @param {Number} height count of lines in map
+     */
+    createMap(map, lan, xShift = 0, yShift = 0, width = 100, height = 100){
+        let commands = new Map()
+        for (let w of lan) {
+            commands.set(w.split(" ")[0], w.split(" ")[1])
+        }
+        let s
+        for(let i = 0; i < height; i++) {
+            for (let j = 0; j < width; j++) {
+                if (map[i][j] === 0) continue
+                s="TilesFactory." + commands.get(map[i][j]) + "(" + (j+xShift) + "," +(i + yShift) +  ")"
+                this.Add(eval(s))
+            }
+        }
+    }
+
+
     addChar(x, y, data) {
         x = x * Game.tileWidth
         y = y * Game.tileWidth
