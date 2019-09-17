@@ -131,11 +131,13 @@ body {
 .hpCount {
     position: fixed;
     left: 25%;
+    margin-top: 2.5px;
     color: white;
 }
 
 .manaCount {
     position: fixed;
     left: 72.3%;
+    margin-top: 2.5px;
     color: white;
 }
