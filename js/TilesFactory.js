@@ -83,6 +83,11 @@ class TilesFactory {
       return TilesFactory.createTile(x, y, ~~(Game.TumbleTree2Texture.width / 4), ~~(Game.TumbleTree2Texture.height / 5), new DrawableObject("middleground", src[~~(Math.random() * 2)]), "Bot");
     }
 
+    static CreateDungeonFloor1(x = 0, y = 0) {
+        let src = [Game.DungeonFloorTexture1, Game.DungeonFloorTexture3, Game.DungeonFloorTexture4]
+        return new StaticObject(x, y, x, y, new DrawableObject("background", src[~~(Math.random() * 3)]));
+    }
+
     /**
      * Порождает и Player по заданным игровым координатам
      * @param {Number} x
@@ -286,6 +291,18 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, ~~(Game.DrunkHuman.width / 4), ~~(Game.DrunkHuman.height / 7), new DrawableObject("middleground", Game.DrunkHuman), "Bot")
     }
 
+    static CreateDeadPeople(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, ~~(Game.DeadPeople.width / 4), ~~(Game.DeadPeople.height / 7), new DrawableObject("middleground", Game.DeadPeople), "Bot")
+    }
+
+    static CreateDeadPeople2(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, ~~(Game.DeadPeople2.width / 1.2), ~~(Game.DeadPeople2.height), new DrawableObject("middleground", Game.DeadPeople2), "Bot")
+    }
+
     static CreateDungeonWallRight(x = 0, y = 0) {
         return TilesFactory.createTile(x, y - 52, 26, Game.tileHeight, new DrawableObject("middleground", Game.DungeonWallLeftTexture),"RightBot")
     }
@@ -300,10 +317,6 @@ class TilesFactory {
 
     static CreateDungeonColumnRight(x = 0, y = 0) {
         return TilesFactory.createTile(x, y, Game.DungeonColumnRightTexture.width, ~~(Game.DungeonColumnRightTexture.height / 6), new DrawableObject("middleground", Game.DungeonColumnRightTexture), "LeftBot")
-    }
-
-    static CreateDungeonFloor1(x = 0, y = 0) {
-        return new StaticObject(x, y, x, y, new DrawableObject("background", Game.DungeonFloorTexture1));
     }
 
     static CreateDungeonWallLeft(x = 0, y = 0) {
@@ -459,6 +472,12 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, ~~(Game.Garbage4.width), ~~(Game.Garbage4.height / 3), new DrawableObject("middleground", Game.Garbage4), "Bot");
     }
 
+    static CreateGarbage5(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, ~~(Game.Garbage5.width / 2), ~~(Game.Garbage5.height), new DrawableObject("middleground", Game.Garbage5), "Bot");
+    }
+
     static CreateHouse1(x = 0, y = 0) {
         x = x * Game.tileWidth
         y = y * Game.tileHeight
@@ -527,6 +546,12 @@ class TilesFactory {
 
     static CreateLukeTile(x = 0, y = 0) {
         return new StaticObject(x, y, x, y, new DrawableObject("background", Game.LukeTexture));
+    }
+
+    static CreateLukeTile2(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return new StaticObject(x, y, x, y, new DrawableObject("middleground", Game.LukeTexture2));
     }
 
     static CreateMediumBirch(x = 0, y = 0) {
@@ -606,6 +631,18 @@ class TilesFactory {
         x = x * Game.tileWidth
         y = y * Game.tileHeight
         return TilesFactory.createTile(x, y, ~~(Game.Skeleton2.width / 1.7), ~~(Game.Skeleton2.height / 4), new DrawableObject("middleground", Game.Skeleton2), "Bot")
+    }
+
+    static CreateSkeleton3(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, ~~(Game.Skeleton3.width / 1.7), ~~(Game.Skeleton3.height / 4), new DrawableObject("middleground", Game.Skeleton3), "Bot")
+    }
+
+    static CreateSkeleton4(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, ~~(Game.Skeleton4.width / 1.7), ~~(Game.Skeleton4.height / 4), new DrawableObject("middleground", Game.Skeleton4), "Bot")
     }
 
     static CreateShed(x = 0, y = 0) {
@@ -730,6 +767,24 @@ class TilesFactory {
         x = x * Game.tileWidth
         y = y * Game.tileHeight
         return TilesFactory.createTile(x, y, ~~(Game.Trap2.width / 4), ~~(Game.Trap2.height / 5), new DrawableObject("middleground", Game.Trap2), "Bot")
+    }
+
+    static CreateTrap3(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, ~~(Game.Trap3.width / 2), ~~(Game.Trap3.height / 5), new DrawableObject("middleground", Game.Trap3), "Bot")
+    }
+
+    static CreateTrap4(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, ~~(Game.Trap4.width / 4), ~~(Game.Trap4.height / 5), new DrawableObject("middleground", Game.Trap4), "Bot")
+    }
+
+    static CreateTrap5(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, ~~(Game.Trap5.width / 2), ~~(Game.Trap5.height / 5), new DrawableObject("middleground", Game.Trap5), "Bot")
     }
 
     static CreateTumbleTree1(x = 0, y = 0) {
