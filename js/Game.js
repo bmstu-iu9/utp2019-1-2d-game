@@ -14,13 +14,18 @@ let soundStorage={}
 let imagesSrc = [
     'angle_tent1.png',
     'angle_tent2.png',
+    'barrels.png',
+    'bench.png',
     'big_birch.png',
     'big_oak.png',
     'big_tent.png',
+    'blood.png',
+    'blood2.png',
     'branches.png',
     'branches2.png',
     'bush1.png',
     'bush2.png',
+    'cage.png',
     'cart.png',
     'carrot1.png',
     'carrot2.png',
@@ -55,6 +60,7 @@ let imagesSrc = [
     'dirtT2.png',
     'dirtT3.png',
     'dead_dirt.png',
+    'drunk_human.png',
     'dungeon_column_left.png',
     'dungeon_column_middle.png',
     'dungeon_column_right.png',
@@ -79,10 +85,15 @@ let imagesSrc = [
     'Floor.png',
     'ghost_shriek.png',
     'gate.png',
+    'garbage1.png',
+    'garbage2.png',
+    'garbage3.png',
+    'garbage4.png',
     'grass1.png',
     'grass2.png',
     'grass3.png',
     'ground1.png',
+    'ground2.png',
     'house1.png',
     'house2.png',
     'house3.png',
@@ -95,6 +106,8 @@ let imagesSrc = [
     'hp_bar_background.png',
     'hp_bar_overlay.png',
     'knight.png',
+    'lattice.png',
+    'lattice2.png',
     'lightning.png',
     'luke.png',
     'medium_birch.png',
@@ -116,11 +129,19 @@ let imagesSrc = [
     'rocks4.png',
     'shop.png',
     'shed.png',
+    'skeleton1.png',
+    'skeleton2.png',
     'small_birch.png',
     'small_oak.png',
     'small_tent.png',
     'state.png',
     'table.png',
+    'tent1.png',
+    'tent2.png',
+    'tent3.png',
+    'tent4.png',
+    'tomb.png',
+    'tomb2.png',
     'tombstone1.png',
     'tombstone2.png',
     'tombstone3.png',
@@ -133,10 +154,14 @@ let imagesSrc = [
     'tombstone10.png',
     'tombstone11.png',
     'tree.png',
+    'trap.png',
+    'trap2.png',
     'tumble_tree1.png',
     'tumble_tree2.png',
     'tumble_tree3.png',
     'tumble_tree4.png',
+    'wardrobe.png',
+    'wardrobe2.png',
     'wall_NW.png',
     'wall_NE.png',
     'wall_SW.png',
@@ -174,13 +199,18 @@ let Game = {
     InitLogic() {
         Game.AngleTentTexture1 = TilesFactory.CreateTexture(imagesStorage.angle_tent1)
         Game.AngleTentTexture2 = TilesFactory.CreateTexture(imagesStorage.angle_tent2)
+        Game.Barrels = TilesFactory.CreateTexture(imagesStorage.barrels)
+        Game.Bench = TilesFactory.CreateTexture(imagesStorage.bench)
         Game.BigBirchTexture = TilesFactory.CreateTexture(imagesStorage.big_birch)
         Game.BigOakTexture = TilesFactory.CreateTexture(imagesStorage.big_oak)
         Game.BigTentTexture = TilesFactory.CreateTexture(imagesStorage.big_tent)
+        Game.Blood = TilesFactory.CreateTexture(imagesStorage.blood)
+        Game.Blood2 = TilesFactory.CreateTexture(imagesStorage.blood2)
         Game.BranchesTexture1 = TilesFactory.CreateTexture(imagesStorage.branches)
         Game.BranchesTexture2 = TilesFactory.CreateTexture(imagesStorage.branches2)
         Game.Bush1Texture = TilesFactory.CreateTexture(imagesStorage.bush1)
         Game.Bush2Texture = TilesFactory.CreateTexture(imagesStorage.bush2)
+        Game.Cage = TilesFactory.CreateTexture(imagesStorage.cage)
         Game.Carrot1 = TilesFactory.CreateTexture(imagesStorage.carrot1)
         Game.Carrot2 = TilesFactory.CreateTexture(imagesStorage.carrot2)
         Game.Carrot3 = TilesFactory.CreateTexture(imagesStorage.carrot3)
@@ -215,6 +245,7 @@ let Game = {
         Game.DirtTextureT1 = TilesFactory.CreateTexture(imagesStorage.dirtT1)
         Game.DirtTextureT2 = TilesFactory.CreateTexture(imagesStorage.dirtT2)
         Game.DirtTextureT3 = TilesFactory.CreateTexture(imagesStorage.dirtT3)
+        Game.DrunkHuman = TilesFactory.CreateTexture(imagesStorage.drunk_human)
         Game.DungeonColumnLeftTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_column_left)
         Game.DungeonColumnMiddleTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_column_middle)
         Game.DungeonColumnRightTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_column_right)
@@ -223,10 +254,15 @@ let Game = {
         Game.DungeonWallRightTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_wall_left)
         Game.DungeonWallTexture1 = TilesFactory.CreateTexture(imagesStorage.dungeon_wall1)
         Game.BrickTexture = TilesFactory.CreateTexture(imagesStorage.Floor)
+        Game.Garbage1 = TilesFactory.CreateTexture(imagesStorage.garbage1)
+        Game.Garbage2 = TilesFactory.CreateTexture(imagesStorage.garbage2)
+        Game.Garbage3 = TilesFactory.CreateTexture(imagesStorage.garbage3)
+        Game.Garbage4 = TilesFactory.CreateTexture(imagesStorage.garbage4)
         Game.GrassTexture1 = TilesFactory.CreateTexture(imagesStorage.grass1)
         Game.GrassTexture2 = TilesFactory.CreateTexture(imagesStorage.grass2)
         Game.GrassTexture3 = TilesFactory.CreateTexture(imagesStorage.grass3)
         Game.GroundTexture = TilesFactory.CreateTexture(imagesStorage.ground1)
+        Game.GroundTexture2 = TilesFactory.CreateTexture(imagesStorage.ground2)
         Game.House1Texture = TilesFactory.CreateTexture(imagesStorage.house1)
         Game.EnterTexture = TilesFactory.CreateTexture(imagesStorage.enter)
         Game.F1 = TilesFactory.CreateTexture(imagesStorage.f1)
@@ -252,6 +288,8 @@ let Game = {
         Game.House9Texture = TilesFactory.CreateTexture(imagesStorage.house9)
         Game.HealthBarBackgroudTexture = TilesFactory.CreateTexture(imagesStorage.hp_bar_background)
         Game.HealthBarOverlayTexture = TilesFactory.CreateTexture(imagesStorage.hp_bar_overlay)
+        Game.Lattice = TilesFactory.CreateTexture(imagesStorage.lattice)
+        Game.Lattice2 = TilesFactory.CreateTexture(imagesStorage.lattice2)
         Game.LukeTexture = TilesFactory.CreateTexture(imagesStorage.luke)
         Game.MediumBirchTexture = TilesFactory.CreateTexture(imagesStorage.medium_birch)
         Game.MediumOakTexture = TilesFactory.CreateTexture(imagesStorage.medium_oak)
@@ -272,11 +310,19 @@ let Game = {
         Game.RocksTexture4 = TilesFactory.CreateTexture(imagesStorage.rocks4)
         Game.Shed = TilesFactory.CreateTexture(imagesStorage.shed)
         Game.Shop = TilesFactory.CreateTexture(imagesStorage.shop)
+        Game.Skeleton1 = TilesFactory.CreateTexture(imagesStorage.skeleton1)
+        Game.Skeleton2 = TilesFactory.CreateTexture(imagesStorage.skeleton2)
         Game.SmallBirchTexture = TilesFactory.CreateTexture(imagesStorage.small_birch)
         Game.SmallOakTexture = TilesFactory.CreateTexture(imagesStorage.small_oak)
         Game.SmallTentTexture = TilesFactory.CreateTexture(imagesStorage.small_tent)
         Game.State = TilesFactory.CreateTexture(imagesStorage.state)
         Game.Table = TilesFactory.CreateTexture(imagesStorage.table)
+        Game.Tent1 = TilesFactory.CreateTexture(imagesStorage.tent1)
+        Game.Tent2 = TilesFactory.CreateTexture(imagesStorage.tent2)
+        Game.Tent3 = TilesFactory.CreateTexture(imagesStorage.tent3)
+        Game.Tent4 = TilesFactory.CreateTexture(imagesStorage.tent4)
+        Game.Tomb1 = TilesFactory.CreateTexture(imagesStorage.tomb)
+        Game.Tomb2 = TilesFactory.CreateTexture(imagesStorage.tomb2)
         Game.TombstoneTexture1 = TilesFactory.CreateTexture(imagesStorage.tombstone1)
         Game.TombstoneTexture2 = TilesFactory.CreateTexture(imagesStorage.tombstone2)
         Game.TombstoneTexture3 = TilesFactory.CreateTexture(imagesStorage.tombstone3)
@@ -289,6 +335,8 @@ let Game = {
         Game.TombstoneTexture10 = TilesFactory.CreateTexture(imagesStorage.tombstone10)
         Game.TombstoneTexture11 = TilesFactory.CreateTexture(imagesStorage.tombstone11)
         Game.TreeTexture = TilesFactory.CreateTexture(imagesStorage.tree)
+        Game.Trap = TilesFactory.CreateTexture(imagesStorage.trap)
+        Game.Trap2 = TilesFactory.CreateTexture(imagesStorage.trap2)
         Game.TumbleTree1Texture = TilesFactory.CreateTexture(imagesStorage.tumble_tree1)
         Game.TumbleTree2Texture = TilesFactory.CreateTexture(imagesStorage.tumble_tree2)
         Game.TumbleTree3Texture = TilesFactory.CreateTexture(imagesStorage.tumble_tree3)
@@ -299,6 +347,8 @@ let Game = {
         Game.DungeonWallSWTexture = TilesFactory.CreateTexture(imagesStorage.wall_SW)
         Game.DungeonWallTexture = TilesFactory.CreateTexture(imagesStorage.wall2)
         Game.DungeonWallTexture2 = TilesFactory.CreateTexture(imagesStorage.Wall)
+        Game.Wardrobe = TilesFactory.CreateTexture(imagesStorage.wardrobe)
+        Game.Wardrobe2 = TilesFactory.CreateTexture(imagesStorage.wardrobe2)
         Game.WellTexture = TilesFactory.CreateTexture(imagesStorage.well)
         Game.HPBottle = TilesFactory.CreateTexture(imagesStorage.HPBottle)
         Game.ManaBottle = TilesFactory.CreateTexture(imagesStorage.ManaBottle)

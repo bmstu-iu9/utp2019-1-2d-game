@@ -30,20 +30,6 @@ class RoomFactory {
         let testRoomSize = 100;
         let room = new Room("Test Room", testRoomSize, testRoomSize);
         if (object === undefined) {
-            //room.type = "roundedRoom"
-            // for (let i = 0; i < testRoomSize; i++) {
-            //     for (let j = 0; j < testRoomSize; j++) {
-            //         //room.Add(TilesFactory.CreateDungeonFloorBrick(j * Game.tileWidth, i * Game.tileHeight))
-            //         //room.Add(TilesFactory.CreateDungeonFloor1(j * Game.tileWidth, i * Game.tileHeight))
-            //         //room.Add(TilesFactory.CreateGrassTile1(j * Game.tileWidth, i * Game.tileHeight))
-            //         room.Add(TilesFactory.CreateGroundTile(j * Game.tileWidth, i * Game.tileHeight))
-            //         //     Добавляет текстуры камней на сцену, нужно был для теста rendering'a
-            //         //     if (Math.random() < 0.4) {
-            //         //         room.Add(TilesFactory.CreateRock(j * Game.tileWidth, i * Game.tileHeight))
-            //         //     }
-            //     }
-            // }
-            room.drawGround(0, 0, 79, 79)
             room.drawRandomGrass(0, 0, 73, 12)
             room.drawRandomGrass(0, 11, 14, 67)
             room.drawRandomGrass(15, 50, 58, 28)
@@ -109,69 +95,9 @@ class RoomFactory {
             room.drawDirt(41, 12, 10, 1)
             room.drawDirt(52, 12, 0, 2)
             room.drawDirt(53, 13, 0, 2)
-            // room.drawBigForest(2, 5, 70, 4)
-            // room.drawBigForest(2, 10, 10, 13)
-
-
-
-
-
+            //Spawn
             room.drawRandomGrass(79, 0, 20, 99)
             room.drawRandomGrass(0, 79, 99, 20)
-            // room.drawBigForest(1, 24, 10, 51)
-            // room.drawBigForestWithFrequecy(19, 50, 3, 25)
-            // room.drawBigForestWithFrequecy(60, 77, 12, 4)
-            // room.drawBigForestWithFrequecy(73, 78, 2, 17)
-
-
-            // room.drawBigForestWithFrequecy(76, 88, 7, 0)
-            // room.drawLineForest(74, 89, 9, 0)
-            // room.drawBigForest(74, 90, 20, 6)
-            // room.drawLineForest(84, 83, 0, 5)
-            // room.drawBigForestWithFrequecy(80, 73, 1, 9)
-            // room.drawLineForest(82, 72, 0, 10)
-            // room.drawBigForestWithFrequecy(75, 77, 0, 10)
-            // room.drawLineForest(74, 77, 0, 11)
-            // room.drawBigForestWithFrequecy(63, 76.5, 12, 0)
-            // room.drawLineForest(63, 77.5, 12, 0)
-            // room.drawBigForestWithFrequecy(49, 74.5, 15, 0)
-            // room.drawLineForest(49, 75.5, 15, 0)
-            // room.drawBigForest(65, 78, 8, 16)
-            // room.drawBigForest(85, 82, 8, 7)
-            // room.drawBigForestWithFrequecy(70, 72, 11, 0)
-            // room.drawLineForest(71, 71, 12, 0)
-            // room.drawBigForest(82, 71, 8, 9)
-            // room.drawBigForest(70, 64, 19, 6)
-            // room.drawBigForestWithFrequecy(50, 69, 20, 0)
-            // room.drawLineForest(50, 68, 20, 0)
-            // room.drawLineForest(66, 70, 3, 0)
-            // room.drawLineForest(46, 61, 5, 0)
-            // room.drawLineForest(45, 61, 0, 5)
-            // room.drawLineForest(52, 61, 0, 7)
-            // room.drawLineForest(32, 67, 14, 0)
-            // room.drawBigForestWithFrequecy(33, 68, 13, 0)
-            // room.drawBigForest(52, 61, 20, 6)
-            // room.drawBigForestWithFrequecy(33, 74, 15, 0)
-            // room.drawLineForest(33, 75, 15, 0)
-            // room.drawBigForestWithFrequecy(27, 56, 0, 9)
-            // room.drawLineForest(28, 56, 0, 9)
-            // room.drawBigForestWithFrequecy(29, 56, 20, 0)
-            // room.drawLineForest(29, 57, 20, 0)
-            // room.drawBigForestWithFrequecy(49, 50, 0, 7)
-            // room.drawLineForest(50, 50, 0, 7)
-            // room.drawBigForest(28, 58, 17, 7.5)
-            // room.drawBigForestWithFrequecy(29, 66, 3, 0)
-            // room.drawLineForest(29, 65, 3, 0)
-            // room.drawBigForest(33, 76, 31, 6)
-
-
-            // room.drawBigForestWithFrequecy(81, 70, 5, 12)
-            // room.drawBigForestWithFrequecy(65, 68, 7, 2)
-            // room.drawBigForestWithFrequecy(70, 70, 11, 2)
-            // room.drawBigForestWithFrequecy(79, 73, 1, 1)
-            // room.drawBigForest(65, 76, 10, 0)
-
-
             room.Add(TilesFactory.CreateEnter(73, 78.5))
             room.drawDirt(67, 86, 11, 2)
             room.drawRandomDirtGrassL(91, 86, 0, 3)
@@ -210,9 +136,6 @@ class RoomFactory {
             room.Add(TilesFactory.CreateFenOff(47.5, 61.5))
             room.drawFence7(47.5, 50, 0, 12)
             room.drawFence7(50.9, 50, 0, 9)
-
-
-
             room.drawFen(31, 39.5, 18, 0)
             room.Add(TilesFactory.CreateFenOff(30.5, 39))
             room.Add(TilesFactory.CreateFenOff(30.4, 45.6))
@@ -221,12 +144,6 @@ class RoomFactory {
             room.Add(TilesFactory.CreateFenOff(50, 45.5))
             room.Add(TilesFactory.CreateFenOff(48.3, 45.5))
             room.drawFence7(50, 40, 0, 6)
-            // room.Add(TilesFactory.CreateFence2(30, 38))
-            // room.Add(TilesFactory.CreateFence2(30, 45))
-            // room.drawFence7(30.2, 44, 0, 2)
-            // room.drawFence7(30.2, 39, 0, 2)
-            // room.Add(TilesFactory.CreateFence4(33.2, 38))
-            // room.Add(TilesFactory.CreateFence5(38.5, 38))
             room.drawDirt(31, 39, 20, 10)
             room.drawDirt(16, 47, 14, 0)
             room.drawNecropolis(31, 40, 18, 6)
@@ -234,13 +151,11 @@ class RoomFactory {
             room.drawNecropolisDirt2(30, 40, 0, 6)
             room.drawFence7(30, 40, 0, 1)
             room.drawFence7(30.3, 43.5, 0, 2)
-
             room.drawDirt(48, 50, 2, 10)
             room.drawRandomDirtGrassR(47, 50, 0, 12)
             room.drawRandomDirtGrassL(51, 50, 0, 10)
             room.drawDirt(48, 60, 10, 2)
             room.drawRandomDirtGrassT(48, 63, 10, 0)
-
             room.drawDirt(67, 68, 3, 17)
             room.drawRandomDirtGrassR(66, 64, 0, 24)
             room.drawRandomDirtGrassL(71, 62, 0, 22)
@@ -252,7 +167,7 @@ class RoomFactory {
             room.Add(TilesFactory.CreateHouse2(73, 87.5))
             room.Add(TilesFactory.CreateHouse1(62, 87.5))
             room.drawLineForest(71, 60, 0, 20)
-
+            //Trail
             room.drawDirt(58, 70, 1, 23)
             room.drawRandomDirtGrassR(57, 70, 0, 26)
             room.drawRandomDirtGrassB(58, 69, 7, 0)
@@ -280,7 +195,6 @@ class RoomFactory {
             room.Add(TilesFactory.CreateTumbleTree2(79, 83))
             room.Add(TilesFactory.CreateTumbleTree3(85, 88))
             room.Add(TilesFactory.CreateTumbleTree2(89.5, 87.5))
-            room.drawTumbleForest(54, 69, 2, 20)
             room.drawBigForest(73, 58, 8, 22)
             room.drawBigForest(80, 78, 10, 3)
             room.drawNecropolis(58, 63, 0, 0)
@@ -289,7 +203,6 @@ class RoomFactory {
             room.drawNecropolis(79, 86, 11, 2)
             room.drawNecropolis(60, 72, 6, 20)
             room.drawNecropolis(60, 89, 30, 3)
-
             room.drawDirt(67, 55, 3, 8)
             room.drawDirt(64, 47, 9, 7)
             room.Add(TilesFactory.CreateFence5(64, 45))
@@ -321,7 +234,7 @@ class RoomFactory {
             room.Add(TilesFactory.CreateBigOak(73.5, 50))
             room.Add(TilesFactory.CreateBigOak(73.5, 54.5))
             room.Add(TilesFactory.CreateBigTent(64.7, 47))
-            room.Add(TilesFactory.CreateAngleTent2(71.5, 47))
+            room.Add(TilesFactory.CreateCart5(70.5, 46))
             room.Add(TilesFactory.CreateCart(70.4, 49.3))
             room.Add(TilesFactory.CreateAngleTent2(71.5, 52))
             room.Add(TilesFactory.CreateCart2(67.4, 46))
@@ -333,9 +246,7 @@ class RoomFactory {
             room.Add(TilesFactory.CreateBigOak(51, 54))
             room.Add(TilesFactory.CreateBigOak(54, 54))
             room.Add(TilesFactory.CreateBigOak(57.5, 54.5))
-            // room.Add(TilesFactory.CreateBigOak(45, 49))
-            // room.Add(TilesFactory.CreateBigOak(45, 53))
-            // room.Add(TilesFactory.CreateBigOak(45, 57))
+            //Cementery
             room.drawNecropolis(48, 63, 3, 32)
             room.drawFence7(47.45, 63, 0, 32)
             room.Add(TilesFactory.CreateTumbleTree4(57.3, 62.6))
@@ -375,6 +286,7 @@ class RoomFactory {
             room.drawNecropolisFloor(40, 45, 0, 1)
             room.drawNecropolisFloor(30, 40, 0, 2)
             room.drawNecropolisFloor(31, 40, 0, 3)
+            //Right village
             room.Add(TilesFactory.CreateBigOak(63, 31.5))
             room.Add(TilesFactory.CreateBigOak(59.5, 32.8))
             room.Add(TilesFactory.CreateBigOak(54.6, 32.8))
@@ -432,19 +344,26 @@ class RoomFactory {
             room.drawRandomDirtGrassB(77, 48, 3, 0)
             room.drawFen(77, 51.5, 21, 0)
             room.drawFence7(76.8, 42, 0, 10)
+            room.drawLineForest(77, 51, 20, 0)
             room.drawBigForest(77, 52, 20, 3)
+            room.Add(TilesFactory.CreateBigOak(91, 79.5))
+            room.Add(TilesFactory.CreateBigOak(93.5, 81))
+            room.Add(TilesFactory.CreateBigOak(96, 80))
             room.drawDirt(82, 20, 2, 12)
             room.Add(TilesFactory.CreateHouse5(65.9, 22))
             room.Add(TilesFactory.CreateCastle(74, 5))
             room.drawDirt(76, 10, 12, 9)
-            room.Add(TilesFactory.CreateCart3(77.8, 36.2))
-            room.Add(TilesFactory.CreateCart4(79, 31))
+            room.Add(TilesFactory.CreateCart3(79.8, 37.5))
             room.Add(TilesFactory.CreateTable(72.6, 33.5))
             room.Add(TilesFactory.CreateTable(72.6, 35.5))
-            room.Add(TilesFactory.CreateTable(76.3, 32))
+            room.Add(TilesFactory.CreateTable(72.6, 37.5))
+            room.Add(TilesFactory.CreateBarrels(76.3, 36.2))
+            room.Add(TilesFactory.CreateTent3(76.3, 31))
+            room.Add(TilesFactory.CreateTent4(79, 31))
+            room.Add(TilesFactory.CreateTent1(76.3, 33.5))
+            room.Add(TilesFactory.CreateTent2(79, 33.5))
             room.Add(TilesFactory.CreateShed(71.95, 31))
-            room.Add(TilesFactory.CreateWell(80, 35))
-            room.Add(TilesFactory.CreateCart5(75.8, 33.3))
+            room.Add(TilesFactory.CreateWell(78.3, 36))
             room.Add(TilesFactory.CreateBigOak(78.3, 22.5))
             room.Add(TilesFactory.CreateBigBirch(78.8, 27))
             room.Add(TilesFactory.CreateBigBirch(78.8, 19.5))
@@ -489,8 +408,8 @@ class RoomFactory {
             room.Add(TilesFactory.CreateBigOak(57.5, 32))
             room.Add(TilesFactory.CreateHouse6(16.2, 49.3))
             room.Add(TilesFactory.CreateHouse2(36.25, 49))
-
-            room.drawNecropolis(16, 50, 31, 20)
+            //Left area from dungeon
+            room.drawNecropolis(16, 50, 31, 49)
             room.drawDirt(30, 49, 0, 3)
             room.drawDirt(29, 53, 2, 0)
             room.drawDirt(28, 54, 0, 0)
@@ -513,16 +432,15 @@ class RoomFactory {
             room.drawFen(33, 49, 14, 0)
             room.Add(TilesFactory.CreateFenOff(15.9, 48.7))
             room.Add(TilesFactory.CreateFenOff(15.9, 61.5))
-            room.drawFen(1, 49, 25.5, 0)
+            room.drawFen(0.5, 49, 26, 0)
             room.drawFence7(15.9, 49.5, 0, 12)
             room.drawDirt(34, 56, 8, 0)
             room.drawDirt(42, 55, 0, 0)
             room.drawDirt(23, 56, 3, 0)
             room.drawDirt(23, 54, 0, 1)
-            //room.Add(TilesFactory.CreateTumbleTree1(15.4, 46.4))
-            room.drawNecropolis(2, 50, 13, 20)
-            room.drawTumbleForest(2, 51, 5, 5)
-
+            room.Add(TilesFactory.CreateTumbleTree1(15.4, 46.4))
+            room.drawNecropolis(0, 50, 15, 49)
+            //Forrest surrounding the dungeon
             room.drawBigForest(4, 24, 8, 17)
             room.drawLineForest(13, 24, 0, 17)
             room.drawBigForest(3, 3, 6, 22)
@@ -533,119 +451,135 @@ class RoomFactory {
             room.drawBigForest(58, 6, 6, 6)
             room.drawLineForest(58, 14, 6, 0)
             room.drawLineForest(63.5, 17, 0, 12)
-            //room.drawBigForest(13, 1, 50, 3)
-            // room.drawPaving(29, 54, 2, 0)
-            // room.drawPaving(28, 55, 4, 2)
-            // room.drawPaving(29, 58, 2, 0)
-            // room.Add(TilesFactory.CreateState(29.7, 54.1))
-
-            //room.drawPaving(34, 50, 0, 10)
-
-            // room.drawRandomDirtGrassB(72, 74, 5, 0)
-            // room.drawRandomDirtGrassB(79, 75, 0, 0)
-            // room.drawRandomDirtGrassL(71, 74, 0, 0)
-            // room.drawRandomDirtGrassB(70, 73, 0, 0)
-            // room.drawRandomDirtGrassT(50, 75, 9, 0)
-            // room.drawRandomDirtGrassT(60, 75, 4, 0)
-            // room.drawRandomDirtGrassR(65, 75, 0, 1)
-            // room.drawRandomDirtGrassB(67, 72, 2, 0)
-            // room.drawDirt(34, 71, 15, 2)
-            // room.drawDirt(32, 70, 1, 2)
-            // room.drawDirt(30, 69, 1, 2)
-            // room.drawDirt(28, 68, 1, 2)
-            // room.drawDirt(26, 67, 1, 2)
-            // room.drawDirt(24, 55, 2, 13)
-            // room.drawDirt(25, 54, 23, 2)
-            // room.drawDirt(47, 50, 2, 4)
-            // room.drawDirt(48, 66, 1, 4)
-            // room.drawDirt(46, 64, 5, 3)
-            // room.drawRandomDirtGrassT(34, 74, 14, 0)
-            // room.drawRandomDirtGrassR(49, 74, 0, 0)
-            // room.drawRandomDirtGrassB(50, 71, 15, 0)
-            // room.drawRandomDirtGrassL(66, 72, 0, 0)
-            // room.drawRandomDirtGrassL(50, 68, 0, 3)
-            // room.drawRandomDirtGrassR(47, 68, 0, 2)
-            // room.drawRandomDirtGrassB(34, 70, 13, 0)
-            // room.drawRandomDirtGrassT(32, 73, 1, 0)
-            // room.drawRandomDirtGrassT(30, 72, 1, 0)
-            // room.drawRandomDirtGrassT(26, 70, 1, 0)
-            // room.drawRandomDirtGrassT(24, 69, 1, 0)
-            // room.drawRandomDirtGrassT(28, 71, 1, 0)
-            // room.drawRandomDirtGrassT(66, 77, 10, 0)
-            // room.drawBigForestWithFrequecy(50, 67, 15, 2.5)
-            // room.drawBigForestWithFrequecy(35, 74, 28.5, 3)
-            // room.drawBigForestWithFrequecy(34, 67, 12, 2)
-            // room.drawBigForestWithFrequecy(27, 56, 3, 10)
-            // room.drawBigForestWithFrequecy(31, 56, 16, 2)
-            // room.drawRandomDirtGrassR(24, 54, 0, 0)
-            // room.drawRandomDirtGrassB(25, 53, 20, 0)
-            // room.drawRandomDirtGrassT(27, 57, 21, 0)
-            // room.drawRandomDirtGrassL(49, 55, 0, 1)
-            // room.drawRandomDirtGrassR(46, 51, 0, 2)
-            // room.drawRandomDirtGrassL(49, 51, 0, 3)
-            // room.drawBigForest(22, 49, 24, 2)
-            // room.drawRandomDirtGrassR(23, 55, 0, 13)
-            // room.drawRandomDirtGrassL(27, 57, 0, 10)
-            // room.drawRandomDirtGrassB(46, 63, 5, 0)
-            // room.drawRandomDirtGrassR(45, 64, 0, 3)
-            // room.drawRandomDirtGrassL(52, 64, 0, 3)
-            // room.drawRandomDirtGrassB(27, 67, 2, 0)
-            // room.drawRandomDirtGrassB(30, 68, 1, 0)
-            // room.drawRandomDirtGrassB(32, 69, 1, 0)
-            // room.drawBigForestWithFrequecy(31, 65, 3, 2)
-            // room.drawBigForestWithFrequecy(45, 59, 7, 3)
-            // room.drawBigForestWithFrequecy(44, 59, 1, 7)
-            // room.drawBigForestWithFrequecy(52, 59, 2, 8)
-            // room.drawBigForest(30, 59, 13, 8)
-            // room.drawBigForestWithFrequecy(23, 68, 2, 8)
-            // room.drawBigForestWithFrequecy(26, 70, 2, 6)
-            // room.drawBigForestWithFrequecy(29, 71, 2, 4)
-            // room.drawBigForestWithFrequecy(32, 73, 3, 3)
-            // room.drawBigForest(10, 75, 60, 10)
-            // room.drawBigForest(63, 86, 10, 10)
-            // room.drawBigForestWithFrequecy(50, 50, 6, 3)
-            // room.drawBigForestWithFrequecy(49, 54, 4, 5)
-            // room.drawBigForest(53, 52, 40, 17)
-            // room.drawBigForest(53, 52, 40, 17)
-            // room.drawBigForest(11, 50, 8, 25)
-            // room.drawLineForest(0, 5, 73, 0)
-            // room.drawLineForest(0, 5, 1, 75)
-            // room.drawLineForest(0, 81, 73, 0)
-            // room.drawLineForest(74, 5, 0, 60)
-            // room.drawBigForest(0, 0, 80, 4)
-            // room.drawBigForest(11, 10, 2.5, 14)
-            // room.drawBigForest(12, 25, 2.5, 24)
-
-
-
-
-            // room.Add(TilesFactory.CreateAngleTent1(2515, 3315))
-            // room.Add(TilesFactory.CreateBigTent(4275, 4350))
-            // room.Add(TilesFactory.CreateBigOak(4200, 4275))
-            // room.Add(TilesFactory.CreateBigOak(4250, 4275))
-            // room.Add(TilesFactory.CreateBigOak(4300, 4275))
-            // room.Add(TilesFactory.CreateBigOak(4350, 4275))
-            // room.Add(TilesFactory.CreateBigOak(4200, 4300))
-            // room.Add(TilesFactory.CreateBigOak(4200, 4350))
-            // room.Add(TilesFactory.CreateDeadWood4(4150, 4400))
-            // room.Add(TilesFactory.CreateDeadWood5(4150, 4530))
-            // room.Add(TilesFactory.CreateDeadWood6(4000, 4550))
-            // room.Add(TilesFactory.CreateDeadWood7(4000, 4350))
-            // room.Add(TilesFactory.CreateTumbleTree3(10, 47))
-            // room.Add(TilesFactory.A1(10, 47))CreateHouse1(10,10)
-            // room.Add(TilesFactory.CreateHouse1(81,75))
-            // room.Add(TilesFactory.CreateHouse1(65,75))
-
-
-
-
-            // room.drawBigForest(60, 35, 5, 3)
-            // room.drawBigForest(55,37,20,15)
-            // room.drawBigForest(66, 20, 11, 17)
-            // room.drawBigForest(53, 9, 24, 2)
-            // room.drawBigForest(56, 12, 20, 4)
-            // room.drawBigForest(61, 16, 14, 2)
-            // room.drawBigForest(65, 18, 11, 2)
+            room.Add(TilesFactory.CreateBigOak(0, 43.5))
+            room.Add(TilesFactory.CreateBigOak(4, 43.5))
+            room.Add(TilesFactory.CreateBigOak(8, 43.5))
+            room.Add(TilesFactory.CreateBigOak(12, 43.5))
+            //Lower area from spawn
+            room.drawNecropolis(48, 96, 51, 3)
+            room.drawNecropolis(91, 86, 8, 9)
+            room.drawDirt(91, 93, 9, 2)
+            room.Add(TilesFactory.CreateTumbleTree2(81, 95))
+            room.Add(TilesFactory.CreateTumbleTree3(75, 94))
+            room.Add(TilesFactory.CreateTumbleTree4(87, 97))
+            room.Add(TilesFactory.CreateTumbleTree3(60, 94))
+            room.Add(TilesFactory.CreateTumbleTree2(66, 95))
+            room.Add(TilesFactory.CreateTumbleTree4(72, 97))
+            room.Add(TilesFactory.CreateTumbleTree2(91, 95))
+            room.Add(TilesFactory.CreateTumbleTree2(94, 88))
+            room.Add(TilesFactory.CreateTumbleTree2(96, 95))
+            room.Add(TilesFactory.CreateTumbleTree2(97, 85))
+            room.Add(TilesFactory.CreateTumbleTree4(93, 86))
+            //Forest to the left of the trail
+            room.Add(TilesFactory.CreateTumbleTree2(54, 69))
+            room.Add(TilesFactory.CreateTumbleTree4(56, 74))
+            room.Add(TilesFactory.CreateTumbleTree2(54, 75))
+            room.Add(TilesFactory.CreateTumbleTree3(55, 80))
+            room.Add(TilesFactory.CreateTumbleTree4(56, 86))
+            room.Add(TilesFactory.CreateTumbleTree2(54.5, 88))
+            room.Add(TilesFactory.CreateTumbleTree2(55, 92))
+            room.Add(TilesFactory.CreateTumbleTree4(50, 69))
+            room.Add(TilesFactory.CreateTumbleTree2(49.5, 71))
+            room.Add(TilesFactory.CreateTumbleTree3(50, 75))
+            room.Add(TilesFactory.CreateTumbleTree2(49, 80))
+            room.Add(TilesFactory.CreateTumbleTree3(50.5, 85))
+            room.Add(TilesFactory.CreateTumbleTree4(49, 90))
+            room.Add(TilesFactory.CreateTumbleTree3(50.5, 90))
+            room.Add(TilesFactory.CreateTumbleTree2(52, 93.5))
+            //Forest in the ruined village
+            room.Add(TilesFactory.CreateTumbleTree2(17, 57.5))
+            room.Add(TilesFactory.CreateTumbleTree4(19, 55.5))
+            room.Add(TilesFactory.CreateTumbleTree3(21, 57))
+            room.Add(TilesFactory.CreateTumbleTree4(28, 60.3))
+            room.Add(TilesFactory.CreateTumbleTree4(26, 51))
+            room.Add(TilesFactory.CreateTumbleTree2(24.5, 56))
+            room.Add(TilesFactory.CreateTumbleTree2(32, 57.2))
+            room.Add(TilesFactory.CreateTumbleTree3(33.6, 49.8))
+            room.Add(TilesFactory.CreateTumbleTree4(35, 54))
+            room.Add(TilesFactory.CreateTumbleTree4(37, 57))
+            room.Add(TilesFactory.CreateTumbleTree3(38, 57))
+            room.Add(TilesFactory.CreateTumbleTree2(41.5, 58))
+            room.Add(TilesFactory.CreateTumbleTree4(45, 58.5))
+            room.Add(TilesFactory.CreateTumbleTree2(45.3, 53))
+            room.Add(TilesFactory.CreateTumbleTree4(0, 50.5))
+            room.Add(TilesFactory.CreateTumbleTree3(4, 49.5))
+            room.Add(TilesFactory.CreateTumbleTree2(8, 50.5))
+            room.Add(TilesFactory.CreateTumbleTree4(12, 50.5))
+            room.Add(TilesFactory.CreateTumbleTree2(10.5, 52.8))
+            room.Add(TilesFactory.CreateTumbleTree4(3, 54.5))
+            room.Add(TilesFactory.CreateTumbleTree2(5.5, 53.5))
+            room.Add(TilesFactory.CreateTumbleTree3(13, 55))
+            room.Add(TilesFactory.CreateTumbleTree4(14, 54))
+            room.Add(TilesFactory.CreateTumbleTree2(1.5, 55))
+            room.Add(TilesFactory.CreateTumbleTree3(8, 57))
+            room.Add(TilesFactory.CreateTumbleTree2(12.6, 58.5))
+            room.Add(TilesFactory.CreateTumbleTree4(3, 61))
+            room.Add(TilesFactory.CreateTumbleTree2(6, 61))
+            room.Add(TilesFactory.CreateTumbleTree3(1, 63))
+            room.Add(TilesFactory.CreateTumbleTree4(9, 65))
+            room.Add(TilesFactory.CreateTumbleTree3(11.3, 63.5))
+            room.Add(TilesFactory.CreateTumbleTree2(6.7, 65.8))
+            room.Add(TilesFactory.CreateTumbleTree4(4, 68))
+            room.Add(TilesFactory.CreateTumbleTree2(18, 62))
+            room.Add(TilesFactory.CreateTumbleTree4(16, 64))
+            room.Add(TilesFactory.CreateTumbleTree3(15, 66))
+            room.Add(TilesFactory.CreateTumbleTree3(20, 65))
+            room.Add(TilesFactory.CreateTumbleTree4(22, 63))
+            room.Add(TilesFactory.CreateTumbleTree2(24, 61))
+            room.Add(TilesFactory.CreateTumbleTree2(26, 65))
+            room.Add(TilesFactory.CreateTumbleTree3(28, 61.5))
+            room.Add(TilesFactory.CreateTumbleTree2(30.5, 66))
+            room.Add(TilesFactory.CreateTumbleTree4(32, 64.5))
+            room.Add(TilesFactory.CreateTumbleTree3(34, 63.5))
+            room.Add(TilesFactory.CreateTumbleTree4(34, 63.5))
+            room.Add(TilesFactory.CreateTumbleTree2(38, 60.5))
+            room.Add(TilesFactory.CreateTumbleTree4(38, 66.5))
+            room.Add(TilesFactory.CreateTumbleTree3(40, 66.5))
+            room.Add(TilesFactory.CreateTumbleTree2(44, 61.5))
+            room.Add(TilesFactory.CreateTumbleTree4(45, 65.5))
+            room.Add(TilesFactory.CreateDrunkHuman(72, 31.8))
+            //Dungeon
+            room.Add(TilesFactory.CreateLattice2(29.5, 16.5))
+            room.Add(TilesFactory.CreateLattice(30.8, 16.5))
+            room.Add(TilesFactory.CreateLattice(32.8, 16.5))
+            room.Add(TilesFactory.CreateLattice(34.71, 16.5))
+            room.Add(TilesFactory.CreateMetalDoor(36.72, 16.77))
+            room.Add(TilesFactory.CreateSkeleton1(33.5, 16))
+            room.Add(TilesFactory.CreateBlood2(22, 32.5))
+            room.Add(TilesFactory.CreateTomb2(19, 16))
+            room.Add(TilesFactory.CreateTomb2(23.3, 16))
+            room.Add(TilesFactory.CreateSkeleton2(26, 39))
+            room.Add(TilesFactory.CreateWardrobe(20.6, 38))
+            room.Add(TilesFactory.CreateWardrobe2(27.5, 22))
+            room.Add(TilesFactory.CreateTrap(41, 15.5))
+            room.Add(TilesFactory.CreateTrap2(44, 16))
+            room.Add(TilesFactory.CreateTrap2(47, 16))
+            room.Add(TilesFactory.CreateCage(49, 17))
+            room.Add(TilesFactory.CreateBlood1(41, 16.5))
+            room.Add(TilesFactory.CreateBlood1(42, 21.5))
+            room.Add(TilesFactory.CreateState(39, 30))
+            room.Add(TilesFactory.CreateGarbage1(35.5, 34))
+            room.Add(TilesFactory.CreateGarbage2(42.5, 29.5))
+            room.Add(TilesFactory.CreateBlood1(24, 38))
+            room.Add(TilesFactory.CreateBlood1(23, 35.7))
+            room.Add(TilesFactory.CreateBlood1(26, 29))
+            room.Add(TilesFactory.CreateBlood1(30, 23.4))
+            room.Add(TilesFactory.CreateBlood1(35, 24))
+            room.Add(TilesFactory.CreateWardrobe2(32, 29))
+            room.Add(TilesFactory.CreateWardrobe(34, 29))
+            room.Add(TilesFactory.CreateWardrobe2(36, 29))
+            room.Add(TilesFactory.CreateWardrobe2(52, 21))
+            room.Add(TilesFactory.CreateGarbage1(58, 24))
+            room.Add(TilesFactory.CreateGarbage2(52, 32))
+            room.Add(TilesFactory.CreateSkeleton2(55.5, 27))
+            room.Add(TilesFactory.CreateGarbage2(22, 44))
+            room.Add(TilesFactory.CreateGarbage1(19, 32.5))
+            room.Add(TilesFactory.CreateWardrobe(20, 22))
+            room.Add(TilesFactory.CreateGarbage3(28, 38))
+            room.Add(TilesFactory.CreateGarbage4(27.2, 32.5))
+            room.Add(TilesFactory.CreateGarbage4(55, 22))
+            room.Add(TilesFactory.CreateBench(35, 34.2))
+            room.Add(TilesFactory.CreateBench(45, 34.2))
 
             room.Add(TilesFactory.CreateHPBottle(1300,1250))
             room.Add(TilesFactory.CreateManaBottle(1300,1200))
@@ -690,14 +624,14 @@ class RoomFactory {
         room.addMap(17, 14,
             '         qwwe       qwwe                                                                 \n' +
             'qwwwwwwww2  1wwwwwww2  1wwwwwwwwwwe                                                                 \n' +
-            'a        a  d       a  d     jg   1e                                                         \n' +
+            'a        a  d       a  d          1e                                                         \n' +
             'a        a  d       a  d           1e                                             \n' +
-            'a        a  d     gha  d           qx                                                       \n' +
+            'a        a  d       a  d           qx                                                       \n' +
             'a        a  d       a  d          q2                                                          \n' +
             'zsssse qs2  1sse qss2  1e qsssssssx                                                                               \n' +
             'a    d a       d a      d a       1wwe                                                                      \n' +
             'zqwwwx zwwwwe  d a      d a       d  1wwe                                                                       \n' +
-            ' a       g  1wwx zwwwwwwx zwwwwwwwx     1wwe                                                                              \n' +
+            ' a          1wwx zwwwwwwx zwwwwwwwx     1wwe                                                                              \n' +
             ' a                                         1we                                                        \n' +
             ' a                                           1e                                                       \n' +
             ' a          qsssssssse qssssssssse    35      d                                                                   \n' +
@@ -706,17 +640,17 @@ class RoomFactory {
             '   d a  d a   qwwwwwwx zwwwwwwwwwx    35      d                                                        \n' +
             '   d a  d a   a                  d           qx                                                         \n' +
             '   d a  d a   a                  d         qs2                                                     \n' +
-            ' qsx zwwx zse a   qe   qe   qe   1e     qss2                                            \n' +
-            ' a          d a   zx   zx   zx    d  qss2                                                     \n' +
+            ' qsx zwwx zse a   qe        qe   1e     qss2                                            \n' +
+            ' a          d a   zx        zx    d  qss2                                                     \n' +
             ' a          d a                   1ss2                                                        \n' +
-            ' a f        d a            f      d                                          \n' +
-            ' zssse  qsssx a      h            d                                                                               \n' +
-            ' a   d  a     a        g          d                                                              \n' +
+            ' a          d a                   d                                          \n' +
+            ' zssse  qsssx a                   d                                                                               \n' +
+            ' a   d  a     a                   d                                                              \n' +
             ' qsssx  zssse zsssssssssssssssssssx                                                                                         \n' +
             ' a          d                                                                                     \n' +
-            ' a         fd                                                                                     \n' +
+            ' a          d                                                                                     \n' +
             ' a          35                                                                                   \n' +
-            ' af   35                                                                                           \n' +
+            ' a    35                                                                                           \n' +
             ' a          35                                                                                      \n' +
             ' a          d                                                                                       \n' +
             ' a          d                                                                                       \n' +
@@ -731,42 +665,40 @@ class RoomFactory {
             '         9999       9999                         \n' +
             '999999999999999999999999999999999999                                    \n' +
             '9                                 99                                   \n' +
-            '9666666666  666666666  666666666666999999\n' +
+            '9666666666  666666666  666666666666999\n' +
             '9666666666  666666666  666666666666699\n' +
-            '9666666666  666666666  6666666666666999999\n' +
-            '9666666666  666666666  6666666666666999\n' +
+            '9666666666  666666666  660666666606699\n' +
+            '9666666666  666666666  666666666666699\n' +
             '9666666666  666666666  666666666669999\n' +
             '9    666       666      666       99999999\n' +
             '9 6666666666   666      666       6669999999\n' +
             '99666666666666666666666666666666666666669999999\n' +
-            ' 9666666666666666666666666666666666666666669999\n' +
-            ' 9666666666666666666666666666666666666666666699\n' +
-            ' 9666666666666666666666666666666666666666666669999\n' +
+            ' 9606666660666660666666660666666666666666669999\n' +
+            ' 96666666666666666666666666666666666666666666999\n' +
+            ' 96666666666666666666666666666666666666666666699\n' +
             ' 96666666669999999999666         666666666666699\n' +
             ' 99666  6669999999999666         666666666666699\n' +
-            ' 99666  6669999666666666666666666666666666666699999\n' +
-            ' 99666  6669999666666666666666666666666666666699999\n' +
-            ' 99666  6669999666666666666666666666666666666699999\n' +
-            ' 99666  666699966666666666666666666666666666999999999999999\n' +
-            ' 9666666666699966666666666666666666666666999999999999999999\n' +
-            ' 9666666666699966666666666666666666666999999999999999999999\n' +
-            ' 9666666666699966666666666666666669999999999999999999999999\n' +
-            ' 966666666669996666666666666666666999999999999999999999\n' +
-            ' 9999666699999966666666666666666669999999999999999999999\n' +
-            ' 966666666669996666666666666666666999999999999999999999999\n' +
-            ' 96666666666\n' +
-            ' 96666666666\n' +
+            ' 99666  66699996666666666666666666666666666666999\n' +
+            ' 99666  66699996666666666666666666666666666666999\n' +
+            ' 99666  66699996066666666666666066666666666666999\n' +
+            ' 99666  6666999666666666666666666666666666669             \n' +
+            ' 96666666666999666666666666666666666666669                \n' +
+            ' 96066666606999666666666666666666666669                   \n' +
+            ' 9666666666699966666666666666666669                       \n' +
+            ' 9666666666699960666666666666660669                       \n' +
+            ' 9999666699999966666666666666666669                       \n' +
+            ' 9666666666699966666666666666666669                       \n' +
+            ' 9666666666699\n' +
+            ' 9606666660699\n' +
             ' 966666666666\n' +
             ' 966666666666\n' +
             ' 966666666666\n' +
-            ' 966666666669\n' +
+            ' 960666666069\n' +
             ' 966666666669\n' +
             ' 966666666669\n' +
             ' 999999999999\n' +
             '  99999999999\n' +
             '  99999999999\n' +
-            '  88888888888\n' +
-            '  88888888888\n' +
             '             ')
         RoomFactory.addWall(room, 3, 28, 3, 'l')
         return room
