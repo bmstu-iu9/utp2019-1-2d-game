@@ -157,7 +157,7 @@ class RoomRenderer {
                     if (!(key instanceof StaticObject)) {
                         if (this.inCamera(key)) {
                             this.sortArray.add(key);
-                            for (let u = Math.max(i - ~~(this.margin / 2), 0); u < i + ~~(this.margin / 2) + 1; u++) {
+                            for (let u = Math.max(i - ~~(this.margin), 0); u < i + ~~(this.margin / 2) + 1; u++) {
                                 for (let v = j - this.margin; v < j + this.margin + 1; v++) {
                                     let drMap = room.middlegroundTiles[v][u];
                                     drMap.forEach((key1) => {
@@ -199,4 +199,3 @@ class RoomRenderer {
         room.nav.render()
     }
 }
-

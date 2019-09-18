@@ -129,6 +129,16 @@ class Room extends GameObject {
       }
     }
 
+    drawGrassDirt(x, y, width, height) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+      for(let i = width; i >= 0; i--) {
+          for(let j = height; j >= 0; j--) {
+              this.Add(TilesFactory.CreateGrassDirt(x + (i * Game.tileWidth), y + (j * Game.tileWidth)))
+          }
+      }
+    }
+
     drawCarrot(x, y, width, height, object) {
       x = x * Game.tileWidth
       y = y * Game.tileHeight
@@ -576,7 +586,7 @@ class Room extends GameObject {
     static fromJSON(object) {
         let room = (object.type === "roundedRoom") ? RoomFactory.CreateRoundedRoom(object) : RoomFactory.CreateTestRoom(object)
         room.id = object.id
-        
+
         room.height = object.height
         room.width = object.width
         room.type = object.type;

@@ -229,6 +229,12 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, Game.CaveEnterTexture.width, ~~(Game.CaveEnterTexture.height / 3), new DrawableObject("middleground", Game.CaveEnterTexture), "Bot")
     }
 
+    static CreateColumn(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, ~~(Game.Column.width / 5), ~~(Game.Column.height / 5), new DrawableObject("middleground", Game.Column), "Bot")
+    }
+
     static CreateCross(x = 0, y = 0) {
         return TilesFactory.createMovableObj(x, y, Game.CrossTexture.width, ~~(Game.CrossTexture.height / 4), new DrawableObject("middleground", Game.CrossTexture), "Bot")
     }
@@ -301,6 +307,12 @@ class TilesFactory {
         x = x * Game.tileWidth
         y = y * Game.tileHeight
         return TilesFactory.createTile(x, y, ~~(Game.DeadPeople2.width / 1.2), ~~(Game.DeadPeople2.height), new DrawableObject("middleground", Game.DeadPeople2), "Bot")
+    }
+
+    static CreateDungeonEnter(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DungeonEnterTexture.width, Game.DungeonEnterTexture.height, new DrawableObject("middleground", Game.DungeonEnterTexture),"Bot")
     }
 
     static CreateDungeonWallRight(x = 0, y = 0) {
@@ -429,6 +441,10 @@ class TilesFactory {
         return new StaticObject(x, y, x, y, new DrawableObject("background", Game.NecropolisTextureDirt2));
     }
 
+    static CreateGrassDirt(x = 0, y = 0) {
+        return new StaticObject(x, y, x, y, new DrawableObject("background", Game.GrassDirt));
+    }
+
     static CreateGrassTile2(x = 0, y = 0) {
         return new StaticObject(x, y, x, y, new DrawableObject("background", Game.GrassTexture2));
     }
@@ -478,6 +494,12 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, ~~(Game.Garbage5.width / 2), ~~(Game.Garbage5.height), new DrawableObject("middleground", Game.Garbage5), "Bot");
     }
 
+    static CreateGarbage6(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, ~~(Game.Garbage6.width / 2), ~~(Game.Garbage6.height), new DrawableObject("middleground", Game.Garbage6), "Bot");
+    }
+
     static CreateHouse1(x = 0, y = 0) {
         x = x * Game.tileWidth
         y = y * Game.tileHeight
@@ -487,7 +509,7 @@ class TilesFactory {
     static CreateHouse2(x = 0, y = 0) {
         x = x * Game.tileWidth
         y = y * Game.tileHeight
-        return TilesFactory.createTile(x, y, ~~(Game.House2Texture.width / 1.20), ~~(Game.House2Texture.height / 2), new DrawableObject("middleground", Game.House2Texture), "Bot");
+        return TilesFactory.createTile(x, y, ~~(Game.House2Texture.width / 1.20), ~~(Game.House2Texture.height / 1.5), new DrawableObject("middleground", Game.House2Texture), "Bot");
     }
 
     static CreateHouse3(x = 0, y = 0) {
