@@ -1,7 +1,16 @@
 'use strict'
+
 class SpriteFactory {
     static CreateTestSprite() {
         return new Sprite(1, Game.GhostBox)
+    }
+
+    static CreateEnemySprite() {
+        return new Sprite(1, Game.EnemyKnightBox)
+    }
+
+    static CreateGhostKnightSprite() {
+        return new Sprite(1, Game.GhostKnightBox)
     }
 
     static CreateFireBallSprite() {

@@ -5,7 +5,7 @@ canvas.width = document.body.clientWidth
 canvas.height = document.body.clientHeight
 canvas.clickPositionX = 0;
 canvas.clickPositionY = 0;
-let ctx = canvas.getContext("2d", { alpha: false })
+let ctx = canvas.getContext("2d", {alpha: false})
 
 let imagesStorage = {}
 let textureStorage = {}
@@ -184,7 +184,9 @@ let imagesSrc = [
     'lightning.png',
     'HPBottle.png',
     'ManaBottle.png',
-    'Sword.png'
+    'Sword.png',
+    'enemy_knight.png',
+    'ghost_knight.png'
 ];
 
 const sounds=[
@@ -378,6 +380,8 @@ let Game = {
         Game.ManaBottle = TilesFactory.CreateTexture(imagesStorage.ManaBottle)
         Game.Sword = TilesFactory.CreateTexture(imagesStorage.Sword)
         Game.GhostBox = BoxFactory.CreateKnightBox()
+        Game.EnemyKnightBox = BoxFactory.CreateEnemyKnightBox()
+        Game.GhostKnightBox = BoxFactory.CreateGhostKnightBox()
         Game.FireBallBox = BoxFactory.CreateFireBallBox()
         Game.LightningBox = BoxFactory.CreateLigthningBox()
         Game.BackgroundSound = soundStorage.BackgroundSound
