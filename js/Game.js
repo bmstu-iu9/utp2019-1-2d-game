@@ -37,6 +37,7 @@ let imagesSrc = [
     'castle.png',
     'cave_enter.png',
     'circle.png',
+    'column.png',
     'cross.png',
     'deadwood1.png',
     'deadwood2.png',
@@ -63,6 +64,7 @@ let imagesSrc = [
     'dead_people.png',
     'dead_people2.png',
     'drunk_human.png',
+    'dungeon_enter.png',
     'dungeon_column_left.png',
     'dungeon_column_middle.png',
     'dungeon_column_right.png',
@@ -95,6 +97,7 @@ let imagesSrc = [
     'garbage3.png',
     'garbage4.png',
     'garbage5.png',
+    'grass_dirt.png',
     'grass1.png',
     'grass2.png',
     'grass3.png',
@@ -233,6 +236,7 @@ let Game = {
         Game.Cart5 = TilesFactory.CreateTexture(imagesStorage.cart5)
         Game.Castle = TilesFactory.CreateTexture(imagesStorage.castle)
         Game.CaveEnterTexture = TilesFactory.CreateTexture(imagesStorage.cave_enter)
+        Game.Column = TilesFactory.CreateTexture(imagesStorage.column)
         Game.Circle = TilesFactory.CreateTexture(imagesStorage.circle)
         Game.CrossTexture = TilesFactory.CreateTexture(imagesStorage.cross)
         Game.DeadWood1Texture = TilesFactory.CreateTexture(imagesStorage.deadwood1)
@@ -260,6 +264,7 @@ let Game = {
         Game.DrunkHuman = TilesFactory.CreateTexture(imagesStorage.drunk_human)
         Game.DeadPeople = TilesFactory.CreateTexture(imagesStorage.dead_people)
         Game.DeadPeople2 = TilesFactory.CreateTexture(imagesStorage.dead_people2)
+        Game.DungeonEnterTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_enter)
         Game.DungeonColumnLeftTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_column_left)
         Game.DungeonColumnMiddleTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_column_middle)
         Game.DungeonColumnRightTexture = TilesFactory.CreateTexture(imagesStorage.dungeon_column_right)
@@ -276,6 +281,7 @@ let Game = {
         Game.Garbage3 = TilesFactory.CreateTexture(imagesStorage.garbage3)
         Game.Garbage4 = TilesFactory.CreateTexture(imagesStorage.garbage4)
         Game.Garbage5 = TilesFactory.CreateTexture(imagesStorage.garbage5)
+        Game.GrassDirt = TilesFactory.CreateTexture(imagesStorage.grass_dirt)
         Game.GrassTexture1 = TilesFactory.CreateTexture(imagesStorage.grass1)
         Game.GrassTexture2 = TilesFactory.CreateTexture(imagesStorage.grass2)
         Game.GrassTexture3 = TilesFactory.CreateTexture(imagesStorage.grass3)
