@@ -164,6 +164,7 @@ class NavMesh {
             firsttriangle = undefined
             first = this.point[index]
             for (let i = 0; i < element.length; i++) {
+                //console.log(this.data)
                 for (let j = 0; j < this.data[element[i]].length; j++) {
                     if (this.data[element[i]][j] == last) {
                         third = element[i]
