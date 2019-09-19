@@ -648,7 +648,7 @@ class RoomFactory {
         }
         room.nav = RoomFactory.initNavMesh(testRoomSize, testRoomSize)
         console.log(room.nav)
-
+        //Mobs and inventory
         room.Add(TilesFactory.CreateStaticNPC(1100, 850, room.nav));
         room.Add(TilesFactory.CreateStaticNPC(1600, 925, room.nav));
         room.Add(TilesFactory.CreateStaticNPC(2350, 850, room.nav));
@@ -657,6 +657,15 @@ class RoomFactory {
         room.Add(TilesFactory.CreateStaticNPC2(2350, 2050, room.nav));
         room.Add(TilesFactory.CreateStaticNPC2(3550, 3300, room.nav));
         room.Add(TilesFactory.CreateStaticNPC(2000, 1700, room.nav));
+        room.Add(TilesFactory.CreateAttackBonus(890, 2470))
+        room.Add(TilesFactory.CreateHPBottle(2400, 2650))
+        room.Add(TilesFactory.CreateManaBottle(1160, 2880))
+        room.Add(TilesFactory.CreateHPBottle(3550, 2525))
+        room.Add(TilesFactory.CreateManaBottle(3600, 2525))
+        room.Add(TilesFactory.CreateManaBottle(4110, 2545))
+        room.Add(TilesFactory.CreateHPBottle(3820, 1700))
+        room.Add(TilesFactory.CreateHPBottle(1020, 2020))
+        room.Add(TilesFactory.CreateManaBottle(1350, 1200))
         room.addMap(17, 14,
             '         qwwe       qwwe                                                                 \n' +
             'qwwwwwwww2  1wwwwwww2  1wwwwwwwwwwe                                                                 \n' +
