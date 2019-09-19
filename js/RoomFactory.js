@@ -649,8 +649,13 @@ class RoomFactory {
         room.nav = RoomFactory.initNavMesh(testRoomSize, testRoomSize)
         console.log(room.nav)
 
-        room.Add(TilesFactory.CreateStaticNPC(1200, 1300, room.nav));
-        room.Add(TilesFactory.CreateStaticNPC2(1850, 2200, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(1100, 850, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(1600, 925, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(2350, 850, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(2850, 1380, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC2(1825, 2300, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC2(2350, 2050, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC2(3550, 3300, room.nav));
         room.Add(TilesFactory.CreateStaticNPC(2000, 1700, room.nav));
         room.addMap(17, 14,
             '         qwwe       qwwe                                                                 \n' +
