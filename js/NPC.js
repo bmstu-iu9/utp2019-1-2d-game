@@ -72,6 +72,7 @@ class NPC extends GameObject {
                     bonus=TilesFactory.CreateManaBottle(this.actor.centre.x,this.actor.centre.y)
                 }
                 if (bonus!==undefined) Game.currentWorld.currentRoom.Add(bonus)
+                Game.Last.play()
             }
             Game.currentWorld.currentRoom.delete(this)
         }

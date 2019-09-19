@@ -197,6 +197,7 @@ const sounds=[
     'FireballExplosion.wav',
     'FireballCast.wav',
     'BackgroundSound.mp3',
+    'Last.mp3',
 ]
 
 let Game = {
@@ -396,11 +397,13 @@ let Game = {
         Game.HitSound = soundStorage.HitSound
         Game.FireballCast = soundStorage.FireballCast
         Game.FireballExplosion = soundStorage.FireballExplosion
+        Game.Last = soundStorage.Last
         Game.HitSound.volume -= 0.9
         Game.HitSound.playbackRate = 0.85
         Game.FireballCast.volume -= 0.95
         Game.FireballExplosion.volume -= 0.95
         Game.FireballExplosion.playbackRate = 1.5
+        Game.Last.volume -= 0.95
         Game.camera = new Camera(canvas.width, canvas.height)
 
         Game.currentWorld = WorldFactory.CreateTestWorld()
