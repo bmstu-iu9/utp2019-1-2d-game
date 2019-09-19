@@ -113,6 +113,13 @@ class TilesFactory {
         return t
     }
 
+    static CreateStaticNPC2(x, y, nav) {
+        let t = TilesFactory.createNPC(x, y, 22, new DrawableObject("middleground", SpriteFactory.CreateGhostKnightSprite()))
+        t.manager = new AIManager(t, nav)
+        t.type = "staticNpc"
+        return t
+    }
+
     /**
      * Порождает и возвращает тайл по заданным игровым координатам
      * @param {Number} x

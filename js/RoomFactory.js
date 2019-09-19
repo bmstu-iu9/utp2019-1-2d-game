@@ -138,7 +138,7 @@ class RoomFactory {
             room.Add(TilesFactory.CreateFenOff(47.5, 61.5))
             room.drawFence7(47.5, 50, 0, 12)
             room.drawFence7(50.9, 50, 0, 9)
-            room.drawFen(31, 39.5, 18, 0)
+            room.drawFen(31, 39, 18, 0)
             room.Add(TilesFactory.CreateFenOff(30.5, 39))
             room.Add(TilesFactory.CreateFenOff(30.4, 45.6))
             room.drawFen(30.5, 46, 17, 0)
@@ -639,11 +639,6 @@ class RoomFactory {
             room.Add(TilesFactory.CreateBlood1(46.6, 18.3))
             room.Add(TilesFactory.CreateSkeleton3(22, 15.5))
             room.Add(TilesFactory.CreateLukeTile2(54.98, 26.8))
-
-            room.Add(TilesFactory.CreateHPBottle(1300,1250))
-            room.Add(TilesFactory.CreateManaBottle(1300,1200))
-            room.Add(TilesFactory.CreateAttackBonus(1400,1250))
-
             room.type = "roundedRoom"
             let player = TilesFactory.CreatePlayer(3925, 4450)
 
@@ -653,33 +648,15 @@ class RoomFactory {
         }
         room.nav = RoomFactory.initNavMesh(testRoomSize, testRoomSize)
         console.log(room.nav)
-        for (let i = 15; i < 16; i++) {
-            if (object === undefined) {
-                for (let j = 16; j < 17; j++) {
-                    let t = TilesFactory.CreateStaticNPC(j * 60, i * 60, room.nav);
-                    room.Add(t);
-                    // Следование за игроком
-                    // t.manager = new Object(t)
-                    // t.manager.update = () => {
-                    //     t.actor.update()
-                    //     t.actor.move(player.actor.position.sub(t.actor.position, new Vector2d).normalize().mul(2))
-                    //     t.hitbox.update(t.actor.centre)
-                    //     t.collisonSolveStrategy = 'move'
-                    //     t.walking = (t.actor.offset.x !== 0 || t.actor.offset.y !== 0)
-                    //     t.direction = t.actor.offset
-                    // }
-                }
-            }
-        }
 
-        // for (let i = 0; i < testRoomSize; i++) {
-        //     for (let j = 0; j < testRoomSize; j++) {
-        //         if (i === 1 || j === 1 || i === (testRoomSize - 3) || j === (testRoomSize - 3)) {
-        //             let t = TilesFactory.CreateDungeonWall(j * Game.tileWidth, i * Game.tileHeight);
-        //             room.Add(t);
-        //         }
-        //     }
-        // }
+        room.Add(TilesFactory.CreateStaticNPC(1100, 850, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(1600, 925, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(2350, 850, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(2850, 1380, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC2(1825, 2300, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC2(2350, 2050, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC2(3550, 3300, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(2000, 1700, room.nav));
         room.addMap(17, 14,
             '         qwwe       qwwe                                                                 \n' +
             'qwwwwwwww2  1wwwwwww2  1wwwwwwwwwwe                                                                 \n' +
