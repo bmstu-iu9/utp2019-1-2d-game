@@ -196,6 +196,5 @@ class RoomRenderer {
                 item.render();
             }
         }
-        room.nav.render()
     }
 }
