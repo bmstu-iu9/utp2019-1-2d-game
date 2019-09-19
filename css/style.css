@@ -1,26 +1,143 @@
 canvas {
-	position: absolute;
+    position: absolute;
     top: 0px;
     left: 0px;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 html {
-	position: absolute;
+    position: absolute;
     top: 0px;
     left: 0px;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
+
+@font-face {
+    font-family: joystix;
+    src: url(./joystix\ monospace.ttf);
+}
+
 body {
-	position: absolute;
+    position: absolute;
+    background-image: url(../resources/Wall.png);
+    background-repeat: repeat;
     top: 0px;
     left: 0px;
-	width: 100%;
+    width: 100%;
     height: 100%;
     margin: 0%;
-	overflow: hidden;
+    overflow: hidden;
+}
+
+.ModalContext {
+    display: none;
+}
+
+.Header {
+    text-align: center;
+    position: absolute;
+    width: auto;
+    font-family: joystix;
+    text-shadow: -1px 4px 0px #323345;
+    font-size: 60pt;
+    top: 30%;
+    left: 50%;
+    transform: translate(-45%, -80%);
+    color: #af3b3b;
+}
+
+.navigation {
+    list-style: none; /* Отключение отображения маркеров. */
+    position: absolute;
+    width: 20%;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navigation li {
+    margin-top: 25px; /* Отступ между блоками по высоте, необходимый для того чтобы пункты меню не сливались */
+    font-family: joystix; /* Тип шрифта пунктов меню */
+    font-size: 20px; /* Размер текста меню */
+}
+
+.navigation li a {
+    box-shadow: inset 0 -1em 0 -0.35em rgba(0, 0, 0, 0.17);
+    display: block; /* Изменение отображения на блочное для того, чтобы иметь возможность задать внутренние отступы.  */
+    padding: 10px 20px; /* Отступы внутри блоков. */
+    height: 35px;
+    background: #323345; /* Цвет блоков меню. */
+    color: #f6f2f2; /* Цвет текста в блоках меню. */
+    text-decoration: none; /* Устранение подчёркивания ссылок. */
+    position: relative; /* Это необходимо при использовании Internet Explorer 6 для того, чтобы ссылка по всей своей площади была «кликабельной». */
+}
+
+.navigation li a:hover {
+    background: #E77A11; /* Цвет фона при наведении курсора мыши */
+    transform: scale(1.05);
+}
+
+.back-bar {
+    float: left;
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 35px;
+    padding: 5px;
+    background: #323345;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.bar {
+    background: #c54;
+    height: 25px;
+    width: 100%;
+    position: relative;
+    transition: width .5s linear;
+}
+
+.mbar {
+    background: rgb(68, 93, 204);
+    height: 25px;
+    width: 100%;
+    position: relative;
+    transition: width .5s linear;
+}
+
+.playerBars {
+    overflow: hidden;
+    position: fixed;
+    width: 50%;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.playerBars li {
+    display: inline-block;
+    width: 49%;
+}
+
+.hpCount {
+    position: fixed;
+    left: 25%;
+    margin-top: 2.5px;
+    color: white;
+}
+
+.manaCount {
+    position: fixed;
+    left: 72.3%;
+    margin-top: 2.5px;
+    color: white;
 }

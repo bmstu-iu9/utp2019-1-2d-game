@@ -9,7 +9,7 @@ let ctx = canvas.getContext("2d", {alpha: false})
 
 let imagesStorage = {}
 let textureStorage = {}
-let soundStorage={}
+let soundStorage = {}
 
 let imagesSrc = [
     'angle_tent1.png',
@@ -192,7 +192,7 @@ let imagesSrc = [
     'ghost_knight.png'
 ];
 
-const sounds=[
+const sounds = [
     'HitSound.wav',
     'FireballExplosion.wav',
     'FireballCast.wav',
@@ -407,6 +407,7 @@ let Game = {
         Game.camera = new Camera(canvas.width, canvas.height)
 
         Game.currentWorld = WorldFactory.CreateTestWorld()
+        Game.barControler = new BarControler(Game.player)
         requestAnimationFrame(Game.Loop)
     },
 
@@ -424,6 +425,7 @@ let Game = {
         while (Game.dt > Game.step) {
             Game.dt -= Game.step
             Game.Update()
+            Game.barControler.update()
             Game.Collide();
             Game.camera.Update()
         }
@@ -452,5 +454,5 @@ let Game = {
 
 Game.InitConfig()
 ResourceLoader.setCallback(Game.InitLogic)
-ResourceLoader.loadSounds(soundStorage,sounds)
+ResourceLoader.loadSounds(soundStorage, sounds)
 ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc)
