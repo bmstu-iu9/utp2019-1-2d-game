@@ -35,6 +35,9 @@ class NPC extends GameObject {
             hitSound:new Sound(Game.HitSound),
             fireballCastSound:new Sound(Game.FireballCast),
             fireballExplosionSound:new Sound(Game.FireballExplosion),
+            update:function () {
+                this.fireballExplosionSound.update()
+            }
         }
     }
 
@@ -72,6 +75,7 @@ class NPC extends GameObject {
                     bonus=TilesFactory.CreateManaBottle(this.actor.centre.x,this.actor.centre.y)
                 }
                 if (bonus!==undefined) Game.currentWorld.currentRoom.Add(bonus)
+                Game.Last.play()
             }
             Game.currentWorld.currentRoom.delete(this)
         }

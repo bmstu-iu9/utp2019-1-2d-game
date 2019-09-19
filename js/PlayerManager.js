@@ -69,5 +69,6 @@ class PlayerManager {
 
         this.player.actor.update()
         this.player.actor.changePosition(this.Direction)
+        this.player.soundBoard.update()
     }
 }
