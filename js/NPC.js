@@ -141,8 +141,11 @@ class NPC extends GameObject {
             npc.statsManager = StatsManager.fromJSON(object.statsManager)
             Game.camera.focusOn(npc.actor)
             Game.player = npc
-        } else if (object.type === "staticNpc") {
-            npc = TilesFactory.CreateStaticNPC(0, 0,object.nav)
+        } else {
+            if (object.type === "staticNpc") {
+            npc = TilesFactory.CreateStaticNPC(0, 0, object.nav)
+            }
+            else npc = TilesFactory.CreateStaticNPC2(0, 0, object.nav)
             npc.id = object.id
             npc.actor = MovableActor.fromJSON(object.actor)
             npc.hitbox = Hitbox.fromJSON(object.hitbox)
@@ -154,7 +157,6 @@ class NPC extends GameObject {
             npc.manager.trianglePath.splice(0)
             object.manager.resultPath.forEach(vector => npc.manager.resultPath.push(Vector2d.fromJSON(vector)))
             object.manager.path.forEach(vector => npc.manager.path.push(Vector2d.fromJSON(vector)))
-          //  object.manager.trianglePath.forEach(triangle => npc.manager.trianglePath.push(Triangle.fromJSON(triangle)))
             npc.manager.agro = object.manager.agro
         }
 

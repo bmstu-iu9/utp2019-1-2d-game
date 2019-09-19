@@ -95,6 +95,21 @@ const SaveLoad = {
         }
      },
 
+     "staticNpc2" : (obj) => {
+         return {
+             id: obj.id,
+             actor: obj.actor,
+             drawable: obj.drawable,
+             hitbox: obj.hitbox,
+             direction: obj.direction,
+             collisonSolveStrategy: obj.collisonSolveStrategy,
+             walking: obj.walking,
+             type : obj.type,
+             statsManager : obj.statsManager,
+             manager : obj.manager
+         }
+     },
+
      "player" : (obj) => {
         return {
             id: obj.id,
