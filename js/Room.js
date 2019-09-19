@@ -586,13 +586,12 @@ class Room extends GameObject {
     static fromJSON(object) {
         let room = (object.type === "roundedRoom") ? RoomFactory.CreateRoundedRoom(object) : RoomFactory.CreateTestRoom(object)
         room.id = object.id
-
+        room.roomObjects.forEach(obj => room.delete(obj))
         room.height = object.height
         room.width = object.width
         room.type = object.type;
         for (let i in object.roomObjects.map) {
             if ("data" in object.roomObjects.map[i]) {
-                //room.Add(Spell.fromJSON(object.roomObjects.map[i]))
                      } else if ("direction" in object.roomObjects.map[i]) {
                 object.roomObjects.map[i].nav = room.nav
                 room.Add(NPC.fromJSON(object.roomObjects.map[i]))

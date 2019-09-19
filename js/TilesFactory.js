@@ -116,7 +116,7 @@ class TilesFactory {
     static CreateStaticNPC2(x, y, nav) {
         let t = TilesFactory.createNPC(x, y, 22, new DrawableObject("middleground", SpriteFactory.CreateGhostKnightSprite()))
         t.manager = new AIManager(t, nav)
-        t.type = "staticNpc"
+        t.type = "staticNpc2"
         return t
     }
 
