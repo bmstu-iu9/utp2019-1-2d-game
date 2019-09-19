@@ -35,6 +35,9 @@ class NPC extends GameObject {
             hitSound:new Sound(Game.HitSound),
             fireballCastSound:new Sound(Game.FireballCast),
             fireballExplosionSound:new Sound(Game.FireballExplosion),
+            update:function () {
+                this.fireballExplosionSound.update()
+            }
         }
     }
 

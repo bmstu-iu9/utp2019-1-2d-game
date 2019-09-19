@@ -39,7 +39,7 @@ class SpellFactory {
                 result.drawable.drowable.reset()
                 result.drawable.drowable.switch("explode")
             }
-            caster.soundBoard.fireballExplosionSound.play()
+            caster.soundBoard.fireballExplosionSound.play(caster.hitbox.getHitbox().centre,collision.obstacleObject.hitbox.getHitbox().centre)
         }
 
         result.drawable.drowable.switch("fly", vector)
