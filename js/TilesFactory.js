@@ -889,7 +889,7 @@ class TilesFactory {
          */
         first_aid_kit.onCollide=(collision)=>{
             if (collision.obstacleObject.manager && collision.obstacleObject.manager instanceof PlayerManager){
-                collision.obstacleObject.statsManager.gainAction(new Action(new Stats(0,50,0,0,0,0)))
+                collision.obstacleObject.statsManager.gainAction(new Action(new Stats(0,70,0,0,0,0)))
                 Game.currentWorld.currentRoom.delete(first_aid_kit)
             }
         }

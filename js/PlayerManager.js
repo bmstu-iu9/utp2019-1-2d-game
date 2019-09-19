@@ -14,6 +14,8 @@ class PlayerManager {
     }
 
     update() {
+        this.player.statsManager.stats.hp += 0.045;
+        this.player.statsManager.stats.mana += 0.06;
         let speed = this.player.statsManager.stats.speed
         let xDirection = 0
         let yDirection = 0

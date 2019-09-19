@@ -650,9 +650,10 @@ class RoomFactory {
         console.log(room.nav)
         //Mobs and inventory
         room.Add(TilesFactory.CreateStaticNPC(1100, 850, room.nav));
-        room.Add(TilesFactory.CreateStaticNPC(1600, 925, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(1690, 1100, room.nav));
         room.Add(TilesFactory.CreateStaticNPC(2350, 850, room.nav));
-        room.Add(TilesFactory.CreateStaticNPC(2850, 1380, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(2675, 1300, room.nav));
+        room.Add(TilesFactory.CreateStaticNPC(1200, 1750, room.nav));
         room.Add(TilesFactory.CreateStaticNPC2(1825, 2300, room.nav));
         room.Add(TilesFactory.CreateStaticNPC2(2350, 2050, room.nav));
         room.Add(TilesFactory.CreateStaticNPC2(3550, 3300, room.nav));
