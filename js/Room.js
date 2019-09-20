@@ -576,6 +576,7 @@ class Room extends GameObject {
     }
 
     toJSON() {
+        console.log(this.roomObjects)
         return Serializations[this.type](this)
     }
 

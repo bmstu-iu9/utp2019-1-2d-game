@@ -139,6 +139,7 @@ class NPC extends GameObject {
             npc.direction = Vector2d.fromJSON(object.direction)
             npc.collisonSolveStrategy = object.collisonSolveStrategy
             npc.statsManager = StatsManager.fromJSON(object.statsManager)
+            Game.barControler = new BarControler(npc)
             Game.camera.focusOn(npc.actor)
             Game.player = npc
         } else {
