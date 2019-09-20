@@ -94,7 +94,7 @@ class TilesFactory {
      * @param {Number} y
      */
     static CreatePlayer(x = 0, y = 0) {
-        let stats = new Stats(150, 200)
+        let stats = new Stats(125, 100,0.5,1,0.5,3.25)
         let player = TilesFactory.createNPC(x, y, 24, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()), stats);
         player.manager = new PlayerManager(player)
         player.type = "player"
@@ -110,6 +110,7 @@ class TilesFactory {
         let t = TilesFactory.createNPC(x, y, 22, new DrawableObject("middleground", SpriteFactory.CreateEnemySprite()))
         t.manager = new AIManager(t, nav)
         t.type = "staticNpc"
+        t.statsManager.stats.strenght=3
         return t
     }
 

@@ -11,11 +11,51 @@ class PlayerManager {
     constructor(player) {
         this.player = player
         this.Direction = new Vector2d(0, 0)
+        PlayerManager.progressHolder = class LevelManager {
+            constructor(){
+                this.level = 0
+                this.experience = 0
+                this.bound = 300
+                LevelManager.descriptor = {
+                    1:[150,150,1,1,1,3.75],
+                    2:[150,200,1.2,1,1,3.75],
+                    3:[175,225,1.5,1,1.1,3.75],
+                    4:[225,270,2,1,1.5,5]
+                }
+                this.order={
+                    0:'hp',
+                    1:'mana',
+                    2:'strength',
+                    3:'agility',
+                    4:'intelligence',
+                    5:'speed',
+                }
+            }
+
+            /**
+             *
+             * @param {NPC} npc
+             */
+            update(npc){
+                if (npc.type==='staticNpc') this.experience+=250
+                else this.experience+=100
+                if (this.bound<=this.experience){
+                    this.experience%=this.bound
+                    this.bound*=2
+                    this.level++
+                    for (let i=2;i<LevelManager.descriptor[this.level].length;i++){
+                        player.statsManager.stats[this.order[i]]=LevelManager.descriptor[this.level][i]
+                    }
+                    player.statsManager.changeLimits(LevelManager.descriptor[this.level][0],LevelManager.descriptor[this.level][1])
+                }
+            }
+        }
+        PlayerManager.levelManager=new PlayerManager.progressHolder()
     }
 
     update() {
-        this.player.statsManager.stats.hp += 0.045;
-        this.player.statsManager.stats.mana += 0.06;
+        this.player.statsManager.stats.hp += 0.05*this.player.statsManager.stats.strenght;
+        this.player.statsManager.stats.mana += 0.05*this.player.statsManager.stats.intelligence;
         let speed = this.player.statsManager.stats.speed
         let xDirection = 0
         let yDirection = 0
@@ -64,7 +104,6 @@ class PlayerManager {
         }
 
         if (mouse.isLeftClicked) {
-          console.log(~~(this.player.actor.position.x/Game.tileWidth),~~(this.player.actor.position.y/Game.tileHeight));
             if (this.player.abilities[2].cast(vector))
                 this.player.state=STATE.attack
         }
