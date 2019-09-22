@@ -11,10 +11,12 @@ class BarControler {
         this.player = player
         this.hp = player.statsManager.hpLimit
         this.mana = player.statsManager.manaLimit
+        this.hpCount = document.getElementById("hp")
+        this.manaCount = document.getElementById("mana")
         this.hpBar.setAttribute("data-total", String(this.player.statsManager.hpLimit))
         this.manaBar.setAttribute("data-total", String(this.player.statsManager.manaLimit))
-        this.hpBar.innerHTML = "<a class='hpCount'><b>" + ~~(this.hp) + "/" + this.player.statsManager.hpLimit + "</b></a>"
-        this.manaBar.innerHTML = "<a class='manaCount'><b>" + ~~(this.mana) + "/" + this.player.statsManager.manaLimit + "</b></a>"
+        this.hpCount.innerText = ~~(this.hp) + "/" + this.player.statsManager.hpLimit
+        this.manaCount.innerText = ~~(this.mana) + "/" + this.player.statsManager.manaLimit
     }
 
     /**
@@ -53,12 +55,12 @@ class BarControler {
         if (this.hp !== this.player.statsManager.stats.hp) {
             this.hp = this.player.statsManager.stats.hp
             this.setHp(this.player.statsManager.stats.hp)
-            this.hpBar.innerHTML = "<a class='hpCount'><b>" + ~~(this.hp) + "/" + this.player.statsManager.hpLimit + "</b></a>"
+            this.hpCount.innerText = ~~(this.hp) + "/" + this.player.statsManager.hpLimit
         }
         if (this.mana !== this.player.statsManager.stats.mana) {
             this.mana = this.player.statsManager.stats.mana
             this.setMana(this.player.statsManager.stats.mana)
-            this.manaBar.innerHTML = "<a class='manaCount'><b>" + ~~(this.mana) + "/" + this.player.statsManager.manaLimit + "</b></a>"
+            this.manaCount.innerText = ~~(this.mana) + "/" + this.player.statsManager.manaLimit
         }
     }
 }
