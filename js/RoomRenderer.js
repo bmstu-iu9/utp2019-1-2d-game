@@ -109,6 +109,9 @@ class RoomRenderer {
         res.x = Math.max(obj.x, obj_b.x);
         res.y1 = Math.min(obj.y1, obj_b.y1);
         res.x1 = Math.min(obj.x1, obj_b.x1);
+        if (Math.abs(res.y - res.y1) === 0 ||
+            Math.abs(res.x - res.x1) === 0)
+            return undefined
         return res;
     }
 
@@ -152,31 +155,31 @@ class RoomRenderer {
         // non StaticObjects rendering
         for (let i = leftTop[0]; i < rightBot[0]; i++) {
             for (let j = leftTop[1]; j < rightBot[1]; j++) {
-                let drowableMap = room.middlegroundTiles[j][i];
+                const drowableMap = room.middlegroundTiles[j][i];
                 drowableMap.forEach((key) => {
                     if (!(key instanceof StaticObject)) {
                         if (this.inCamera(key)) {
                             this.sortArray.add(key);
                             for (let u = Math.max(i - ~~(this.margin), 0); u < i + ~~(this.margin / 2) + 1; u++) {
                                 for (let v = j - this.margin; v < j + this.margin + 1; v++) {
-                                    let drMap = room.middlegroundTiles[v][u];
+                                    const drMap = room.middlegroundTiles[v][u];
                                     drMap.forEach((key1) => {
-                                        if (key1 instanceof StaticObject) {
-                                            if (this.isIntersect(key, key1)) {
-                                                this.sortArray.add(new RenderTask(key1, this.calcIntersection(
-                                                    {
-                                                        x: key.actor.position.x,
-                                                        y: key.actor.position.y,
-                                                        x1: key.actor.position.x + key.drawable.drowable.width,
-                                                        y1: key.actor.position.y + key.drawable.drowable.height,
-                                                    },
-                                                    {
-                                                        x: key1.actor.position.x,
-                                                        y: key1.actor.position.y,
-                                                        x1: key1.actor.position.x + key1.drawable.drowable.width,
-                                                        y1: key1.actor.position.y + key1.drawable.drowable.height,
-                                                    })));
-                                            }
+                                        if (key1 instanceof StaticObject && this.isIntersect(key, key1)) {
+                                            const drawRect = this.calcIntersection(
+                                                {
+                                                    x: key.actor.position.x,
+                                                    y: key.actor.position.y,
+                                                    x1: key.actor.position.x + key.drawable.drowable.width,
+                                                    y1: key.actor.position.y + key.drawable.drowable.height,
+                                                },
+                                                {
+                                                    x: key1.actor.position.x,
+                                                    y: key1.actor.position.y,
+                                                    x1: key1.actor.position.x + key1.drawable.drowable.width,
+                                                    y1: key1.actor.position.y + key1.drawable.drowable.height,
+                                                });
+                                            if (drawRect)
+                                                this.sortArray.add(new RenderTask(key1, drawRect));
                                         }
                                     });
                                 }
