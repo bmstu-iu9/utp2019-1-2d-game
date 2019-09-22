@@ -437,6 +437,8 @@ let Game = {
             SaveLoad.save()
         if (keyboard.KeyX === true)
             SaveLoad.load()
+        if (keyboard.Escape === true)
+            document.getElementById("exitDialog").style.display = 'block'
     },
 
     Update() {
