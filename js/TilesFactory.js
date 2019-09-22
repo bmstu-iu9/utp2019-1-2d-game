@@ -129,13 +129,13 @@ class TilesFactory {
      static CreateAngleTent1(x = 0, y = 0) {
        x = x * Game.tileWidth
        y = y * Game.tileHeight
-         return TilesFactory.createTile(x, y, ~~(Game.AngleTentTexture1.width / 2), ~~(Game.AngleTentTexture1.height / 5), new DrawableObject("middleground", Game.AngleTentTexture1), "Bot")
+         return TilesFactory.createTile(x, y, ~~(Game.AngleTentTexture1.width / 2.05), ~~(Game.AngleTentTexture1.height / 5), new DrawableObject("middleground", Game.AngleTentTexture1), "Bot")
      }
 
      static CreateAngleTent2(x = 0, y = 0) {
         x = x * Game.tileWidth
         y = y * Game.tileHeight
-         return TilesFactory.createTile(x, y, ~~(Game.AngleTentTexture2.width / 2), ~~(Game.AngleTentTexture2.height / 5), new DrawableObject("middleground", Game.AngleTentTexture2), "Bot")
+         return TilesFactory.createTile(x, y, ~~(Game.AngleTentTexture2.width / 2.05), ~~(Game.AngleTentTexture2.height / 5), new DrawableObject("middleground", Game.AngleTentTexture2), "Bot")
      }
 
     static CreateBigBirch(x = 0, y = 0) {
@@ -226,6 +226,35 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, ~~(Game.Cart5.width / 1.8), ~~(Game.Cart5.height / 3.8), new DrawableObject("middleground", Game.Cart5), "Bot")
     }
 
+    static CreateCarta(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, (Game.Carta.width / 1.5), (Game.Carta.height / 3), new DrawableObject("middleground", Game.Carta), "Bot")
+    }
+
+    static CreateCart2a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.Cart2a.width, (Game.Cart2a.height / 3), new DrawableObject("middleground", Game.Cart2a), "Bot")
+    }
+
+    static CreateCart3a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, (Game.Cart3a.width / 2), (Game.Cart3a.height / 3), new DrawableObject("middleground", Game.Cart3a), "Bot")
+    }
+
+    static CreateCart4a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, (Game.Cart4a.width / 1.5), (Game.Cart4a.height / 4.5), new DrawableObject("middleground", Game.Cart4a), "Center")
+    }
+
+    static CreateCart5a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, (Game.Cart5a.width / 1.8), ~~(Game.Cart5a.height / 3.8), new DrawableObject("middleground", Game.Cart5a), "Bot")
+    }
     static CreateCastle(x = 0, y = 0) {
         x = x * Game.tileWidth
         y = y * Game.tileHeight
@@ -258,32 +287,88 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, ~~(Game.Circle.width / 5), ~~(Game.Circle.height / 5), new DrawableObject("middleground", Game.Circle), "Bot")
     }
 
-    static CreateDeadWood1(x = 0, y = 0) {
-        return TilesFactory.createTile(x, y, Game.DeadWood1Texture.width, ~~(Game.DeadWood1Texture.height / 4), new DrawableObject("middleground", Game.DeadWood1Texture), "Bot")
+   static CreateDeadWood1(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood1Texture.width, (Game.DeadWood1Texture.height / 4), new DrawableObject("middleground", Game.DeadWood1Texture), "Bot")
     }
 
     static CreateDeadWood2(x = 0, y = 0) {
-        return TilesFactory.createTile(x, y, Game.DeadWood2Texture.width, ~~(Game.DeadWood2Texture.height / 4), new DrawableObject("middleground", Game.DeadWood2Texture), "Bot")
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood2Texture.width, (Game.DeadWood2Texture.height / 4), new DrawableObject("middleground", Game.DeadWood2Texture), "Bot")
     }
 
     static CreateDeadWood3(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
         return TilesFactory.createTile(x, y, Game.DeadWood3Texture.width, ~~(Game.DeadWood3Texture.height / 4), new DrawableObject("middleground", Game.DeadWood3Texture), "Bot")
     }
 
     static CreateDeadWood4(x = 0, y = 0) {
-        return TilesFactory.createTile(x, y, Game.DeadWood4Texture.width, ~~(Game.DeadWood4Texture.height / 4), new DrawableObject("middleground", Game.DeadWood4Texture), "Bot")
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood4Texture.width, (Game.DeadWood4Texture.height / 4), new DrawableObject("middleground", Game.DeadWood4Texture), "Bot")
     }
 
     static CreateDeadWood5(x = 0, y = 0) {
-        return TilesFactory.createTile(x, y, Game.DeadWood5Texture.width, ~~(Game.DeadWood5Texture.height / 4), new DrawableObject("middleground", Game.DeadWood5Texture), "Bot")
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood5Texture.width, (Game.DeadWood5Texture.height / 4), new DrawableObject("middleground", Game.DeadWood5Texture), "Bot")
     }
 
     static CreateDeadWood6(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
         return TilesFactory.createTile(x, y, Game.DeadWood6Texture.width, ~~(Game.DeadWood6Texture.height / 4), new DrawableObject("middleground", Game.DeadWood6Texture), "Bot")
     }
 
     static CreateDeadWood7(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
         return TilesFactory.createTile(x, y, Game.DeadWood7Texture.width, ~~(Game.DeadWood7Texture.height / 4), new DrawableObject("middleground", Game.DeadWood7Texture), "Bot")
+    }
+
+    static CreateDeadWood1a(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood1Texturea.width, (Game.DeadWood1Texturea.height / 4), new DrawableObject("middleground", Game.DeadWood1Texturea), "Bot")
+    }
+
+    static CreateDeadWood2a(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood2Texturea.width, (Game.DeadWood2Texturea.height / 4), new DrawableObject("middleground", Game.DeadWood2Texturea), "Bot")
+    }
+
+    static CreateDeadWood3a(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood3Texturea.width, ~~(Game.DeadWood3Texturea.height / 4), new DrawableObject("middleground", Game.DeadWood3Texturea), "Bot")
+    }
+
+    static CreateDeadWood4a(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood4Texturea.width, (Game.DeadWood4Texturea.height / 4), new DrawableObject("middleground", Game.DeadWood4Texturea), "Bot")
+    }
+
+    static CreateDeadWood5a(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood5Texturea.width, (Game.DeadWood5Texturea.height / 4), new DrawableObject("middleground", Game.DeadWood5Texturea), "Bot")
+    }
+
+    static CreateDeadWood6a(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood6Texturea.width, ~~(Game.DeadWood6Texturea.height / 4), new DrawableObject("middleground", Game.DeadWood6Texturea), "Bot")
+    }
+
+    static CreateDeadWood7a(x = 0, y = 0) {
+      x = x * Game.tileWidth
+      y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.DeadWood7Texturea.width, ~~(Game.DeadWood7Texturea.height / 4), new DrawableObject("middleground", Game.DeadWood7Texturea), "Bot")
     }
 
     static CreateDeadNpc1(x = 0, y = 0) {
@@ -638,6 +723,30 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, Game.RocksTexture4.width, ~~(Game.RocksTexture4.height / 3), new DrawableObject("middleground", Game.RocksTexture4), "Bot")
     }
 
+    static CreateRocks1a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.RocksTexture1a.width, (Game.RocksTexture1a.height / 3), new DrawableObject("middleground", Game.RocksTexture1a), "Bot")
+    }
+
+    static CreateRocks2a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.RocksTexture2a.width, (Game.RocksTexture2a.height / 3), new DrawableObject("middleground", Game.RocksTexture2a), "Bot")
+    }
+
+    static CreateRocks3a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.RocksTexture3a.width, (Game.RocksTexture3a.height / 3), new DrawableObject("middleground", Game.RocksTexture3a), "Bot")
+    }
+
+    static CreateRocks4a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.RocksTexture4a.width, (Game.RocksTexture4a.height / 3), new DrawableObject("middleground", Game.RocksTexture4a), "Bot")
+    }
+
     static CreateSmallBirch(x = 0, y = 0) {
         return TilesFactory.createTile(x, y, ~~(Game.SmallBirchTexture.width / 3), ~~(Game.SmallBirchTexture.height / 4), new DrawableObject("middleground", Game.SmallBirchTexture), "Bot")
     }
@@ -726,6 +835,42 @@ class TilesFactory {
         return TilesFactory.createTile(x, y, ~~(Game.Tent4.width), ~~(Game.Tent4.height / 4), new DrawableObject("middleground", Game.Tent4), "Bot")
     }
 
+    static CreateTent1a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, (Game.Tent1a.width), (Game.Tent1a.height / 4), new DrawableObject("middleground", Game.Tent1a), "Bot")
+    }
+
+    static CreateTent2a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, (Game.Tent2a.width), (Game.Tent2a.height / 4), new DrawableObject("middleground", Game.Tent2a), "Bot")
+    }
+
+    static CreateTent3a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, (Game.Tent3a.width), (Game.Tent3a.height / 4), new DrawableObject("middleground", Game.Tent3a), "Bot")
+    }
+
+    static CreateTent4a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, (Game.Tent4a.width), (Game.Tent4a.height / 4), new DrawableObject("middleground", Game.Tent4a), "Bot")
+    }
+
+    static CreateTombstone1(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture1.width, (Game.TombstoneTexture1.height / 4), new DrawableObject("middleground", Game.TombstoneTexture1), "Bot")
+    }
+
+    static CreateTombstone2(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture2.width, (Game.TombstoneTexture2.height / 4), new DrawableObject("middleground", Game.TombstoneTexture2), "Bot")
+    }
+
     static CreateTombstone3(x = 0, y = 0) {
         x = x * Game.tileWidth
         y = y * Game.tileHeight
@@ -778,6 +923,72 @@ class TilesFactory {
         x = x * Game.tileWidth
         y = y * Game.tileHeight
         return TilesFactory.createTile(x, y, Game.TombstoneTexture11.width, ~~(Game.TombstoneTexture11.height / 4), new DrawableObject("middleground", Game.TombstoneTexture11), "Bot")
+    }
+
+    static CreateTombstone1a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture1a.width, (Game.TombstoneTexture1a.height / 4), new DrawableObject("middleground", Game.TombstoneTexture1a), "Bot")
+    }
+
+    static CreateTombstone2a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture2a.width, (Game.TombstoneTexture2a.height / 4), new DrawableObject("middleground", Game.TombstoneTexture2a), "Bot")
+    }
+
+    static CreateTombstone3a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture3a.width, ~~(Game.TombstoneTexture3a.height / 4), new DrawableObject("middleground", Game.TombstoneTexture3a), "Bot")
+    }
+
+    static CreateTombstone4a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture4a.width, (Game.TombstoneTexture4a.height / 3), new DrawableObject("middleground", Game.TombstoneTexture4a), "Bot")
+    }
+
+    static CreateTombstone5a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture5a.width, (Game.TombstoneTexture5a.height / 4), new DrawableObject("middleground", Game.TombstoneTexture5a), "Bot")
+    }
+
+    static CreateTombstone6a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture6a.width, ~~(Game.TombstoneTexture6a.height / 2.75), new DrawableObject("middleground", Game.TombstoneTexture6a), "Bot")
+    }
+
+    static CreateTombstone7a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture7a.width, (Game.TombstoneTexture7a.height / 4), new DrawableObject("middleground", Game.TombstoneTexture7a), "Bot")
+    }
+
+    static CreateTombstone8a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture8a.width, (Game.TombstoneTexture8a.height / 4), new DrawableObject("middleground", Game.TombstoneTexture8a), "Bot")
+    }
+
+    static CreateTombstone9a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, (Game.TombstoneTexture9a.width / 2), (Game.TombstoneTexture9a.height / 4), new DrawableObject("middleground", Game.TombstoneTexture9a), "Bot")
+    }
+
+    static CreateTombstone10a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture10a.width, (Game.TombstoneTexture10a.height / 4), new DrawableObject("middleground", Game.TombstoneTexture10a), "Bot")
+    }
+
+    static CreateTombstone11a(x = 0, y = 0) {
+        x = x * Game.tileWidth
+        y = y * Game.tileHeight
+        return TilesFactory.createTile(x, y, Game.TombstoneTexture11a.width, (Game.TombstoneTexture11a.height / 4), new DrawableObject("middleground", Game.TombstoneTexture11a), "Bot")
     }
 
     static CreateTree(x = 0, y = 0) {

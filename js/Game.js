@@ -34,6 +34,11 @@ let imagesSrc = [
     'cart3.png',
     'cart4.png',
     'cart5.png',
+    'carta.png',
+    'cart2a.png',
+    'cart3a.png',
+    'cart4a.png',
+    'cart5a.png',
     'castle.png',
     'cave_enter.png',
     'circle.png',
@@ -46,6 +51,13 @@ let imagesSrc = [
     'deadwood5.png',
     'deadwood6.png',
     'deadwood7.png',
+    'deadwood1a.png',
+    'deadwood2a.png',
+    'deadwood3a.png',
+    'deadwood4a.png',
+    'deadwood5a.png',
+    'deadwood6a.png',
+    'deadwood7a.png',
     'dead_npc1.png',
     'dead_npc2.png',
     'dirtB1.png',
@@ -137,6 +149,10 @@ let imagesSrc = [
     'rocks2.png',
     'rocks3.png',
     'rocks4.png',
+    'rocks1a.png',
+    'rocks2a.png',
+    'rocks3a.png',
+    'rocks4a.png',
     'shop.png',
     'shed.png',
     'skeleton1.png',
@@ -152,6 +168,10 @@ let imagesSrc = [
     'tent2.png',
     'tent3.png',
     'tent4.png',
+    'tent1a.png',
+    'tent2a.png',
+    'tent3a.png',
+    'tent4a.png',
     'tomb.png',
     'tomb2.png',
     'tombstone1.png',
@@ -165,6 +185,17 @@ let imagesSrc = [
     'tombstone9.png',
     'tombstone10.png',
     'tombstone11.png',
+    'tombstone1a.png',
+    'tombstone2a.png',
+    'tombstone3a.png',
+    'tombstone4a.png',
+    'tombstone5a.png',
+    'tombstone6a.png',
+    'tombstone7a.png',
+    'tombstone8a.png',
+    'tombstone9a.png',
+    'tombstone10a.png',
+    'tombstone11a.png',
     'tree.png',
     'trap.png',
     'trap2.png',
@@ -237,6 +268,11 @@ let Game = {
         Game.Cart3 = TilesFactory.CreateTexture(imagesStorage.cart3)
         Game.Cart4 = TilesFactory.CreateTexture(imagesStorage.cart4)
         Game.Cart5 = TilesFactory.CreateTexture(imagesStorage.cart5)
+        Game.Carta = TilesFactory.CreateTexture(imagesStorage.carta)
+        Game.Cart2a = TilesFactory.CreateTexture(imagesStorage.cart2a)
+        Game.Cart3a = TilesFactory.CreateTexture(imagesStorage.cart3a)
+        Game.Cart4a = TilesFactory.CreateTexture(imagesStorage.cart4a)
+        Game.Cart5a = TilesFactory.CreateTexture(imagesStorage.cart5a)
         Game.Castle = TilesFactory.CreateTexture(imagesStorage.castle)
         Game.CaveEnterTexture = TilesFactory.CreateTexture(imagesStorage.cave_enter)
         Game.Column = TilesFactory.CreateTexture(imagesStorage.column)
@@ -249,6 +285,13 @@ let Game = {
         Game.DeadWood5Texture = TilesFactory.CreateTexture(imagesStorage.deadwood5)
         Game.DeadWood6Texture = TilesFactory.CreateTexture(imagesStorage.deadwood6)
         Game.DeadWood7Texture = TilesFactory.CreateTexture(imagesStorage.deadwood7)
+        Game.DeadWood1Texturea = TilesFactory.CreateTexture(imagesStorage.deadwood1a)
+        Game.DeadWood2Texturea = TilesFactory.CreateTexture(imagesStorage.deadwood2a)
+        Game.DeadWood3Texturea = TilesFactory.CreateTexture(imagesStorage.deadwood3a)
+        Game.DeadWood4Texturea = TilesFactory.CreateTexture(imagesStorage.deadwood4a)
+        Game.DeadWood5Texturea = TilesFactory.CreateTexture(imagesStorage.deadwood5a)
+        Game.DeadWood6Texturea = TilesFactory.CreateTexture(imagesStorage.deadwood6a)
+        Game.DeadWood7Texturea = TilesFactory.CreateTexture(imagesStorage.deadwood7a)
         Game.DeadDirt = TilesFactory.CreateTexture(imagesStorage.dead_dirt)
         Game.DeadNpc1 = TilesFactory.CreateTexture(imagesStorage.dead_npc1)
         Game.DeadNpc2 = TilesFactory.CreateTexture(imagesStorage.dead_npc2)
@@ -336,6 +379,10 @@ let Game = {
         Game.RocksTexture2 = TilesFactory.CreateTexture(imagesStorage.rocks2)
         Game.RocksTexture3 = TilesFactory.CreateTexture(imagesStorage.rocks3)
         Game.RocksTexture4 = TilesFactory.CreateTexture(imagesStorage.rocks4)
+        Game.RocksTexture1a = TilesFactory.CreateTexture(imagesStorage.rocks1a)
+        Game.RocksTexture2a = TilesFactory.CreateTexture(imagesStorage.rocks2a)
+        Game.RocksTexture3a = TilesFactory.CreateTexture(imagesStorage.rocks3a)
+        Game.RocksTexture4a = TilesFactory.CreateTexture(imagesStorage.rocks4a)
         Game.Shed = TilesFactory.CreateTexture(imagesStorage.shed)
         Game.Shop = TilesFactory.CreateTexture(imagesStorage.shop)
         Game.Skeleton1 = TilesFactory.CreateTexture(imagesStorage.skeleton1)
@@ -351,6 +398,10 @@ let Game = {
         Game.Tent2 = TilesFactory.CreateTexture(imagesStorage.tent2)
         Game.Tent3 = TilesFactory.CreateTexture(imagesStorage.tent3)
         Game.Tent4 = TilesFactory.CreateTexture(imagesStorage.tent4)
+        Game.Tent1a = TilesFactory.CreateTexture(imagesStorage.tent1a)
+        Game.Tent2a = TilesFactory.CreateTexture(imagesStorage.tent2a)
+        Game.Tent3a = TilesFactory.CreateTexture(imagesStorage.tent3a)
+        Game.Tent4a = TilesFactory.CreateTexture(imagesStorage.tent4a)
         Game.Tomb1 = TilesFactory.CreateTexture(imagesStorage.tomb)
         Game.Tomb2 = TilesFactory.CreateTexture(imagesStorage.tomb2)
         Game.TombstoneTexture1 = TilesFactory.CreateTexture(imagesStorage.tombstone1)
@@ -364,6 +415,17 @@ let Game = {
         Game.TombstoneTexture9 = TilesFactory.CreateTexture(imagesStorage.tombstone9)
         Game.TombstoneTexture10 = TilesFactory.CreateTexture(imagesStorage.tombstone10)
         Game.TombstoneTexture11 = TilesFactory.CreateTexture(imagesStorage.tombstone11)
+        Game.TombstoneTexture1a = TilesFactory.CreateTexture(imagesStorage.tombstone1a)
+        Game.TombstoneTexture2a = TilesFactory.CreateTexture(imagesStorage.tombstone2a)
+        Game.TombstoneTexture3a = TilesFactory.CreateTexture(imagesStorage.tombstone3a)
+        Game.TombstoneTexture4a = TilesFactory.CreateTexture(imagesStorage.tombstone4a)
+        Game.TombstoneTexture5a = TilesFactory.CreateTexture(imagesStorage.tombstone5a)
+        Game.TombstoneTexture6a = TilesFactory.CreateTexture(imagesStorage.tombstone6a)
+        Game.TombstoneTexture7a = TilesFactory.CreateTexture(imagesStorage.tombstone7a)
+        Game.TombstoneTexture8a = TilesFactory.CreateTexture(imagesStorage.tombstone8a)
+        Game.TombstoneTexture9a = TilesFactory.CreateTexture(imagesStorage.tombstone9a)
+        Game.TombstoneTexture10a = TilesFactory.CreateTexture(imagesStorage.tombstone10a)
+        Game.TombstoneTexture11a = TilesFactory.CreateTexture(imagesStorage.tombstone11a)
         Game.TreeTexture = TilesFactory.CreateTexture(imagesStorage.tree)
         Game.Trap = TilesFactory.CreateTexture(imagesStorage.trap)
         Game.Trap2 = TilesFactory.CreateTexture(imagesStorage.trap2)
