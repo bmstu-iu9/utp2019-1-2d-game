@@ -16,7 +16,7 @@ class Room extends GameObject {
         this.updatableObjects = new HashMap()
         this.backgroundTiles = new Array(height).fill().map(x => new Array(width))
         this.movedObjects = []
-        this.middlegroundTiles = new Array(height).fill().map(() => new Array(width).fill().map(y => new HashMap))
+        this.middlegroundTiles = new Array(height).fill().map(() => new Array(width).fill().map(() => new HashMap))
         this.foregroundTiles = new Array(height).fill().map(() => new Array(width))
         this.rnd = Game.roomRnd;
         this.manager = new RoomManager(this);

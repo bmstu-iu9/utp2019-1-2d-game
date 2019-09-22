@@ -189,7 +189,8 @@ let imagesSrc = [
     'ManaBottle.png',
     'Sword.png',
     'enemy_knight.png',
-    'ghost_knight.png'
+    'ghost_knight.png',
+    'Levelup.png'
 ];
 
 const sounds = [
@@ -386,6 +387,7 @@ let Game = {
         Game.HPBottle = TilesFactory.CreateTexture(imagesStorage.HPBottle)
         Game.ManaBottle = TilesFactory.CreateTexture(imagesStorage.ManaBottle)
         Game.Sword = TilesFactory.CreateTexture(imagesStorage.Sword)
+        Game.Levelup = TilesFactory.CreateTexture(imagesStorage.Levelup)
         Game.GhostBox = BoxFactory.CreateKnightBox()
         Game.EnemyKnightBox = BoxFactory.CreateEnemyKnightBox()
         Game.GhostKnightBox = BoxFactory.CreateGhostKnightBox()

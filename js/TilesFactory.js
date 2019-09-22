@@ -94,7 +94,7 @@ class TilesFactory {
      * @param {Number} y
      */
     static CreatePlayer(x = 0, y = 0) {
-        let stats = new Stats(125, 100,0.5,1,0.5,3.25)
+        let stats = new Stats(150, 100,0.75,1,0.5,3.25)
         let player = TilesFactory.createNPC(x, y, 24, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()), stats);
         player.manager = new PlayerManager(player)
         player.type = "player"
@@ -110,7 +110,7 @@ class TilesFactory {
         let t = TilesFactory.createNPC(x, y, 22, new DrawableObject("middleground", SpriteFactory.CreateEnemySprite()))
         t.manager = new AIManager(t, nav)
         t.type = "staticNpc"
-        t.statsManager.stats.strenght=3
+        t.statsManager.stats.strenght=1.5
         return t
     }
 
@@ -906,7 +906,7 @@ class TilesFactory {
          */
         sword.onCollide=(collision)=>{
             if (collision.obstacleObject.manager && collision.obstacleObject.manager instanceof PlayerManager){
-                let effect=new Effect(2)
+                let effect=new Effect(10)
                 effect.prevStat=collision.obstacleObject.statsManager.stats.strenght
                 /**
                  * @param {StatsManager} statsManager
@@ -923,6 +923,28 @@ class TilesFactory {
             }
         }
         return sword
+    }
+
+    /**
+     *
+     * @param {NPC} mob
+     * @constructor
+     */
+    static CreateLevelUpIcon(mob){
+        const x=mob.hitbox.getHitbox().centre.x-30
+        const y=mob.hitbox.getHitbox().centre.y-90
+        let icon=TilesFactory.createNPC(x,y,0,new DrawableObject("middleground",Game.Levelup),)
+        icon.remainTime=1
+        icon.collisonSolveStrategy='none'
+        icon.Update=function () {
+            this.remainTime-=Game.step
+            if (this.remainTime<=0){
+                Game.currentWorld.currentRoom.delete(icon)
+            }
+            this.actor.update()
+            this.actor.changePosition(new Vector2d(0,-1))
+        }
+        Game.currentWorld.currentRoom.Add(icon)
     }
 
 

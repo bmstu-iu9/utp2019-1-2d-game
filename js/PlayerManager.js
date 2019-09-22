@@ -15,10 +15,10 @@ class PlayerManager {
             constructor(){
                 this.level = 0
                 this.experience = 0
-                this.bound = 300
+                this.bound = 100
                 LevelManager.descriptor = {
-                    1:[150,150,1,1,1,3.75],
-                    2:[150,200,1.2,1,1,3.75],
+                    1:[150,150,1,1,1,3.5],
+                    2:[175,200,1.2,1,1,3.75],
                     3:[175,225,1.5,1,1.1,3.75],
                     4:[225,270,2,1,1.5,5]
                 }
@@ -40,6 +40,7 @@ class PlayerManager {
                 if (npc.type==='staticNpc') this.experience+=250
                 else this.experience+=100
                 if (this.bound<=this.experience){
+                    TilesFactory.CreateLevelUpIcon(player)
                     this.experience%=this.bound
                     this.bound*=2
                     this.level++
