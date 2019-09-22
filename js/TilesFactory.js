@@ -877,12 +877,14 @@ class TilesFactory {
                 Game.currentWorld.currentRoom.delete(first_aid_kit)
             }
         }
+        first_aid_kit.type = "hpBottle"
         return first_aid_kit
     }
 
     static CreateManaBottle(x=0,y=0){
         let first_aid_kit=TilesFactory.createMovableObj(x,y,Game.ManaBottle.width,~~(Game.ManaBottle.height/2),new DrawableObject("middleground",Game.ManaBottle),"Bot")
         first_aid_kit.collisonSolveStrategy='hit'
+        first_aid_kit.type = "manaBottle"
         /**
          *
          * @param {Collision} collision
@@ -921,6 +923,7 @@ class TilesFactory {
                 Game.currentWorld.currentRoom.delete(sword)
             }
         }
+        sword.type = "sword"
         return sword
     }
 
