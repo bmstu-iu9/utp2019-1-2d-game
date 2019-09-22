@@ -39,31 +39,31 @@ class MovableObject extends GameObject {
         this.actor = new Actor(new Vector2d(x, y), new Vector2d(xcentre, ycentre))
         this.drawable = drawable
         this.collisonSolveStrategy = "stay"
-        this.type = "staticObject"
+        this.type = "movableObject"
     }
 
     render() {
         this.drawable.render()
     }
 
-    toJSON(){
+    toJSON() {
         return Serializations[this.type](this)
     }
 
     /**
      *
-     * @param {StaticObject} object
+     * @param {MovableObject} object
      */
-    static fromJSON(object){
-        let staticObject = new StaticObject(object.actor.position.x,object.actor.position.y,
-            object.actor.centre.x,object.actor.centre.y,
-            DrawableObject.fromJSON(object.drawable),object.id)
-        staticObject.collisonSolveStrategy = object.collisonSolveStrategy
-        if ("hitbox" in object) {
-            staticObject.hitbox = ("name" in object.hitbox) ? Hitbox.fromJSON(object.hitbox) : ("radius" in object.hitbox)
+    static fromJSON(object) {
+        let movableObject = new MovableObject(object.actor.position.x, object.actor.position.y, object.actor.centre.x,
+            object.actor.centre.y,
+            DrawableObject.fromJSON(object.drawable), object.id)
+        movableObject.collisonSolveStrategy = object.collisonSolveStrategy
+            if ("hitbox" in object) {
+            movableObject.hitbox = ("name" in object.hitbox) ? Hitbox.fromJSON(object.hitbox) : ("radius" in object.hitbox)
                 ? CircleHitbox.fromJSON(object.hitbox) : AABB.fromJSON(object.hitbox)
         }
-        return staticObject
+        return movableObject
     }
 }
 

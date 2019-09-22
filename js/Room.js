@@ -592,13 +592,24 @@ class Room extends GameObject {
         room.width = object.width
         room.type = object.type;
         for (let i in object.roomObjects.map) {
-            if ("data" in object.roomObjects.map[i]) {
-                     } else if ("direction" in object.roomObjects.map[i]) {
+            if ("direction" in object.roomObjects.map[i]) {
                 object.roomObjects.map[i].nav = room.nav
                 room.Add(NPC.fromJSON(object.roomObjects.map[i]))
             }
-            else {
+            else if (object.roomObjects.map[i].type === "staticObject") {
                 room.Add(StaticObject.fromJSON(object.roomObjects.map[i]))
+            }
+            else if (object.roomObjects.map[i].type === "hpBottle") {
+                room.Add(TilesFactory.CreateHPBottle(object.roomObjects.map[i].actor.position.x, object.roomObjects.map[i].actor.position.y))
+            }
+            else if (object.roomObjects.map[i].type === "manaBottle") {
+                room.Add(TilesFactory.CreateManaBottle(object.roomObjects.map[i].actor.position.x, object.roomObjects.map[i].actor.position.y))
+            }
+            else if (object.roomObjects.map[i].type === "sword") {
+                room.Add(TilesFactory.CreateAttackBonus(object.roomObjects.map[i].actor.position.x, object.roomObjects.map[i].actor.position.y))
+            }
+            else if (object.roomObjects.map[i].type === "movableObject"){
+                room.Add(MovableObject.fromJSON(object.roomObjects.map[i]))
             }
         }
         room.rnd = new RoomRenderer(8, room)
