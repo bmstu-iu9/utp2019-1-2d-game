@@ -6,8 +6,8 @@ const SaveLoad = {
         let openRequest = indexedDB.open("saveFile", 2)
         openRequest.onupgradeneeded = () => {
             db = openRequest.result;
-            if (!db.objectStoreNames.contains('file')) { // if there's no "file" store
-                db.createObjectStore('file', {autoIncrement: true}); // create it
+            if (!db.objectStoreNames.contains('file')) {
+                db.createObjectStore('file', {autoIncrement: true});
             }
         };
         openRequest.onerror = () => {
@@ -19,7 +19,6 @@ const SaveLoad = {
         };
     },
     save() {
-        // продолжить работу с базой данных, используя объект db
         let transaction = db.transaction('file', "readwrite")
         let storage = transaction.objectStore("file")
         let js = JSON.stringify(Game.currentWorld)
@@ -268,7 +267,6 @@ const SaveLoad = {
              resultPath : obj.resultPath,
              agro : obj.agro,
              path : obj.path,
-           //  trianglePath : obj.trianglePath
          }
      },
 
@@ -279,6 +277,16 @@ const SaveLoad = {
              edge : obj.edge.map,
              id : obj.id
          }
+     },
+
+     "levelManager" : (obj) => {
+        return {
+            experience : obj.experience,
+            level : obj.level,
+            bound : obj.bound,
+            bonuses : obj.bonuses,
+            type : obj.type
+        }
      }
 }
 

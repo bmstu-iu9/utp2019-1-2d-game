@@ -17,6 +17,7 @@ class PlayerManager {
                 this.experience = 0
                 this.bound = 100
                 this.bonuses=[0,0,0,0,0,0]
+                this.type = "levelManager"
                 LevelManager.descriptor = {
                     1:[150,150,1,1,1,3.5],
                     2:[175,200,1.2,1,1,3.75],
@@ -51,6 +52,24 @@ class PlayerManager {
                     }
                     player.statsManager.changeLimits(LevelManager.descriptor[this.level][0]+this.bonuses[0],LevelManager.descriptor[this.level][1]+this.bonuses[0])
                 }
+            }
+
+            toJSON(){
+                return Serializations[this.type](this)
+            }
+
+            /**
+             *
+             * @param {LevelManager} object
+             */
+
+            static fromJSON(object){
+                let levelManager = new LevelManager()
+                levelManager.experience = object.experience
+                levelManager.bonuses = object.bonuses
+                levelManager.bound = object.bound
+                levelManager.level = object.level
+                return levelManager
             }
         }
         PlayerManager.levelManager=new PlayerManager.progressHolder()
