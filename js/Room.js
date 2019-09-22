@@ -601,7 +601,7 @@ class Room extends GameObject {
                 room.Add(StaticObject.fromJSON(object.roomObjects.map[i]))
             }
         }
-        room.rnd = new RoomRenderer(4, room)
+        room.rnd = new RoomRenderer(8, room)
         return room
     }
 

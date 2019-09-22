@@ -17,7 +17,7 @@ class RoomManager {
      *Обновляет позицию объекта на тайловой карте
      * @param obj
      */
-    refreshPosition(obj){
+    refreshPosition(obj) {
         if (obj.drawable.placement === "middleground") {
             let prevI = ~~(obj.actor.prevPosition.y / Game.tileHeight)
             let prevJ = ~~(obj.actor.prevPosition.x / Game.tileWidth)
@@ -35,13 +35,16 @@ class RoomManager {
      * Обновляет все игровые объекты внури managebleObj (Room)
      */
     Update() {
-        if (Game.BackgroundSound.currentTime===0)
-            Game.BackgroundSound.play().catch(_=>{})
-        this.managableObj.updatableObjects.forEach((element)=>{
-            if(element.actor instanceof MovableActor){
-               this.refreshPosition(element)
+        if (Game.BackgroundSound.currentTime === 0)
+            Game.BackgroundSound.play().catch(_ => { })
+        this.managableObj.updatableObjects.forEach((element) => {
+            if (element.actor instanceof MovableActor) {
+                this.refreshPosition(element)
             }
             element.Update()
+        })
+
+        this.managableObj.updatableObjects.forEach((element) => {
             //Проверяем, переместился ли объект
             if (element.hitbox !== undefined && element.actor.offset !== undefined && (element.actor.offset.x !== 0 || element.actor.offset.y !== 0)) {
                 this.managableObj.movedObjects.push(element)
