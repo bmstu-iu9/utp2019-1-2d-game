@@ -94,7 +94,7 @@ class TilesFactory {
      * @param {Number} y
      */
     static CreatePlayer(x = 0, y = 0) {
-        let stats = new Stats(150, 100,0.75,1,0.5,3.25)
+        let stats = new Stats(150, 140,0.75,1,0.5,3.25)
         let player = TilesFactory.createNPC(x, y, 24, new DrawableObject("middleground", SpriteFactory.CreateTestSprite()), stats);
         player.manager = new PlayerManager(player)
         player.type = "player"
@@ -906,19 +906,8 @@ class TilesFactory {
          */
         sword.onCollide=(collision)=>{
             if (collision.obstacleObject.manager && collision.obstacleObject.manager instanceof PlayerManager){
-                let effect=new Effect(10)
-                effect.prevStat=collision.obstacleObject.statsManager.stats.strenght
-                /**
-                 * @param {StatsManager} statsManager
-                 * @param {Number} dt
-                 */
-                effect.update=function(statsManager,dt){
-                    this.remainTime-=dt;
-                    if (this.remainTime>0){
-                        statsManager.stats.strenght=this.prevStat*2
-                    }else statsManager.stats.strenght=this.prevStat
-                }
-                collision.obstacleObject.statsManager.gainEffect(effect)
+                collision.obstacleObject.statsManager.gainAction(new Action(new Stats(0,0,0.2,0,0,0)))
+                PlayerManager.levelManager.bonuses[2]+=0.2
                 Game.currentWorld.currentRoom.delete(sword)
             }
         }
@@ -940,9 +929,10 @@ class TilesFactory {
             this.remainTime-=Game.step
             if (this.remainTime<=0){
                 Game.currentWorld.currentRoom.delete(icon)
+            }else {
+                this.actor.update()
+                this.actor.changePosition(new Vector2d(0, -1))
             }
-            this.actor.update()
-            this.actor.changePosition(new Vector2d(0,-1))
         }
         Game.currentWorld.currentRoom.Add(icon)
     }

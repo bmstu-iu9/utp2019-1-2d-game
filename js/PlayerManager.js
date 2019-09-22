@@ -16,6 +16,7 @@ class PlayerManager {
                 this.level = 0
                 this.experience = 0
                 this.bound = 100
+                this.bonuses=[0,0,0,0,0,0]
                 LevelManager.descriptor = {
                     1:[150,150,1,1,1,3.5],
                     2:[175,200,1.2,1,1,3.75],
@@ -25,7 +26,7 @@ class PlayerManager {
                 this.order={
                     0:'hp',
                     1:'mana',
-                    2:'strength',
+                    2:'strenght',
                     3:'agility',
                     4:'intelligence',
                     5:'speed',
@@ -46,8 +47,9 @@ class PlayerManager {
                     this.level++
                     for (let i=2;i<LevelManager.descriptor[this.level].length;i++){
                         player.statsManager.stats[this.order[i]]=LevelManager.descriptor[this.level][i]
+                        player.statsManager.stats[this.order[i]]+=this.bonuses[i]
                     }
-                    player.statsManager.changeLimits(LevelManager.descriptor[this.level][0],LevelManager.descriptor[this.level][1])
+                    player.statsManager.changeLimits(LevelManager.descriptor[this.level][0]+this.bonuses[0],LevelManager.descriptor[this.level][1]+this.bonuses[0])
                 }
             }
         }
