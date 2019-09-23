@@ -41,6 +41,7 @@ const SaveLoad = {
         if (obj !== undefined)
             obj.onsuccess = () => {
                 Game.currentWorld = World.fromJSON(JSON.parse(obj.result))
+                requestAnimationFrame(Game.Loop);
             }
         else {
             alert("У вас нет сохранений")
@@ -318,5 +319,3 @@ let initialize = async () => {
     await SaveLoad.init()
 }
 initialize()
-
-

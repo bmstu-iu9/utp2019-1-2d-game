@@ -1,6 +1,8 @@
 'use strict'
 
 let canvas = document.getElementById("canvas")
+let MusicRange = document.getElementById("MusicVolumeRange")
+let SoundFXRange = document.getElementById("SoundFXRange")
 canvas.width = document.body.clientWidth
 canvas.height = document.body.clientHeight
 canvas.clickPositionX = 0;
@@ -455,22 +457,25 @@ let Game = {
         Game.LightningBox = BoxFactory.CreateLigthningBox()
         Game.BackgroundSound = soundStorage.BackgroundSound
         Game.BackgroundSound.loop=true
-        Game.BackgroundSound.volume -= 0.98
         Game.HitSound = soundStorage.HitSound
         Game.FireballCast = soundStorage.FireballCast
         Game.FireballExplosion = soundStorage.FireballExplosion
         Game.Last = soundStorage.Last
-        Game.HitSound.volume -= 0.9
+
         Game.HitSound.playbackRate = 0.85
-        Game.FireballCast.volume -= 0.95
-        Game.FireballExplosion.volume -= 0.95
+
         Game.FireballExplosion.playbackRate = 1.5
-        Game.Last.volume -= 0.95
+
         Game.camera = new Camera(canvas.width, canvas.height)
+        Game.BackgroundSound.volume = MusicRange.value /100;
+        Game.FireballCast.volume = SoundFXRange.value / 100;
+        Game.FireballExplosion.volume = SoundFXRange.value / 100;
+        Game.HitSound.volume = SoundFXRange.value / 100;
+        Game.Last.volume = SoundFXRange.value / 100;
+
 
         Game.currentWorld = WorldFactory.CreateTestWorld()
         Game.barControler = new BarControler(Game.player)
-        requestAnimationFrame(Game.Loop)
     },
 
     /**
@@ -516,7 +521,24 @@ let Game = {
     }
 };
 
-Game.InitConfig()
-ResourceLoader.setCallback(Game.InitLogic)
-ResourceLoader.loadSounds(soundStorage, sounds)
-ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc)
+const startGame = () => {
+    document.getElementById("mainMenu").style.display = "none";
+    document.getElementById("playerBars").style.display = "block";
+    canvas.style.display = "block";
+
+    Game.InitConfig();
+    ResourceLoader.setCallback(() =>{Game.InitLogic(); requestAnimationFrame(Game.Loop);});
+    ResourceLoader.loadSounds(soundStorage, sounds);
+    ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc);
+}
+
+const load = () =>{
+    document.getElementById("mainMenu").style.display = "none";
+    document.getElementById("playerBars").style.display = "block";
+    canvas.style.display = "block";
+
+    Game.InitConfig();
+    ResourceLoader.setCallback(() =>{ Game.InitLogic(); SaveLoad.load();});
+    ResourceLoader.loadSounds(soundStorage, sounds);
+    ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc);
+}

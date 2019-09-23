@@ -4,6 +4,7 @@
 }
 
 canvas {
+    display: none;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -57,7 +58,6 @@ body {
 .bar {
     background: #c54;
     height: 25px;
-    width: 100%;
     position: relative;
     transition: width .5s linear;
 }
@@ -65,13 +65,12 @@ body {
 .mbar {
     background: rgb(68, 93, 204);
     height: 25px;
-    width: 100%;
     position: relative;
     transition: width .5s linear;
 }
 
 .playerBars {
-    overflow: hidden;
+    display: none;
     position: fixed;
     width: 50%;
     bottom: 0px;
@@ -81,21 +80,25 @@ body {
 
 .playerBars li {
     display: inline-block;
-    width: 49%;
+    width: 40%;
 }
 
 .hpCount {
-    position: fixed;
-    left: 25%;
-    margin-top: 2.5px;
-    color: white;
-    font-family: joystix;
+  position: relative;
+  top: 0;
+  align-self: center;
+  text-align: center;
+  margin: 0;
+  color: white;
+  font-family: joystix;
 }
 
 .manaCount {
-    position: fixed;
-    left: 72.3%;
-    margin-top: 2.5px;
+  position: relative;
+  top: 0;
+  align-self: center;
+    text-align: center;
+    margin: 0;
     color: white;
     font-family: joystix;
 }
@@ -111,7 +114,7 @@ body {
     font-family: joystix;
     text-shadow: -1px 4px 0px #323345;
     font-size: 60pt;
-    top: 30%;
+    top: 25%;
     left: 50%;
     transform: translate(-45%, -80%);
     color: #af3b3b;
@@ -133,7 +136,7 @@ body {
 .navigation {
     list-style: none;
     position: absolute;
-    width: 20%;
+    width: 30%;
     text-align: center;
     top: 50%;
     left: 50%;
@@ -141,45 +144,42 @@ body {
 }
 
 .navigation li {
-    margin-top: 25px; 
-    font-family: joystix; 
-    font-size: 20px; 
+    margin-top: 20px; 
 }
 
-.navigation li a {
+.menuButton {
     box-shadow: inset 0 -1em 0 -0.35em rgba(0, 0, 0, 0.17);
     display: block; 
     padding: 10px 20px; 
     height: 35px;
     background: #323345; 
     color: #f6f2f2; 
+    font-family: joystix;
+
     text-decoration: none; 
     position: relative; 
 }
 
-.navigation li a:hover {
+.menuButton:hover {
     background: #E77A11; 
     transform: scale(1.05);
 }
 
 input[type='range'] {
-  appearance: none !important;
   height:15px;
+  background-color: #00000000;
+  float: left;
 }
 
 input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none !important;
-  background:$shop-talk;
   height: 30px;
   width: 15px;
-  border: 2px solid $background;
+  border: 2px solid;
+  float: left;
 }
 
 input[type=range] {
-  height: 38px;
-  -webkit-appearance: none;
-  margin: 10px 0;
-  width: 100%;
+  float: right;
 }
 input[type=range]:focus {
   outline: none;
@@ -188,7 +188,6 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 10px;
   cursor: pointer;
-  animate: 0.2s;
   box-shadow: 1px 1px 1px #000000;
   background: #3071A9;
   border-radius: 5px;
@@ -202,7 +201,6 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 5px;
   background: #FFFFFF;
   cursor: pointer;
-  -webkit-appearance: none;
   margin-top: -11px;
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
@@ -212,7 +210,6 @@ input[type=range]::-moz-range-track {
   width: 100%;
   height: 10px;
   cursor: pointer;
-  animate: 0.2s;
   box-shadow: 1px 1px 1px #000000;
   background: #3071A9;
   border-radius: 5px;
@@ -231,7 +228,6 @@ input[type=range]::-ms-track {
   width: 100%;
   height: 10px;
   cursor: pointer;
-  animate: 0.2s;
   background: transparent;
   border-color: transparent;
   color: transparent;
@@ -263,4 +259,19 @@ input[type=range]:focus::-ms-fill-lower {
 }
 input[type=range]:focus::-ms-fill-upper {
   background: #3071A9;
+}
+
+.rangeContainer{
+  background: #323345; 
+  text-align: left;
+  color: #f6f2f2; 
+  font-family: joystix;
+  padding: 10px 20px; 
+  height: 50px;
+  align-content: center;
+  box-shadow: inset 0 -1em 0 -0.35em rgba(0, 0, 0, 0.17);
+}
+
+.mainMenu{
+  display: inline;
 }

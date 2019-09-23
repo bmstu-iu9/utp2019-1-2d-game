@@ -32,7 +32,7 @@ class ResourceLoader {
 
     static onLoad() {
         loaded--
-        if (loaded === 0) {
+        if (loaded === 0 && callback) {
             callback()
         }
     }
