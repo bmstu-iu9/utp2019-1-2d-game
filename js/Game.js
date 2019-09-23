@@ -521,6 +521,15 @@ let Game = {
     }
 };
 
+
+const windowResizeHandler = () => {
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientHeight;
+    Game.currentWorld.currentRoom.rnd.reRender();
+}
+
+window.addEventListener("resize", windowResizeHandler);
+
 const startGame = () => {
     document.getElementById("mainMenu").style.display = "none";
     document.getElementById("playerBars").style.display = "block";
@@ -542,3 +551,4 @@ const load = () =>{
     ResourceLoader.loadSounds(soundStorage, sounds);
     ResourceLoader.InitResourceRep(imagesStorage, Game.srcPath, imagesSrc);
 }
+

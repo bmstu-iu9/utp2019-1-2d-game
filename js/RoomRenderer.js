@@ -26,6 +26,12 @@ class RoomRenderer {
         this.mPreRender(this.room);
     }
 
+    reRender(){
+        this.bgPreRender(this.room);
+        this.mPreRender(this.room);
+        this.render();
+    }
+
     /**
      * Пререндеринг background
      * @param {Room} room
