@@ -160,11 +160,11 @@ class QuadTree{
      * @param {AABB,CircleHitbox} object
      * @return {boolean}
      */
-    delete(object){
+    erase=(object)=>{
         if (this.next[0]!=null){
             const index=this.getIndex(object)
             if (index.index!==undefined){
-                this.next[index.index].delete(object)
+                return this.next[index.index].erase(object)
             }else {
                 if(this.objects.removeHitbox(object)) {
                     QuadTree.rearrange(this,this.capacity)
@@ -172,11 +172,20 @@ class QuadTree{
                 }
             }
         }else {
-            if (this.objects.removeHitbox(object) && this.parent!==this) {
-                QuadTree.rearrange(this.parent,this.capacity)
+            if (this.objects.removeHitbox(object)) {
+                if (this.parent!==this)
+                    QuadTree.rearrange(this.parent,this.capacity)
                 return true
             }
         }
+        return false
+    }
+
+    delete(object){
+        if (object instanceof Hitbox){
+            return this.erase(object.hitboxPrevState) || this.erase(object.hitbox)
+        }
+        else return this.erase(object)
     }
 
     static rearrange(node,capacity){

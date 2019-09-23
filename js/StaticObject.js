@@ -5,6 +5,7 @@ class StaticObject extends GameObject {
         this.actor = new Actor(new Vector2d(x, y), new Vector2d(xcentre, ycentre))
         this.drawable = drawable
         this.collisonSolveStrategy = "stay"
+        this.type = "staticObject"
     }
 
     render() {
@@ -12,11 +13,7 @@ class StaticObject extends GameObject {
     }
 
     toJSON(){
-        return {
-            id : this.id,
-            actor : this.actor,
-            drawable : this.drawable // возможно нужен будет id
-        }
+        return Serializations[this.type](this)
     }
 
     /**
@@ -24,9 +21,49 @@ class StaticObject extends GameObject {
      * @param {StaticObject} object
      */
     static fromJSON(object){
-        return new StaticObject(object.actor.position.x,object.actor.position.y,
+        let staticObject = new StaticObject(object.actor.position.x,object.actor.position.y,
             object.actor.centre.x,object.actor.centre.y,
             DrawableObject.fromJSON(object.drawable),object.id)
+        staticObject.collisonSolveStrategy = object.collisonSolveStrategy
+        if ("hitbox" in object) {
+            staticObject.hitbox = ("name" in object.hitbox) ? Hitbox.fromJSON(object.hitbox) : ("radius" in object.hitbox)
+                ? CircleHitbox.fromJSON(object.hitbox) : AABB.fromJSON(object.hitbox)
+        }
+        return staticObject
+    }
+}
+
+class MovableObject extends GameObject {
+    constructor(x, y, xcentre, ycentre, drawable, id = Game.getUniqId()) {
+        super(id)
+        this.actor = new Actor(new Vector2d(x, y), new Vector2d(xcentre, ycentre))
+        this.drawable = drawable
+        this.collisonSolveStrategy = "stay"
+        this.type = "movableObject"
+    }
+
+    render() {
+        this.drawable.render()
+    }
+
+    toJSON() {
+        return Serializations[this.type](this)
+    }
+
+    /**
+     *
+     * @param {MovableObject} object
+     */
+    static fromJSON(object) {
+        let movableObject = new MovableObject(object.actor.position.x, object.actor.position.y, object.actor.centre.x,
+            object.actor.centre.y,
+            DrawableObject.fromJSON(object.drawable), object.id)
+        movableObject.collisonSolveStrategy = object.collisonSolveStrategy
+            if ("hitbox" in object) {
+            movableObject.hitbox = ("name" in object.hitbox) ? Hitbox.fromJSON(object.hitbox) : ("radius" in object.hitbox)
+                ? CircleHitbox.fromJSON(object.hitbox) : AABB.fromJSON(object.hitbox)
+        }
+        return movableObject
     }
 }
 

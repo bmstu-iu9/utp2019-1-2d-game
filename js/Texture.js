@@ -2,15 +2,16 @@
 
 class Texture {
     /**
-     * 
-     * @param {Image} image 
+     *
+     * @param {Image} image
      */
     constructor(image) {
         this.setImage(image);
+        this.type = "texture"
     }
     /**
-     * 
-     * @param {Image} img 
+     *
+     * @param {Image} img
      */
     setImage(img) {
         if (img instanceof Image) {
@@ -22,22 +23,21 @@ class Texture {
 
     }
     /**
-     * 
-     * @param {Vector2D} canvasCoord 
+     *
+     * @param {Vector2D} canvasCoord
      */
     render(canvasCoord) {
         ctx.drawImage(this.img, canvasCoord.x, canvasCoord.y);
     }
 
     toJSON(){
-        return this.img.src
+        return Serializations[this.type](this)
     }
     /**
      *
      * @param {Texture} object
      */
     static fromJSON(object){
-        return textureStorage[object] //Как появится id нужно будет удалить
+        return textureStorage[object.src] //Как появится id нужно будет удалить
     }
 }
-

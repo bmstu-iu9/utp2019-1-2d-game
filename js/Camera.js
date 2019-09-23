@@ -29,6 +29,7 @@ class Camera {
      */
     setCanvasCoord(tile) {
         tile.actor.position.sub(this.position, tile.drawable.canvasCoord)
+        tile.drawable.canvasCoord.round()
     }
 
     setGameCoord(vector){

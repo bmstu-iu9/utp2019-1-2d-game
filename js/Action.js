@@ -11,6 +11,7 @@ class Action {
      */
     constructor(stats = new Stats()) {
         this.stats = stats
+        this.type = "action"
     }
 
     /**
@@ -19,5 +20,18 @@ class Action {
      */
     apply(target) {
         target.stats.add(this.stats)
+    }
+
+    toJSON(){
+        return Serializations[this.type](this)
+    }
+
+    /**
+     *
+     * @param{Action} object
+     */
+
+    static fromJSON(object){
+        return new Action(object.stats)
     }
 }

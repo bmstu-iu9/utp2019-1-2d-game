@@ -56,4 +56,5 @@ class HashMap {
             functi(this.map[key])
         }
     }
+
 }

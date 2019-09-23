@@ -10,8 +10,24 @@ let keyboard={
     KeyS:false,
     KeyD:false,
     KeyZ:false, // save()
-    KeyX:false, //load()
-    KeyF:false
+    KeyF: false,
+    Space:false,
+    Escape:false,
+};
+
+let keyboardUP={
+    ArrowUp:false,
+    ArrowDown:false,
+    ArrowRight:false,
+    ArrowLeft:false,
+    KeyW:false,
+    KeyA:false,
+    KeyS:false,
+    KeyD:false,
+    KeyZ:false, // save()
+    KeyF: false,
+    Space:false,
+    Escape:false,
 };
 
 let mouse={
@@ -20,14 +36,29 @@ let mouse={
     clickPosition:new Vector2d()
 };
 
-const keyboardListener=(keyboard)=>{
-    const keyboardHandler=(event)=>{
-        if (keyboard.hasOwnProperty(event.code)){
-            keyboard[event.code]=event.type==='keydown';
-        }
-    };
-    addEventListener('keydown',keyboardHandler);
-    addEventListener('keyup',keyboardHandler);
+const inputReset = () => {
+    for(const key in keyboardUP){
+        keyboardUP[key] = false;
+    }
+}
+
+const keyboardHandler=(event)=>{
+    if (keyboard.hasOwnProperty(event.code)){
+        keyboard[event.code]=event.type==='keydown';
+        
+    }
+};
+const keyboardUPHandler=(event)=>{
+    if (keyboardUP.hasOwnProperty(event.code)){
+        keyboardUP[event.code]=event.type==='keyup';
+    }
+};
+
+const keyboardListener=()=>{
+    addEventListener('keydown', keyboardHandler);
+    addEventListener('keydown', keyboardUPHandler);
+    addEventListener('keyup', keyboardUPHandler);
+    addEventListener('keyup', keyboardHandler);
 };
 
 const mouseListener=(mouse)=>{

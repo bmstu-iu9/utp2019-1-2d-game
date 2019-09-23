@@ -11,6 +11,7 @@ class Effect {
      */
     constructor(remainTime) {
         this.remainTime = remainTime
+        this.type = "effect"
     }
 
     /**
@@ -24,10 +25,7 @@ class Effect {
     }
 
     toJSON(){
-        return {
-            remainTime : this.remainTime
-            //Еще будет id
-        }
+        return Serializations[this.type](this)
     }
 
     /**

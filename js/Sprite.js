@@ -1,5 +1,10 @@
 'use strict'
 
+/**
+ * @param  {Number} speed
+ * @param {SpriteBox} pattern
+ *
+ */
 class Sprite {
     speed;
     index = 0;

@@ -15,13 +15,14 @@ class Stats {
      * @param {Number} speed
      */
 
-    constructor(hp = 100, mana = 50, strength = 1, agility = 1, intelligence = 1, speed = 4) {
+    constructor(hp = 100, mana = 50, strength = 1, agility = 1, intelligence = 1, speed = 3.75) {
         this.hp = hp
         this.mana = mana
         this.strenght = strength
         this.agility = agility
         this.intelligence = intelligence
         this.speed = speed
+        this.type = "stats"
     }
 
     /**
@@ -43,14 +44,7 @@ class Stats {
     }
 
     toJSON() {
-        return {
-            hp: this.hp,
-            mana: this.mana,
-            strenght: this.strenght,
-            agility: this.agility,
-            intelligence: this.intelligence,
-            speed: this.speed
-        }
+        return Serializations[this.type](this)
     }
 
     /**

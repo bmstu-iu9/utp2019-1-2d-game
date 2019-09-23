@@ -1,12 +1,12 @@
 'use strict'
 let loaded = 0
 let callback
+const soundPath='sounds/'
 
 class ResourceLoader {
 
     /**
-     * 
-     * @param {*} dest 
+     *
      * @param {String} src путь к файлу формата jpg, png, svg
      */
     static loadImage(src) {
@@ -32,7 +32,7 @@ class ResourceLoader {
 
     static onLoad() {
         loaded--
-        if (loaded === 0) {
+        if (loaded === 0 && callback) {
             callback()
         }
     }
@@ -43,5 +43,16 @@ class ResourceLoader {
      */
     static setCallback(_callback) {
         callback = _callback
+    }
+
+    /**
+     *
+     * @param {Object} dest
+     * @param {[string]} sounds
+     */
+    static loadSounds(dest,sounds){
+        for (let i=0;i<sounds.length;i++){
+            dest[sounds[i].split('.')[0]]=new Audio(soundPath+sounds[i])
+        }
     }
 }

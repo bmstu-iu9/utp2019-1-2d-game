@@ -83,10 +83,20 @@ const calcLine=(a,b,point)=>{
     const ortho=gramSchmidt(vector,point.sub(a,new Vector2d()))
     const inter=intersect(a,b,point,determineLine(ortho,point))
     let minX,minY,maxX,maxY
-    minX=Math.min(a.x,b.x)
-    maxX=Math.max(a.x,b.x)
-    minY=Math.min(a.y,b.y)
-    maxY=Math.max(a.y,b.y)
+    if (a.x<b.x){
+        maxX=b.x
+        minX=a.x
+    }else {
+        maxX=a.x
+        minX=b.x
+    }
+    if (a.y<b.y){
+        maxY=b.y
+        minY=a.y
+    }else {
+        maxY=a.y
+        minY=b.y
+    }
     if (minX<=inter.x && inter.x<=maxX && inter.y<=maxY && inter.y>=minY){
         return inter
     }else {
@@ -148,6 +158,7 @@ class AABB {
         this.vertices=vertices
         this.setNormals()
         this.id=id
+        this.type = "AABB"
     }
 
     setNormals=()=>{
@@ -200,12 +211,7 @@ class AABB {
     }
 
     toJSON() {
-        return {
-            centre: this.centre,
-            vertices: this.vertices,
-            firstAxis: this.firstAxis,
-            secondAxis: this.secondAxis
-        }
+        return Serializations[this.type](this)
     }
 
 
@@ -215,8 +221,8 @@ class AABB {
      */
     static fromJSON(object){
         let vertices = []
-        vertices.push(object.vertices.forEach(vertex => Vector2d.fromJSON(vertex)))
-        return new AABB(Vector2d.fromJSON(object.centre),vertices)
+        object.vertices.forEach(vertex => vertices.push(Vector2d.fromJSON(vertex)))
+        return new AABB(Vector2d.fromJSON(object.centre),vertices,object.id)
     }
 
     getMinMaxX(){
@@ -274,8 +280,7 @@ class AABB {
      * @param {Number} angle
      * @param {Vector2d} dot
      */
-    rotate(angle,dot=undefined) {
-        angle *= Math.PI / 180
+    rotateRadian(angle,dot=undefined) {
         const cos = Math.cos(angle)
         const sin = Math.sin(angle)
         if (dot === undefined) {
@@ -286,6 +291,15 @@ class AABB {
         }
         this.setNormals()
     }
+
+    /**
+     * @param {Number} angle
+     * @param {Vector2d} dot
+     */
+    rotateDegrees(angle,dot=undefined){
+        angle*=Math.PI/180
+        this.rotateRadian(angle,dot)
+    }
 }
 
 class CircleHitbox {
@@ -293,6 +307,7 @@ class CircleHitbox {
         this.radius=radius
         this.centre=centre
         this.id=id
+        this.type = "CircleHitbox"
     }
 
     getCollision(obstacle) {
@@ -319,10 +334,7 @@ class CircleHitbox {
     }
 
     toJSON() {
-        return {
-            radius: this.radius,
-            centre: this.centre
-        }
+        return Serializations[this.type](this)
     }
 
     /**
@@ -330,7 +342,7 @@ class CircleHitbox {
      * @param {CircleHitbox} object
      */
     static fromJSON(object){
-        return new CircleHitbox(Vector2d.fromJSON(object.centre),object.radius)
+        return new CircleHitbox(Vector2d.fromJSON(object.centre),object.radius,object.id)
     }
 
 
