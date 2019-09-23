@@ -76,6 +76,7 @@ class NPC extends GameObject {
                 }
                 if (bonus!==undefined) Game.currentWorld.currentRoom.Add(bonus)
                 Game.Last.play()
+                PlayerManager.levelManager.update(this)
             }
             Game.currentWorld.currentRoom.delete(this)
         }

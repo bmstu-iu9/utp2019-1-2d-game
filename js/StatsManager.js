@@ -81,6 +81,16 @@ class StatsManager {
         this.effectsContainer = this.effectsContainer.filter(effect => effect.remainTime > 0)
     }
 
+    /**
+     *
+     * @param {Number} hp
+     * @param {Number} mana
+     */
+    changeLimits(hp, mana){
+        this.hpLimit=hp
+        this.manaLimit=mana
+    }
+
     toJSON() {
         return Serializations[this.type](this)
     }

@@ -39,7 +39,7 @@ class BarControler {
      */
     setHp(hp) {
         this.hpBar.setAttribute("data-value", String(hp))
-        this.hpBar.style["width"] = String(~~(hp / this.hpBar.getAttribute("data-total") * 100)) + "%"
+        this.hpBar.style["width"] = String(~~(hp / this.hpLimit * 100)) + "%"
     }
 
     /**
@@ -48,10 +48,18 @@ class BarControler {
      */
     setMana(mana) {
         this.manaBar.setAttribute("data-value", String(mana))
-        this.manaBar.style["width"] = String(~~(mana / this.manaBar.getAttribute("data-total") * 100)) + "%"
+        this.manaBar.style["width"] = String(~~(mana / this.manaLimit * 100)) + "%"
     }
 
     update() {
+        if (this.player.statsManager.hpLimit !== this.hpLimit){
+            this.hpLimit = this.player.statsManager.hpLimit
+            this.hpBar.setAttribute("data-total", this.hpLimit)
+        }
+        if (this.player.statsManager.manaLimit !== this.manaLimit){
+            this.manaLimit = this.player.statsManager.manaLimit
+            this.manaBar.setAttribute("data-total", this.manaLimit)
+        }
         if (this.hp !== this.player.statsManager.stats.hp) {
             this.hp = this.player.statsManager.stats.hp
             this.setHp(this.player.statsManager.stats.hp)
