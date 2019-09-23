@@ -15,6 +15,7 @@ let keyboard={
     KeyQ: false,
     KeyE: false,
     Space:false,
+    Escape:false,
 };
 
 let mouse={
