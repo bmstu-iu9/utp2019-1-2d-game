@@ -463,19 +463,14 @@ let Game = {
         Game.FireballCast = soundStorage.FireballCast
         Game.FireballExplosion = soundStorage.FireballExplosion
         Game.Last = soundStorage.Last
-
         Game.HitSound.playbackRate = 0.85
-
         Game.FireballExplosion.playbackRate = 1.5
-
         Game.camera = new Camera(canvas.width, canvas.height)
         Game.BackgroundSound.volume = MusicRange.value /100;
         Game.FireballCast.volume = SoundFXRange.value / 100;
         Game.FireballExplosion.volume = SoundFXRange.value / 100;
         Game.HitSound.volume = SoundFXRange.value / 100;
         Game.Last.volume = SoundFXRange.value / 100;
-
-
         Game.currentWorld = WorldFactory.CreateTestWorld()
         Game.barControler = new BarControler(Game.player)
     },
@@ -496,18 +491,21 @@ let Game = {
             Game.Update()
             Game.barControler.update()
             Game.Collide();
-            Game.camera.Update()
+            Game.camera.Update()        
         }
         Game.Render();
         Game.last = Game.now;
-        //console.log(mouse.clickPosition.add(Game.camera.position, new Vector2d()))
-        requestAnimationFrame(Game.Loop)
-        if (keyboard.KeyZ === true)
+        if (keyboardUP.KeyZ === true)
             SaveLoad.save()
-        if (keyboard.KeyX === true)
-            SaveLoad.load()
-        if (keyboard.Escape === true)
-            document.getElementById("exitDialog").style.display = 'block'
+        if (keyboardUP.Escape === true){
+            let buf = document.getElementById("exitDialog")
+            if(buf.style.display === 'block')
+                buf.style.display = 'none';
+            else
+                buf.style.display = 'block';
+        }
+        inputReset();
+        requestAnimationFrame(Game.Loop)
     },
 
     Update() {
