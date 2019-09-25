@@ -37,14 +37,14 @@ const SaveLoad = {
         let transaction = db.transaction('file', "readwrite")
         let storage = transaction.objectStore("file")
         let obj = storage.get(1)
-        if (obj !== undefined)
             obj.onsuccess = () => {
-                Game.currentWorld = World.fromJSON(JSON.parse(obj.result))
-                requestAnimationFrame(Game.Loop);
+                if (obj.result !== undefined) {
+                    Game.currentWorld = World.fromJSON(JSON.parse(obj.result))
+                    requestAnimationFrame(Game.Loop);
+                }
+
+                else startGame()
             }
-        else {
-            alert("У вас нет сохранений")
-        }
 
     }
 
