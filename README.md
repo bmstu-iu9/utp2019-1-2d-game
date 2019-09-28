@@ -21,10 +21,10 @@
 
 ## Команда
 
-- [Степан Плаунов] (https://github.com/KoIIdun) KoIIdun
-- [Владислав Мурыжников] (https://github.com/vlad333rrty) vlad333rrty
-- [Виктор Флоря] (https://github.com/FloryaVictor) FloryaVictor
-- [Михаил Петров] (https://github.com/Lanaken) Lanaken
-- [Илья Гетиков] (https://github.com/IlyaGetikov) IlyaGetikov
-- [Ольга Боровая] (https://github.com/Olga14) Olga14
-- [Алексей Тарасов] (https://github.com/tarasovalx) tarasovalx
+- [Степан Плаунов](https://github.com/KoIIdun) KoIIdun
+- [Владислав Мурыжников](https://github.com/vlad333rrty) vlad333rrty
+- [Виктор Флоря](https://github.com/FloryaVictor) FloryaVictor
+- [Михаил Петров](https://github.com/Lanaken) Lanaken
+- [Илья Гетиков](https://github.com/IlyaGetikov) IlyaGetikov
+- [Ольга Боровая](https://github.com/Olga14) Olga14
+- [Алексей Тарасов](https://github.com/tarasovalx) tarasovalx
